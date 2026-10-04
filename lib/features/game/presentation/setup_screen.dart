@@ -1,3 +1,5 @@
+import 'package:suspecto/core/app_store.dart';
+import 'package:suspecto/core/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:suspecto/features/game/data/local/starter_words.dart';
 import 'package:suspecto/features/game/domain/models/player.dart';
@@ -20,6 +22,25 @@ class _SetupScreenState extends State<SetupScreen> {
   final _categories = starterWords.map((w) => w.category).toSet();
   int _imposters = 1;
   int _minutes = 3;
+  bool _restored = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_restored) { return; }
+    _restored = true;
+    final store = StoreScope.maybeOf(context);
+    if (store == null) { return; }
+    if (store.lastPlayers.length >= 3 && store.lastPlayers.length <= 20) {
+      for (final c in _names) { c.dispose(); }
+      _names.clear();
+      _names.addAll(store.lastPlayers.map((name) => TextEditingController(text: name)));
+    }
+    final saved = store.lastCategories.where(_categories.contains).toSet();
+    if (saved.isNotEmpty) { _categories.clear(); _categories.addAll(saved); }
+    _imposters = store.lastImposters.clamp(1, GameEngine.maxImposters(_names.length));
+    _minutes = [1, 3, 5].contains(store.lastMinutes) ? store.lastMinutes : 3;
+  }
 
   @override
   void dispose() {
@@ -35,7 +56,7 @@ class _SetupScreenState extends State<SetupScreen> {
     }
     if (_categories.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Choose at least one category.')),
+        const SnackBar(content: LocalText('Choose at least one category.')),
       );
       return;
     }
@@ -46,6 +67,8 @@ class _SetupScreenState extends State<SetupScreen> {
     final words = starterWords
         .where((w) => _categories.contains(w.category))
         .toList();
+    StoreScope.maybeOf(context)?.saveSetup(players.map((p) => p.name).toList(), _categories.toList(), _imposters, _minutes);
+    StoreScope.maybeOf(context)?.feedback();
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (_) => PlayScreen(
@@ -72,20 +95,20 @@ class _SetupScreenState extends State<SetupScreen> {
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Row(
                   children: [
-                    CircleAvatar(child: Text('${i + 1}')),
+                    CircleAvatar(backgroundColor: Colors.primaries[i % Colors.primaries.length].withValues(alpha: 0.18), child: Icon([Icons.pets, Icons.bolt, Icons.star, Icons.rocket_launch, Icons.local_florist, Icons.sports_esports][i % 6])),
                     const SizedBox(width: 12),
                     Expanded(
                       child: TextFormField(
                         controller: _names[i],
                         maxLength: 24,
                         decoration: InputDecoration(
-                          labelText: 'Player ${i + 1}',
+                          labelText: translate(context, 'Player ${i + 1}'),
                           counterText: '',
                         ),
                         validator: (value) {
                           final name = value?.trim() ?? '';
                           if (name.isEmpty) {
-                            return 'Enter a name';
+                            return translate(context, 'Enter a name');
                           }
                           if (_names
                                   .where(
@@ -95,14 +118,14 @@ class _SetupScreenState extends State<SetupScreen> {
                                   )
                                   .length >
                               1) {
-                            return 'Use a different name';
+                            return translate(context, 'Use a different name');
                           }
                           return null;
                         },
                       ),
                     ),
                     IconButton(
-                      tooltip: 'Remove player ${i + 1}',
+                      tooltip: translate(context, 'Remove player ${i + 1}'),
                       onPressed: _names.length > 3
                           ? () {
                               setState(() {
@@ -133,24 +156,24 @@ class _SetupScreenState extends State<SetupScreen> {
               )
             : null,
         icon: const Icon(Icons.person_add_alt_1),
-        label: Text('Add player (${_names.length}/20)'),
+        label: LocalText('Add player (${_names.length}/20)'),
       ),
       const SizedBox(height: 24),
-      Text('Imposters', style: Theme.of(context).textTheme.titleLarge),
+      LocalText('Imposters', style: Theme.of(context).textTheme.titleLarge),
       const SizedBox(height: 8),
       Wrap(
         spacing: 8,
         children: [
           for (var n = 1; n <= GameEngine.maxImposters(_names.length); n++)
             ChoiceChip(
-              label: Text('$n'),
+              label: LocalText('$n'),
               selected: _imposters == n,
               onSelected: (_) => setState(() => _imposters = n),
             ),
         ],
       ),
       const SizedBox(height: 24),
-      Text('Word packs', style: Theme.of(context).textTheme.titleLarge),
+      LocalText('Word packs', style: Theme.of(context).textTheme.titleLarge),
       const SizedBox(height: 8),
       Wrap(
         spacing: 8,
@@ -160,7 +183,7 @@ class _SetupScreenState extends State<SetupScreen> {
             .toSet()
             .map(
               (category) => FilterChip(
-                label: Text(category),
+                label: LocalText(category),
                 selected: _categories.contains(category),
                 onSelected: (selected) => setState(() {
                   if (selected) {
@@ -174,21 +197,21 @@ class _SetupScreenState extends State<SetupScreen> {
             .toList(),
       ),
       const SizedBox(height: 24),
-      Text('Discussion time', style: Theme.of(context).textTheme.titleLarge),
+      LocalText('Discussion time', style: Theme.of(context).textTheme.titleLarge),
       const SizedBox(height: 8),
       Wrap(
         spacing: 8,
         children: [
           for (final n in [1, 3, 5])
             ChoiceChip(
-              label: Text('$n min'),
+              label: LocalText('$n min'),
               selected: _minutes == n,
               onSelected: (_) => setState(() => _minutes = n),
             ),
         ],
       ),
       const SizedBox(height: 28),
-      FilledButton(onPressed: _start, child: const Text('Deal secret roles')),
+      FilledButton(onPressed: _start, child: const LocalText('Deal secret roles')),
     ],
   );
 }

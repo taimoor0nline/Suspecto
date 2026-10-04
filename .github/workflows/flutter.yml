@@ -4,20 +4,47 @@ on:
   pull_request:
 permissions:
   contents: read
+concurrency:
+  group: flutter-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.47.6'
           channel: stable
           cache: true
+      - name: Validate offline content
+        run: python scripts/generate_content.py
+      - name: Generate platform runners
+        run: flutter create --empty --platforms=android,ios,web --project-name suspecto --org com.suspecto .
       - run: flutter pub get
+      - run: dart run flutter_launcher_icons
       - run: dart format lib test
       - run: flutter analyze
-      - run: flutter test
-      - name: Generate platform runners and build web smoke test
-        run: |
-          flutter create --empty --platforms=android,ios,web --project-name suspecto --org com.suspecto .
-          flutter build web
+      - name: Tests and screenshots
+        run: flutter test --dart-define=CAPTURE_SCREENSHOTS=true
+      - run: flutter build web
+      - run: flutter build apk --debug
+      - name: Archive generated runners and lockfile
+        if: always()
+        run: zip -r platform-runners.zip android ios web .metadata pubspec.lock
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: suspecto-beta
+          path: |
+            build/app/outputs/flutter-apk/app-debug.apk
+            build/web
+            build/screenshots
+            platform-runners.zip
+          if-no-files-found: warn
+          retention-days: 30

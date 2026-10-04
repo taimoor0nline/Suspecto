@@ -1,3 +1,5 @@
+import 'package:suspecto/core/app_store.dart';
+import 'package:suspecto/core/localization.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -39,6 +41,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   Timer? _timer;
   late int _remaining;
   DateTime? _deadline;
+  late String _roundId;
 
   @override
   void initState() {
@@ -48,6 +51,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   }
 
   void _newRound() {
+    _roundId = DateTime.now().microsecondsSinceEpoch.toString();
     _timer?.cancel();
     _session = GameEngine().createSession(
       players: widget.players,
@@ -85,6 +89,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   }
 
   void _show(bool show) {
+    if (show && !_visible) { StoreScope.maybeOf(context)?.feedback(reveal: true); }
     setState(() {
       _visible = show;
       if (show) {
@@ -94,6 +99,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   }
 
   void _nextCard() {
+    StoreScope.maybeOf(context)?.feedback();
     setState(() {
       _visible = false;
       _viewed = false;
@@ -125,6 +131,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   }
 
   void _castVote() {
+    StoreScope.maybeOf(context)?.feedback();
     _ballot.vote(_session.players[_index].id, _selected!);
     setState(() {
       _selected = null;
@@ -141,6 +148,12 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
         }
       }
     });
+    if (_phase == _Phase.result) {
+      final store = StoreScope.maybeOf(context);
+      if (store != null) {
+        unawaited(store.recordRound(id: _roundId, word: _session.secretWord.value, category: _session.secretWord.category, players: _session.players.map((p) => p.name).toList(), imposters: _session.players.where(_session.isImposter).map((p) => p.name).toList(), accused: _session.players.where((p) => _suspects.contains(p.id)).map((p) => p.name).toList(), citizensWin: _suspects.every(_session.imposterPlayerIds.contains)));
+      }
+    }
   }
 
   Future<void> _exit() async {
@@ -148,16 +161,16 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
     final exit = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('End this round?'),
-        content: const Text('Your current round will be lost.'),
+        title: const LocalText('End this round?'),
+        content: const LocalText('Your current round will be lost.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Keep playing'),
+            child: const LocalText('Keep playing'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('End round'),
+            child: const LocalText('End round'),
           ),
         ],
       ),
@@ -188,8 +201,9 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
             onPointerUp: (_) => _show(false),
             onPointerCancel: (_) => _show(false),
             child: Semantics(
-              label: 'Hold to reveal your secret card',
-              child: Container(
+              label: translate(context, 'Hold to reveal your secret card'),
+              child: AnimatedContainer(
+                  duration: MediaQuery.of(context).disableAnimations ? Duration.zero : const Duration(milliseconds: 160),
                 constraints: const BoxConstraints(minHeight: 260),
                 padding: const EdgeInsets.all(28),
                 decoration: BoxDecoration(
@@ -206,7 +220,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                       size: 60,
                     ),
                     const SizedBox(height: 20),
-                    Text(
+                    LocalText(
                       _visible
                           ? (_session.isImposter(player)
                                 ? 'You are the imposter'
@@ -216,7 +230,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                       style: theme.textTheme.headlineMedium,
                     ),
                     const SizedBox(height: 12),
-                    Text(
+                    LocalText(
                       _visible
                           ? (_session.isImposter(player)
                                 ? 'Blend in. Listen to the clues. Bluff your way through.'
@@ -232,7 +246,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
           const SizedBox(height: 24),
           FilledButton(
             onPressed: _viewed && !_visible ? _nextCard : null,
-            child: Text(
+            child: LocalText(
               _index == _session.players.length - 1
                   ? 'Start discussion'
                   : 'Hide & pass',
@@ -251,11 +265,11 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                 children: [
                   const Icon(Icons.timer_outlined, size: 48),
                   const SizedBox(height: 16),
-                  Text(
+                  LocalText(
                     '${_remaining ~/ 60}:${(_remaining % 60).toString().padLeft(2, '0')}',
                     style: theme.textTheme.displayLarge,
                   ),
-                  Text(_remaining == 0 ? 'Time to vote!' : 'Discussion time'),
+                  LocalText(_remaining == 0 ? 'Time to vote!' : 'Discussion time'),
                 ],
               ),
             ),
@@ -263,7 +277,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
           const SizedBox(height: 24),
           FilledButton(
             onPressed: _beginVoting,
-            child: const Text('Start private voting'),
+            child: const LocalText('Start private voting'),
           ),
         ];
       case _Phase.vote:
@@ -284,13 +298,13 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                             ? Icons.check_circle
                             : Icons.person_outline,
                       ),
-                      label: Text(candidate.name),
+                      label: LocalText(candidate.name),
                     ),
                   ),
                 const SizedBox(height: 20),
                 FilledButton(
                   onPressed: _selected == null ? null : _castVote,
-                  child: const Text('Submit private vote'),
+                  child: const LocalText('Submit private vote'),
                 ),
               ]
             : [
@@ -298,7 +312,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                 const SizedBox(height: 24),
                 FilledButton(
                   onPressed: () => setState(() => _voterReady = true),
-                  child: Text('I am ${player.name}'),
+                  child: LocalText('I am ${player.name}'),
                 ),
               ];
       case _Phase.tie:
@@ -309,7 +323,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
           const SizedBox(height: 24),
           FilledButton(
             onPressed: _beginVoting,
-            child: const Text('Vote again'),
+            child: const LocalText('Vote again'),
           ),
         ];
       case _Phase.result:
@@ -329,13 +343,13 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                     color: theme.colorScheme.primary,
                   ),
                   const SizedBox(height: 16),
-                  const Text('THE SECRET WORD'),
-                  Text(
+                  const LocalText('THE SECRET WORD'),
+                  LocalText(
                     _session.secretWord.value,
                     style: theme.textTheme.headlineLarge,
                   ),
                   const SizedBox(height: 16),
-                  Text(
+                  LocalText(
                     'Imposters: ${_session.players.where(_session.isImposter).map((p) => p.name).join(', ')}',
                     textAlign: TextAlign.center,
                   ),
@@ -344,26 +358,26 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
             ),
           ),
           const SizedBox(height: 20),
-          Text('The votes', style: theme.textTheme.titleLarge),
+          LocalText('The votes', style: theme.textTheme.titleLarge),
           for (final p in _session.players)
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text(p.name),
-              subtitle: Text(
+              title: LocalText(p.name),
+              subtitle: LocalText(
                 _suspects.contains(p.id)
                     ? 'Accused by the group'
                     : 'Not accused',
               ),
-              trailing: Text('${_ballot.counts[p.id]} votes'),
+              trailing: LocalText('${_ballot.counts[p.id]} votes'),
             ),
           const SizedBox(height: 20),
           FilledButton(
             onPressed: () => setState(_newRound),
-            child: const Text('Play again'),
+            child: const LocalText('Play again'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Change players & settings'),
+            child: const LocalText('Change players & settings'),
           ),
         ];
     }
@@ -375,7 +389,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
         ...children,
         if (_phase != _Phase.result) ...[
           const SizedBox(height: 20),
-          TextButton(onPressed: _exit, child: const Text('End round')),
+          TextButton(onPressed: _exit, child: const LocalText('End round')),
         ],
       ],
     );

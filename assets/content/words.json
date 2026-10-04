@@ -1,0 +1,1685 @@
+{
+  "version": 1,
+  "words": [
+    {
+      "id": "food-001",
+      "category": "Food",
+      "en": "Pizza",
+      "ar": "بيتزا",
+      "difficulty": 1
+    },
+    {
+      "id": "food-002",
+      "category": "Food",
+      "en": "Burger",
+      "ar": "برغر",
+      "difficulty": 1
+    },
+    {
+      "id": "food-003",
+      "category": "Food",
+      "en": "Pasta",
+      "ar": "معكرونة",
+      "difficulty": 1
+    },
+    {
+      "id": "food-004",
+      "category": "Food",
+      "en": "Sushi",
+      "ar": "سوشي",
+      "difficulty": 1
+    },
+    {
+      "id": "food-005",
+      "category": "Food",
+      "en": "Popcorn",
+      "ar": "فشار",
+      "difficulty": 1
+    },
+    {
+      "id": "food-006",
+      "category": "Food",
+      "en": "Pancake",
+      "ar": "فطيرة",
+      "difficulty": 1
+    },
+    {
+      "id": "food-007",
+      "category": "Food",
+      "en": "Ice cream",
+      "ar": "آيس كريم",
+      "difficulty": 1
+    },
+    {
+      "id": "food-008",
+      "category": "Food",
+      "en": "Sandwich",
+      "ar": "شطيرة",
+      "difficulty": 1
+    },
+    {
+      "id": "food-009",
+      "category": "Food",
+      "en": "Chocolate",
+      "ar": "شوكولاتة",
+      "difficulty": 1
+    },
+    {
+      "id": "food-010",
+      "category": "Food",
+      "en": "Watermelon",
+      "ar": "بطيخ",
+      "difficulty": 1
+    },
+    {
+      "id": "food-011",
+      "category": "Food",
+      "en": "Apple",
+      "ar": "تفاح",
+      "difficulty": 1
+    },
+    {
+      "id": "food-012",
+      "category": "Food",
+      "en": "Cheese",
+      "ar": "جبن",
+      "difficulty": 1
+    },
+    {
+      "id": "food-013",
+      "category": "Food",
+      "en": "Rice",
+      "ar": "أرز",
+      "difficulty": 1
+    },
+    {
+      "id": "food-014",
+      "category": "Food",
+      "en": "Bread",
+      "ar": "خبز",
+      "difficulty": 1
+    },
+    {
+      "id": "food-015",
+      "category": "Food",
+      "en": "Soup",
+      "ar": "حساء",
+      "difficulty": 1
+    },
+    {
+      "id": "food-016",
+      "category": "Food",
+      "en": "Honey",
+      "ar": "عسل",
+      "difficulty": 1
+    },
+    {
+      "id": "food-017",
+      "category": "Food",
+      "en": "Yogurt",
+      "ar": "زبادي",
+      "difficulty": 1
+    },
+    {
+      "id": "food-018",
+      "category": "Food",
+      "en": "Dates",
+      "ar": "تمر",
+      "difficulty": 1
+    },
+    {
+      "id": "food-019",
+      "category": "Food",
+      "en": "Strawberry",
+      "ar": "فراولة",
+      "difficulty": 1
+    },
+    {
+      "id": "food-020",
+      "category": "Food",
+      "en": "Coffee",
+      "ar": "قهوة",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-001",
+      "category": "Animals",
+      "en": "Tiger",
+      "ar": "نمر",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-002",
+      "category": "Animals",
+      "en": "Dolphin",
+      "ar": "دلفين",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-003",
+      "category": "Animals",
+      "en": "Elephant",
+      "ar": "فيل",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-004",
+      "category": "Animals",
+      "en": "Penguin",
+      "ar": "بطريق",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-005",
+      "category": "Animals",
+      "en": "Giraffe",
+      "ar": "زرافة",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-006",
+      "category": "Animals",
+      "en": "Kangaroo",
+      "ar": "كنغر",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-007",
+      "category": "Animals",
+      "en": "Lion",
+      "ar": "أسد",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-008",
+      "category": "Animals",
+      "en": "Rabbit",
+      "ar": "أرنب",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-009",
+      "category": "Animals",
+      "en": "Octopus",
+      "ar": "أخطبوط",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-010",
+      "category": "Animals",
+      "en": "Turtle",
+      "ar": "سلحفاة",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-011",
+      "category": "Animals",
+      "en": "Panda",
+      "ar": "باندا",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-012",
+      "category": "Animals",
+      "en": "Owl",
+      "ar": "بومة",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-013",
+      "category": "Animals",
+      "en": "Camel",
+      "ar": "جمل",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-014",
+      "category": "Animals",
+      "en": "Horse",
+      "ar": "حصان",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-015",
+      "category": "Animals",
+      "en": "Butterfly",
+      "ar": "فراشة",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-016",
+      "category": "Animals",
+      "en": "Eagle",
+      "ar": "عقاب",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-017",
+      "category": "Animals",
+      "en": "Shark",
+      "ar": "قرش",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-018",
+      "category": "Animals",
+      "en": "Fox",
+      "ar": "ثعلب",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-019",
+      "category": "Animals",
+      "en": "Monkey",
+      "ar": "قرد",
+      "difficulty": 1
+    },
+    {
+      "id": "animals-020",
+      "category": "Animals",
+      "en": "Bee",
+      "ar": "نحلة",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-001",
+      "category": "Sports",
+      "en": "Football",
+      "ar": "كرة القدم",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-002",
+      "category": "Sports",
+      "en": "Tennis",
+      "ar": "تنس",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-003",
+      "category": "Sports",
+      "en": "Cricket",
+      "ar": "كريكيت",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-004",
+      "category": "Sports",
+      "en": "Basketball",
+      "ar": "كرة السلة",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-005",
+      "category": "Sports",
+      "en": "Swimming",
+      "ar": "سباحة",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-006",
+      "category": "Sports",
+      "en": "Boxing",
+      "ar": "ملاكمة",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-007",
+      "category": "Sports",
+      "en": "Golf",
+      "ar": "غولف",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-008",
+      "category": "Sports",
+      "en": "Volleyball",
+      "ar": "كرة الطائرة",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-009",
+      "category": "Sports",
+      "en": "Cycling",
+      "ar": "ركوب الدراجات",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-010",
+      "category": "Sports",
+      "en": "Skiing",
+      "ar": "تزلج",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-011",
+      "category": "Sports",
+      "en": "Badminton",
+      "ar": "ريشة طائرة",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-012",
+      "category": "Sports",
+      "en": "Wrestling",
+      "ar": "مصارعة",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-013",
+      "category": "Sports",
+      "en": "Archery",
+      "ar": "رماية بالقوس",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-014",
+      "category": "Sports",
+      "en": "Surfing",
+      "ar": "ركوب الأمواج",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-015",
+      "category": "Sports",
+      "en": "Hockey",
+      "ar": "هوكي",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-016",
+      "category": "Sports",
+      "en": "Rugby",
+      "ar": "رغبي",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-017",
+      "category": "Sports",
+      "en": "Gymnastics",
+      "ar": "جمباز",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-018",
+      "category": "Sports",
+      "en": "Fencing",
+      "ar": "مبارزة",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-019",
+      "category": "Sports",
+      "en": "Bowling",
+      "ar": "بولينغ",
+      "difficulty": 1
+    },
+    {
+      "id": "sports-020",
+      "category": "Sports",
+      "en": "Table tennis",
+      "ar": "تنس الطاولة",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-001",
+      "category": "Technology",
+      "en": "Laptop",
+      "ar": "حاسوب محمول",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-002",
+      "category": "Technology",
+      "en": "Robot",
+      "ar": "روبوت",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-003",
+      "category": "Technology",
+      "en": "Smartphone",
+      "ar": "هاتف ذكي",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-004",
+      "category": "Technology",
+      "en": "Drone",
+      "ar": "طائرة مسيرة",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-005",
+      "category": "Technology",
+      "en": "Keyboard",
+      "ar": "لوحة مفاتيح",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-006",
+      "category": "Technology",
+      "en": "Headphones",
+      "ar": "سماعات رأس",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-007",
+      "category": "Technology",
+      "en": "Camera",
+      "ar": "كاميرا",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-008",
+      "category": "Technology",
+      "en": "Printer",
+      "ar": "طابعة",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-009",
+      "category": "Technology",
+      "en": "Satellite",
+      "ar": "قمر صناعي",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-010",
+      "category": "Technology",
+      "en": "Smartwatch",
+      "ar": "ساعة ذكية",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-011",
+      "category": "Technology",
+      "en": "Microphone",
+      "ar": "ميكروفون",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-012",
+      "category": "Technology",
+      "en": "Charger",
+      "ar": "شاحن",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-013",
+      "category": "Technology",
+      "en": "Tablet",
+      "ar": "جهاز لوحي",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-014",
+      "category": "Technology",
+      "en": "Projector",
+      "ar": "جهاز عرض",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-015",
+      "category": "Technology",
+      "en": "Calculator",
+      "ar": "آلة حاسبة",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-016",
+      "category": "Technology",
+      "en": "USB drive",
+      "ar": "ذاكرة فلاش",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-017",
+      "category": "Technology",
+      "en": "Router",
+      "ar": "جهاز توجيه",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-018",
+      "category": "Technology",
+      "en": "Scanner",
+      "ar": "ماسح ضوئي",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-019",
+      "category": "Technology",
+      "en": "Joystick",
+      "ar": "عصا تحكم",
+      "difficulty": 1
+    },
+    {
+      "id": "technology-020",
+      "category": "Technology",
+      "en": "Telescope",
+      "ar": "تلسكوب",
+      "difficulty": 1
+    },
+    {
+      "id": "places-001",
+      "category": "Places",
+      "en": "Beach",
+      "ar": "شاطئ",
+      "difficulty": 1
+    },
+    {
+      "id": "places-002",
+      "category": "Places",
+      "en": "Airport",
+      "ar": "مطار",
+      "difficulty": 1
+    },
+    {
+      "id": "places-003",
+      "category": "Places",
+      "en": "Library",
+      "ar": "مكتبة",
+      "difficulty": 1
+    },
+    {
+      "id": "places-004",
+      "category": "Places",
+      "en": "Hospital",
+      "ar": "مستشفى",
+      "difficulty": 1
+    },
+    {
+      "id": "places-005",
+      "category": "Places",
+      "en": "Museum",
+      "ar": "متحف",
+      "difficulty": 1
+    },
+    {
+      "id": "places-006",
+      "category": "Places",
+      "en": "Desert",
+      "ar": "صحراء",
+      "difficulty": 1
+    },
+    {
+      "id": "places-007",
+      "category": "Places",
+      "en": "School",
+      "ar": "مدرسة",
+      "difficulty": 1
+    },
+    {
+      "id": "places-008",
+      "category": "Places",
+      "en": "Cinema",
+      "ar": "سينما",
+      "difficulty": 1
+    },
+    {
+      "id": "places-009",
+      "category": "Places",
+      "en": "Stadium",
+      "ar": "ملعب",
+      "difficulty": 1
+    },
+    {
+      "id": "places-010",
+      "category": "Places",
+      "en": "Supermarket",
+      "ar": "سوبرماركت",
+      "difficulty": 1
+    },
+    {
+      "id": "places-011",
+      "category": "Places",
+      "en": "Restaurant",
+      "ar": "مطعم",
+      "difficulty": 1
+    },
+    {
+      "id": "places-012",
+      "category": "Places",
+      "en": "Park",
+      "ar": "حديقة",
+      "difficulty": 1
+    },
+    {
+      "id": "places-013",
+      "category": "Places",
+      "en": "Zoo",
+      "ar": "حديقة حيوان",
+      "difficulty": 1
+    },
+    {
+      "id": "places-014",
+      "category": "Places",
+      "en": "Bakery",
+      "ar": "مخبز",
+      "difficulty": 1
+    },
+    {
+      "id": "places-015",
+      "category": "Places",
+      "en": "Hotel",
+      "ar": "فندق",
+      "difficulty": 1
+    },
+    {
+      "id": "places-016",
+      "category": "Places",
+      "en": "Castle",
+      "ar": "قلعة",
+      "difficulty": 1
+    },
+    {
+      "id": "places-017",
+      "category": "Places",
+      "en": "Farm",
+      "ar": "مزرعة",
+      "difficulty": 1
+    },
+    {
+      "id": "places-018",
+      "category": "Places",
+      "en": "Harbor",
+      "ar": "ميناء",
+      "difficulty": 1
+    },
+    {
+      "id": "places-019",
+      "category": "Places",
+      "en": "Theater",
+      "ar": "مسرح",
+      "difficulty": 1
+    },
+    {
+      "id": "places-020",
+      "category": "Places",
+      "en": "Playground",
+      "ar": "ساحة لعب",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-001",
+      "category": "Objects",
+      "en": "Umbrella",
+      "ar": "مظلة",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-002",
+      "category": "Objects",
+      "en": "Backpack",
+      "ar": "حقيبة ظهر",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-003",
+      "category": "Objects",
+      "en": "Mirror",
+      "ar": "مرآة",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-004",
+      "category": "Objects",
+      "en": "Pillow",
+      "ar": "وسادة",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-005",
+      "category": "Objects",
+      "en": "Candle",
+      "ar": "شمعة",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-006",
+      "category": "Objects",
+      "en": "Scissors",
+      "ar": "مقص",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-007",
+      "category": "Objects",
+      "en": "Wallet",
+      "ar": "محفظة",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-008",
+      "category": "Objects",
+      "en": "Sunglasses",
+      "ar": "نظارات شمسية",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-009",
+      "category": "Objects",
+      "en": "Clock",
+      "ar": "ساعة",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-010",
+      "category": "Objects",
+      "en": "Toothbrush",
+      "ar": "فرشاة أسنان",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-011",
+      "category": "Objects",
+      "en": "Key",
+      "ar": "مفتاح",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-012",
+      "category": "Objects",
+      "en": "Balloon",
+      "ar": "بالون",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-013",
+      "category": "Objects",
+      "en": "Compass",
+      "ar": "بوصلة",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-014",
+      "category": "Objects",
+      "en": "Flashlight",
+      "ar": "مصباح يدوي",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-015",
+      "category": "Objects",
+      "en": "Bucket",
+      "ar": "دلو",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-016",
+      "category": "Objects",
+      "en": "Rope",
+      "ar": "حبل",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-017",
+      "category": "Objects",
+      "en": "Ladder",
+      "ar": "سلم",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-018",
+      "category": "Objects",
+      "en": "Basket",
+      "ar": "سلة",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-019",
+      "category": "Objects",
+      "en": "Suitcase",
+      "ar": "حقيبة سفر",
+      "difficulty": 1
+    },
+    {
+      "id": "objects-020",
+      "category": "Objects",
+      "en": "Magnifying glass",
+      "ar": "عدسة مكبرة",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-001",
+      "category": "Nature",
+      "en": "Mountain",
+      "ar": "جبل",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-002",
+      "category": "Nature",
+      "en": "River",
+      "ar": "نهر",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-003",
+      "category": "Nature",
+      "en": "Forest",
+      "ar": "غابة",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-004",
+      "category": "Nature",
+      "en": "Ocean",
+      "ar": "محيط",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-005",
+      "category": "Nature",
+      "en": "Waterfall",
+      "ar": "شلال",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-006",
+      "category": "Nature",
+      "en": "Volcano",
+      "ar": "بركان",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-007",
+      "category": "Nature",
+      "en": "Rainbow",
+      "ar": "قوس قزح",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-008",
+      "category": "Nature",
+      "en": "Snow",
+      "ar": "ثلج",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-009",
+      "category": "Nature",
+      "en": "Thunder",
+      "ar": "رعد",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-010",
+      "category": "Nature",
+      "en": "Lightning",
+      "ar": "برق",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-011",
+      "category": "Nature",
+      "en": "Cloud",
+      "ar": "سحابة",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-012",
+      "category": "Nature",
+      "en": "Rain",
+      "ar": "مطر",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-013",
+      "category": "Nature",
+      "en": "Sunrise",
+      "ar": "شروق الشمس",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-014",
+      "category": "Nature",
+      "en": "Sunset",
+      "ar": "غروب الشمس",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-015",
+      "category": "Nature",
+      "en": "Moon",
+      "ar": "قمر",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-016",
+      "category": "Nature",
+      "en": "Star",
+      "ar": "نجمة",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-017",
+      "category": "Nature",
+      "en": "Flower",
+      "ar": "زهرة",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-018",
+      "category": "Nature",
+      "en": "Cactus",
+      "ar": "صبار",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-019",
+      "category": "Nature",
+      "en": "Palm tree",
+      "ar": "نخلة",
+      "difficulty": 1
+    },
+    {
+      "id": "nature-020",
+      "category": "Nature",
+      "en": "Island",
+      "ar": "جزيرة",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-001",
+      "category": "Jobs",
+      "en": "Doctor",
+      "ar": "طبيب",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-002",
+      "category": "Jobs",
+      "en": "Teacher",
+      "ar": "معلم",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-003",
+      "category": "Jobs",
+      "en": "Chef",
+      "ar": "طاه",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-004",
+      "category": "Jobs",
+      "en": "Pilot",
+      "ar": "طيار",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-005",
+      "category": "Jobs",
+      "en": "Farmer",
+      "ar": "مزارع",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-006",
+      "category": "Jobs",
+      "en": "Nurse",
+      "ar": "ممرض",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-007",
+      "category": "Jobs",
+      "en": "Firefighter",
+      "ar": "رجل إطفاء",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-008",
+      "category": "Jobs",
+      "en": "Dentist",
+      "ar": "طبيب أسنان",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-009",
+      "category": "Jobs",
+      "en": "Architect",
+      "ar": "مهندس معماري",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-010",
+      "category": "Jobs",
+      "en": "Plumber",
+      "ar": "سباك",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-011",
+      "category": "Jobs",
+      "en": "Electrician",
+      "ar": "كهربائي",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-012",
+      "category": "Jobs",
+      "en": "Mechanic",
+      "ar": "ميكانيكي",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-013",
+      "category": "Jobs",
+      "en": "Photographer",
+      "ar": "مصور",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-014",
+      "category": "Jobs",
+      "en": "Journalist",
+      "ar": "صحفي",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-015",
+      "category": "Jobs",
+      "en": "Librarian",
+      "ar": "أمين مكتبة",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-016",
+      "category": "Jobs",
+      "en": "Astronaut",
+      "ar": "رائد فضاء",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-017",
+      "category": "Jobs",
+      "en": "Scientist",
+      "ar": "عالم",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-018",
+      "category": "Jobs",
+      "en": "Painter",
+      "ar": "رسام",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-019",
+      "category": "Jobs",
+      "en": "Tailor",
+      "ar": "خياط",
+      "difficulty": 1
+    },
+    {
+      "id": "jobs-020",
+      "category": "Jobs",
+      "en": "Carpenter",
+      "ar": "نجار",
+      "difficulty": 1
+    },
+    {
+      "id": "music-001",
+      "category": "Music",
+      "en": "Guitar",
+      "ar": "غيتار",
+      "difficulty": 1
+    },
+    {
+      "id": "music-002",
+      "category": "Music",
+      "en": "Piano",
+      "ar": "بيانو",
+      "difficulty": 1
+    },
+    {
+      "id": "music-003",
+      "category": "Music",
+      "en": "Drum",
+      "ar": "طبل",
+      "difficulty": 1
+    },
+    {
+      "id": "music-004",
+      "category": "Music",
+      "en": "Violin",
+      "ar": "كمان",
+      "difficulty": 1
+    },
+    {
+      "id": "music-005",
+      "category": "Music",
+      "en": "Flute",
+      "ar": "ناي",
+      "difficulty": 1
+    },
+    {
+      "id": "music-006",
+      "category": "Music",
+      "en": "Trumpet",
+      "ar": "بوق",
+      "difficulty": 1
+    },
+    {
+      "id": "music-007",
+      "category": "Music",
+      "en": "Harp",
+      "ar": "قيثارة",
+      "difficulty": 1
+    },
+    {
+      "id": "music-008",
+      "category": "Music",
+      "en": "Accordion",
+      "ar": "أكورديون",
+      "difficulty": 1
+    },
+    {
+      "id": "music-009",
+      "category": "Music",
+      "en": "Saxophone",
+      "ar": "ساكسفون",
+      "difficulty": 1
+    },
+    {
+      "id": "music-010",
+      "category": "Music",
+      "en": "Tambourine",
+      "ar": "دف",
+      "difficulty": 1
+    },
+    {
+      "id": "music-011",
+      "category": "Music",
+      "en": "Concert",
+      "ar": "حفل موسيقي",
+      "difficulty": 1
+    },
+    {
+      "id": "music-012",
+      "category": "Music",
+      "en": "Orchestra",
+      "ar": "أوركسترا",
+      "difficulty": 1
+    },
+    {
+      "id": "music-013",
+      "category": "Music",
+      "en": "Singer",
+      "ar": "مغن",
+      "difficulty": 1
+    },
+    {
+      "id": "music-014",
+      "category": "Music",
+      "en": "Choir",
+      "ar": "جوقة",
+      "difficulty": 1
+    },
+    {
+      "id": "music-015",
+      "category": "Music",
+      "en": "Melody",
+      "ar": "لحن",
+      "difficulty": 1
+    },
+    {
+      "id": "music-016",
+      "category": "Music",
+      "en": "Rhythm",
+      "ar": "إيقاع",
+      "difficulty": 1
+    },
+    {
+      "id": "music-017",
+      "category": "Music",
+      "en": "Lullaby",
+      "ar": "تهويدة",
+      "difficulty": 1
+    },
+    {
+      "id": "music-018",
+      "category": "Music",
+      "en": "Opera",
+      "ar": "أوبرا",
+      "difficulty": 1
+    },
+    {
+      "id": "music-019",
+      "category": "Music",
+      "en": "DJ",
+      "ar": "دي جي",
+      "difficulty": 1
+    },
+    {
+      "id": "music-020",
+      "category": "Music",
+      "en": "Oud",
+      "ar": "عود",
+      "difficulty": 1
+    },
+    {
+      "id": "home-001",
+      "category": "Home",
+      "en": "Sofa",
+      "ar": "أريكة",
+      "difficulty": 1
+    },
+    {
+      "id": "home-002",
+      "category": "Home",
+      "en": "Bed",
+      "ar": "سرير",
+      "difficulty": 1
+    },
+    {
+      "id": "home-003",
+      "category": "Home",
+      "en": "Wardrobe",
+      "ar": "خزانة ملابس",
+      "difficulty": 1
+    },
+    {
+      "id": "home-004",
+      "category": "Home",
+      "en": "Curtain",
+      "ar": "ستارة",
+      "difficulty": 1
+    },
+    {
+      "id": "home-005",
+      "category": "Home",
+      "en": "Carpet",
+      "ar": "سجادة",
+      "difficulty": 1
+    },
+    {
+      "id": "home-006",
+      "category": "Home",
+      "en": "Refrigerator",
+      "ar": "ثلاجة",
+      "difficulty": 1
+    },
+    {
+      "id": "home-007",
+      "category": "Home",
+      "en": "Oven",
+      "ar": "فرن",
+      "difficulty": 1
+    },
+    {
+      "id": "home-008",
+      "category": "Home",
+      "en": "Kettle",
+      "ar": "غلاية",
+      "difficulty": 1
+    },
+    {
+      "id": "home-009",
+      "category": "Home",
+      "en": "Washing machine",
+      "ar": "غسالة",
+      "difficulty": 1
+    },
+    {
+      "id": "home-010",
+      "category": "Home",
+      "en": "Dishwasher",
+      "ar": "غسالة صحون",
+      "difficulty": 1
+    },
+    {
+      "id": "home-011",
+      "category": "Home",
+      "en": "Vacuum cleaner",
+      "ar": "مكنسة كهربائية",
+      "difficulty": 1
+    },
+    {
+      "id": "home-012",
+      "category": "Home",
+      "en": "Fan",
+      "ar": "مروحة",
+      "difficulty": 1
+    },
+    {
+      "id": "home-013",
+      "category": "Home",
+      "en": "Air conditioner",
+      "ar": "مكيف",
+      "difficulty": 1
+    },
+    {
+      "id": "home-014",
+      "category": "Home",
+      "en": "Doorbell",
+      "ar": "جرس الباب",
+      "difficulty": 1
+    },
+    {
+      "id": "home-015",
+      "category": "Home",
+      "en": "Bookshelf",
+      "ar": "رف كتب",
+      "difficulty": 1
+    },
+    {
+      "id": "home-016",
+      "category": "Home",
+      "en": "Bathtub",
+      "ar": "حوض استحمام",
+      "difficulty": 1
+    },
+    {
+      "id": "home-017",
+      "category": "Home",
+      "en": "Sink",
+      "ar": "مغسلة",
+      "difficulty": 1
+    },
+    {
+      "id": "home-018",
+      "category": "Home",
+      "en": "Dining table",
+      "ar": "طاولة طعام",
+      "difficulty": 1
+    },
+    {
+      "id": "home-019",
+      "category": "Home",
+      "en": "Armchair",
+      "ar": "كرسي بذراعين",
+      "difficulty": 1
+    },
+    {
+      "id": "home-020",
+      "category": "Home",
+      "en": "Fireplace",
+      "ar": "موقد",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-001",
+      "category": "Vehicles",
+      "en": "Bicycle",
+      "ar": "دراجة هوائية",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-002",
+      "category": "Vehicles",
+      "en": "Motorcycle",
+      "ar": "دراجة نارية",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-003",
+      "category": "Vehicles",
+      "en": "Bus",
+      "ar": "حافلة",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-004",
+      "category": "Vehicles",
+      "en": "Train",
+      "ar": "قطار",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-005",
+      "category": "Vehicles",
+      "en": "Airplane",
+      "ar": "طائرة",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-006",
+      "category": "Vehicles",
+      "en": "Helicopter",
+      "ar": "مروحية",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-007",
+      "category": "Vehicles",
+      "en": "Boat",
+      "ar": "قارب",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-008",
+      "category": "Vehicles",
+      "en": "Submarine",
+      "ar": "غواصة",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-009",
+      "category": "Vehicles",
+      "en": "Truck",
+      "ar": "شاحنة",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-010",
+      "category": "Vehicles",
+      "en": "Taxi",
+      "ar": "سيارة أجرة",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-011",
+      "category": "Vehicles",
+      "en": "Ambulance",
+      "ar": "سيارة إسعاف",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-012",
+      "category": "Vehicles",
+      "en": "Tractor",
+      "ar": "جرار",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-013",
+      "category": "Vehicles",
+      "en": "Scooter",
+      "ar": "سكوتر",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-014",
+      "category": "Vehicles",
+      "en": "Sailboat",
+      "ar": "قارب شراعي",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-015",
+      "category": "Vehicles",
+      "en": "Hot air balloon",
+      "ar": "منطاد",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-016",
+      "category": "Vehicles",
+      "en": "Spaceship",
+      "ar": "مركبة فضائية",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-017",
+      "category": "Vehicles",
+      "en": "Cable car",
+      "ar": "تلفريك",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-018",
+      "category": "Vehicles",
+      "en": "Tram",
+      "ar": "ترام",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-019",
+      "category": "Vehicles",
+      "en": "Fire engine",
+      "ar": "شاحنة إطفاء",
+      "difficulty": 1
+    },
+    {
+      "id": "vehicles-020",
+      "category": "Vehicles",
+      "en": "Canoe",
+      "ar": "زورق",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-001",
+      "category": "Travel",
+      "en": "Passport",
+      "ar": "جواز سفر",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-002",
+      "category": "Travel",
+      "en": "Boarding pass",
+      "ar": "بطاقة صعود",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-003",
+      "category": "Travel",
+      "en": "Ticket",
+      "ar": "تذكرة",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-004",
+      "category": "Travel",
+      "en": "Map",
+      "ar": "خريطة",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-005",
+      "category": "Travel",
+      "en": "Tent",
+      "ar": "خيمة",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-006",
+      "category": "Travel",
+      "en": "Sleeping bag",
+      "ar": "كيس نوم",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-007",
+      "category": "Travel",
+      "en": "Souvenir",
+      "ar": "تذكار",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-008",
+      "category": "Travel",
+      "en": "Postcard",
+      "ar": "بطاقة بريدية",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-009",
+      "category": "Travel",
+      "en": "Tour guide",
+      "ar": "مرشد سياحي",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-010",
+      "category": "Travel",
+      "en": "Camping",
+      "ar": "تخييم",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-011",
+      "category": "Travel",
+      "en": "Hiking",
+      "ar": "مشي جبلي",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-012",
+      "category": "Travel",
+      "en": "Road trip",
+      "ar": "رحلة برية",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-013",
+      "category": "Travel",
+      "en": "Cruise",
+      "ar": "رحلة بحرية",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-014",
+      "category": "Travel",
+      "en": "Picnic",
+      "ar": "نزهة",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-015",
+      "category": "Travel",
+      "en": "Safari",
+      "ar": "سفاري",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-016",
+      "category": "Travel",
+      "en": "Luggage",
+      "ar": "أمتعة",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-017",
+      "category": "Travel",
+      "en": "Visa",
+      "ar": "تأشيرة",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-018",
+      "category": "Travel",
+      "en": "Reservation",
+      "ar": "حجز",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-019",
+      "category": "Travel",
+      "en": "Check-in",
+      "ar": "تسجيل الوصول",
+      "difficulty": 1
+    },
+    {
+      "id": "travel-020",
+      "category": "Travel",
+      "en": "Vacation",
+      "ar": "إجازة",
+      "difficulty": 1
+    }
+  ]
+}

@@ -5,6 +5,10 @@ import 'package:suspecto/features/game/domain/models/player.dart';
 import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/presentation/play_screen.dart';
 
+Future<void> reveal(WidgetTester tester, Finder finder) async {
+  await tester.scrollUntilVisible(finder, 180, scrollable: find.byType(Scrollable).first);
+}
+
 void main() {
   testWidgets('complete private reveal, discussion, ballots and rematch', (
     tester,
@@ -34,26 +38,26 @@ void main() {
       await tester.pump();
       expect(find.text('Pizza'), findsNothing);
       final next = find.text(i == 2 ? 'Start discussion' : 'Hide & pass');
-      await tester.ensureVisible(next);
+      await reveal(tester, next);
       await tester.tap(next);
       await tester.pump();
     }
-    await tester.ensureVisible(find.text('Start private voting'));
+    await reveal(tester, find.text('Start private voting'));
     await tester.tap(find.text('Start private voting'));
     await tester.pump();
     for (final pair in [('Ali', 'Sara'), ('Sara', 'Ali'), ('Omar', 'Sara')]) {
-      await tester.ensureVisible(find.text('I am ${pair.$1}'));
+      await reveal(tester, find.text('I am ${pair.$1}'));
       await tester.tap(find.text('I am ${pair.$1}'));
       await tester.pump();
       await tester.tap(find.text(pair.$2));
       await tester.pump();
-      await tester.ensureVisible(find.text('Submit private vote'));
+      await reveal(tester, find.text('Submit private vote'));
       await tester.tap(find.text('Submit private vote'));
       await tester.pump();
     }
     expect(find.text('THE SECRET WORD'), findsOneWidget);
     expect(find.text('Pizza'), findsOneWidget);
-    await tester.ensureVisible(find.text('Play again'));
+    await reveal(tester, find.text('Play again'));
     await tester.tap(find.text('Play again'));
     await tester.pump();
     expect(find.text('Pass to Ali'), findsOneWidget);
@@ -100,7 +104,7 @@ void main() {
     tester.platformDispatcher.textScaleFactorTestValue = 2;
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
     await tester.pumpWidget(const SuspectoApp());
-    await tester.ensureVisible(find.text('Start game'));
+    await reveal(tester, find.text('Start game'));
     await tester.tap(find.text('Start game'));
     await tester.pumpAndSettle();
     expect(find.text('Gather your suspects'), findsOneWidget);
