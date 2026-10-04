@@ -1,0 +1,23 @@
+name: Flutter checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: dart format lib test
+      - run: flutter analyze
+      - run: flutter test
+      - name: Generate platform runners and build web smoke test
+        run: |
+          flutter create --platforms=android,ios,web --project-name suspecto --org com.suspecto .
+          flutter build web

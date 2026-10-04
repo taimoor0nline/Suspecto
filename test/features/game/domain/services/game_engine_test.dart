@@ -14,20 +14,12 @@ void main() {
         const Player(id: '2', name: 'Sara'),
         const Player(id: '3', name: 'Omar'),
       ];
-      final words = [
-        const WordEntry(value: 'Pizza', category: 'Food'),
-      ];
+      final words = [const WordEntry(value: 'Pizza', category: 'Food')];
 
-      final session = engine.createSession(
-        players: players,
-        words: words,
-      );
+      final session = engine.createSession(players: players, words: words);
 
       expect(session.players, hasLength(3));
-      expect(
-        session.players.where(session.isImposter),
-        hasLength(1),
-      );
+      expect(session.players.where(session.isImposter), hasLength(1));
       expect(session.secretWord.value, 'Pizza');
     });
 
@@ -40,9 +32,7 @@ void main() {
             Player(id: '1', name: 'Ali'),
             Player(id: '2', name: 'Sara'),
           ],
-          words: const [
-            WordEntry(value: 'Pizza', category: 'Food'),
-          ],
+          words: const [WordEntry(value: 'Pizza', category: 'Food')],
         ),
         throwsArgumentError,
       );
