@@ -33,7 +33,7 @@ void main() {
       AppLanguage(code: 'en', name: 'English', enabled: true),
       AppLanguage(code: 'en', name: 'Duplicate', enabled: false),
     ]), throwsArgumentError);
-    expect(defaultLanguageConfig.resolve('zh-Hans').code, 'en');
+    expect(englishOnly.resolve('zh-Hans').code, 'en');
     expect(defaultLanguageConfig.resolve('ar').direction, TextDirection.rtl);
   });
 

@@ -51,12 +51,9 @@ class HistoryScreen extends StatelessWidget {
                           ? '?'
                           : entry.key.characters.first)),
                   title: Text(entry.key),
-                  subtitle: Text(StoreScope.of(context).language == 'ar'
-                      ? '${entry.value.played} جولات • ${entry.value.imposterRounds} أدوار مخادع'
-                      : '${entry.value.played} rounds • ${entry.value.imposterRounds} imposter roles'),
-                  trailing: Text(StoreScope.of(context).language == 'ar'
-                      ? '${entry.value.wins} فوز'
-                      : '${entry.value.wins} wins')),
+                  subtitle: LocalText(
+                      '${entry.value.played} rounds • ${entry.value.imposterRounds} imposter roles'),
+                  trailing: LocalText('${entry.value.wins} wins')),
             const SizedBox(height: 24),
             const LocalText('Completed rounds',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),

@@ -12,7 +12,7 @@ GitHub Actions run. Generated runners/lockfile are archived for committing after
 - Android and iPhone: full game, exit confirmation, rematch and restart.
 - 3/7/20 players, 1/2/3 imposters, ties and invalid names/categories.
 - Portrait/landscape, small displays and 200% text scale.
-- English/Arabic direction, long names and translated words.
+- All seven locales and Arabic direction, long names and translated words.
 - Pointer cancel, app switch, screen lock and interruptions during role reveal.
 - Android secure-window behavior and iOS inactive-scene cover; validate recent-app previews.
 - Timer resume, voting privacy, haptics and system sound preferences.
@@ -48,7 +48,7 @@ Do not enable these services simply to mark the checklist complete.
 
 ## Content and product decisions
 
-Review Arabic translations with a native speaker. The current vocabulary is
+Review all translations with native speakers. The current vocabulary is
 original curated starter content, not the proposed tens-of-thousands-word catalog.
 Check branding/name rights, finalize publisher/contact information and decide
 whether children are a target audience before any monetization integration.

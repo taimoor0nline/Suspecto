@@ -54,8 +54,13 @@ app build. English is the required enabled fallback. Settings and supported
 locales use this catalog; a disabled or unknown saved language falls back to
 English. Missing translation strings also use English.
 
-English and Arabic are enabled. Spanish, French, Japanese, Simplified Chinese
-and Traditional Chinese are registered but disabled: their UI and word
-translations must be implemented and reviewed before enabling them. The catalog
-includes native names, locale codes and text direction. This is bundled
-configuration, so changes require a new build; no network is required.
+English, Arabic, Spanish, French, Japanese, Simplified Chinese and Traditional
+Chinese are enabled. Each has all 240 word concepts; new locales include the full
+UI catalog and dynamic messages. User names are preserved. New translations
+need native-speaker review before release.
+
+Edit `assets/content/ui_translations.json` for new-language UI strings and
+`assets/content/words.json` for vocabulary. Run `python scripts/generate_content.py`
+to regenerate Dart constants. Validation rejects missing entries, duplicate word
+translations and mismatched placeholders. Run the validation unit tests with
+`python -m unittest discover -s scripts -p 'test_*.py'`.

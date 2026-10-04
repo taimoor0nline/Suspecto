@@ -1,5 +1,6 @@
 import 'package:suspecto/features/game/data/local/word_translations.dart';
 import 'package:flutter/material.dart';
+import 'package:suspecto/core/ui_translations.dart';
 import 'package:suspecto/core/app_store.dart';
 
 String translate(BuildContext context, String text) {
@@ -7,7 +8,27 @@ String translate(BuildContext context, String text) {
   final language = store == null
       ? 'en'
       : store.languageConfig.resolve(store.language).code;
+  return translateForLanguage(language, text);
+}
+
+String translateForLanguage(String language, String text) {
+  if (language == 'en') return text;
+  final words = wordTranslations[language];
+  if (words != null && words.containsKey(text)) return words[text]!;
   if (language != 'ar') {
+    final strings = uiTranslations[language];
+    if (strings == null) return text;
+    if (strings.containsKey(text)) return strings[text]!;
+    for (final (pattern, template, parameters) in _dynamicMessages) {
+      final match = pattern.firstMatch(text);
+      if (match == null) continue;
+      var result = strings[template];
+      if (result == null) return text;
+      for (var i = 0; i < parameters.length; i++) {
+        result = result.replaceAll('{${parameters[i]}}', match[i + 1]!);
+      }
+      return result;
+    }
     return text;
   }
   if (arabicWords.containsKey(text)) {
@@ -39,6 +60,9 @@ String translate(BuildContext context, String text) {
           'يبدأ ${m[1]}. يقدم كل لاعب تلميحاً، ثم ناقشوا من يخادع. لا تكشفوا الكلمة.'
     ),
     (RegExp(r'^Imposters: (.+)$'), (m) => 'المخادعون: ${m[1]}'),
+    (RegExp(r'^(\d+) rounds • (\d+) imposter roles$'),
+      (m) => '${m[1]} جولات • ${m[2]} أدوار مخادع'),
+    (RegExp(r'^(\d+) wins$'), (m) => '${m[1]} فوز'),
   ];
   for (final (pattern, replacement) in patterns) {
     final match = pattern.firstMatch(text);
@@ -48,6 +72,26 @@ String translate(BuildContext context, String text) {
   }
   return text;
 }
+
+final _dynamicMessages = <(RegExp, String, List<String>)>[
+  (RegExp(r'^Pass to (.+)$'), 'Pass to {name}', ['name']),
+  (RegExp(r'^I am (.+)$'), 'I am {name}', ['name']),
+  (RegExp(r'^Player (\d+)$'), 'Player {number}', ['number']),
+  (RegExp(r'^Remove player (\d+)$'), 'Remove player {number}', ['number']),
+  (RegExp(r'^Add player \((\d+)/20\)$'), 'Add player ({number}/20)', ['number']),
+  (RegExp(r'^(\d+) min$'), '{number} min', ['number']),
+  (RegExp(r'^(\d+) votes$'), '{number} votes', ['number']),
+  (RegExp(r'^Card (\d+) of (\d+)\. Everyone else, look away\.$'),
+    'Card {number} of {total}. Everyone else, look away.', ['number', 'total']),
+  (RegExp(r'^Vote (\d+) of (\d+)\. Choose your suspect privately\.$'),
+    'Vote {number} of {total}. Choose your suspect privately.', ['number', 'total']),
+  (RegExp(r'^(.+) starts\. Give one clue each, then discuss who is bluffing\. Keep the word secret\.$'),
+    '{name} starts. Give one clue each, then discuss who is bluffing. Keep the word secret.', ['name']),
+  (RegExp(r'^Imposters: (.+)$'), 'Imposters: {name}', ['name']),
+  (RegExp(r'^(\d+) rounds • (\d+) imposter roles$'),
+    '{number} rounds • {total} imposter roles', ['number', 'total']),
+  (RegExp(r'^(\d+) wins$'), '{number} wins', ['number']),
+];
 
 class LocalText extends StatelessWidget {
   const LocalText(this.data,
