@@ -22,8 +22,9 @@ String translateForLanguage(String language, String text) {
     for (final (pattern, template, parameters) in _dynamicMessages) {
       final match = pattern.firstMatch(text);
       if (match == null) continue;
-      var result = strings[template];
-      if (result == null) return text;
+      final translatedTemplate = strings[template];
+      if (translatedTemplate == null) return text;
+      var result = translatedTemplate;
       for (var i = 0; i < parameters.length; i++) {
         result = result.replaceAll('{${parameters[i]}}', match[i + 1]!);
       }
