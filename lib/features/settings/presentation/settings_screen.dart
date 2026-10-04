@@ -16,11 +16,11 @@ class SettingsScreen extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           Wrap(spacing: 8, children: [
-            for (final item in [('en', 'English'), ('ar', 'العربية')])
+            for (final item in store.languageConfig.enabled)
               ChoiceChip(
-                  label: Text(item.$2),
-                  selected: store.language == item.$1,
-                  onSelected: (_) => store.updateSettings(language: item.$1))
+                  label: Text(item.name),
+                  selected: store.language == item.code,
+                  onSelected: (_) => store.updateSettings(language: item.code))
           ]),
           const SizedBox(height: 24),
           const LocalText('Appearance',
@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
               ('dark', 'Dark')
             ])
               ChoiceChip(
-                  label: LocalText(item.$2),
+                  label: LocalText(item.name),
                   selected: store.theme == item.$1,
                   onSelected: (_) => store.updateSettings(theme: item.$1))
           ]),

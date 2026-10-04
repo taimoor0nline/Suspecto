@@ -46,3 +46,16 @@ require your own keys and store accounts. See `docs/release-checklist.md`.
 
 No ads, billing or remote analytics SDK is enabled. See the draft privacy policy
 and store listing under `docs/`; review and finalize them before publishing.
+
+## Language availability
+
+Edit `lib/core/language_config.dart` to enable or disable languages for the next
+app build. English is the required enabled fallback. Settings and supported
+locales use this catalog; a disabled or unknown saved language falls back to
+English. Missing translation strings also use English.
+
+English and Arabic are enabled. Spanish, French, Japanese, Simplified Chinese
+and Traditional Chinese are registered but disabled: their UI and word
+translations must be implemented and reviewed before enabling them. The catalog
+includes native names, locale codes and text direction. This is bundled
+configuration, so changes require a new build; no network is required.
