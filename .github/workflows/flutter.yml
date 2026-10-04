@@ -1,0 +1,73 @@
+name: Flutter checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: flutter-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+      - name: Validate offline content
+        run: python scripts/generate_content.py
+      - name: Generate platform runners
+        run: flutter create --empty --platforms=android,ios,web --project-name suspecto --org com.suspecto .
+      - run: flutter pub get
+      - run: dart run flutter_launcher_icons
+      - run: dart format lib test
+      - run: flutter analyze
+      - name: Tests and screenshots
+        run: flutter test --dart-define=CAPTURE_SCREENSHOTS=true
+      - run: flutter build web
+      - run: flutter build apk --debug
+      - name: Archive generated runners and lockfile
+        if: always()
+        run: |
+          git ls-files --cached --others --exclude-standard android ios web .metadata pubspec.lock | zip platform-runners.zip -@
+          zip -r source-formatted.zip lib test analysis_options.yaml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: suspecto-beta
+          path: |
+            build/app/outputs/flutter-apk/app-debug.apk
+            build/web
+            build/screenshots
+            platform-runners.zip
+            source-formatted.zip
+          if-no-files-found: warn
+          retention-days: 30
+  ios-simulator:
+    runs-on: macos-14
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+      - run: flutter create --empty --platforms=ios --project-name suspecto --org com.suspecto .
+      - run: flutter pub get
+      - run: dart run flutter_launcher_icons
+      - run: flutter build ios --simulator --debug
+      - run: ditto -c -k --sequesterRsrc --keepParent build/ios/iphonesimulator/Runner.app suspecto-ios-simulator.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: suspecto-ios-simulator
+          path: suspecto-ios-simulator.zip
+          retention-days: 30
