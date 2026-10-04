@@ -6,8 +6,8 @@ class GameSession {
     required List<Player> players,
     required Set<String> imposterPlayerIds,
     required this.secretWord,
-  }) : players = List.unmodifiable(players),
-       imposterPlayerIds = Set.unmodifiable(imposterPlayerIds);
+  })  : players = List.unmodifiable(players),
+        imposterPlayerIds = Set.unmodifiable(imposterPlayerIds);
 
   final List<Player> players;
   final Set<String> imposterPlayerIds;

@@ -89,7 +89,9 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   }
 
   void _show(bool show) {
-    if (show && !_visible) { StoreScope.maybeOf(context)?.feedback(reveal: true); }
+    if (show && !_visible) {
+      StoreScope.maybeOf(context)?.feedback(reveal: true);
+    }
     setState(() {
       _visible = show;
       if (show) {
@@ -151,7 +153,20 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
     if (_phase == _Phase.result) {
       final store = StoreScope.maybeOf(context);
       if (store != null) {
-        unawaited(store.recordRound(id: _roundId, word: _session.secretWord.value, category: _session.secretWord.category, players: _session.players.map((p) => p.name).toList(), imposters: _session.players.where(_session.isImposter).map((p) => p.name).toList(), accused: _session.players.where((p) => _suspects.contains(p.id)).map((p) => p.name).toList(), citizensWin: _suspects.every(_session.imposterPlayerIds.contains)));
+        unawaited(store.recordRound(
+            id: _roundId,
+            word: _session.secretWord.value,
+            category: _session.secretWord.category,
+            players: _session.players.map((p) => p.name).toList(),
+            imposters: _session.players
+                .where(_session.isImposter)
+                .map((p) => p.name)
+                .toList(),
+            accused: _session.players
+                .where((p) => _suspects.contains(p.id))
+                .map((p) => p.name)
+                .toList(),
+            citizensWin: _suspects.every(_session.imposterPlayerIds.contains)));
       }
     }
   }
@@ -184,8 +199,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final player = _session.players[_index];
-    final citizensWin =
-        _suspects.isNotEmpty &&
+    final citizensWin = _suspects.isNotEmpty &&
         _suspects.every(_session.imposterPlayerIds.contains);
     String title;
     String subtitle;
@@ -203,7 +217,9 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
             child: Semantics(
               label: translate(context, 'Hold to reveal your secret card'),
               child: AnimatedContainer(
-                  duration: MediaQuery.of(context).disableAnimations ? Duration.zero : const Duration(milliseconds: 160),
+                duration: MediaQuery.of(context).disableAnimations
+                    ? Duration.zero
+                    : const Duration(milliseconds: 160),
                 constraints: const BoxConstraints(minHeight: 260),
                 padding: const EdgeInsets.all(28),
                 decoration: BoxDecoration(
@@ -223,8 +239,8 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                     LocalText(
                       _visible
                           ? (_session.isImposter(player)
-                                ? 'You are the imposter'
-                                : _session.secretWord.value)
+                              ? 'You are the imposter'
+                              : _session.secretWord.value)
                           : 'Hold to reveal',
                       textAlign: TextAlign.center,
                       style: theme.textTheme.headlineMedium,
@@ -233,8 +249,8 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                     LocalText(
                       _visible
                           ? (_session.isImposter(player)
-                                ? 'Blend in. Listen to the clues. Bluff your way through.'
-                                : 'Remember the word. Give a clue, but do not say it.')
+                              ? 'Blend in. Listen to the clues. Bluff your way through.'
+                              : 'Remember the word. Give a clue, but do not say it.')
                           : 'Release to hide your card.',
                       textAlign: TextAlign.center,
                     ),
@@ -269,7 +285,8 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                     '${_remaining ~/ 60}:${(_remaining % 60).toString().padLeft(2, '0')}',
                     style: theme.textTheme.displayLarge,
                   ),
-                  LocalText(_remaining == 0 ? 'Time to vote!' : 'Discussion time'),
+                  LocalText(
+                      _remaining == 0 ? 'Time to vote!' : 'Discussion time'),
                 ],
               ),
             ),
@@ -317,7 +334,8 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
               ];
       case _Phase.tie:
         title = 'Too close to call';
-        subtitle = 'The vote is tied at the cutoff. Discuss again, then everyone votes again. Roles stay secret.';
+        subtitle =
+            'The vote is tied at the cutoff. Discuss again, then everyone votes again. Roles stay secret.';
         children = [
           const Icon(Icons.balance, size: 88),
           const SizedBox(height: 24),

@@ -15,11 +15,15 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: brightness == Brightness.dark ? const Color(0xFF141124) : const Color(0xFFF7F6FB),
+      scaffoldBackgroundColor: brightness == Brightness.dark
+          ? const Color(0xFF141124)
+          : const Color(0xFFF7F6FB),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: colorScheme.surfaceContainerHighest.withValues(alpha: 0.45),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide.none),
       ),
       appBarTheme: const AppBarTheme(
         centerTitle: false,

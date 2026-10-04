@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
@@ -12,7 +11,9 @@ import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/presentation/play_screen.dart';
 
 void main() {
-  if (!const bool.fromEnvironment('CAPTURE_SCREENSHOTS')) { return; }
+  if (!const bool.fromEnvironment('CAPTURE_SCREENSHOTS')) {
+    return;
+  }
   testWidgets('capture beta screens for visual review', (tester) async {
     tester.view.physicalSize = const Size(420, 900);
     tester.view.devicePixelRatio = 1;
@@ -21,17 +22,21 @@ void main() {
     await tester.runAsync(() async {
       final font = File('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf');
       if (await font.exists()) {
-        final loader = FontLoader('Roboto')..addFont(Future.value(ByteData.sublistView(await font.readAsBytes())));
+        final loader = FontLoader('Roboto')
+          ..addFont(
+              Future.value(ByteData.sublistView(await font.readAsBytes())));
         await loader.load();
       }
-      final icons = FontLoader('MaterialIcons')..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'));
+      final icons = FontLoader('MaterialIcons')
+        ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'));
       await icons.load();
     });
     final boundary = GlobalKey();
     Future<void> capture(String name) async {
       await tester.pumpAndSettle();
       await tester.runAsync(() async {
-        final render = boundary.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+        final render = boundary.currentContext!.findRenderObject()!
+            as RenderRepaintBoundary;
         final image = await render.toImage(pixelRatio: 2);
         final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
         final file = File('build/screenshots/$name.png');
@@ -40,20 +45,33 @@ void main() {
         image.dispose();
       });
     }
+
     final store = AppStore();
-    await tester.pumpWidget(RepaintBoundary(key: boundary, child: SuspectoApp(store: store)));
+    await tester.pumpWidget(
+        RepaintBoundary(key: boundary, child: SuspectoApp(store: store)));
     await capture('01-home');
     await tester.scrollUntilVisible(find.text('Start game'), 120);
     await tester.tap(find.text('Start game'));
     await capture('02-player-setup');
     store.language = 'ar';
     await tester.pumpWidget(const SizedBox.shrink());
-    await tester.pumpWidget(RepaintBoundary(key: boundary, child: SuspectoApp(store: store)));
+    await tester.pumpWidget(
+        RepaintBoundary(key: boundary, child: SuspectoApp(store: store)));
     await capture('03-arabic-home');
-    await tester.pumpWidget(RepaintBoundary(key: boundary, child: const MaterialApp(debugShowCheckedModeBanner: false, home: PlayScreen(
-      players: [Player(id: 'a', name: 'Ali'), Player(id: 'b', name: 'Sara'), Player(id: 'c', name: 'Omar')],
-      words: [WordEntry(value: 'Pizza', category: 'Food')], imposterCount: 1, discussionMinutes: 1,
-    ))));
+    await tester.pumpWidget(RepaintBoundary(
+        key: boundary,
+        child: const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: PlayScreen(
+              players: [
+                Player(id: 'a', name: 'Ali'),
+                Player(id: 'b', name: 'Sara'),
+                Player(id: 'c', name: 'Omar')
+              ],
+              words: [WordEntry(value: 'Pizza', category: 'Food')],
+              imposterCount: 1,
+              discussionMinutes: 1,
+            ))));
     await capture('04-private-card');
     await tester.pumpWidget(const SizedBox.shrink());
     store.dispose();

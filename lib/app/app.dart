@@ -14,13 +14,31 @@ class SuspectoApp extends StatefulWidget {
 class _SuspectoAppState extends State<SuspectoApp> {
   late final AppStore _store = widget.store ?? AppStore();
   @override
-  void dispose() { if (widget.store == null) { _store.dispose(); } super.dispose(); }
+  void dispose() {
+    if (widget.store == null) {
+      _store.dispose();
+    }
+    super.dispose();
+  }
+
   @override
-  Widget build(BuildContext context) => StoreScope(store: _store, child: ListenableBuilder(listenable: _store, builder: (context, _) => MaterialApp(
-    title: 'Suspecto', debugShowCheckedModeBanner: false,
-    theme: AppTheme.light(), darkTheme: AppTheme.dark(), themeMode: _store.themeMode,
-    locale: Locale(_store.language), supportedLocales: const [Locale('en'), Locale('ar')],
-    localizationsDelegates: const [GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, GlobalCupertinoLocalizations.delegate],
-    home: const HomeScreen(),
-  )));
+  Widget build(BuildContext context) => StoreScope(
+      store: _store,
+      child: ListenableBuilder(
+          listenable: _store,
+          builder: (context, _) => MaterialApp(
+                title: 'Suspecto',
+                debugShowCheckedModeBanner: false,
+                theme: AppTheme.light(),
+                darkTheme: AppTheme.dark(),
+                themeMode: _store.themeMode,
+                locale: Locale(_store.language),
+                supportedLocales: const [Locale('en'), Locale('ar')],
+                localizationsDelegates: const [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate
+                ],
+                home: const HomeScreen(),
+              )));
 }

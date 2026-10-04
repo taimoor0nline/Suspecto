@@ -6,7 +6,8 @@ import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/presentation/play_screen.dart';
 
 Future<void> reveal(WidgetTester tester, Finder finder) async {
-  await tester.scrollUntilVisible(finder, 180, scrollable: find.byType(Scrollable).first);
+  await tester.scrollUntilVisible(finder, 180,
+      scrollable: find.byType(Scrollable).first);
 }
 
 void main() {
