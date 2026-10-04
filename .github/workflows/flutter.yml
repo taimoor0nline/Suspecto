@@ -19,5 +19,5 @@ jobs:
       - run: flutter test
       - name: Generate platform runners and build web smoke test
         run: |
-          flutter create --platforms=android,ios,web --project-name suspecto --org com.suspecto .
+          flutter create --empty --platforms=android,ios,web --project-name suspecto --org com.suspecto .
           flutter build web

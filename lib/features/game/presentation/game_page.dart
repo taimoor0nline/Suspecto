@@ -27,6 +27,7 @@ class GamePage extends StatelessWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 600),
             child: ListView(
+              key: ValueKey(title),
               padding: const EdgeInsets.all(24),
               children: [
                 Text(

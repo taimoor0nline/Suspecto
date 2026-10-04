@@ -22,7 +22,7 @@ Install the current stable Flutter SDK, then:
 
 ```bash
 flutter pub get
-flutter create --platforms=android,ios,web --project-name suspecto --org com.suspecto .
+flutter create --empty --platforms=android,ios,web --project-name suspecto --org com.suspecto .
 flutter analyze
 flutter test
 flutter run
