@@ -4,7 +4,9 @@ import 'package:suspecto/core/app_store.dart';
 
 String translate(BuildContext context, String text) {
   final store = StoreScope.maybeOf(context);
-  final language = store?.languageConfig.resolve(store.language).code ?? 'en';
+  final language = store == null
+      ? 'en'
+      : store.languageConfig.resolve(store.language).code;
   if (language != 'ar') {
     return text;
   }
