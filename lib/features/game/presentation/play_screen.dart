@@ -298,7 +298,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
                             ? Icons.check_circle
                             : Icons.person_outline,
                       ),
-                      label: LocalText(candidate.name),
+                      label: Text(candidate.name),
                     ),
                   ),
                 const SizedBox(height: 20),
@@ -362,7 +362,7 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
           for (final p in _session.players)
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: LocalText(p.name),
+              title: Text(p.name),
               subtitle: LocalText(
                 _suspects.contains(p.id)
                     ? 'Accused by the group'

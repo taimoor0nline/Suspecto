@@ -37,8 +37,10 @@ unique IDs, English/Arabic terms and required fields without a network connectio
 
 ## Beta artifacts
 
-GitHub Actions generates runners, a debug Android APK, a web bundle, screenshots,
-and a platform-runners ZIP containing Android/iOS/web folders and the lockfile.
+Android/iOS/web runners and the dependency lockfile are committed. GitHub Actions
+builds a debug Android APK, a web bundle, review screenshots and an iOS simulator
+app. Android prevents screenshots/recent-app role previews; iOS covers the app
+when inactive. These protections still require validation on physical devices.
 Android debug builds are for testing only. Release signing and iOS distribution
 require your own keys and store accounts. See `docs/release-checklist.md`.
 

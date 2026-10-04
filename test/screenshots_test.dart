@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -16,6 +18,15 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.runAsync(() async {
+      final font = File('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf');
+      if (await font.exists()) {
+        final loader = FontLoader('Roboto')..addFont(Future.value(ByteData.sublistView(await font.readAsBytes())));
+        await loader.load();
+      }
+      final icons = FontLoader('MaterialIcons')..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'));
+      await icons.load();
+    });
     final boundary = GlobalKey();
     Future<void> capture(String name) async {
       await tester.pumpAndSettle();
@@ -39,7 +50,7 @@ void main() {
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpWidget(RepaintBoundary(key: boundary, child: SuspectoApp(store: store)));
     await capture('03-arabic-home');
-    await tester.pumpWidget(RepaintBoundary(key: boundary, child: const MaterialApp(home: PlayScreen(
+    await tester.pumpWidget(RepaintBoundary(key: boundary, child: const MaterialApp(debugShowCheckedModeBanner: false, home: PlayScreen(
       players: [Player(id: 'a', name: 'Ali'), Player(id: 'b', name: 'Sara'), Player(id: 'c', name: 'Omar')],
       words: [WordEntry(value: 'Pizza', category: 'Food')], imposterCount: 1, discussionMinutes: 1,
     ))));

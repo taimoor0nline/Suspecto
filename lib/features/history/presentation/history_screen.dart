@@ -20,7 +20,7 @@ class HistoryScreen extends StatelessWidget {
         const LocalText('Finish a game to start your story.'),
       ] else ...[
         const LocalText('Player stats', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-        for (final entry in stats) ListTile(contentPadding: EdgeInsets.zero, leading: CircleAvatar(child: Text(entry.key.characters.first)), title: Text(entry.key), subtitle: Text(StoreScope.of(context).language == 'ar' ? '${entry.value.played} جولات • ${entry.value.imposterRounds} أدوار مخادع' : '${entry.value.played} rounds • ${entry.value.imposterRounds} imposter roles'), trailing: Text(StoreScope.of(context).language == 'ar' ? '${entry.value.wins} فوز' : '${entry.value.wins} wins')),
+        for (final entry in stats) ListTile(contentPadding: EdgeInsets.zero, leading: CircleAvatar(child: Text(entry.key.isEmpty ? '?' : entry.key.characters.first)), title: Text(entry.key), subtitle: Text(StoreScope.of(context).language == 'ar' ? '${entry.value.played} جولات • ${entry.value.imposterRounds} أدوار مخادع' : '${entry.value.played} rounds • ${entry.value.imposterRounds} imposter roles'), trailing: Text(StoreScope.of(context).language == 'ar' ? '${entry.value.wins} فوز' : '${entry.value.wins} wins')),
         const SizedBox(height: 24),
         const LocalText('Completed rounds', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
         for (final round in store.history) Card(child: ListTile(

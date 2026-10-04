@@ -25,30 +25,44 @@ class AppStore extends ChangeNotifier {
   ThemeMode get themeMode => switch (theme) { 'dark' => ThemeMode.dark, 'light' => ThemeMode.light, _ => ThemeMode.system };
 
   Future<void> load() async {
+    String? raw;
     try {
       _prefs = await SharedPreferences.getInstance();
-      final raw = _prefs!.getString('suspecto.v1');
-      if (raw == null) { return; }
-      final data = jsonDecode(raw) as Map<String, dynamic>;
-      language = data['language'] == 'ar' ? 'ar' : 'en';
-      theme = ['system', 'dark', 'light'].contains(data['theme']) ? data['theme'] as String : 'system';
-      haptics = data['haptics'] != false;
-      sounds = data['sounds'] == true;
-      lastPlayers = List<String>.from(data['players'] ?? []);
-      lastCategories = List<String>.from(data['categories'] ?? []);
-      lastImposters = data['imposters'] is int ? data['imposters'] as int : 1;
-      lastMinutes = data['minutes'] is int ? data['minutes'] as int : 3;
-      final rounds = data['history'] as List? ?? [];
-      for (final r in rounds.take(200)) {
-        final round = Map<String, dynamic>.from(r as Map);
-        if (round['id'] is String && round['word'] is String && round['category'] is String && round['date'] is String && DateTime.tryParse(round['date'] as String) != null && round['citizensWin'] is bool && [round['players'], round['imposters'], round['accused']].every((v) => v is List && v.every((x) => x is String))) {
-          _history.add(round);
-        }
-      }
+      final value = _prefs!.get('suspecto.v1');
+      raw = value is String ? value : null;
     } catch (_) {
-      // Corrupt or unavailable storage must never prevent offline play.
-      language = 'en'; theme = 'system'; haptics = true; sounds = false;
-      lastPlayers = []; lastCategories = []; _history.clear();
+      storageAvailable = false;
+      notifyListeners();
+      return;
+    }
+    if (raw == null) { return; }
+    Map<String, dynamic> data;
+    try { data = jsonDecode(raw) as Map<String, dynamic>; }
+    catch (_) { return; }
+    language = data['language'] == 'ar' ? 'ar' : 'en';
+    theme = ['system', 'dark', 'light'].contains(data['theme']) ? data['theme'] as String : 'system';
+    haptics = data['haptics'] != false;
+    sounds = data['sounds'] == true;
+    List<String> validStrings(dynamic value) => value is List && value.every((x) => x is String && x.trim().isNotEmpty) ? List<String>.from(value) : [];
+    final savedPlayers = validStrings(data['players']);
+    lastPlayers = savedPlayers.length >= 3 && savedPlayers.length <= 20 ? savedPlayers : [];
+    lastCategories = validStrings(data['categories']);
+    lastImposters = data['imposters'] is int ? data['imposters'] as int : 1;
+    lastMinutes = data['minutes'] is int ? data['minutes'] as int : 3;
+    _history.clear();
+    final rounds = data['history'] is List ? data['history'] as List : [];
+    for (final entry in rounds) {
+      if (_history.length == 200) { break; }
+      if (entry is! Map) { continue; }
+      try {
+        final round = Map<String, dynamic>.from(entry);
+        final players = validStrings(round['players']);
+        final imposters = validStrings(round['imposters']);
+        final accused = validStrings(round['accused']);
+        if (round['id'] is! String || (round['id'] as String).isEmpty || _history.any((r) => r['id'] == round['id']) || round['word'] is! String || (round['word'] as String).trim().isEmpty || round['category'] is! String || (round['category'] as String).trim().isEmpty || round['date'] is! String || DateTime.tryParse(round['date'] as String) == null || round['citizensWin'] is! bool) { continue; }
+        if (players.length < 3 || players.length > 20 || players.toSet().length != players.length || imposters.isEmpty || imposters.length > 3 || imposters.length * 2 >= players.length || imposters.toSet().length != imposters.length || accused.length != imposters.length || accused.toSet().length != accused.length || ![...imposters, ...accused].every(players.contains) || accused.every(imposters.contains) != round['citizensWin']) { continue; }
+        _history.add({...round, 'players': players, 'imposters': imposters, 'accused': accused});
+      } catch (_) { /* Skip only the malformed record. */ }
     }
     notifyListeners();
   }

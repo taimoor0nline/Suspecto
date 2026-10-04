@@ -18,3 +18,10 @@ coverage/
 Thumbs.db
 
 # Generated platform files may be added after running flutter create .
+
+# Release signing / platform secrets
+android/key.properties
+*.jks
+*.keystore
+GoogleService-Info.plist
+google-services.json

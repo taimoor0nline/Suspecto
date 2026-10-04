@@ -48,3 +48,16 @@ If/when required:
 - Object storage/CDN for downloadable content
 
 Keep the Flutter domain layer independent from backend implementations so offline and online modes can coexist.
+
+## Implemented offline beta storage
+
+SharedPreferences stores one versioned JSON snapshot for settings, last party
+setup and up to 200 completed rounds. Player statistics are derived from those
+retained rounds by display name. This small snapshot does not need a database
+server. Word packs are generated from a validated bilingual JSON content source
+and compiled into the application. Unfinished role assignments are never saved.
+Storage failure keeps gameplay available; saved changes may be lost.
+
+English/Arabic translation and Flutter localization delegates provide RTL
+support. Preferences independently control theme, haptic feedback and system
+click sounds. No monetization or remote telemetry SDK is enabled.

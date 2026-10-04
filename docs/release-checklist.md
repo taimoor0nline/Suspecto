@@ -14,6 +14,7 @@ GitHub Actions run. Generated runners/lockfile are archived for committing after
 - Portrait/landscape, small displays and 200% text scale.
 - English/Arabic direction, long names and translated words.
 - Pointer cancel, app switch, screen lock and interruptions during role reveal.
+- Android secure-window behavior and iOS inactive-scene cover; validate recent-app previews.
 - Timer resume, voting privacy, haptics and system sound preferences.
 - Settings/history persistence, clear history and storage failure behavior.
 - Airplane mode, accessibility screen reader and reduced motion.
@@ -34,7 +35,8 @@ Play Console at submission time.
 Finalize bundle ID and team, configure signing/capabilities and launcher icon,
 review privacy declarations, test on devices, build/archive with Xcode or
 `flutter build ipa`, upload to TestFlight and complete the App Store listing.
-An iOS folder in a ZIP is not an iOS build or App Store approval.
+A separate macOS CI job builds an iOS simulator app without publisher signing.
+It does not produce an installable iPhone IPA or App Store approval.
 
 ## Commercial services — intentionally awaiting configuration
 

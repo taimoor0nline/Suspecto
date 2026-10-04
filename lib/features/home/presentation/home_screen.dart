@@ -17,10 +17,9 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(28),
           child: Column(
             children: [
-              Icon(
-                Icons.visibility_rounded,
-                size: 88,
-                color: Theme.of(context).colorScheme.primary,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Image.asset('assets/branding/suspecto-icon.png', width: 104, height: 104, semanticLabel: 'Suspecto'),
               ),
               const SizedBox(height: 20),
               LocalText(
