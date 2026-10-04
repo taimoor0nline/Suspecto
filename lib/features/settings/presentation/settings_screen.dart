@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
               ('dark', 'Dark')
             ])
               ChoiceChip(
-                  label: LocalText(item.name),
+                  label: LocalText(item.$2),
                   selected: store.theme == item.$1,
                   onSelected: (_) => store.updateSettings(theme: item.$1))
           ]),
