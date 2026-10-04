@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:suspecto/core/app_store.dart';
 
 String translate(BuildContext context, String text) {
-  if ((StoreScope.maybeOf(context)?.language ?? 'en') != 'ar') {
+  final store = StoreScope.maybeOf(context);
+  final language = store == null
+      ? 'en'
+      : store.languageConfig.resolve(store.language).code;
+  if (language != 'ar') {
     return text;
   }
   if (arabicWords.containsKey(text)) {

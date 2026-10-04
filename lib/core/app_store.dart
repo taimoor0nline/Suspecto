@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:suspecto/core/language_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,9 @@ class PlayerStats {
 }
 
 class AppStore extends ChangeNotifier {
+  AppStore({LanguageConfig? languageConfig})
+      : languageConfig = languageConfig ?? defaultLanguageConfig;
+  final LanguageConfig languageConfig;
   SharedPreferences? _prefs;
   String language = 'en';
   String theme = 'system';
@@ -49,7 +53,8 @@ class AppStore extends ChangeNotifier {
     } catch (_) {
       return;
     }
-    language = data['language'] == 'ar' ? 'ar' : 'en';
+    language = languageConfig.resolve(
+        data['language'] is String ? data['language'] as String : null).code;
     theme = ['system', 'dark', 'light'].contains(data['theme'])
         ? data['theme'] as String
         : 'system';
@@ -141,7 +146,7 @@ class AppStore extends ChangeNotifier {
   Future<void> updateSettings(
       {String? language, String? theme, bool? haptics, bool? sounds}) async {
     if (language != null) {
-      this.language = language == 'ar' ? 'ar' : 'en';
+      this.language = languageConfig.resolve(language).code;
     }
     if (theme != null) {
       this.theme =

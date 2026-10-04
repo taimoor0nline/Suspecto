@@ -32,8 +32,14 @@ class _SuspectoAppState extends State<SuspectoApp> {
                 theme: AppTheme.light(),
                 darkTheme: AppTheme.dark(),
                 themeMode: _store.themeMode,
-                locale: Locale(_store.language),
-                supportedLocales: const [Locale('en'), Locale('ar')],
+                locale: _store.languageConfig.resolve(_store.language).locale,
+                supportedLocales: _store.languageConfig.enabled
+                    .map((language) => language.locale).toList(),
+                builder: (context, child) => Directionality(
+                  textDirection: _store.languageConfig
+                      .resolve(_store.language).direction,
+                  child: child!,
+                ),
                 localizationsDelegates: const [
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
