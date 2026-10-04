@@ -33,6 +33,7 @@ void main() {
       await tester.pumpAndSettle();
       await store.updateSettings(language: code);
       await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(find.text(starts[code]!), 120);
       expect(find.text(starts[code]!), findsOneWidget);
       expect(Directionality.of(tester.element(find.text(starts[code]!))),
           TextDirection.ltr);
