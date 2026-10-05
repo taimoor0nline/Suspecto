@@ -21,7 +21,9 @@ votes and scores are exchanged only between phones in that game and are not
 sent to the internet. On iOS this requires Local Network permission. The camera
 is used only, if you choose, to scan a host's join QR code; images are processed
 on the device and not stored. The host phone saves completed multi-phone rounds
-to its own history. Any network permission in a debug build is
+to its own history. Tapping Share on a results screen creates an image on
+the device (round outcome, word, player names, awards and points) and opens the
+system share sheet; nothing is sent unless you choose an app to share with. Any network permission in a debug build is
 used by development tooling; release manifests must be reviewed before release.
 
 This draft applies only to the current offline build. Introducing ads, purchases,

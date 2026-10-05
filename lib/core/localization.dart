@@ -1,3 +1,4 @@
+import 'package:suspecto/features/game/data/local/question_pairs.dart';
 import 'package:suspecto/features/game/data/local/word_translations.dart';
 import 'package:flutter/material.dart';
 import 'package:suspecto/core/ui_translations.dart';
@@ -15,6 +16,10 @@ String translateForLanguage(String language, String text) {
   if (language == 'en') return text;
   final words = wordTranslations[language];
   if (words != null && words.containsKey(text)) return words[text]!;
+  final questions = questionTranslations[language];
+  if (questions != null && questions.containsKey(text)) {
+    return questions[text]!;
+  }
   if (language != 'ar') {
     final strings = uiTranslations[language];
     if (strings == null) return text;
@@ -72,6 +77,17 @@ String translateForLanguage(String language, String text) {
     (RegExp(r'^Players \((\d+)/20\)$'), (m) => 'اللاعبون (${m[1]}/20)'),
     (RegExp(r'^(\d+) of (\d+) ready$'), (m) => '${m[1]} من ${m[2]} جاهزون'),
     (
+      RegExp(
+          r'^(.+) answers first\. Everyone answers their question out loud, then discuss whose answer did not fit\.$'),
+      (m) =>
+          'يجيب ${m[1]} أولاً. يجيب الجميع عن أسئلتهم بصوت عالٍ، ثم ناقشوا من كانت إجابته غريبة.'
+    ),
+    (RegExp(r'^Jester: (.+)$'), (m) => 'المهرّج: ${m[1]}'),
+    (RegExp(r'^(\d+) imposter wins$'), (m) => '${m[1]} انتصارات كمخادع'),
+    (RegExp(r'^(\d+) imposters spotted$'), (m) => 'كشف ${m[1]} مخادعين'),
+    (RegExp(r'^(\d+) votes received$'), (m) => 'تلقى ${m[1]} أصوات'),
+    (RegExp(r'^(\d+) Jester wins$'), (m) => '${m[1]} انتصارات كمهرّج'),
+    (
       RegExp(r'^(\d+) rounds • (\d+) wins • (\d+) imposter roles$'),
       (m) => '${m[1]} جولات • ${m[2]} فوز • ${m[3]} أدوار مخادع'
     ),
@@ -123,11 +139,32 @@ final _dynamicMessages = <(RegExp, String, List<String>)>[
   (RegExp(r'^\+(\d+) this round$'), '+{number} this round', ['number']),
   (RegExp(r'^(.+): \+(\d+) pts$'), '{name}: +{number} pts', ['name', 'number']),
   (RegExp(r'^(\d+) words$'), '{number} words', ['number']),
+  (RegExp(r'^Players \((\d+)/20\)$'), 'Players ({number}/20)', ['number']),
+  (
+    RegExp(r'^(\d+) of (\d+) ready$'),
+    '{number} of {total} ready',
+    ['number', 'total']
+  ),
   (
     RegExp(r'^(\d+) rounds • (\d+) wins • (\d+) imposter roles$'),
     '{number} rounds • {wins} wins • {total} imposter roles',
     ['number', 'wins', 'total']
   ),
+  (
+    RegExp(
+        r'^(.+) answers first\. Everyone answers their question out loud, then discuss whose answer did not fit\.$'),
+    '{name} answers first. Everyone answers their question out loud, then discuss whose answer did not fit.',
+    ['name']
+  ),
+  (RegExp(r'^Jester: (.+)$'), 'Jester: {name}', ['name']),
+  (RegExp(r'^(\d+) imposter wins$'), '{number} imposter wins', ['number']),
+  (
+    RegExp(r'^(\d+) imposters spotted$'),
+    '{number} imposters spotted',
+    ['number']
+  ),
+  (RegExp(r'^(\d+) votes received$'), '{number} votes received', ['number']),
+  (RegExp(r'^(\d+) Jester wins$'), '{number} Jester wins', ['number']),
 ];
 
 class LocalText extends StatelessWidget {

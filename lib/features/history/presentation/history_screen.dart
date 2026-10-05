@@ -33,11 +33,19 @@ class HistoryScreen extends StatelessWidget {
           ? Text(round[key] as String, style: style)
           : LocalText(round[key] as String, style: style);
 
-  String _outcome(Map<String, dynamic> round) => round['citizensWin'] == true
-      ? 'Citizens won'
-      : round['stolen'] == true
-          ? 'Imposters stole the win'
-          : 'Imposters won';
+  String _outcome(Map<String, dynamic> round) => round['jesterWin'] == true
+      ? 'The Jester won'
+      : round['citizensWin'] == true
+          ? 'Citizens won'
+          : round['stolen'] == true
+              ? 'Imposters stole the win'
+              : 'Imposters won';
+
+  /// Saved mode labels; classic rounds show no label.
+  static const _modeLabels = {
+    'undercover': 'Undercover',
+    'questions': 'Questions',
+  };
 
   void _details(BuildContext context, Map<String, dynamic> round) {
     final points = (round['points'] as Map?) ?? const {};
@@ -50,16 +58,19 @@ class HistoryScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     LocalText(_outcome(round)),
-                    if (round['mode'] == 'undercover' &&
-                        round['decoyWord'] is String) ...[
+                    if (round['decoyWord'] is String) ...[
                       const SizedBox(height: 8),
-                      const LocalText("THE IMPOSTERS' WORD"),
+                      LocalText(round['mode'] == 'questions'
+                          ? "THE IMPOSTERS' QUESTION"
+                          : "THE IMPOSTERS' WORD"),
                       _word(round, 'decoyWord',
                           style: const TextStyle(fontWeight: FontWeight.bold)),
                     ],
                     const SizedBox(height: 8),
                     LocalText(
                         'Imposters: ${(round['imposters'] as List).join(', ')}'),
+                    if (round['jester'] is String)
+                      LocalText('Jester: ${round['jester']}'),
                     if (points.isNotEmpty) ...[
                       const SizedBox(height: 8),
                       for (final entry in points.entries)
@@ -128,7 +139,7 @@ class HistoryScreen extends StatelessWidget {
                     : Icons.theater_comedy_outlined),
                 title: _word(round, 'word'),
                 subtitle: Text(
-                    '${translate(context, _outcome(round))}${round['mode'] == 'undercover' ? ' • ${translate(context, 'Undercover')}' : ''}\n${MaterialLocalizations.of(context).formatMediumDate(DateTime.parse(round['date'] as String).toLocal())} • ${(round['players'] as List).join(', ')}'),
+                    '${translate(context, _outcome(round))}${_modeLabels.containsKey(round['mode']) ? ' • ${translate(context, _modeLabels[round['mode']]!)}' : ''}\n${MaterialLocalizations.of(context).formatMediumDate(DateTime.parse(round['date'] as String).toLocal())} • ${(round['players'] as List).join(', ')}'),
                 isThreeLine: true,
                 onTap: () => _details(context, round),
               )),

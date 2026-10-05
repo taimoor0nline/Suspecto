@@ -104,6 +104,22 @@ any incompatible change.
 Presentation widgets render `RoundController` state and forward taps to it;
 game rules live in the domain layer and contain no Flutter UI code.
 
+## Engagement features
+
+- `GameMode.questions` deals (innocent, imposter) question pairs from
+  `questionPairs`; the innocent question is revealed during discussion (by the
+  host in multi-phone games). The last-chance guess is not used in this mode.
+- `GameOptions.jester` makes one innocent player the Jester when there are at
+  least `GameOptions.jesterMinPlayers` players.
+- `WordDifficulty` filters built-in words; `dealableWords` applies it in setup.
+- `PartyAwards.compute` derives session titles from `RoundResult`s, which now
+  keep the final ballot. Ties award nobody.
+- `SoundEffects` (core/audio) plays bundled WAVs and is disabled under
+  `flutter test`. `Celebration` and `CountdownSounds` add sound and confetti.
+- `ResultShareCard` is rendered to PNG and shared with `share_plus`.
+- Multi-phone protocol version 2 adds the Jester flag, revealed question and
+  awards to each view.
+
 ## Scoring
 
 | Event | Points |
@@ -112,6 +128,7 @@ game rules live in the domain layer and contain no Flutter UI code.
 | Citizen's vote named an imposter | +1 that citizen |
 | At least one imposter escapes | +2 each imposter |
 | Caught imposters guess the word | +3 each imposter |
+| The Jester is voted out | +3 Jester; nobody else wins (sharp votes still count) |
 
 History records store points by player name. Rounds saved before scoring was
 added contribute wins but no points to the leaderboard.

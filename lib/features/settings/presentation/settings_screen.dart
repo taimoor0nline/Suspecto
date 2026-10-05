@@ -50,9 +50,9 @@ class SettingsScreen extends StatelessWidget {
               }),
           SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: const LocalText('System click sounds'),
-              subtitle: const LocalText(
-                  'Sound availability depends on device settings.'),
+              title: const LocalText('Sound effects'),
+              subtitle:
+                  const LocalText('Card, vote, timer and celebration sounds.'),
               value: store.sounds,
               onChanged: (value) {
                 store.updateSettings(sounds: value);

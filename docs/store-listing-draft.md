@@ -14,7 +14,9 @@ for the players who are bluffing.
 - Choose from 12 packs with 240 words in English, Arabic, Spanish, French,
   Japanese and Chinese.
 - Reveal cards privately by holding the screen; release to hide.
-- Play Classic or Undercover, where imposters get a similar word.
+- Play Classic, Undercover (imposters get a similar word) or Question mode.
+- Choose easy, medium or hard words, and add a sneaky Jester role.
+- Win party awards like Best Bluffer and share your results with friends.
 - Caught imposters get one last chance to guess the word and steal the win.
 - Score points across rounds and climb the leaderboard.
 - Create your own word packs with inside jokes and themes.
