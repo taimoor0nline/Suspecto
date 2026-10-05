@@ -19,6 +19,10 @@ GitHub Actions run. Generated runners/lockfile are archived for committing after
 - Settings/history persistence, clear history and storage failure behavior.
 - Airplane mode, accessibility screen reader and reduced motion.
 - Verify screen-reader announcement timing does not disclose roles to other players.
+- Multi-phone: host on Android and iPhone; join by QR and typed code; 3 and 20
+  phones; same Wi-Fi and phone hotspot; iOS Local Network and camera prompts;
+  screen lock, Wi-Fi drop and app switch on guests and host; rejoin mid-round;
+  duplicate names, kicked players and a guest joining during a round.
 
 ## Android release — requires publisher credentials
 

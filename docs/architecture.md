@@ -80,8 +80,26 @@ lib/
       presentation/        setup + play screens; phases/ holds one widget per
                            round phase; widgets/ holds shared pieces
     packs/                 WordPack model, built-in catalog, pack list/editor
+    lan/                   multi-phone play on Wi-Fi/hotspot
+      domain/              JoinCode (IPv4+port as 8 chars), LanView protocol
+      application/         LanHostGame (authoritative game on the host),
+                           HostSession / ClientSession (shared LanSession API)
+      data/                WebSocket transport (dart:io; stub on web)
+      presentation/        menu, host setup, join, QR scan, game screen + views
     history/  home/  settings/
 ```
+
+### Multi-phone protocol
+
+JSON over WebSocket at `ws://<host>:<port>/ws`. A guest sends
+`{t: hello, v, name, token}`; the host replies with `view` messages, a
+`reject` with a reason, or `closed`. Each `view` is personalised: it carries
+only the receiving phone's card, and reveals all roles only in the result.
+Guests send actions (`seen`, `vote`, `guess`, `leave`); host-only actions
+(`start`, `discuss`, `startVote`, `addTime`, `lobby`, `kick`) are ignored from
+other phones. A guest that reconnects with the same token, or with the name of
+a disconnected player, resumes as that player. Bump `lanProtocolVersion` on
+any incompatible change.
 
 Presentation widgets render `RoundController` state and forward taps to it;
 game rules live in the domain layer and contain no Flutter UI code.
