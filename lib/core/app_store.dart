@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/domain/models/round_result.dart';
 import 'package:suspecto/features/packs/domain/word_pack.dart';
+import 'package:suspecto/features/profiles/domain/player_profile.dart';
 
 class PlayerStats {
   int played = 0;
@@ -39,6 +40,11 @@ class AppStore extends ChangeNotifier {
   /// The quick tutorial was finished or dismissed on this device.
   bool tutorialSeen = false;
   final List<WordPack> _customPacks = [];
+  final List<PlayerProfile> _profiles = [];
+
+  /// Remembered players, alphabetical.
+  List<PlayerProfile> get profiles => List.unmodifiable([..._profiles]
+    ..sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase())));
   List<WordPack> get customPacks => List.unmodifiable(_customPacks);
   final List<Map<String, dynamic>> _history = [];
   List<Map<String, dynamic>> get history => List.unmodifiable(
@@ -94,6 +100,18 @@ class AppStore extends ChangeNotifier {
         data['lanName'] is String && (data['lanName'] as String).length <= 24
             ? data['lanName'] as String
             : '';
+    _profiles.clear();
+    final savedProfiles =
+        data['profiles'] is List ? data['profiles'] as List : [];
+    for (final json in savedProfiles) {
+      final profile = PlayerProfile.fromJson(json);
+      if (profile != null &&
+          _profiles.length < PlayerProfile.maxProfiles &&
+          profileFor(profile.name) == null &&
+          !_profiles.any((p) => p.id == profile.id)) {
+        _profiles.add(profile);
+      }
+    }
     _customPacks.clear();
     final packs =
         data['customPacks'] is List ? data['customPacks'] as List : [];
@@ -185,6 +203,7 @@ class AppStore extends ChangeNotifier {
             'lanName': lanName,
             'tutorialSeen': tutorialSeen,
             'customPacks': [for (final pack in _customPacks) pack.toJson()],
+            'profiles': [for (final profile in _profiles) profile.toJson()],
             'history': _history
           }));
     } catch (_) {
@@ -230,6 +249,99 @@ class AppStore extends ChangeNotifier {
   Future<void> saveLanName(String name) async {
     lanName = name.trim();
     await _save();
+  }
+
+  /// The profile whose name matches [name], ignoring case.
+  PlayerProfile? profileFor(String name) {
+    final key = name.trim().toLowerCase();
+    for (final profile in _profiles) {
+      if (profile.name.toLowerCase() == key) {
+        return profile;
+      }
+    }
+    return null;
+  }
+
+  /// Avatar and colour for [name]: its profile, or a stable default.
+  PlayerProfile lookOf(String name) =>
+      profileFor(name) ?? PlayerProfile.defaultFor(name, id: '');
+
+  /// Remembers any of [names] that have no profile yet.
+  Future<void> rememberPlayers(Iterable<String> names) async {
+    var changed = false;
+    for (final name in names.map((n) => n.trim())) {
+      if (name.isEmpty ||
+          profileFor(name) != null ||
+          _profiles.length >= PlayerProfile.maxProfiles) {
+        continue;
+      }
+      _profiles.add(PlayerProfile.defaultFor(name));
+      changed = true;
+    }
+    if (changed) {
+      await _save();
+    }
+  }
+
+  /// Whether giving [name] to a profile would clash with another person:
+  /// another profile has it, or (when renaming profile [exceptProfileId]) the
+  /// name already has rounds in history. A new profile may claim a name from
+  /// history; that is how existing stats get an avatar.
+  bool nameInUse(String name, {String? exceptProfileId}) {
+    final key = name.trim().toLowerCase();
+    final other = profileFor(name);
+    if (other != null && other.id != exceptProfileId) {
+      return true;
+    }
+    final own = _profiles.where((p) => p.id == exceptProfileId).firstOrNull;
+    if (own == null || own.name.toLowerCase() == key) {
+      return false;
+    }
+    return _history.any((round) => (round['players'] as List)
+        .any((n) => (n as String).toLowerCase() == key));
+  }
+
+  /// Adds or updates [profile]. Renaming also renames the player throughout
+  /// history, so their stats and achievements move with them.
+  Future<void> saveProfile(PlayerProfile profile) async {
+    final index = _profiles.indexWhere((p) => p.id == profile.id);
+    final previous = index >= 0 ? _profiles[index] : null;
+    if (index >= 0) {
+      _profiles[index] = profile;
+    } else if (_profiles.length < PlayerProfile.maxProfiles) {
+      _profiles.add(profile);
+    }
+    if (previous != null && previous.name != profile.name) {
+      _renameInHistory(previous.name, profile.name);
+      lastPlayers = [
+        for (final n in lastPlayers) n == previous.name ? profile.name : n,
+      ];
+    }
+    await _save();
+  }
+
+  /// Forgets a profile. Their rounds stay in history under the same name.
+  Future<void> deleteProfile(String id) async {
+    _profiles.removeWhere((p) => p.id == id);
+    await _save();
+  }
+
+  void _renameInHistory(String from, String to) {
+    String swap(Object? name) => name == from ? to : name as String;
+    for (final round in _history) {
+      for (final key in ['players', 'imposters', 'accused']) {
+        round[key] = [for (final n in round[key] as List) swap(n)];
+      }
+      if (round['jester'] == from) {
+        round['jester'] = to;
+      }
+      if (round['points'] is Map) {
+        round['points'] = {
+          for (final e in (round['points'] as Map).entries)
+            swap(e.key): e.value,
+        };
+      }
+    }
   }
 
   /// Adds a custom pack, or replaces the one with the same ID.

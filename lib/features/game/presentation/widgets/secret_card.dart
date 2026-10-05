@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/profiles/presentation/player_avatar.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/presentation/widgets/word_text.dart';
@@ -18,6 +19,7 @@ class SecretCard extends StatelessWidget {
     this.hint,
     this.question = false,
     this.jester = false,
+    this.ownerName,
   });
 
   final bool visible;
@@ -34,6 +36,9 @@ class SecretCard extends StatelessWidget {
 
   /// This player is the Jester.
   final bool jester;
+
+  /// Shows this player's avatar on the hidden card so they know it is theirs.
+  final String? ownerName;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +85,10 @@ class SecretCard extends StatelessWidget {
   }
 
   List<Widget> _back(ThemeData theme) => [
-        const Icon(Icons.fingerprint, size: 60),
+        if (ownerName == null)
+          const Icon(Icons.fingerprint, size: 60)
+        else
+          PlayerAvatar(name: ownerName!, radius: 30),
         const SizedBox(height: 20),
         LocalText('Hold to reveal',
             textAlign: TextAlign.center, style: theme.textTheme.headlineMedium),

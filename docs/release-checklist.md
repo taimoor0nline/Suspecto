@@ -26,6 +26,8 @@ GitHub Actions run. Generated runners/lockfile are archived for committing after
 - Scan a shared pack QR code between Android and iPhone, including a 200-word
   Arabic or Chinese pack (dense code) at normal screen brightness.
 - Achievements after upgrading with existing history; tutorial card on first run.
+- Player profiles: saved-player chips in setup, renaming with existing history,
+  and emoji avatars rendering on older Android devices.
 - Multi-phone: host on Android and iPhone; join by QR and typed code; 3 and 20
   phones; same Wi-Fi and phone hotspot; iOS Local Network and camera prompts;
   screen lock, Wi-Fi drop and app switch on guests and host; rejoin mid-round;

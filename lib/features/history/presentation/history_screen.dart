@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/profiles/presentation/player_avatar.dart';
 import 'package:suspecto/features/achievements/presentation/achievement_widgets.dart';
 import 'package:suspecto/features/achievements/domain/achievements.dart';
 import 'package:suspecto/core/app_store.dart';
@@ -119,19 +120,9 @@ class HistoryScreen extends StatelessWidget {
               ListTile(
                   contentPadding: EdgeInsets.zero,
                   onTap: () => showPlayerAchievements(context, entry.key),
-                  leading: CircleAvatar(
-                      backgroundColor: rank == 0
-                          ? theme.colorScheme.primary
-                          : theme.colorScheme.surfaceContainerHighest,
-                      foregroundColor: rank == 0
-                          ? theme.colorScheme.onPrimary
-                          : theme.colorScheme.onSurface,
-                      child: rank == 0
-                          ? const Icon(Icons.emoji_events, size: 20)
-                          : Text(entry.key.isEmpty
-                              ? '?'
-                              : entry.key.characters.first)),
+                  leading: PlayerAvatar(name: entry.key),
                   title: Text.rich(TextSpan(children: [
+                    if (rank == 0) const TextSpan(text: '🏆 '),
                     TextSpan(text: entry.key),
                     if ((badges[entry.key]?.length ?? 0) > 0)
                       TextSpan(

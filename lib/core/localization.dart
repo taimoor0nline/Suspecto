@@ -96,6 +96,10 @@ String translateForLanguage(String language, String text) {
       (m) => '${m[1]} من ${m[2]} إنجازات'
     ),
     (RegExp(r'^Page (\d+) of (\d+)$'), (m) => 'الصفحة ${m[1]} من ${m[2]}'),
+    (
+      RegExp(r'^(\d+) rounds • (\d+) pts • (\d+) badges$'),
+      (m) => '${m[1]} جولات • ${m[2]} نقطة • ${m[3]} شارات'
+    ),
   ];
   for (final (pattern, replacement) in patterns) {
     final match = pattern.firstMatch(text);
@@ -179,6 +183,11 @@ final _dynamicMessages = <(RegExp, String, List<String>)>[
     RegExp(r'^Page (\d+) of (\d+)$'),
     'Page {number} of {total}',
     ['number', 'total']
+  ),
+  (
+    RegExp(r'^(\d+) rounds • (\d+) pts • (\d+) badges$'),
+    '{number} rounds • {total} pts • {wins} badges',
+    ['number', 'total', 'wins']
   ),
 ];
 

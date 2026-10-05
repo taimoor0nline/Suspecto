@@ -37,23 +37,29 @@ class GamePage extends StatelessWidget {
                       opacity: value,
                       child: Transform.translate(
                           offset: Offset(0, 12 * (1 - value)), child: child)),
-                  child: ListView(
+                  // Not a lazy ListView: pages are short, and building every
+                  // child keeps forms alive when scrolled out of view (setup
+                  // validates its player names from the bottom button).
+                  child: SingleChildScrollView(
                     key: ValueKey(title),
                     padding: const EdgeInsets.all(24),
-                    children: [
-                      LocalText(
-                        title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge
-                            ?.copyWith(fontWeight: FontWeight.w800),
-                      ),
-                      const SizedBox(height: 8),
-                      LocalText(subtitle,
-                          style: Theme.of(context).textTheme.bodyLarge),
-                      const SizedBox(height: 28),
-                      ...children,
-                    ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        LocalText(
+                          title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(fontWeight: FontWeight.w800),
+                        ),
+                        const SizedBox(height: 8),
+                        LocalText(subtitle,
+                            style: Theme.of(context).textTheme.bodyLarge),
+                        const SizedBox(height: 28),
+                        ...children,
+                      ],
+                    ),
                   ),
                 ),
               ),

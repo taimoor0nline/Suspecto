@@ -23,6 +23,8 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
   count), shown on results and in History
 - Share custom packs by QR code and import them with "Scan a pack"
 - A five-page quick tutorial, offered on Home until seen
+- Player profiles: an avatar and colour per player, one-tap saved players in
+  setup, and renaming that moves a player's history, stats and achievements
 - Optional category hint for imposters (classic mode)
 - Last-chance guess: caught imposters can steal the win by picking the word
 - Timed discussion (+1 minute), random first speaker, private ballots, ties/revotes

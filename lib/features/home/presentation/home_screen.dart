@@ -1,3 +1,4 @@
+import 'package:suspecto/features/profiles/presentation/profiles_screen.dart';
 import 'package:suspecto/features/tutorial/presentation/tutorial_screen.dart';
 import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/features/settings/presentation/settings_screen.dart';
@@ -84,6 +85,13 @@ class HomeScreen extends StatelessWidget {
                   MaterialPageRoute<void>(builder: (_) => const PacksScreen())),
               icon: const Icon(Icons.library_books_outlined),
               label: const LocalText('Word packs')),
+          const SizedBox(height: 8),
+          OutlinedButton.icon(
+              onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                      builder: (_) => const ProfilesScreen())),
+              icon: const Icon(Icons.groups_outlined),
+              label: const LocalText('Players')),
           const SizedBox(height: 8),
           OutlinedButton.icon(
               onPressed: () => Navigator.of(context).push(

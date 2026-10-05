@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/profiles/presentation/player_avatar.dart';
 import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/achievements/domain/achievements.dart';
@@ -87,7 +88,14 @@ Future<void> showPlayerAchievements(BuildContext context, String name) {
           controller: controller,
           padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
           children: [
-            Text(name, style: theme.textTheme.headlineSmall),
+            Row(
+              children: [
+                PlayerAvatar(name: name, radius: 24),
+                const SizedBox(width: 12),
+                Expanded(
+                    child: Text(name, style: theme.textTheme.headlineSmall)),
+              ],
+            ),
             LocalText(
                 '${earned.length} of ${Achievement.values.length} achievements'),
             const SizedBox(height: 16),

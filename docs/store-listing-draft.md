@@ -20,6 +20,7 @@ for the players who are bluffing.
 - Win party awards like Best Bluffer and share your results with friends.
 - Unlock achievements, try quick speed rounds and learn in a one-minute tutorial.
 - Share your own word packs with friends by QR code.
+- Give every player an avatar and keep their stats and achievements.
 - Caught imposters get one last chance to guess the word and steal the win.
 - Score points across rounds and climb the leaderboard.
 - Create your own word packs with inside jokes and themes.

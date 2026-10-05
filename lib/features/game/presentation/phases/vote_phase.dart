@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/profiles/presentation/player_avatar.dart';
 import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/core/audio/sound_effects.dart';
 import 'package:suspecto/core/localization.dart';
@@ -27,9 +28,9 @@ class VotePhase extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 8),
                   child: OutlinedButton.icon(
                     onPressed: () => round.select(candidate.id),
-                    icon: Icon(round.selected == candidate.id
-                        ? Icons.check_circle
-                        : Icons.person_outline),
+                    icon: round.selected == candidate.id
+                        ? const Icon(Icons.check_circle)
+                        : PlayerAvatar(name: candidate.name, radius: 12),
                     label: Text(candidate.name),
                   ),
                 ),
@@ -45,7 +46,7 @@ class VotePhase extends StatelessWidget {
               ),
             ]
           : [
-              const Icon(Icons.how_to_vote_outlined, size: 88),
+              Center(child: PlayerAvatar(name: player.name, radius: 44)),
               const SizedBox(height: 24),
               FilledButton(
                 onPressed: round.confirmVoter,
