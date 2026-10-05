@@ -184,8 +184,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Your word packs': 'Tus packs de palabras',
     '{name}: +{number} pts': '{name}: +{number} pts',
     '{number} pts': '{number} pts',
-    '{number} rounds • {wins} wins • {total} imposter roles':
-        '{number} rondas • {wins} victorias • {total} roles de impostor',
     '{number} words': '{number} palabras',
     'A round is in progress. Try again when it ends.':
         'Hay una ronda en curso. Inténtalo cuando termine.',
@@ -330,10 +328,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Sharpest Detective': 'Detective más agudo',
     'Most Suspected': 'El más sospechoso',
     'Chaos Jester': 'Bufón del caos',
-    '{number} imposter wins': '{number} victorias como impostor',
-    '{number} imposters spotted': '{number} impostores descubiertos',
-    '{number} votes received': '{number} votos recibidos',
-    '{number} Jester wins': '{number} victorias como bufón',
     'Share results': 'Compartir resultados',
     'Share': 'Compartir',
     'Sharing is not available on this device.':
@@ -423,8 +417,6 @@ const uiTranslations = <String, Map<String, String>>{
         'Los jugadores guardados conservan su avatar, estadísticas y logros. Los nombres nuevos se guardan al empezar una partida.',
     'No saved players yet': 'Aún no hay jugadores guardados',
     'Add player': 'Añadir jugador',
-    '{number} rounds • {total} pts • {wins} badges':
-        '{number} rondas • {total} pts • {wins} insignias',
     'That name already has a profile or stats. Choose another name.':
         'Ese nombre ya tiene un perfil o estadísticas. Elige otro nombre.',
     'Rename this player?': '¿Cambiar el nombre de este jugador?',
@@ -444,6 +436,17 @@ const uiTranslations = <String, Map<String, String>>{
     'Save player': 'Guardar jugador',
     'Remove player': 'Quitar jugador',
     'Saved players': 'Jugadores guardados',
+    '1 vote': '1 voto',
+    '1 pt': '1 pt',
+    '1 word': '1 palabra',
+    'Rounds: {number} • Wins: {wins} • Imposter: {total}':
+        'Rondas: {number} • Victorias: {wins} • Impostor: {total}',
+    'Rounds: {number} • Points: {total} • Badges: {wins}':
+        'Rondas: {number} • Puntos: {total} • Insignias: {wins}',
+    'Imposter wins: {number}': 'Victorias como impostor: {number}',
+    'Imposters spotted: {number}': 'Impostores descubiertos: {number}',
+    'Votes received: {number}': 'Votos recibidos: {number}',
+    'Jester wins: {number}': 'Victorias como bufón: {number}',
   },
   'fr': {
     'Trust no one.\nSuspect everyone.':
@@ -629,8 +632,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Your word packs': 'Tes packs de mots',
     '{name}: +{number} pts': '{name} : +{number} pts',
     '{number} pts': '{number} pts',
-    '{number} rounds • {wins} wins • {total} imposter roles':
-        '{number} manches • {wins} victoires • {total} rôles d’imposteur',
     '{number} words': '{number} mots',
     'A round is in progress. Try again when it ends.':
         'Une manche est en cours. Réessaie quand elle sera terminée.',
@@ -773,10 +774,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Sharpest Detective': 'Détective le plus fin',
     'Most Suspected': 'Le plus soupçonné',
     'Chaos Jester': 'Bouffon du chaos',
-    '{number} imposter wins': '{number} victoires en imposteur',
-    '{number} imposters spotted': '{number} imposteurs repérés',
-    '{number} votes received': '{number} votes reçus',
-    '{number} Jester wins': '{number} victoires en bouffon',
     'Share results': 'Partager les résultats',
     'Share': 'Partager',
     'Sharing is not available on this device.':
@@ -865,8 +862,6 @@ const uiTranslations = <String, Map<String, String>>{
         'Les joueurs enregistrés gardent leur avatar, leurs stats et leurs succès. Les nouveaux noms sont enregistrés au début d’une partie.',
     'No saved players yet': 'Aucun joueur enregistré pour l’instant',
     'Add player': 'Ajouter un joueur',
-    '{number} rounds • {total} pts • {wins} badges':
-        '{number} manches • {total} pts • {wins} badges',
     'That name already has a profile or stats. Choose another name.':
         'Ce nom a déjà un profil ou des stats. Choisis un autre nom.',
     'Rename this player?': 'Renommer ce joueur ?',
@@ -886,6 +881,17 @@ const uiTranslations = <String, Map<String, String>>{
     'Save player': 'Enregistrer le joueur',
     'Remove player': 'Retirer le joueur',
     'Saved players': 'Joueurs enregistrés',
+    '1 vote': '1 vote',
+    '1 pt': '1 pt',
+    '1 word': '1 mot',
+    'Rounds: {number} • Wins: {wins} • Imposter: {total}':
+        'Manches : {number} • Victoires : {wins} • Imposteur : {total}',
+    'Rounds: {number} • Points: {total} • Badges: {wins}':
+        'Manches : {number} • Points : {total} • Badges : {wins}',
+    'Imposter wins: {number}': 'Victoires en imposteur : {number}',
+    'Imposters spotted: {number}': 'Imposteurs repérés : {number}',
+    'Votes received: {number}': 'Votes reçus : {number}',
+    'Jester wins: {number}': 'Victoires en bouffon : {number}',
   },
   'ja': {
     'Trust no one.\nSuspect everyone.': '誰も信じるな。\n全員を疑え。',
@@ -1056,8 +1062,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Your word packs': 'あなたの言葉パック',
     '{name}: +{number} pts': '{name}：+{number}点',
     '{number} pts': '{number}点',
-    '{number} rounds • {wins} wins • {total} imposter roles':
-        '{number}ラウンド • {wins}勝 • インポスター役{total}回',
     '{number} words': '{number}語',
     'A round is in progress. Try again when it ends.':
         'ラウンドが進行中です。終わったらもう一度試してください。',
@@ -1191,10 +1195,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Sharpest Detective': '名探偵',
     'Most Suspected': '最も疑われた人',
     'Chaos Jester': 'カオスなジェスター',
-    '{number} imposter wins': 'インポスターとして{number}勝',
-    '{number} imposters spotted': 'インポスターを{number}回見抜いた',
-    '{number} votes received': '{number}票を集めた',
-    '{number} Jester wins': 'ジェスターとして{number}勝',
     'Share results': '結果をシェア',
     'Share': 'シェア',
     'Sharing is not available on this device.': 'この端末ではシェアできません。',
@@ -1273,8 +1273,6 @@ const uiTranslations = <String, Map<String, String>>{
         '保存したプレイヤーはアバター、成績、実績を引き継ぎます。新しい名前はゲーム開始時に保存されます。',
     'No saved players yet': '保存したプレイヤーはまだいません',
     'Add player': 'プレイヤーを追加',
-    '{number} rounds • {total} pts • {wins} badges':
-        '{number}ラウンド • {total}点 • バッジ{wins}個',
     'That name already has a profile or stats. Choose another name.':
         'その名前にはすでにプロフィールか成績があります。別の名前を選んでください。',
     'Rename this player?': 'このプレイヤーの名前を変更しますか？',
@@ -1293,6 +1291,17 @@ const uiTranslations = <String, Map<String, String>>{
     'Save player': 'プレイヤーを保存',
     'Remove player': 'プレイヤーを削除',
     'Saved players': '保存したプレイヤー',
+    '1 vote': '1票',
+    '1 pt': '1点',
+    '1 word': '1語',
+    'Rounds: {number} • Wins: {wins} • Imposter: {total}':
+        'ラウンド：{number} • 勝利：{wins} • インポスター：{total}',
+    'Rounds: {number} • Points: {total} • Badges: {wins}':
+        'ラウンド：{number} • ポイント：{total} • バッジ：{wins}',
+    'Imposter wins: {number}': 'インポスターでの勝利：{number}',
+    'Imposters spotted: {number}': '見抜いたインポスター：{number}',
+    'Votes received: {number}': '集めた票：{number}',
+    'Jester wins: {number}': 'ジェスターでの勝利：{number}',
   },
   'zh-Hans': {
     'Trust no one.\nSuspect everyone.': '别相信任何人。\n每个人都值得怀疑。',
@@ -1457,8 +1466,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Your word packs': '你的词包',
     '{name}: +{number} pts': '{name}：+{number}分',
     '{number} pts': '{number}分',
-    '{number} rounds • {wins} wins • {total} imposter roles':
-        '{number}轮 • {wins}次胜利 • {total}次卧底身份',
     '{number} words': '{number}个词',
     'A round is in progress. Try again when it ends.': '本轮正在进行，结束后再试。',
     'A round is in progress. You\'ll be dealt in next round.':
@@ -1586,10 +1593,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Sharpest Detective': '最强侦探',
     'Most Suspected': '最受怀疑',
     'Chaos Jester': '混乱小丑',
-    '{number} imposter wins': '{number}次卧底获胜',
-    '{number} imposters spotted': '识破{number}次卧底',
-    '{number} votes received': '被投{number}票',
-    '{number} Jester wins': '{number}次小丑获胜',
     'Share results': '分享结果',
     'Share': '分享',
     'Sharing is not available on this device.': '此设备不支持分享。',
@@ -1667,8 +1670,6 @@ const uiTranslations = <String, Map<String, String>>{
         '已保存的玩家会保留头像、统计和成就。新名字会在游戏开始时保存。',
     'No saved players yet': '还没有已保存的玩家',
     'Add player': '添加玩家',
-    '{number} rounds • {total} pts • {wins} badges':
-        '{number}轮 • {total}分 • {wins}枚徽章',
     'That name already has a profile or stats. Choose another name.':
         '这个名字已有档案或统计，请换一个名字。',
     'Rename this player?': '要重命名这位玩家吗？',
@@ -1687,6 +1688,17 @@ const uiTranslations = <String, Map<String, String>>{
     'Save player': '保存玩家',
     'Remove player': '移除玩家',
     'Saved players': '已保存的玩家',
+    '1 vote': '1票',
+    '1 pt': '1分',
+    '1 word': '1个词',
+    'Rounds: {number} • Wins: {wins} • Imposter: {total}':
+        '回合：{number} • 获胜：{wins} • 卧底：{total}',
+    'Rounds: {number} • Points: {total} • Badges: {wins}':
+        '回合：{number} • 积分：{total} • 徽章：{wins}',
+    'Imposter wins: {number}': '卧底获胜：{number}',
+    'Imposters spotted: {number}': '识破卧底：{number}',
+    'Votes received: {number}': '被投票数：{number}',
+    'Jester wins: {number}': '小丑获胜：{number}',
   },
   'zh-Hant': {
     'Trust no one.\nSuspect everyone.': '別相信任何人。\n每個人都值得懷疑。',
@@ -1851,8 +1863,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Your word packs': '你的詞包',
     '{name}: +{number} pts': '{name}：+{number}分',
     '{number} pts': '{number}分',
-    '{number} rounds • {wins} wins • {total} imposter roles':
-        '{number}輪 • {wins}次勝利 • {total}次臥底身分',
     '{number} words': '{number}個詞',
     'A round is in progress. Try again when it ends.': '本輪正在進行，結束後再試。',
     'A round is in progress. You\'ll be dealt in next round.':
@@ -1981,10 +1991,6 @@ const uiTranslations = <String, Map<String, String>>{
     'Sharpest Detective': '最強偵探',
     'Most Suspected': '最受懷疑',
     'Chaos Jester': '混亂小丑',
-    '{number} imposter wins': '{number}次臥底獲勝',
-    '{number} imposters spotted': '識破{number}次臥底',
-    '{number} votes received': '被投{number}票',
-    '{number} Jester wins': '{number}次小丑獲勝',
     'Share results': '分享結果',
     'Share': '分享',
     'Sharing is not available on this device.': '此裝置不支援分享。',
@@ -2062,8 +2068,6 @@ const uiTranslations = <String, Map<String, String>>{
         '已儲存的玩家會保留頭像、統計和成就。新名字會在遊戲開始時儲存。',
     'No saved players yet': '還沒有已儲存的玩家',
     'Add player': '新增玩家',
-    '{number} rounds • {total} pts • {wins} badges':
-        '{number}輪 • {total}分 • {wins}枚徽章',
     'That name already has a profile or stats. Choose another name.':
         '這個名字已有檔案或統計，請換一個名字。',
     'Rename this player?': '要重新命名這位玩家嗎？',
@@ -2082,5 +2086,16 @@ const uiTranslations = <String, Map<String, String>>{
     'Save player': '儲存玩家',
     'Remove player': '移除玩家',
     'Saved players': '已儲存的玩家',
+    '1 vote': '1票',
+    '1 pt': '1分',
+    '1 word': '1個詞',
+    'Rounds: {number} • Wins: {wins} • Imposter: {total}':
+        '回合：{number} • 獲勝：{wins} • 臥底：{total}',
+    'Rounds: {number} • Points: {total} • Badges: {wins}':
+        '回合：{number} • 積分：{total} • 徽章：{wins}',
+    'Imposter wins: {number}': '臥底獲勝：{number}',
+    'Imposters spotted: {number}': '識破臥底：{number}',
+    'Votes received: {number}': '被投票數：{number}',
+    'Jester wins: {number}': '小丑獲勝：{number}',
   },
 };

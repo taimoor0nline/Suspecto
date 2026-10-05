@@ -83,23 +83,23 @@ String translateForLanguage(String language, String text) {
           'يجيب ${m[1]} أولاً. يجيب الجميع عن أسئلتهم بصوت عالٍ، ثم ناقشوا من كانت إجابته غريبة.'
     ),
     (RegExp(r'^Jester: (.+)$'), (m) => 'المهرّج: ${m[1]}'),
-    (RegExp(r'^(\d+) imposter wins$'), (m) => '${m[1]} انتصارات كمخادع'),
-    (RegExp(r'^(\d+) imposters spotted$'), (m) => 'كشف ${m[1]} مخادعين'),
-    (RegExp(r'^(\d+) votes received$'), (m) => 'تلقى ${m[1]} أصوات'),
-    (RegExp(r'^(\d+) Jester wins$'), (m) => '${m[1]} انتصارات كمهرّج'),
-    (
-      RegExp(r'^(\d+) rounds • (\d+) wins • (\d+) imposter roles$'),
-      (m) => '${m[1]} جولات • ${m[2]} فوز • ${m[3]} أدوار مخادع'
-    ),
     (
       RegExp(r'^(\d+) of (\d+) achievements$'),
       (m) => '${m[1]} من ${m[2]} إنجازات'
     ),
     (RegExp(r'^Page (\d+) of (\d+)$'), (m) => 'الصفحة ${m[1]} من ${m[2]}'),
     (
-      RegExp(r'^(\d+) rounds • (\d+) pts • (\d+) badges$'),
-      (m) => '${m[1]} جولات • ${m[2]} نقطة • ${m[3]} شارات'
+      RegExp(r'^Rounds: (\d+) • Wins: (\d+) • Imposter: (\d+)$'),
+      (m) => 'الجولات: ${m[1]} • الفوز: ${m[2]} • كمخادع: ${m[3]}'
     ),
+    (
+      RegExp(r'^Rounds: (\d+) • Points: (\d+) • Badges: (\d+)$'),
+      (m) => 'الجولات: ${m[1]} • النقاط: ${m[2]} • الشارات: ${m[3]}'
+    ),
+    (RegExp(r'^Imposter wins: (\d+)$'), (m) => 'انتصارات كمخادع: ${m[1]}'),
+    (RegExp(r'^Imposters spotted: (\d+)$'), (m) => 'مخادعون مكشوفون: ${m[1]}'),
+    (RegExp(r'^Votes received: (\d+)$'), (m) => 'الأصوات المستلمة: ${m[1]}'),
+    (RegExp(r'^Jester wins: (\d+)$'), (m) => 'انتصارات كمهرّج: ${m[1]}'),
   ];
   for (final (pattern, replacement) in patterns) {
     final match = pattern.firstMatch(text);
@@ -155,25 +155,12 @@ final _dynamicMessages = <(RegExp, String, List<String>)>[
     ['number', 'total']
   ),
   (
-    RegExp(r'^(\d+) rounds • (\d+) wins • (\d+) imposter roles$'),
-    '{number} rounds • {wins} wins • {total} imposter roles',
-    ['number', 'wins', 'total']
-  ),
-  (
     RegExp(
         r'^(.+) answers first\. Everyone answers their question out loud, then discuss whose answer did not fit\.$'),
     '{name} answers first. Everyone answers their question out loud, then discuss whose answer did not fit.',
     ['name']
   ),
   (RegExp(r'^Jester: (.+)$'), 'Jester: {name}', ['name']),
-  (RegExp(r'^(\d+) imposter wins$'), '{number} imposter wins', ['number']),
-  (
-    RegExp(r'^(\d+) imposters spotted$'),
-    '{number} imposters spotted',
-    ['number']
-  ),
-  (RegExp(r'^(\d+) votes received$'), '{number} votes received', ['number']),
-  (RegExp(r'^(\d+) Jester wins$'), '{number} Jester wins', ['number']),
   (
     RegExp(r'^(\d+) of (\d+) achievements$'),
     '{number} of {total} achievements',
@@ -185,11 +172,30 @@ final _dynamicMessages = <(RegExp, String, List<String>)>[
     ['number', 'total']
   ),
   (
-    RegExp(r'^(\d+) rounds • (\d+) pts • (\d+) badges$'),
-    '{number} rounds • {total} pts • {wins} badges',
+    RegExp(r'^Rounds: (\d+) • Wins: (\d+) • Imposter: (\d+)$'),
+    'Rounds: {number} • Wins: {wins} • Imposter: {total}',
+    ['number', 'wins', 'total']
+  ),
+  (
+    RegExp(r'^Rounds: (\d+) • Points: (\d+) • Badges: (\d+)$'),
+    'Rounds: {number} • Points: {total} • Badges: {wins}',
     ['number', 'total', 'wins']
   ),
+  (RegExp(r'^Imposter wins: (\d+)$'), 'Imposter wins: {number}', ['number']),
+  (
+    RegExp(r'^Imposters spotted: (\d+)$'),
+    'Imposters spotted: {number}',
+    ['number']
+  ),
+  (RegExp(r'^Votes received: (\d+)$'), 'Votes received: {number}', ['number']),
+  (RegExp(r'^Jester wins: (\d+)$'), 'Jester wins: {number}', ['number']),
 ];
+
+/// English source text for counts, with singular forms. Pass the result to
+/// [LocalText] or [translate].
+String votesText(int n) => n == 1 ? '1 vote' : '$n votes';
+String pointsText(int n) => n == 1 ? '1 pt' : '$n pts';
+String wordsText(int n) => n == 1 ? '1 word' : '$n words';
 
 class LocalText extends StatelessWidget {
   const LocalText(this.data,

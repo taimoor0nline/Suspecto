@@ -5,23 +5,23 @@ import 'package:suspecto/features/game/domain/services/party_awards.dart';
 /// Emoji, English title and English detail text for an award. The detail
 /// uses message templates so it translates with the count filled in.
 (String, String, String) awardLabel(PartyAward award) => switch (award.kind) {
-      AwardKind.mvp => ('🏆', 'MVP', '${award.count} pts'),
+      AwardKind.mvp => ('🏆', 'MVP', pointsText(award.count)),
       AwardKind.bluffer => (
           '🎭',
           'Best Bluffer',
-          '${award.count} imposter wins'
+          'Imposter wins: ${award.count}'
         ),
       AwardKind.detective => (
           '🔍',
           'Sharpest Detective',
-          '${award.count} imposters spotted'
+          'Imposters spotted: ${award.count}'
         ),
       AwardKind.suspect => (
           '😬',
           'Most Suspected',
-          '${award.count} votes received'
+          'Votes received: ${award.count}'
         ),
-      AwardKind.jester => ('🃏', 'Chaos Jester', '${award.count} Jester wins'),
+      AwardKind.jester => ('🃏', 'Chaos Jester', 'Jester wins: ${award.count}'),
     };
 
 /// Session titles shown under the results.

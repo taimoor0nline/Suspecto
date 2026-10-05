@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/profiles/presentation/player_avatar.dart';
 import 'package:suspecto/features/achievements/presentation/achievement_widgets.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/application/round_controller.dart';
@@ -49,11 +50,12 @@ class ResultPhase extends StatelessWidget {
           for (final p in session.players)
             ListTile(
               contentPadding: EdgeInsets.zero,
+              leading: PlayerAvatar(name: p.name, radius: 18),
               title: Text(p.name),
               subtitle: LocalText(result.accusedIds.contains(p.id)
                   ? 'Accused by the group'
                   : 'Not accused'),
-              trailing: LocalText('${round.ballot.counts[p.id]} votes'),
+              trailing: LocalText(votesText(round.ballot.counts[p.id] ?? 0)),
             ),
           const SizedBox(height: 20),
           LocalText('Scoreboard', style: theme.textTheme.titleLarge),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/profiles/presentation/player_avatar.dart';
 import 'package:suspecto/features/achievements/presentation/achievement_widgets.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/domain/models/player.dart';
@@ -59,11 +60,12 @@ class LanResultView extends StatelessWidget {
           for (final p in view.roundPlayers)
             ListTile(
               contentPadding: EdgeInsets.zero,
+              leading: PlayerAvatar(name: p.name, radius: 18),
               title: Text(p.name),
               subtitle: LocalText(result.accusedIds.contains(p.id)
                   ? 'Accused by the group'
                   : 'Not accused'),
-              trailing: LocalText('${result.votes[p.id] ?? 0} votes'),
+              trailing: LocalText(votesText(result.votes[p.id] ?? 0)),
             ),
           const SizedBox(height: 20),
           LocalText('Scoreboard', style: theme.textTheme.titleLarge),

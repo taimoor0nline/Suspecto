@@ -14,7 +14,7 @@ import 'package:suspecto/features/packs/domain/dealable_words.dart';
 import 'package:suspecto/features/packs/domain/word_pack.dart';
 import 'package:suspecto/features/packs/presentation/packs_screen.dart';
 
-/// The untouched default names, which are never saved as players.
+/// Default names saved by older versions; restored as empty fields.
 final _placeholderName = RegExp(r'^Player \d+$');
 
 class SetupScreen extends StatefulWidget {
@@ -25,10 +25,8 @@ class SetupScreen extends StatefulWidget {
 
 class _SetupScreenState extends State<SetupScreen> {
   final _form = GlobalKey<FormState>();
-  final _names = List.generate(
-    3,
-    (i) => TextEditingController(text: 'Player ${i + 1}'),
-  );
+  // Empty fields mean "Player N" (translated) when the game starts.
+  final _names = List.generate(3, (_) => TextEditingController());
   Set<String> _packIds = builtInPacks.map((p) => p.id).toSet();
   int _imposters = 1;
   int _minutes = 3;
@@ -57,8 +55,8 @@ class _SetupScreenState extends State<SetupScreen> {
       }
       _names
         ..clear()
-        ..addAll(
-            store.lastPlayers.map((name) => TextEditingController(text: name)));
+        ..addAll(store.lastPlayers.map((name) => TextEditingController(
+            text: _placeholderName.hasMatch(name) ? '' : name)));
     }
     final available = _packs.map((p) => p.id).toSet();
     final saved = store.lastCategories.where(available.contains).toSet();
@@ -79,13 +77,17 @@ class _SetupScreenState extends State<SetupScreen> {
     super.dispose();
   }
 
-  void _addPlayer() => setState(() =>
-      _names.add(TextEditingController(text: 'Player ${_names.length + 1}')));
+  void _addPlayer() => setState(() => _names.add(TextEditingController()));
+
+  /// The name a row plays under: what was typed, or "Player N".
+  String _nameAt(int i) {
+    final typed = _names[i].text.trim();
+    return typed.isEmpty ? translate(context, 'Player ${i + 1}') : typed;
+  }
 
   /// Puts a saved player into the first empty or placeholder row, or a new row.
   void _addSaved(String name) => setState(() {
-        final free = _names.where((c) =>
-            c.text.trim().isEmpty || _placeholderName.hasMatch(c.text.trim()));
+        final free = _names.where((c) => c.text.trim().isEmpty);
         if (free.isNotEmpty) {
           free.first.text = name;
         } else if (_names.length < 20) {
@@ -99,14 +101,11 @@ class _SetupScreenState extends State<SetupScreen> {
             _imposters.clamp(1, GameEngine.maxImposters(_names.length));
       });
 
-  String? _validateName(String? value) {
-    final name = value?.trim() ?? '';
-    if (name.isEmpty) {
-      return translate(context, 'Enter a name');
-    }
-    final duplicates = _names
-        .where((c) => c.text.trim().toLowerCase() == name.toLowerCase())
-        .length;
+  String? _validateName(int index) {
+    final name = _nameAt(index).toLowerCase();
+    final duplicates = [
+      for (var i = 0; i < _names.length; i++) _nameAt(i).toLowerCase(),
+    ].where((n) => n == name).length;
     return duplicates > 1 ? translate(context, 'Use a different name') : null;
   }
 
@@ -123,15 +122,14 @@ class _SetupScreenState extends State<SetupScreen> {
     }
     final players = List.generate(
       _names.length,
-      (i) => Player(id: '$i', name: _names[i].text.trim()),
+      (i) => Player(id: '$i', name: _nameAt(i)),
     );
     final store = StoreScope.maybeOf(context);
     store?.saveSetup(players.map((p) => p.name).toList(),
         packs.map((p) => p.id).toList(), _imposters, _minutes,
         options: _options);
-    store?.rememberPlayers(players
-        .map((p) => p.name)
-        .where((name) => !_placeholderName.hasMatch(name)));
+    store?.rememberPlayers(
+        _names.map((c) => c.text.trim()).where((name) => name.isNotEmpty));
     store?.feedback();
     Navigator.of(context).push(
       MaterialPageRoute<void>(
@@ -152,6 +150,8 @@ class _SetupScreenState extends State<SetupScreen> {
     return GamePage(
       title: 'Gather your suspects',
       subtitle: 'Add your friends, pick your packs, and pass the phone.',
+      bottomAction: FilledButton(
+          onPressed: _start, child: const LocalText('Deal secret roles')),
       children: [
         Form(
           key: _form,
@@ -212,9 +212,6 @@ class _SetupScreenState extends State<SetupScreen> {
             ],
           ),
         ],
-        const SizedBox(height: 28),
-        FilledButton(
-            onPressed: _start, child: const LocalText('Deal secret roles')),
       ],
     );
   }
@@ -272,7 +269,7 @@ class _SetupScreenState extends State<SetupScreen> {
                   labelText: translate(context, 'Player ${i + 1}'),
                   counterText: '',
                 ),
-                validator: _validateName,
+                validator: (_) => _validateName(i),
                 onChanged: (_) => setState(() {}),
               ),
             ),

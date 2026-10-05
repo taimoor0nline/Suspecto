@@ -108,19 +108,19 @@ class LanDiscussionView extends LanRoundView {
           ? '$starter answers first. Everyone answers their question out loud, then discuss whose answer did not fit.'
           : '$starter starts. Give one clue each, then discuss who is bluffing. Keep the word secret.',
       children: [
+        DiscussionTimerCard(
+            remainingSeconds: view.remainingSeconds,
+            mode: view.mode,
+            speedRound: view.speedRound),
         if (questions) ...[
+          const SizedBox(height: 16),
           QuestionRevealCard(
             question: view.revealedQuestion?.entry,
             onReveal: view.isHost
                 ? () => session.send(LanAction.revealQuestion)
                 : null,
           ),
-          const SizedBox(height: 12),
         ],
-        DiscussionTimerCard(
-            remainingSeconds: view.remainingSeconds,
-            mode: view.mode,
-            speedRound: view.speedRound),
         const SizedBox(height: 24),
         if (view.isHost) ...[
           FilledButton(

@@ -394,4 +394,8 @@ const arabicStrings = <String, String>{
   'Save player': 'حفظ اللاعب',
   'Remove player': 'إزالة اللاعب',
   'Saved players': 'اللاعبون المحفوظون',
+  // polish_tr
+  '1 vote': 'صوت واحد',
+  '1 pt': 'نقطة واحدة',
+  '1 word': 'كلمة واحدة',
 };

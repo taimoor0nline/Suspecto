@@ -137,6 +137,7 @@ class DiscussionTimerCard extends StatelessWidget {
     return CountdownSounds(
       remainingSeconds: remaining,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (speedRound) ...[
             Card(
