@@ -23,6 +23,27 @@ def validate_words(rows):
             values.add(value)
 
 
+def validate_questions(rows, words):
+    ids, seen = set(), {language: set() for language in LANGUAGES}
+    word_terms = {row['en'].strip().casefold() for row in words}
+    for row in rows:
+        if not isinstance(row.get('id'), str) or row['id'] in ids:
+            raise ValueError(f'Invalid or duplicate question id: {row.get("id")}')
+        ids.add(row['id'])
+        for side in ('main', 'imposter'):
+            texts = row.get(side)
+            if not isinstance(texts, dict):
+                raise ValueError(f'Missing {side} question: {row["id"]}')
+            for language in LANGUAGES:
+                text = texts.get(language)
+                if not isinstance(text, str) or not text.strip():
+                    raise ValueError(f'Invalid {side} question {language}: {row["id"]}')
+                key = text.strip().casefold()
+                if key in seen[language] or (language == 'en' and key in word_terms):
+                    raise ValueError(f'Duplicate question {language}: {text}')
+                seen[language].add(key)
+
+
 def validate_ui(catalogs, required):
     for language in LANGUAGES[2:]:
         catalog = catalogs.get(language)
@@ -42,6 +63,8 @@ def dart(value):
 def main():
     rows = json.loads((ROOT / 'assets/content/words.json').read_text())['words']
     validate_words(rows)
+    questions = json.loads((ROOT / 'assets/content/questions.json').read_text())['questions']
+    validate_questions(questions, rows)
     source = (ROOT / 'lib/core/localization.dart').read_text()
     arabic = (ROOT / 'lib/core/l10n/arabic_strings.dart').read_text()
     arabic = arabic.split('const arabicStrings =')[1]
@@ -65,6 +88,21 @@ def main():
         words += '  },\n'
     words += '};\nfinal arabicWords = wordTranslations[\'ar\']!;\n'
     (ROOT / 'lib/features/game/data/local/word_translations.dart').write_text(words)
+    pairs = header + "import 'package:suspecto/features/game/domain/models/word_entry.dart';\n\n"
+    pairs += '/// Question mode: (question for innocent players, question for imposters).\n'
+    pairs += 'const questionPairs = <(WordEntry, WordEntry)>[\n'
+    for row in questions:
+        main_q, imposter_q = (dart(row[side]['en']) for side in ('main', 'imposter'))
+        pairs += f"  (WordEntry(value: {main_q}, category: 'Questions'), WordEntry(value: {imposter_q}, category: 'Questions')),\n"
+    pairs += '];\n\n/// Question translations by locale, keyed by the English question.\n'
+    pairs += 'const questionTranslations = <String, Map<String, String>>{\n'
+    for language in LANGUAGES[1:]:
+        pairs += f'  {dart(language)}: {{\n'
+        for row in questions:
+            for side in ('main', 'imposter'):
+                pairs += f"    {dart(row[side]['en'])}: {dart(row[side][language])},\n"
+        pairs += '  },\n'
+    (ROOT / 'lib/features/game/data/local/question_pairs.dart').write_text(pairs + '};\n')
     ui = header + 'const uiTranslations = <String, Map<String, String>>{\n'
     for language, catalog in catalogs.items():
         ui += f'  {dart(language)}: {{\n'
@@ -72,7 +110,7 @@ def main():
             ui += f'    {dart(source)}: {dart(translated)},\n'
         ui += '  },\n'
     (ROOT / 'lib/core/ui_translations.dart').write_text(ui + '};\n')
-    print(f'Validated {len(rows)} unique words in {len(LANGUAGES)} locales and {len(required)} UI messages per new locale.')
+    print(f'Validated {len(rows)} unique words and {len(questions)} question pairs in {len(LANGUAGES)} locales and {len(required)} UI messages per new locale.')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,572 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "q-001",
+      "main": {
+        "en": "How many hours do you sleep on a weekend night?",
+        "ar": "كم ساعة تنام في ليلة عطلة نهاية الأسبوع؟",
+        "es": "¿Cuántas horas duermes una noche de fin de semana?",
+        "fr": "Combien d’heures dors-tu une nuit de week-end ?",
+        "ja": "週末の夜は何時間寝ますか？",
+        "zh-Hans": "周末晚上你睡几个小时？",
+        "zh-Hant": "週末晚上你睡幾個小時？"
+      },
+      "imposter": {
+        "en": "How many hours a day do you spend on your phone?",
+        "ar": "كم ساعة تقضي على هاتفك يومياً؟",
+        "es": "¿Cuántas horas al día pasas con el móvil?",
+        "fr": "Combien d’heures par jour passes-tu sur ton téléphone ?",
+        "ja": "1日に何時間スマホを使いますか？",
+        "zh-Hans": "你每天花几个小时看手机？",
+        "zh-Hant": "你每天花幾個小時看手機？"
+      }
+    },
+    {
+      "id": "q-002",
+      "main": {
+        "en": "What is the best food to eat at the cinema?",
+        "ar": "ما أفضل طعام تأكله في السينما؟",
+        "es": "¿Cuál es la mejor comida para el cine?",
+        "fr": "Quel est le meilleur aliment à manger au cinéma ?",
+        "ja": "映画館で食べるのに一番いい食べ物は？",
+        "zh-Hans": "在电影院吃什么最好？",
+        "zh-Hant": "在電影院吃什麼最好？"
+      },
+      "imposter": {
+        "en": "What is the best food to eat at the beach?",
+        "ar": "ما أفضل طعام تأكله على الشاطئ؟",
+        "es": "¿Cuál es la mejor comida para la playa?",
+        "fr": "Quel est le meilleur aliment à manger à la plage ?",
+        "ja": "ビーチで食べるのに一番いい食べ物は？",
+        "zh-Hans": "在海边吃什么最好？",
+        "zh-Hant": "在海邊吃什麼最好？"
+      }
+    },
+    {
+      "id": "q-003",
+      "main": {
+        "en": "How many cups of coffee or tea do you drink a day?",
+        "ar": "كم كوباً من القهوة أو الشاي تشرب يومياً؟",
+        "es": "¿Cuántas tazas de café o té bebes al día?",
+        "fr": "Combien de tasses de café ou de thé bois-tu par jour ?",
+        "ja": "1日にコーヒーかお茶を何杯飲みますか？",
+        "zh-Hans": "你每天喝几杯咖啡或茶？",
+        "zh-Hant": "你每天喝幾杯咖啡或茶？"
+      },
+      "imposter": {
+        "en": "How many glasses of water do you drink a day?",
+        "ar": "كم كوباً من الماء تشرب يومياً؟",
+        "es": "¿Cuántos vasos de agua bebes al día?",
+        "fr": "Combien de verres d’eau bois-tu par jour ?",
+        "ja": "1日に水を何杯飲みますか？",
+        "zh-Hans": "你每天喝几杯水？",
+        "zh-Hant": "你每天喝幾杯水？"
+      }
+    },
+    {
+      "id": "q-004",
+      "main": {
+        "en": "How old were you when you got your first phone?",
+        "ar": "كم كان عمرك عندما حصلت على أول هاتف؟",
+        "es": "¿Cuántos años tenías cuando tuviste tu primer móvil?",
+        "fr": "Quel âge avais-tu quand tu as eu ton premier téléphone ?",
+        "ja": "初めてスマホを持ったのは何歳？",
+        "zh-Hans": "你几岁有了第一部手机？",
+        "zh-Hant": "你幾歲有了第一支手機？"
+      },
+      "imposter": {
+        "en": "How old were you when you learned to ride a bike?",
+        "ar": "كم كان عمرك عندما تعلمت ركوب الدراجة؟",
+        "es": "¿Cuántos años tenías cuando aprendiste a montar en bici?",
+        "fr": "Quel âge avais-tu quand tu as appris à faire du vélo ?",
+        "ja": "自転車に乗れるようになったのは何歳？",
+        "zh-Hans": "你几岁学会骑自行车？",
+        "zh-Hant": "你幾歲學會騎腳踏車？"
+      }
+    },
+    {
+      "id": "q-005",
+      "main": {
+        "en": "Which animal would make the best pet?",
+        "ar": "أي حيوان سيكون أفضل حيوان أليف؟",
+        "es": "¿Qué animal sería la mejor mascota?",
+        "fr": "Quel animal ferait le meilleur animal de compagnie ?",
+        "ja": "ペットにするなら一番いい動物は？",
+        "zh-Hans": "哪种动物最适合当宠物？",
+        "zh-Hant": "哪種動物最適合當寵物？"
+      },
+      "imposter": {
+        "en": "Which animal would scare you most at night?",
+        "ar": "أي حيوان سيخيفك أكثر في الليل؟",
+        "es": "¿Qué animal te asustaría más por la noche?",
+        "fr": "Quel animal te ferait le plus peur la nuit ?",
+        "ja": "夜に出会ったら一番怖い動物は？",
+        "zh-Hans": "晚上遇到哪种动物最让你害怕？",
+        "zh-Hant": "晚上遇到哪種動物最讓你害怕？"
+      }
+    },
+    {
+      "id": "q-006",
+      "main": {
+        "en": "How many countries would you like to visit in your life?",
+        "ar": "كم دولة تود أن تزور في حياتك؟",
+        "es": "¿Cuántos países te gustaría visitar en tu vida?",
+        "fr": "Combien de pays aimerais-tu visiter dans ta vie ?",
+        "ja": "人生で何か国を訪れてみたいですか？",
+        "zh-Hans": "你这辈子想去多少个国家？",
+        "zh-Hant": "你這輩子想去多少個國家？"
+      },
+      "imposter": {
+        "en": "How many friends do you talk to every week?",
+        "ar": "كم صديقاً تتحدث معه كل أسبوع؟",
+        "es": "¿Con cuántos amigos hablas cada semana?",
+        "fr": "À combien d’amis parles-tu chaque semaine ?",
+        "ja": "毎週何人の友達と話しますか？",
+        "zh-Hans": "你每周和几个朋友聊天？",
+        "zh-Hant": "你每週和幾個朋友聊天？"
+      }
+    },
+    {
+      "id": "q-007",
+      "main": {
+        "en": "What is the best birthday gift?",
+        "ar": "ما أفضل هدية عيد ميلاد؟",
+        "es": "¿Cuál es el mejor regalo de cumpleaños?",
+        "fr": "Quel est le meilleur cadeau d’anniversaire ?",
+        "ja": "誕生日プレゼントで一番いいものは？",
+        "zh-Hans": "最好的生日礼物是什么？",
+        "zh-Hant": "最好的生日禮物是什麼？"
+      },
+      "imposter": {
+        "en": "What is the best thing to bring to a picnic?",
+        "ar": "ما أفضل شيء تحضره إلى نزهة؟",
+        "es": "¿Qué es lo mejor para llevar a un pícnic?",
+        "fr": "Quelle est la meilleure chose à apporter à un pique-nique ?",
+        "ja": "ピクニックに持っていくなら一番いいものは？",
+        "zh-Hans": "去野餐最好带什么？",
+        "zh-Hant": "去野餐最好帶什麼？"
+      }
+    },
+    {
+      "id": "q-008",
+      "main": {
+        "en": "Which room in a house is your favourite?",
+        "ar": "ما غرفتك المفضلة في المنزل؟",
+        "es": "¿Cuál es tu habitación favorita de una casa?",
+        "fr": "Quelle est ta pièce préférée dans une maison ?",
+        "ja": "家の中で一番好きな部屋は？",
+        "zh-Hans": "你最喜欢家里的哪个房间？",
+        "zh-Hant": "你最喜歡家裡的哪個房間？"
+      },
+      "imposter": {
+        "en": "Which room in a house do you clean the least?",
+        "ar": "ما الغرفة التي تنظفها أقل من غيرها في المنزل؟",
+        "es": "¿Qué habitación de la casa limpias menos?",
+        "fr": "Quelle pièce de la maison nettoies-tu le moins ?",
+        "ja": "家の中で一番掃除しない部屋は？",
+        "zh-Hans": "家里哪个房间你打扫得最少？",
+        "zh-Hant": "家裡哪個房間你打掃得最少？"
+      }
+    },
+    {
+      "id": "q-009",
+      "main": {
+        "en": "What would you take to a desert island?",
+        "ar": "ماذا ستأخذ معك إلى جزيرة مهجورة؟",
+        "es": "¿Qué te llevarías a una isla desierta?",
+        "fr": "Qu’emporterais-tu sur une île déserte ?",
+        "ja": "無人島に何を持っていきますか？",
+        "zh-Hans": "你会带什么去荒岛？",
+        "zh-Hant": "你會帶什麼去荒島？"
+      },
+      "imposter": {
+        "en": "What would you take on a long flight?",
+        "ar": "ماذا ستأخذ معك في رحلة طيران طويلة؟",
+        "es": "¿Qué te llevarías en un vuelo largo?",
+        "fr": "Qu’emporterais-tu pour un long vol ?",
+        "ja": "長いフライトに何を持っていきますか？",
+        "zh-Hans": "长途飞行你会带什么？",
+        "zh-Hant": "長途飛行你會帶什麼？"
+      }
+    },
+    {
+      "id": "q-010",
+      "main": {
+        "en": "What is a good name for a cat?",
+        "ar": "ما الاسم الجيد لقطة؟",
+        "es": "¿Cuál es un buen nombre para un gato?",
+        "fr": "Quel est un bon nom pour un chat ?",
+        "ja": "猫にぴったりの名前は？",
+        "zh-Hans": "给猫起什么名字好？",
+        "zh-Hant": "給貓取什麼名字好？"
+      },
+      "imposter": {
+        "en": "What is a good name for a boat?",
+        "ar": "ما الاسم الجيد لقارب؟",
+        "es": "¿Cuál es un buen nombre para un barco?",
+        "fr": "Quel est un bon nom pour un bateau ?",
+        "ja": "船にぴったりの名前は？",
+        "zh-Hans": "给船起什么名字好？",
+        "zh-Hant": "給船取什麼名字好？"
+      }
+    },
+    {
+      "id": "q-011",
+      "main": {
+        "en": "How many minutes does it take you to get ready in the morning?",
+        "ar": "كم دقيقة تحتاج لتستعد في الصباح؟",
+        "es": "¿Cuántos minutos tardas en arreglarte por la mañana?",
+        "fr": "Combien de minutes te faut-il pour te préparer le matin ?",
+        "ja": "朝の支度に何分かかりますか？",
+        "zh-Hans": "你早上准备出门要几分钟？",
+        "zh-Hant": "你早上準備出門要幾分鐘？"
+      },
+      "imposter": {
+        "en": "How many minutes does it take you to cook dinner?",
+        "ar": "كم دقيقة تحتاج لتطبخ العشاء؟",
+        "es": "¿Cuántos minutos tardas en preparar la cena?",
+        "fr": "Combien de minutes te faut-il pour préparer le dîner ?",
+        "ja": "夕食を作るのに何分かかりますか？",
+        "zh-Hans": "你做晚饭要几分钟？",
+        "zh-Hant": "你做晚餐要幾分鐘？"
+      }
+    },
+    {
+      "id": "q-012",
+      "main": {
+        "en": "Which superpower would you choose?",
+        "ar": "أي قوة خارقة ستختار؟",
+        "es": "¿Qué superpoder elegirías?",
+        "fr": "Quel super-pouvoir choisirais-tu ?",
+        "ja": "超能力を選ぶなら何？",
+        "zh-Hans": "你会选择什么超能力？",
+        "zh-Hant": "你會選擇什麼超能力？"
+      },
+      "imposter": {
+        "en": "Which job would you choose if money did not matter?",
+        "ar": "أي وظيفة ستختار لو لم يكن المال مهماً؟",
+        "es": "¿Qué trabajo elegirías si el dinero no importara?",
+        "fr": "Quel métier choisirais-tu si l’argent ne comptait pas ?",
+        "ja": "お金が関係なければどの仕事を選びますか？",
+        "zh-Hans": "如果不在乎钱，你会选什么工作？",
+        "zh-Hant": "如果不在乎錢，你會選什麼工作？"
+      }
+    },
+    {
+      "id": "q-013",
+      "main": {
+        "en": "What colour should a sports car be?",
+        "ar": "ما اللون المناسب لسيارة رياضية؟",
+        "es": "¿De qué color debería ser un coche deportivo?",
+        "fr": "De quelle couleur devrait être une voiture de sport ?",
+        "ja": "スポーツカーは何色がいい？",
+        "zh-Hans": "跑车应该是什么颜色？",
+        "zh-Hant": "跑車應該是什麼顏色？"
+      },
+      "imposter": {
+        "en": "What colour should a bedroom wall be?",
+        "ar": "ما اللون المناسب لجدار غرفة النوم؟",
+        "es": "¿De qué color debería ser la pared de un dormitorio?",
+        "fr": "De quelle couleur devrait être un mur de chambre ?",
+        "ja": "寝室の壁は何色がいい？",
+        "zh-Hans": "卧室的墙应该是什么颜色？",
+        "zh-Hant": "臥室的牆應該是什麼顏色？"
+      }
+    },
+    {
+      "id": "q-014",
+      "main": {
+        "en": "What is the best snack for watching a film?",
+        "ar": "ما أفضل وجبة خفيفة أثناء مشاهدة فيلم؟",
+        "es": "¿Cuál es el mejor aperitivo para ver una película?",
+        "fr": "Quel est le meilleur en-cas pour regarder un film ?",
+        "ja": "映画を見ながら食べるのに一番いいおやつは？",
+        "zh-Hans": "看电影时最适合吃什么零食？",
+        "zh-Hant": "看電影時最適合吃什麼零食？"
+      },
+      "imposter": {
+        "en": "What is the best snack for a road trip?",
+        "ar": "ما أفضل وجبة خفيفة لرحلة بالسيارة؟",
+        "es": "¿Cuál es el mejor aperitivo para un viaje en coche?",
+        "fr": "Quel est le meilleur en-cas pour un road trip ?",
+        "ja": "ドライブ旅行に一番いいおやつは？",
+        "zh-Hans": "公路旅行最适合吃什么零食？",
+        "zh-Hant": "公路旅行最適合吃什麼零食？"
+      }
+    },
+    {
+      "id": "q-015",
+      "main": {
+        "en": "How many times a week do you exercise?",
+        "ar": "كم مرة في الأسبوع تمارس الرياضة؟",
+        "es": "¿Cuántas veces a la semana haces ejercicio?",
+        "fr": "Combien de fois par semaine fais-tu du sport ?",
+        "ja": "週に何回運動しますか？",
+        "zh-Hans": "你每周运动几次？",
+        "zh-Hant": "你每週運動幾次？"
+      },
+      "imposter": {
+        "en": "How many times a week do you eat dessert?",
+        "ar": "كم مرة في الأسبوع تأكل الحلوى؟",
+        "es": "¿Cuántas veces a la semana comes postre?",
+        "fr": "Combien de fois par semaine manges-tu un dessert ?",
+        "ja": "週に何回デザートを食べますか？",
+        "zh-Hans": "你每周吃几次甜点？",
+        "zh-Hant": "你每週吃幾次甜點？"
+      }
+    },
+    {
+      "id": "q-016",
+      "main": {
+        "en": "Which famous person would you invite to dinner?",
+        "ar": "أي شخص مشهور ستدعوه إلى العشاء؟",
+        "es": "¿A qué persona famosa invitarías a cenar?",
+        "fr": "Quelle célébrité inviterais-tu à dîner ?",
+        "ja": "夕食に招きたい有名人は？",
+        "zh-Hans": "你会邀请哪位名人共进晚餐？",
+        "zh-Hant": "你會邀請哪位名人共進晚餐？"
+      },
+      "imposter": {
+        "en": "Which famous person would you swap lives with for a day?",
+        "ar": "مع أي شخص مشهور ستتبادل حياتك ليوم واحد؟",
+        "es": "¿Con qué persona famosa cambiarías tu vida por un día?",
+        "fr": "Avec quelle célébrité échangerais-tu ta vie pour une journée ?",
+        "ja": "1日だけ人生を入れ替えるならどの有名人？",
+        "zh-Hans": "你想和哪位名人交换一天人生？",
+        "zh-Hant": "你想和哪位名人交換一天人生？"
+      }
+    },
+    {
+      "id": "q-017",
+      "main": {
+        "en": "What is the most useful thing in a kitchen?",
+        "ar": "ما أكثر شيء مفيد في المطبخ؟",
+        "es": "¿Qué es lo más útil de una cocina?",
+        "fr": "Quel est l’objet le plus utile dans une cuisine ?",
+        "ja": "キッチンで一番便利なものは？",
+        "zh-Hans": "厨房里最有用的东西是什么？",
+        "zh-Hant": "廚房裡最有用的東西是什麼？"
+      },
+      "imposter": {
+        "en": "What is the most useful thing in a bathroom?",
+        "ar": "ما أكثر شيء مفيد في الحمام؟",
+        "es": "¿Qué es lo más útil de un baño?",
+        "fr": "Quel est l’objet le plus utile dans une salle de bain ?",
+        "ja": "浴室で一番便利なものは？",
+        "zh-Hans": "浴室里最有用的东西是什么？",
+        "zh-Hant": "浴室裡最有用的東西是什麼？"
+      }
+    },
+    {
+      "id": "q-018",
+      "main": {
+        "en": "Which sound annoys you the most?",
+        "ar": "ما الصوت الذي يزعجك أكثر؟",
+        "es": "¿Qué sonido te molesta más?",
+        "fr": "Quel bruit t’agace le plus ?",
+        "ja": "一番イライラする音は？",
+        "zh-Hans": "什么声音最让你烦？",
+        "zh-Hant": "什麼聲音最讓你煩？"
+      },
+      "imposter": {
+        "en": "Which sound helps you fall asleep?",
+        "ar": "ما الصوت الذي يساعدك على النوم؟",
+        "es": "¿Qué sonido te ayuda a dormirte?",
+        "fr": "Quel bruit t’aide à t’endormir ?",
+        "ja": "眠りにつくのに役立つ音は？",
+        "zh-Hans": "什么声音能帮你入睡？",
+        "zh-Hant": "什麼聲音能幫你入睡？"
+      }
+    },
+    {
+      "id": "q-019",
+      "main": {
+        "en": "What do you do first when you wake up?",
+        "ar": "ما أول شيء تفعله عندما تستيقظ؟",
+        "es": "¿Qué es lo primero que haces al despertarte?",
+        "fr": "Que fais-tu en premier au réveil ?",
+        "ja": "起きて最初にすることは？",
+        "zh-Hans": "你醒来后第一件事做什么？",
+        "zh-Hant": "你醒來後第一件事做什麼？"
+      },
+      "imposter": {
+        "en": "What do you do just before you sleep?",
+        "ar": "ماذا تفعل قبل أن تنام مباشرة؟",
+        "es": "¿Qué haces justo antes de dormir?",
+        "fr": "Que fais-tu juste avant de dormir ?",
+        "ja": "寝る直前にすることは？",
+        "zh-Hans": "你睡前最后做什么？",
+        "zh-Hant": "你睡前最後做什麼？"
+      }
+    },
+    {
+      "id": "q-020",
+      "main": {
+        "en": "How many songs could you sing without the lyrics?",
+        "ar": "كم أغنية تستطيع غناءها دون النظر إلى الكلمات؟",
+        "es": "¿Cuántas canciones podrías cantar sin la letra?",
+        "fr": "Combien de chansons pourrais-tu chanter sans les paroles ?",
+        "ja": "歌詞を見ずに歌える歌は何曲？",
+        "zh-Hans": "你能不看歌词唱几首歌？",
+        "zh-Hant": "你能不看歌詞唱幾首歌？"
+      },
+      "imposter": {
+        "en": "How many phone numbers do you know by heart?",
+        "ar": "كم رقم هاتف تحفظه عن ظهر قلب؟",
+        "es": "¿Cuántos números de teléfono te sabes de memoria?",
+        "fr": "Combien de numéros de téléphone connais-tu par cœur ?",
+        "ja": "暗記している電話番号はいくつ？",
+        "zh-Hans": "你能背出几个电话号码？",
+        "zh-Hant": "你能背出幾個電話號碼？"
+      }
+    },
+    {
+      "id": "q-021",
+      "main": {
+        "en": "What is the best place for a first date?",
+        "ar": "ما أفضل مكان لموعد أول؟",
+        "es": "¿Cuál es el mejor sitio para una primera cita?",
+        "fr": "Quel est le meilleur endroit pour un premier rendez-vous ?",
+        "ja": "初デートに一番いい場所は？",
+        "zh-Hans": "第一次约会最适合去哪里？",
+        "zh-Hant": "第一次約會最適合去哪裡？"
+      },
+      "imposter": {
+        "en": "What is the best place for a family dinner?",
+        "ar": "ما أفضل مكان لعشاء عائلي؟",
+        "es": "¿Cuál es el mejor sitio para una cena familiar?",
+        "fr": "Quel est le meilleur endroit pour un dîner en famille ?",
+        "ja": "家族の夕食に一番いい場所は？",
+        "zh-Hans": "家庭聚餐最适合去哪里？",
+        "zh-Hant": "家庭聚餐最適合去哪裡？"
+      }
+    },
+    {
+      "id": "q-022",
+      "main": {
+        "en": "Which fruit is the most delicious?",
+        "ar": "ما الفاكهة الألذ؟",
+        "es": "¿Qué fruta es la más deliciosa?",
+        "fr": "Quel fruit est le plus délicieux ?",
+        "ja": "一番おいしい果物は？",
+        "zh-Hans": "哪种水果最好吃？",
+        "zh-Hant": "哪種水果最好吃？"
+      },
+      "imposter": {
+        "en": "Which fruit is the hardest to eat?",
+        "ar": "ما الفاكهة الأصعب في الأكل؟",
+        "es": "¿Qué fruta es la más difícil de comer?",
+        "fr": "Quel fruit est le plus difficile à manger ?",
+        "ja": "一番食べにくい果物は？",
+        "zh-Hans": "哪种水果最难吃（吃起来最麻烦）？",
+        "zh-Hant": "哪種水果最難吃（吃起來最麻煩）？"
+      }
+    },
+    {
+      "id": "q-023",
+      "main": {
+        "en": "How many hours could you go without your phone?",
+        "ar": "كم ساعة تستطيع البقاء دون هاتفك؟",
+        "es": "¿Cuántas horas podrías pasar sin tu móvil?",
+        "fr": "Combien d’heures pourrais-tu tenir sans ton téléphone ?",
+        "ja": "スマホなしで何時間過ごせますか？",
+        "zh-Hans": "你能几个小时不碰手机？",
+        "zh-Hant": "你能幾個小時不碰手機？"
+      },
+      "imposter": {
+        "en": "How many hours could you go without talking?",
+        "ar": "كم ساعة تستطيع البقاء دون كلام؟",
+        "es": "¿Cuántas horas podrías pasar sin hablar?",
+        "fr": "Combien d’heures pourrais-tu tenir sans parler ?",
+        "ja": "話さずに何時間過ごせますか？",
+        "zh-Hans": "你能几个小时不说话？",
+        "zh-Hant": "你能幾個小時不說話？"
+      }
+    },
+    {
+      "id": "q-024",
+      "main": {
+        "en": "Which season is the best for a holiday?",
+        "ar": "أي فصل هو الأفضل لقضاء عطلة؟",
+        "es": "¿Qué estación es la mejor para irse de vacaciones?",
+        "fr": "Quelle saison est la meilleure pour partir en vacances ?",
+        "ja": "旅行に一番いい季節は？",
+        "zh-Hans": "哪个季节最适合度假？",
+        "zh-Hant": "哪個季節最適合度假？"
+      },
+      "imposter": {
+        "en": "Which season makes you feel the laziest?",
+        "ar": "أي فصل يجعلك تشعر بالكسل أكثر؟",
+        "es": "¿Qué estación te da más pereza?",
+        "fr": "Quelle saison te rend le plus paresseux ?",
+        "ja": "一番だらけてしまう季節は？",
+        "zh-Hans": "哪个季节让你最懒？",
+        "zh-Hant": "哪個季節讓你最懶？"
+      }
+    },
+    {
+      "id": "q-025",
+      "main": {
+        "en": "What is the best thing to do on a rainy day?",
+        "ar": "ما أفضل شيء تفعله في يوم ممطر؟",
+        "es": "¿Qué es lo mejor que se puede hacer un día de lluvia?",
+        "fr": "Quelle est la meilleure activité un jour de pluie ?",
+        "ja": "雨の日にするのに一番いいことは？",
+        "zh-Hans": "下雨天最适合做什么？",
+        "zh-Hant": "下雨天最適合做什麼？"
+      },
+      "imposter": {
+        "en": "What is the best thing to do on a long train ride?",
+        "ar": "ما أفضل شيء تفعله في رحلة قطار طويلة؟",
+        "es": "¿Qué es lo mejor que se puede hacer en un viaje largo en tren?",
+        "fr": "Quelle est la meilleure activité pendant un long trajet en train ?",
+        "ja": "長い電車の旅でするのに一番いいことは？",
+        "zh-Hans": "坐长途火车时最适合做什么？",
+        "zh-Hant": "坐長途火車時最適合做什麼？"
+      }
+    },
+    {
+      "id": "q-026",
+      "main": {
+        "en": "How many people is the perfect size for a party?",
+        "ar": "كم عدد الأشخاص المثالي لحفلة؟",
+        "es": "¿Cuántas personas son ideales para una fiesta?",
+        "fr": "Combien de personnes faut-il pour une fête idéale ?",
+        "ja": "パーティーに理想的な人数は？",
+        "zh-Hans": "派对最理想的人数是多少？",
+        "zh-Hant": "派對最理想的人數是多少？"
+      },
+      "imposter": {
+        "en": "How many people can sit around your dining table?",
+        "ar": "كم شخصاً يمكنه الجلوس حول طاولة طعامك؟",
+        "es": "¿Cuántas personas caben en tu mesa de comedor?",
+        "fr": "Combien de personnes peuvent s’asseoir autour de ta table ?",
+        "ja": "あなたの食卓には何人座れますか？",
+        "zh-Hans": "你家餐桌能坐几个人？",
+        "zh-Hant": "你家餐桌能坐幾個人？"
+      }
+    },
+    {
+      "id": "q-027",
+      "main": {
+        "en": "What would you buy first if you won a lot of money?",
+        "ar": "ما أول شيء ستشتريه لو ربحت مبلغاً كبيراً؟",
+        "es": "¿Qué comprarías primero si ganaras mucho dinero?",
+        "fr": "Qu’achèterais-tu en premier si tu gagnais beaucoup d’argent ?",
+        "ja": "大金が当たったら最初に何を買いますか？",
+        "zh-Hans": "如果中了大奖，你第一件买什么？",
+        "zh-Hant": "如果中了大獎，你第一件買什麼？"
+      },
+      "imposter": {
+        "en": "What would you save first if your house was on fire?",
+        "ar": "ما أول شيء ستنقذه لو احترق منزلك؟",
+        "es": "¿Qué salvarías primero si tu casa se incendiara?",
+        "fr": "Que sauverais-tu en premier si ta maison brûlait ?",
+        "ja": "家が火事になったら最初に何を持ち出しますか？",
+        "zh-Hans": "如果家里着火，你第一件抢救什么？",
+        "zh-Hant": "如果家裡著火，你第一件搶救什麼？"
+      }
+    }
+  ]
+}
