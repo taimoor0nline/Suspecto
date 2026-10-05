@@ -363,4 +363,11 @@ const arabicStrings = <String, String>{
   'Mix it up': 'نوّع اللعب',
   'Try Undercover and Question modes, add a Jester, or play on everyone\'s phone over Wi-Fi.':
       'جرّب الوضع المتخفي ووضع الأسئلة، أو أضف مهرّجاً، أو العبوا على هواتفكم جميعاً عبر الواي فاي.',
+  // themed_tr
+  'Football Fever': 'حمى كرة القدم',
+  'Countries': 'الدول',
+  'Movies & TV': 'أفلام وتلفزيون',
+  'Ramadan & Eid': 'رمضان والعيد',
+  'Kids': 'الأطفال',
+  'New': 'جديد',
 };

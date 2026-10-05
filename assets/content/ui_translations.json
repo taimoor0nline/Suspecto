@@ -317,7 +317,13 @@
     "Vote them out": "Votad para expulsarlos",
     "Vote privately for whoever seems to be bluffing. Catch every imposter to win, but caught imposters get one guess at the word!": "Vota en privado a quien parezca estar fingiendo. Descubrid a todos los impostores para ganar, ¡pero los impostores descubiertos pueden intentar adivinar la palabra!",
     "Mix it up": "Cambia las cosas",
-    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "Prueba los modos Encubierto y Preguntas, añade un bufón o jugad en los teléfonos de todos por wifi."
+    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "Prueba los modos Encubierto y Preguntas, añade un bufón o jugad en los teléfonos de todos por wifi.",
+    "Football Fever": "Fiebre del fútbol",
+    "Countries": "Países",
+    "Movies & TV": "Cine y televisión",
+    "Ramadan & Eid": "Ramadán y Eid",
+    "Kids": "Niños",
+    "New": "Nuevo"
   },
   "fr": {
     "Trust no one.\nSuspect everyone.": "Ne fais confiance à personne.\nSoupçonne tout le monde.",
@@ -637,7 +643,13 @@
     "Vote them out": "Votez pour les démasquer",
     "Vote privately for whoever seems to be bluffing. Catch every imposter to win, but caught imposters get one guess at the word!": "Vote en secret pour celui qui semble bluffer. Démasquez tous les imposteurs pour gagner, mais les imposteurs démasqués ont une chance de deviner le mot !",
     "Mix it up": "Varie les plaisirs",
-    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "Essaie les modes Infiltré et Questions, ajoute un bouffon ou jouez sur le téléphone de chacun en Wi-Fi."
+    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "Essaie les modes Infiltré et Questions, ajoute un bouffon ou jouez sur le téléphone de chacun en Wi-Fi.",
+    "Football Fever": "Fièvre du foot",
+    "Countries": "Pays",
+    "Movies & TV": "Cinéma et télé",
+    "Ramadan & Eid": "Ramadan et Aïd",
+    "Kids": "Enfants",
+    "New": "Nouveau"
   },
   "ja": {
     "Trust no one.\nSuspect everyone.": "誰も信じるな。\n全員を疑え。",
@@ -957,7 +969,13 @@
     "Vote them out": "投票で追放",
     "Vote privately for whoever seems to be bluffing. Catch every imposter to win, but caught imposters get one guess at the word!": "怪しい人にこっそり投票します。インポスター全員を見破れば勝ち。でも見破られたインポスターには言葉を当てるチャンスが1回あります！",
     "Mix it up": "いろいろ試そう",
-    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "潜入モードや質問モードを試したり、ジェスターを加えたり、Wi-Fiで全員の端末で遊んだりしよう。"
+    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "潜入モードや質問モードを試したり、ジェスターを加えたり、Wi-Fiで全員の端末で遊んだりしよう。",
+    "Football Fever": "サッカー熱",
+    "Countries": "国",
+    "Movies & TV": "映画とテレビ",
+    "Ramadan & Eid": "ラマダンとイード",
+    "Kids": "キッズ",
+    "New": "NEW"
   },
   "zh-Hans": {
     "Trust no one.\nSuspect everyone.": "别相信任何人。\n每个人都值得怀疑。",
@@ -1277,7 +1295,13 @@
     "Vote them out": "投票淘汰",
     "Vote privately for whoever seems to be bluffing. Catch every imposter to win, but caught imposters get one guess at the word!": "私下投票给看起来在伪装的人。识破所有卧底即可获胜，但被识破的卧底有一次猜词机会！",
     "Mix it up": "花样玩法",
-    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "试试潜伏模式和问题模式，加入小丑，或通过 Wi-Fi 在每个人的手机上玩。"
+    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "试试潜伏模式和问题模式，加入小丑，或通过 Wi-Fi 在每个人的手机上玩。",
+    "Football Fever": "足球狂热",
+    "Countries": "国家",
+    "Movies & TV": "影视",
+    "Ramadan & Eid": "斋月与开斋节",
+    "Kids": "儿童",
+    "New": "新"
   },
   "zh-Hant": {
     "Trust no one.\nSuspect everyone.": "別相信任何人。\n每個人都值得懷疑。",
@@ -1597,6 +1621,12 @@
     "Vote them out": "投票淘汰",
     "Vote privately for whoever seems to be bluffing. Catch every imposter to win, but caught imposters get one guess at the word!": "私下投票給看起來在偽裝的人。識破所有臥底即可獲勝，但被識破的臥底有一次猜詞機會！",
     "Mix it up": "花樣玩法",
-    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "試試潛伏模式和問題模式，加入小丑，或透過 Wi-Fi 在每個人的手機上玩。"
+    "Try Undercover and Question modes, add a Jester, or play on everyone's phone over Wi-Fi.": "試試潛伏模式和問題模式，加入小丑，或透過 Wi-Fi 在每個人的手機上玩。",
+    "Football Fever": "足球狂熱",
+    "Countries": "國家",
+    "Movies & TV": "影視",
+    "Ramadan & Eid": "齋月與開齋節",
+    "Kids": "兒童",
+    "New": "新"
   }
 }

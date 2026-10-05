@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:suspecto/core/localization.dart';
+import 'package:suspecto/features/packs/data/word_pack_catalog.dart';
 import 'package:suspecto/features/packs/domain/word_pack.dart';
 
 /// Chips for choosing built-in and custom word packs.
@@ -22,8 +23,32 @@ class PackPicker extends StatelessWidget {
     final theme = Theme.of(context);
     final custom = packs.where((p) => p.custom).toList();
     Widget chip(WordPack pack) => FilterChip(
-          avatar: pack.custom ? const Icon(Icons.edit_note, size: 18) : null,
-          label: pack.custom ? Text(pack.name) : LocalText(pack.name),
+          avatar: pack.custom
+              ? const Icon(Icons.edit_note, size: 18)
+              : (packEmoji[pack.id] == null ? null : Text(packEmoji[pack.id]!)),
+          label: pack.custom
+              ? Text(pack.name)
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    LocalText(pack.name),
+                    if (newPackIds.contains(pack.id)) ...[
+                      const SizedBox(width: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 1),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.tertiary,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: LocalText('New',
+                            style: theme.textTheme.labelSmall?.copyWith(
+                                color: theme.colorScheme.onTertiary,
+                                fontWeight: FontWeight.w800)),
+                      ),
+                    ],
+                  ],
+                ),
           selected: selected.contains(pack.id),
           onSelected: (value) => onChanged(value
               ? {...selected, pack.id}

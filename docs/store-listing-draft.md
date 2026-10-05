@@ -11,8 +11,9 @@ imposters. Pass the phone, check your role privately, give clever clues and vote
 for the players who are bluffing.
 
 - Play together with 3–20 players and up to 3 imposters.
-- Choose from 12 packs with 240 words in English, Arabic, Spanish, French,
-  Japanese and Chinese.
+- Choose from 17 packs with 340 words in English, Arabic, Spanish, French,
+  Japanese and Chinese, including Football, Countries, Movies, Ramadan & Eid
+  and a Kids pack.
 - Reveal cards privately by holding the screen; release to hide.
 - Play Classic, Undercover (imposters get a similar word) or Question mode.
 - Choose easy, medium or hard words, and add a sneaky Jester role.
