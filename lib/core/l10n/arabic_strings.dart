@@ -161,4 +161,98 @@ const arabicStrings = <String, String>{
   // History.
   'Leaderboard': 'المتصدرون',
   'Imposters stole the win': 'خطف المخادعون الفوز',
+  // Multi-phone games.
+  'Play on several phones': 'العب على عدة هواتف',
+  'Everyone sees their card and votes on their own phone. No internet needed.':
+      'يرى كل لاعب بطاقته ويصوّت من هاتفه. لا حاجة للإنترنت.',
+  'Connect every phone to the same Wi-Fi, or to the host phone\'s hotspot.':
+      'اربط كل الهواتف بشبكة الواي فاي نفسها، أو بنقطة اتصال هاتف المضيف.',
+  'One phone hosts and shows a QR code.':
+      'يستضيف هاتف واحد اللعبة ويعرض رمز QR.',
+  'Everyone else scans it or types the join code.':
+      'يمسحه الآخرون أو يكتبون رمز الانضمام.',
+  'Multi-phone games are not available in the web version.':
+      'اللعب على عدة هواتف غير متاح في نسخة الويب.',
+  'Host a game': 'استضف لعبة',
+  'Join a game': 'انضم إلى لعبة',
+  'Tip: some public or office Wi-Fi blocks phones from seeing each other. Use a phone hotspot instead.':
+      'نصيحة: بعض شبكات الواي فاي العامة أو شبكات العمل تمنع الهواتف من رؤية بعضها. استخدم نقطة اتصال الهاتف بدلاً من ذلك.',
+  'Pick the rules. Friends join from their own phones.':
+      'اختر القواعد. ينضم الأصدقاء من هواتفهم.',
+  'Your name': 'اسمك',
+  'Lowered automatically if too few players join (always fewer than half).':
+      'يُخفّض تلقائياً إذا انضم عدد قليل من اللاعبين (دائماً أقل من النصف).',
+  'Open lobby': 'افتح غرفة الانتظار',
+  'Could not start the game.': 'تعذّر بدء اللعبة.',
+  'Connect to Wi-Fi or turn on your hotspot, then try again.':
+      'اتصل بشبكة واي فاي أو شغّل نقطة الاتصال، ثم حاول مجدداً.',
+  'Could not open a network port. Close other apps and try again.':
+      'تعذّر فتح منفذ الشبكة. أغلق التطبيقات الأخرى وحاول مجدداً.',
+  'Connect to the same Wi-Fi as the host, or to their hotspot, then scan their QR code.':
+      'اتصل بشبكة الواي فاي نفسها التي يستخدمها المضيف أو بنقطة اتصاله، ثم امسح رمز QR.',
+  'Join code': 'رمز الانضمام',
+  'JOIN CODE': 'رمز الانضمام',
+  'Check the code on the host phone.': 'تحقق من الرمز على هاتف المضيف.',
+  'Scan QR code': 'امسح رمز QR',
+  'Join with code': 'انضم بالرمز',
+  'Join QR code': 'رمز QR للانضمام',
+  'Camera unavailable. Type the join code instead.':
+      'الكاميرا غير متاحة. اكتب رمز الانضمام بدلاً من ذلك.',
+  'Point the camera at the QR code on the host\'s phone.':
+      'وجّه الكاميرا إلى رمز QR على هاتف المضيف.',
+  'Invite your friends': 'ادعُ أصدقاءك',
+  'You\'re in!': 'انضممت!',
+  'Friends join on the same Wi-Fi or your hotspot. No internet needed.':
+      'ينضم الأصدقاء عبر الواي فاي نفسه أو نقطة اتصالك. لا حاجة للإنترنت.',
+  'Waiting for the host to start the round.': 'بانتظار أن يبدأ المضيف الجولة.',
+  'On other phones: Play on several phones → Join a game.':
+      'على الهواتف الأخرى: العب على عدة هواتف ← انضم إلى لعبة.',
+  'You need at least 3 players.': 'تحتاج إلى ٣ لاعبين على الأقل.',
+  'Host': 'المضيف',
+  'Disconnected': 'غير متصل',
+  'Remove': 'إزالة',
+  'Reconnecting…': 'جارٍ إعادة الاتصال…',
+  'Stay on the same Wi-Fi or hotspot.':
+      'ابقَ على الواي فاي أو نقطة الاتصال نفسها.',
+  'End game for everyone': 'إنهاء اللعبة للجميع',
+  'Leave game': 'مغادرة اللعبة',
+  'End the game for everyone?': 'هل تريد إنهاء اللعبة للجميع؟',
+  'Every phone will be disconnected.': 'سيتم فصل جميع الهواتف.',
+  'Leave this game?': 'هل تريد مغادرة هذه اللعبة؟',
+  'You can rejoin with the same name and code.':
+      'يمكنك العودة بالاسم والرمز نفسيهما.',
+  'End game': 'إنهاء اللعبة',
+  'Leave': 'مغادرة',
+  'Game over': 'انتهت اللعبة',
+  'Back': 'رجوع',
+  'Joining game…': 'جارٍ الانضمام إلى اللعبة…',
+  'Stay on the same Wi-Fi or hotspot as the host.':
+      'ابقَ على الواي فاي أو نقطة الاتصال نفسها التي يستخدمها المضيف.',
+  'Your secret card': 'بطاقتك السرية',
+  'Make sure nobody can see your screen.': 'تأكد أن لا أحد يرى شاشتك.',
+  'I\'ve seen my card': 'رأيت بطاقتي',
+  'Start discussion now': 'ابدأ النقاش الآن',
+  'Start voting on every phone': 'ابدأ التصويت على كل الهواتف',
+  'The host will start the vote.': 'سيبدأ المضيف التصويت.',
+  'Who is the imposter?': 'من هو المخادع؟',
+  'Choose your suspect. Your vote stays private.':
+      'اختر المشتبه به. يبقى صوتك سرياً.',
+  'Vote locked in': 'تم تأكيد صوتك',
+  'Waiting for everyone else to vote.': 'بانتظار تصويت البقية.',
+  'The imposters are guessing the word…': 'المخادعون يخمّنون الكلمة…',
+  'Sit this one out': 'انتظر هذه الجولة',
+  'A round is in progress. You\'ll be dealt in next round.':
+      'هناك جولة جارية. ستشارك في الجولة القادمة.',
+  'Back to lobby': 'العودة إلى غرفة الانتظار',
+  'That name is already taken.': 'هذا الاسم مستخدم بالفعل.',
+  'A round is in progress. Try again when it ends.':
+      'هناك جولة جارية. حاول مجدداً عند انتهائها.',
+  'This game is full.': 'هذه اللعبة ممتلئة.',
+  'Update Suspecto on every phone to play together.':
+      'حدّث Suspecto على كل الهواتف لتلعبوا معاً.',
+  'The host removed you from the game.': 'أزالك المضيف من اللعبة.',
+  'The host ended the game.': 'أنهى المضيف اللعبة.',
+  'Could not join this game.': 'تعذّر الانضمام إلى هذه اللعبة.',
+  'Couldn\'t reach the host. Check that you\'re on the same Wi-Fi or hotspot and the code is right.':
+      'تعذّر الوصول إلى المضيف. تأكد أنك على الواي فاي أو نقطة الاتصال نفسها وأن الرمز صحيح.',
 };

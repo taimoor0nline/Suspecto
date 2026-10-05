@@ -47,6 +47,8 @@ String translate(BuildContext context, String text) {
     (RegExp(r'^\+(\d+) this round$'), (m) => '+${m[1]} في هذه الجولة'),
     (RegExp(r'^(.+): \+(\d+) pts$'), (m) => '${m[1]}: +${m[2]} نقطة'),
     (RegExp(r'^(\d+) words$'), (m) => '${m[1]} كلمة'),
+    (RegExp(r'^Players \((\d+)/20\)$'), (m) => 'اللاعبون (${m[1]}/20)'),
+    (RegExp(r'^(\d+) of (\d+) ready$'), (m) => '${m[1]} من ${m[2]} جاهزون'),
     (
       RegExp(r'^(\d+) rounds • (\d+) wins • (\d+) imposter roles$'),
       (m) => '${m[1]} جولات • ${m[2]} فوز • ${m[3]} أدوار مخادع'
