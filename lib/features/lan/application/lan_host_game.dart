@@ -434,6 +434,7 @@ class LanHostGame {
               stolen: result.stolen,
               jesterId: session.jesterId,
               jesterWin: result.jesterWin,
+              roundId: result.id,
             )
           : null,
       scores: Map.of(_totals),

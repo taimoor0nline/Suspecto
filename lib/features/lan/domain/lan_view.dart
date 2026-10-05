@@ -117,6 +117,7 @@ class LanResult {
     required this.stolen,
     this.jesterId,
     this.jesterWin = false,
+    this.roundId,
   });
 
   final LanWord secret;
@@ -130,6 +131,9 @@ class LanResult {
   final String? jesterId;
   final bool jesterWin;
 
+  /// The host's history ID for this round.
+  final String? roundId;
+
   Map<String, Object?> toJson() => {
         'secret': secret.toJson(),
         'decoy': decoy?.toJson(),
@@ -141,6 +145,7 @@ class LanResult {
         'stolen': stolen,
         'jester': jesterId,
         'jesterWin': jesterWin,
+        'roundId': roundId,
       };
 
   static LanResult? fromJson(Object? json) {
@@ -159,6 +164,7 @@ class LanResult {
       stolen: json['stolen'] == true,
       jesterId: json['jester'] is String ? json['jester'] as String : null,
       jesterWin: json['jesterWin'] == true,
+      roundId: json['roundId'] is String ? json['roundId'] as String : null,
     );
   }
 }

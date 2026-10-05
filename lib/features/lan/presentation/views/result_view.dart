@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/achievements/presentation/achievement_widgets.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/domain/models/player.dart';
 import 'package:suspecto/features/game/presentation/widgets/celebration.dart';
@@ -52,6 +53,8 @@ class LanResultView extends StatelessWidget {
                 result.jesterId == null ? null : view.nameOf(result.jesterId!),
           ),
           const SizedBox(height: 20),
+          if (result.roundId != null)
+            AchievementsUnlockedCard(roundId: result.roundId!),
           LocalText('The votes', style: theme.textTheme.titleLarge),
           for (final p in view.roundPlayers)
             ListTile(

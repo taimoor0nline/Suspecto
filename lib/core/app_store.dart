@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:suspecto/core/language_config.dart';
+import 'package:suspecto/features/achievements/domain/achievements.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:suspecto/core/audio/sound_effects.dart';
@@ -311,7 +312,11 @@ class AppStore extends ChangeNotifier {
         if (imposter) {
           stats.imposterRounds++;
         }
-        if (imposter != (round['citizensWin'] as bool)) {
+        final winner = Achievements.winner(round);
+        if (imposter
+            ? winner == 'imposters'
+            : winner == 'citizens' ||
+                (winner == 'jester' && round['jester'] == name)) {
           stats.wins++;
         }
       }
