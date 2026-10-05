@@ -123,6 +123,8 @@ final _dynamicMessages = <(RegExp, String, List<String>)>[
   (RegExp(r'^\+(\d+) this round$'), '+{number} this round', ['number']),
   (RegExp(r'^(.+): \+(\d+) pts$'), '{name}: +{number} pts', ['name', 'number']),
   (RegExp(r'^(\d+) words$'), '{number} words', ['number']),
+  (RegExp(r'^Players \((\d+)/20\)$'), 'Players ({number}/20)', ['number']),
+  (RegExp(r'^(\d+) of (\d+) ready$'), '{number} of {total} ready', ['number', 'total']),
   (
     RegExp(r'^(\d+) rounds • (\d+) wins • (\d+) imposter roles$'),
     '{number} rounds • {wins} wins • {total} imposter roles',
