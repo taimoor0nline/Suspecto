@@ -118,6 +118,11 @@ game rules live in the domain layer and contain no Flutter UI code.
   `flutter test`. `Celebration` and `CountdownSounds` add sound and confetti.
 - `ResultShareCard` is rendered to PNG and shared with `share_plus`.
 - `GameOptions.speedRound` sets a 30-second discussion.
+- `PlayerProfile` (features/profiles) stores a name, avatar and colour.
+  History stays keyed by name; `AppStore.saveProfile` renames a player across
+  history, and `nameInUse` blocks renames that would merge two people. Names
+  without a profile get a stable default look from `PlayerProfile.defaultFor`.
+- `GamePage` uses a non-lazy scroll view so off-screen forms stay alive.
 - `Achievements` (features/achievements) tallies saved history per player name
   and reports what a round unlocked; `AppStore.stats` uses the same winner rule.
 - `PackCode` packs a custom pack as `suspecto:pack:1:` + base64url(gzip(JSON)),
