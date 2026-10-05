@@ -18,6 +18,7 @@ for the players who are bluffing.
 - Caught imposters get one last chance to guess the word and steal the win.
 - Score points across rounds and climb the leaderboard.
 - Create your own word packs with inside jokes and themes.
+- Pass one phone around, or play on everyone's phone over Wi-Fi or a hotspot.
 - Discuss with a timer, vote privately and resolve tied votes.
 - Play another round with the same group.
 - View local history and player stats.
@@ -30,6 +31,6 @@ Screenshot candidates: home, player setup, private card, Arabic home.
 CI captures actual beta screens for review; final store screenshots need device
 QA and must accurately reflect the release build.
 
-No online multiplayer, ads, premium purchases or downloadable packs are included
+No internet multiplayer, ads, premium purchases or downloadable packs are included
 in this beta. Validate name availability and complete store age/content ratings
 before release. No ranking or keyword-performance guarantees are implied.

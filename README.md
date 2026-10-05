@@ -14,6 +14,9 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
 - Timed discussion (+1 minute), random first speaker, private ballots, ties/revotes
 - Points per round, session scoreboard across rematches and all-time leaderboard
 - Custom word packs (up to 50 packs of 3–200 words) created and stored on device
+- Multi-phone play on the same Wi-Fi or a phone hotspot, with no internet or server:
+  one phone hosts and shows a QR/join code, everyone reveals and votes on their own
+  phone at the same time, and dropped phones rejoin with their role and score
 - Last 200 completed rounds and player statistics on this device
 - English, Arabic, Spanish, French, Japanese and Simplified/Traditional Chinese
   interface, RTL layout for Arabic, light/dark/system theme
@@ -52,6 +55,16 @@ require your own keys and store accounts. See `docs/release-checklist.md`.
 
 No ads, billing or remote analytics SDK is enabled. See the draft privacy policy
 and store listing under `docs/`; review and finalize them before publishing.
+
+## Multi-phone play
+
+The host phone runs a small WebSocket server on the local network (ports
+47820–47835). The join code encodes the host's private IPv4 address and port,
+so no discovery service or internet is needed. The host is authoritative and
+sends each phone only its own card. Only the host phone saves the round to
+history. Hosting and joining need Android/iOS; the web build hides this mode.
+Some public or office Wi-Fi isolates devices; a phone hotspot avoids that.
+Validate on physical devices, including iOS's Local Network permission prompt.
 
 ## Language availability
 
