@@ -9,11 +9,16 @@ class GamePage extends StatelessWidget {
     required this.subtitle,
     required this.children,
     this.canPop = true,
+    this.bottomAction,
   });
   final String title;
   final String subtitle;
   final List<Widget> children;
   final bool canPop;
+
+  /// A primary button pinned to the bottom of long pages, so the main action
+  /// is always reachable without scrolling.
+  final Widget? bottomAction;
 
   @override
   Widget build(BuildContext context) => PopScope(
@@ -23,8 +28,35 @@ class GamePage extends StatelessWidget {
             title: const LocalText('SUSPECTO'),
             automaticallyImplyLeading: canPop,
           ),
+          bottomNavigationBar: bottomAction == null
+              ? null
+              : DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    border: Border(
+                      top: BorderSide(
+                          color: Theme.of(context).colorScheme.outlineVariant),
+                    ),
+                  ),
+                  child: SafeArea(
+                    top: false,
+                    child: Align(
+                      heightFactor: 1,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 600),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+                          child: bottomAction,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
           body: SafeArea(
-            child: Center(
+            // Top-aligned: a shrink-wrapping scroll view would otherwise be
+            // centred vertically on short pages.
+            child: Align(
+              alignment: Alignment.topCenter,
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 600),
                 child: TweenAnimationBuilder<double>(

@@ -120,6 +120,14 @@ class _HostSetupScreenState extends State<HostSetupScreen> {
     return GamePage(
       title: 'Host a game',
       subtitle: 'Pick the rules. Friends join from their own phones.',
+      bottomAction: FilledButton.icon(
+        onPressed: _starting ? null : _host,
+        icon: _starting
+            ? const SizedBox.square(
+                dimension: 18, child: CircularProgressIndicator(strokeWidth: 2))
+            : const Icon(Icons.wifi_tethering),
+        label: const LocalText('Open lobby'),
+      ),
       children: [
         Form(
           key: _form,
@@ -183,16 +191,6 @@ class _HostSetupScreenState extends State<HostSetupScreen> {
             ],
           ),
         ],
-        const SizedBox(height: 28),
-        FilledButton.icon(
-          onPressed: _starting ? null : _host,
-          icon: _starting
-              ? const SizedBox.square(
-                  dimension: 18,
-                  child: CircularProgressIndicator(strokeWidth: 2))
-              : const Icon(Icons.wifi_tethering),
-          label: const LocalText('Open lobby'),
-        ),
       ],
     );
   }

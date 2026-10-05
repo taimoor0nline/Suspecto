@@ -73,6 +73,7 @@ class GameOptionsSection extends StatelessWidget {
         const SizedBox(height: 8),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
+          secondary: const Icon(Icons.lightbulb_outline),
           title: const LocalText('Category hint for imposters'),
           subtitle: LocalText(classic
               ? 'Imposters see which pack the word is from.'
@@ -84,6 +85,7 @@ class GameOptionsSection extends StatelessWidget {
         ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
+          secondary: const Icon(Icons.psychology_alt_outlined),
           title: const LocalText('Last-chance guess'),
           subtitle: LocalText(questions
               ? 'Not used in question mode.'
