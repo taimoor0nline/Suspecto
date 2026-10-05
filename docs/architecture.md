@@ -146,6 +146,12 @@ game rules live in the domain layer and contain no Flutter UI code.
   Detective's card names `GameSession.detectiveClearId`, a non-imposter. The
   Accomplice sees the imposters, scores as one, and counts as an imposter-team
   winner in stats; history saves both roles by name.
+- `GameOptions.drawing` adds `RoundPhase.drawing` between reveal and
+  discussion (not in question mode). Each player, in seat order from the
+  starting player, adds one `DrawingStroke` per turn for
+  `GameOptions.drawingLaps` laps. Points are normalised 0–1. `DrawingCanvas`
+  claims touches with an `EagerGestureRecognizer` so drags draw instead of
+  scrolling the page. Sketches are not saved to history.
 - Multi-phone protocol version 2 adds the Jester flag, revealed question and
   awards to each view.
 

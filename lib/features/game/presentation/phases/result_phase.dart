@@ -5,6 +5,7 @@ import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/application/round_controller.dart';
 import 'package:suspecto/features/game/presentation/phases/phase_page.dart';
 import 'package:suspecto/features/game/presentation/widgets/celebration.dart';
+import 'package:suspecto/features/game/presentation/widgets/drawing_canvas.dart';
 import 'package:suspecto/features/game/presentation/widgets/party_awards_card.dart';
 import 'package:suspecto/features/game/presentation/widgets/round_widgets.dart';
 import 'package:suspecto/features/game/presentation/widgets/scoreboard.dart';
@@ -51,6 +52,12 @@ class ResultPhase extends StatelessWidget {
             accompliceName: session.accomplice?.name,
             detectiveName: session.detective?.name,
           ),
+          if (round.strokes.isNotEmpty) ...[
+            const SizedBox(height: 20),
+            LocalText('The drawing', style: theme.textTheme.titleLarge),
+            const SizedBox(height: 8),
+            DrawingCanvas(players: round.players, strokes: round.strokes),
+          ],
           const SizedBox(height: 20),
           AchievementsUnlockedCard(roundId: result.id),
           LocalText('The votes', style: theme.textTheme.titleLarge),

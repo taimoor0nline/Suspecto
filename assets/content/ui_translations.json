@@ -423,7 +423,14 @@
     "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "Un jugador recibe la palabra real, conoce a los impostores y gana con ellos. Requiere 6+ jugadores.",
     "{name} is not an imposter.": "{name} no es un impostor.",
     "Accomplice: {name}": "Cómplice: {name}",
-    "Detective: {name}": "Detective: {name}"
+    "Detective: {name}": "Detective: {name}",
+    "Drawing round": "Ronda de dibujo",
+    "Take turns adding one line each to a drawing of your word, then discuss.": "Por turnos, cada uno añade una línea a un dibujo de su palabra y luego debatís.",
+    "Redo my line": "Rehacer mi línea",
+    "Done, pass the phone": "Listo, pasa el teléfono",
+    "Look at the drawing together. Whose lines look like a bluff? Keep the word secret.": "Mirad el dibujo juntos. ¿Qué líneas parecen un farol? Mantened la palabra en secreto.",
+    "The drawing": "El dibujo",
+    "Line {number} of {total}. Add one line to the drawing. No letters or numbers!": "Línea {number} de {total}. Añade una línea al dibujo. ¡Sin letras ni números!"
   },
   "fr": {
     "Trust no one.\nSuspect everyone.": "Ne fais confiance à personne.\nSoupçonne tout le monde.",
@@ -849,7 +856,14 @@
     "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "Un joueur reçoit le vrai mot, connaît les imposteurs et gagne avec eux. 6 joueurs minimum.",
     "{name} is not an imposter.": "{name} n’est pas un imposteur.",
     "Accomplice: {name}": "Complice : {name}",
-    "Detective: {name}": "Détective : {name}"
+    "Detective: {name}": "Détective : {name}",
+    "Drawing round": "Manche de dessin",
+    "Take turns adding one line each to a drawing of your word, then discuss.": "Chacun son tour, ajoutez une ligne à un dessin de votre mot, puis discutez.",
+    "Redo my line": "Refaire ma ligne",
+    "Done, pass the phone": "Fini, passe le téléphone",
+    "Look at the drawing together. Whose lines look like a bluff? Keep the word secret.": "Regardez le dessin ensemble. Quelles lignes ressemblent à du bluff ? Gardez le mot secret.",
+    "The drawing": "Le dessin",
+    "Line {number} of {total}. Add one line to the drawing. No letters or numbers!": "Ligne {number} sur {total}. Ajoute une ligne au dessin. Ni lettres ni chiffres !"
   },
   "ja": {
     "Trust no one.\nSuspect everyone.": "誰も信じるな。\n全員を疑え。",
@@ -1275,7 +1289,14 @@
     "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "1人が本当のワードを受け取り、インポスターを知っていて、彼らと一緒に勝利します。6人以上必要。",
     "{name} is not an imposter.": "{name}はインポスターではありません。",
     "Accomplice: {name}": "共犯者：{name}",
-    "Detective: {name}": "探偵：{name}"
+    "Detective: {name}": "探偵：{name}",
+    "Drawing round": "お絵かきラウンド",
+    "Take turns adding one line each to a drawing of your word, then discuss.": "順番に、自分のワードの絵に1本ずつ線を足してから話し合います。",
+    "Redo my line": "線を描き直す",
+    "Done, pass the phone": "完了、スマホを渡す",
+    "Look at the drawing together. Whose lines look like a bluff? Keep the word secret.": "みんなで絵を見ましょう。誰の線がはったりっぽい？ワードは秘密のままで。",
+    "The drawing": "みんなの絵",
+    "Line {number} of {total}. Add one line to the drawing. No letters or numbers!": "{total}本中{number}本目。絵に線を1本足そう。文字や数字は禁止！"
   },
   "zh-Hans": {
     "Trust no one.\nSuspect everyone.": "别相信任何人。\n每个人都值得怀疑。",
@@ -1701,7 +1722,14 @@
     "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "一名玩家拿到真正的词语，知道谁是卧底，并与他们一起获胜。需要 6 名以上玩家。",
     "{name} is not an imposter.": "{name}不是卧底。",
     "Accomplice: {name}": "帮凶：{name}",
-    "Detective: {name}": "侦探：{name}"
+    "Detective: {name}": "侦探：{name}",
+    "Drawing round": "绘画回合",
+    "Take turns adding one line each to a drawing of your word, then discuss.": "轮流为自己词语的画作各添一笔，然后讨论。",
+    "Redo my line": "重画这一笔",
+    "Done, pass the phone": "完成，传递手机",
+    "Look at the drawing together. Whose lines look like a bluff? Keep the word secret.": "一起看看这幅画。谁的笔画像是在虚张声势？不要说出词语。",
+    "The drawing": "这幅画",
+    "Line {number} of {total}. Add one line to the drawing. No letters or numbers!": "第 {number} 笔，共 {total} 笔。为画作添一笔。不能写字或数字！"
   },
   "zh-Hant": {
     "Trust no one.\nSuspect everyone.": "別相信任何人。\n每個人都值得懷疑。",
@@ -2127,6 +2155,13 @@
     "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "一名玩家拿到真正的詞語，知道誰是臥底，並與他們一起獲勝。需要 6 名以上玩家。",
     "{name} is not an imposter.": "{name}不是臥底。",
     "Accomplice: {name}": "幫兇：{name}",
-    "Detective: {name}": "偵探：{name}"
+    "Detective: {name}": "偵探：{name}",
+    "Drawing round": "繪畫回合",
+    "Take turns adding one line each to a drawing of your word, then discuss.": "輪流為自己詞語的畫作各添一筆，然後討論。",
+    "Redo my line": "重畫這一筆",
+    "Done, pass the phone": "完成，傳遞手機",
+    "Look at the drawing together. Whose lines look like a bluff? Keep the word secret.": "一起看看這幅畫。誰的筆畫像是在虛張聲勢？不要說出詞語。",
+    "The drawing": "這幅畫",
+    "Line {number} of {total}. Add one line to the drawing. No letters or numbers!": "第 {number} 筆，共 {total} 筆。為畫作添一筆。不能寫字或數字！"
   }
 }

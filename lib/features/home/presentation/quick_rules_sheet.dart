@@ -60,6 +60,8 @@ Future<void> showQuickRules(BuildContext context) => showModalBottomSheet<void>(
                   'One innocent player secretly learns that another player is innocent. Needs 4+ players.'),
               rule(Icons.handshake_outlined, 'Accomplice role',
                   'One player gets the real word, knows the imposters and wins with them. Needs 6+ players.'),
+              rule(Icons.brush_outlined, 'Drawing round',
+                  'Take turns adding one line each to a drawing of your word, then discuss.'),
               rule(Icons.bolt, 'Speed round',
                   '30-second discussion with one-word clues.'),
               heading('Scoring'),

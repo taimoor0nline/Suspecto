@@ -8,13 +8,13 @@ class GameOptionsSection extends StatelessWidget {
       {super.key,
       required this.options,
       required this.onChanged,
-      this.extraRoles = false});
+      this.passAndPlay = false});
   final GameOptions options;
   final ValueChanged<GameOptions> onChanged;
 
-  /// Offers the Detective and Accomplice, which pass-the-phone games
-  /// support.
-  final bool extraRoles;
+  /// Offers the drawing round, Detective and Accomplice, which only
+  /// pass-the-phone games support.
+  final bool passAndPlay;
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +111,19 @@ class GameOptionsSection extends StatelessWidget {
           value: options.speedRound,
           onChanged: (value) => onChanged(options.copyWith(speedRound: value)),
         ),
+        if (passAndPlay)
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            secondary: const Icon(Icons.brush_outlined),
+            title: const LocalText('Drawing round'),
+            subtitle: LocalText(questions
+                ? 'Not used in question mode.'
+                : 'Take turns adding one line each to a drawing of your word, then discuss.'),
+            value: !questions && options.drawing,
+            onChanged: questions
+                ? null
+                : (value) => onChanged(options.copyWith(drawing: value)),
+          ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           secondary: const Text('🃏', style: TextStyle(fontSize: 24)),
@@ -120,7 +133,7 @@ class GameOptionsSection extends StatelessWidget {
           value: options.jester,
           onChanged: (value) => onChanged(options.copyWith(jester: value)),
         ),
-        if (extraRoles) ...[
+        if (passAndPlay) ...[
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             secondary: const Text('🔍', style: TextStyle(fontSize: 24)),

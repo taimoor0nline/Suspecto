@@ -9,6 +9,7 @@ import 'package:suspecto/features/game/domain/models/player.dart';
 import 'package:suspecto/features/game/domain/models/round_result.dart';
 import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/presentation/phases/discussion_phase.dart';
+import 'package:suspecto/features/game/presentation/phases/drawing_phase.dart';
 import 'package:suspecto/features/game/presentation/phases/guess_phase.dart';
 import 'package:suspecto/features/game/presentation/phases/result_phase.dart';
 import 'package:suspecto/features/game/presentation/phases/reveal_phase.dart';
@@ -101,6 +102,8 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
         builder: (context, _) => switch (_round.phase) {
           RoundPhase.reveal =>
             RevealPhase(round: _round, onEndRound: _endRound),
+          RoundPhase.drawing =>
+            DrawingPhase(round: _round, onEndRound: _endRound),
           RoundPhase.discussion =>
             DiscussionPhase(round: _round, onEndRound: _endRound),
           RoundPhase.vote => VotePhase(round: _round, onEndRound: _endRound),

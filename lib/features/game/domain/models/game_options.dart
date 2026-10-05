@@ -49,10 +49,14 @@ class GameOptions {
     this.matchTarget = 0,
     this.detective = false,
     this.accomplice = false,
+    this.drawing = false,
   });
 
   /// Discussion length for speed rounds.
   static const speedRoundSeconds = 30;
+
+  /// How many times each player adds a line in a drawing round.
+  static const drawingLaps = 2;
 
   /// Match lengths offered in setup, in points. 0 plays endless rounds.
   static const matchTargets = [0, 5, 10, 15];
@@ -93,6 +97,10 @@ class GameOptions {
   /// One innocent player knows the imposters and wins with them.
   final bool accomplice;
 
+  /// Before discussion, players take turns adding one line each to a shared
+  /// sketch of their word. Not used in question mode.
+  final bool drawing;
+
   /// Discussion length in seconds for the chosen [minutes].
   int discussionSeconds(int minutes) =>
       speedRound ? speedRoundSeconds : minutes * 60;
@@ -107,6 +115,7 @@ class GameOptions {
     int? matchTarget,
     bool? detective,
     bool? accomplice,
+    bool? drawing,
   }) =>
       GameOptions(
         mode: mode ?? this.mode,
@@ -118,6 +127,7 @@ class GameOptions {
         matchTarget: matchTarget ?? this.matchTarget,
         detective: detective ?? this.detective,
         accomplice: accomplice ?? this.accomplice,
+        drawing: drawing ?? this.drawing,
       );
 
   Map<String, dynamic> toJson() => {
@@ -130,6 +140,7 @@ class GameOptions {
         'matchTarget': matchTarget,
         'detective': detective,
         'accomplice': accomplice,
+        'drawing': drawing,
       };
 
   factory GameOptions.fromJson(Object? json) {
@@ -148,6 +159,7 @@ class GameOptions {
           : 0,
       detective: json['detective'] == true,
       accomplice: json['accomplice'] == true,
+      drawing: json['drawing'] == true,
     );
   }
 }

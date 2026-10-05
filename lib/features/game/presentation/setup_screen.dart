@@ -183,7 +183,7 @@ class _SetupScreenState extends State<SetupScreen> {
         ),
         const SizedBox(height: 24),
         GameOptionsSection(
-          extraRoles: true,
+          passAndPlay: true,
           options: _options,
           onChanged: (options) => setState(() => _options = options),
         ),
