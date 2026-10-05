@@ -130,8 +130,8 @@ class HistoryScreen extends StatelessWidget {
                           style: theme.textTheme.bodySmall),
                   ])),
                   subtitle: LocalText(
-                      '${entry.value.played} rounds • ${entry.value.wins} wins • ${entry.value.imposterRounds} imposter roles'),
-                  trailing: LocalText('${entry.value.points} pts',
+                      'Rounds: ${entry.value.played} • Wins: ${entry.value.wins} • Imposter: ${entry.value.imposterRounds}'),
+                  trailing: LocalText(pointsText(entry.value.points),
                       style: theme.textTheme.titleMedium
                           ?.copyWith(fontWeight: FontWeight.w700))),
             const SizedBox(height: 24),

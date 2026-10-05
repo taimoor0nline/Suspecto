@@ -64,7 +64,7 @@ class PacksScreen extends StatelessWidget {
               child: ListTile(
                 leading: const Icon(Icons.edit_note),
                 title: Text(pack.name),
-                subtitle: LocalText('${pack.entries.length} words'),
+                subtitle: LocalText(wordsText(pack.entries.length)),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => _open(context, pack),
               ),

@@ -37,7 +37,7 @@ Future<void> showPackQr(BuildContext context, WordPack pack) {
             ),
           ),
           const SizedBox(height: 12),
-          LocalText('${pack.entries.length} words'),
+          LocalText(wordsText(pack.entries.length)),
           const SizedBox(height: 8),
           const LocalText(
             'On the other phone: Word packs → Scan a pack.',

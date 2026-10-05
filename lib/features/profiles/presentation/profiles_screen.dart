@@ -35,7 +35,7 @@ class ProfilesScreen extends StatelessWidget {
                 leading: PlayerAvatar(name: profile.name),
                 title: Text(profile.name),
                 subtitle: LocalText(
-                    '${stats[profile.name]?.played ?? 0} rounds • ${stats[profile.name]?.points ?? 0} pts • ${badges[profile.name]?.unlocked.length ?? 0} badges'),
+                    'Rounds: ${stats[profile.name]?.played ?? 0} • Points: ${stats[profile.name]?.points ?? 0} • Badges: ${badges[profile.name]?.unlocked.length ?? 0}'),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => editProfile(context, profile),
               ),
@@ -208,8 +208,8 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
         LocalText('Colour', style: theme.textTheme.titleMedium),
         const SizedBox(height: 8),
         Wrap(
-          spacing: 10,
-          runSpacing: 10,
+          spacing: 8,
+          runSpacing: 8,
           children: [
             for (final color in PlayerProfile.colors)
               Semantics(
@@ -219,8 +219,8 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                   customBorder: const CircleBorder(),
                   onTap: () => setState(() => _color = color),
                   child: Container(
-                    width: 40,
-                    height: 40,
+                    width: 34,
+                    height: 34,
                     decoration: BoxDecoration(
                       color: Color(color),
                       shape: BoxShape.circle,

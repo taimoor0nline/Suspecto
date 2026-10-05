@@ -34,7 +34,7 @@ class Scoreboard extends StatelessWidget {
                     ? LocalText('+${roundPoints[entry.key.id]} this round',
                         style: TextStyle(color: theme.colorScheme.primary))
                     : null,
-                trailing: LocalText('${entry.value} pts',
+                trailing: LocalText(pointsText(entry.value),
                     style: theme.textTheme.titleMedium
                         ?.copyWith(fontWeight: FontWeight.w700)),
               ),

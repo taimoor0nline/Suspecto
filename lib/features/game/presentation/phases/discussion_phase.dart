@@ -31,17 +31,17 @@ class _DiscussionPhaseState extends State<DiscussionPhase> {
           : '$starter starts. Give one clue each, then discuss who is bluffing. Keep the word secret.',
       onEndRound: widget.onEndRound,
       children: [
-        if (questions) ...[
-          QuestionRevealCard(
-            question: _questionShown ? session.secretWord : null,
-            onReveal: () => setState(() => _questionShown = true),
-          ),
-          const SizedBox(height: 12),
-        ],
         DiscussionTimerCard(
             remainingSeconds: round.remainingSeconds,
             mode: session.mode,
             speedRound: round.options.speedRound),
+        if (questions) ...[
+          const SizedBox(height: 16),
+          QuestionRevealCard(
+            question: _questionShown ? session.secretWord : null,
+            onReveal: () => setState(() => _questionShown = true),
+          ),
+        ],
         const SizedBox(height: 24),
         FilledButton(
           onPressed: round.beginVoting,

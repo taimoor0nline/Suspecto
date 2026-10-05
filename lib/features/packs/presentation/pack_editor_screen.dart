@@ -105,7 +105,7 @@ class _PackEditorScreenState extends State<PackEditorScreen> {
           decoration: InputDecoration(
             labelText: translate(context, 'Words'),
             alignLabelWithHint: true,
-            helperText: translate(context, '$count words'),
+            helperText: translate(context, wordsText(count)),
           ),
         ),
         if (_error != null) ...[
