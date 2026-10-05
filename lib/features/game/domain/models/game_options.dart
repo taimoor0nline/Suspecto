@@ -47,6 +47,8 @@ class GameOptions {
     this.jester = false,
     this.speedRound = false,
     this.matchTarget = 0,
+    this.detective = false,
+    this.accomplice = false,
   });
 
   /// Discussion length for speed rounds.
@@ -57,6 +59,12 @@ class GameOptions {
 
   /// The Jester needs enough players that being voted out is a real bluff.
   static const jesterMinPlayers = 5;
+
+  /// The Detective needs at least one other innocent player to clear.
+  static const detectiveMinPlayers = 4;
+
+  /// The Accomplice needs enough citizens left to catch the imposters.
+  static const accompliceMinPlayers = 6;
 
   final GameMode mode;
 
@@ -79,6 +87,12 @@ class GameOptions {
   /// match. 0 plays endless rounds.
   final int matchTarget;
 
+  /// One innocent player secretly learns that another player is innocent.
+  final bool detective;
+
+  /// One innocent player knows the imposters and wins with them.
+  final bool accomplice;
+
   /// Discussion length in seconds for the chosen [minutes].
   int discussionSeconds(int minutes) =>
       speedRound ? speedRoundSeconds : minutes * 60;
@@ -91,6 +105,8 @@ class GameOptions {
     bool? jester,
     bool? speedRound,
     int? matchTarget,
+    bool? detective,
+    bool? accomplice,
   }) =>
       GameOptions(
         mode: mode ?? this.mode,
@@ -100,6 +116,8 @@ class GameOptions {
         jester: jester ?? this.jester,
         speedRound: speedRound ?? this.speedRound,
         matchTarget: matchTarget ?? this.matchTarget,
+        detective: detective ?? this.detective,
+        accomplice: accomplice ?? this.accomplice,
       );
 
   Map<String, dynamic> toJson() => {
@@ -110,6 +128,8 @@ class GameOptions {
         'jester': jester,
         'speedRound': speedRound,
         'matchTarget': matchTarget,
+        'detective': detective,
+        'accomplice': accomplice,
       };
 
   factory GameOptions.fromJson(Object? json) {
@@ -126,6 +146,8 @@ class GameOptions {
       matchTarget: matchTargets.contains(json['matchTarget'])
           ? json['matchTarget'] as int
           : 0,
+      detective: json['detective'] == true,
+      accomplice: json['accomplice'] == true,
     );
   }
 }

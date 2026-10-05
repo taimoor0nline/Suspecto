@@ -479,4 +479,14 @@ const arabicStrings = <String, String>{
   'New match': 'مباراة جديدة',
   'Next round': 'الجولة التالية',
   'Match winner': 'بطل المباراة',
+  'You are the Accomplice': 'أنت الشريك',
+  'You win with the imposters. Protect them without getting caught.':
+      'تفوز مع المخادعين. احمهم دون أن تنكشف.',
+  'You are the Detective': 'أنت المحقق',
+  'Detective role': 'دور المحقق',
+  'Accomplice role': 'دور الشريك',
+  'One innocent player secretly learns that another player is innocent. Needs 4+ players.':
+      'يعرف لاعب بريء سراً أن لاعباً آخر بريء. يحتاج 4 لاعبين أو أكثر.',
+  'One player gets the real word, knows the imposters and wins with them. Needs 6+ players.':
+      'لاعب يحصل على الكلمة الحقيقية ويعرف المخادعين ويفوز معهم. يحتاج 6 لاعبين أو أكثر.',
 };

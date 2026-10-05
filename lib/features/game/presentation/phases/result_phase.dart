@@ -48,6 +48,8 @@ class ResultPhase extends StatelessWidget {
             decoy: session.decoyWord,
             imposterNames: imposterNames,
             jesterName: session.jester?.name,
+            accompliceName: session.accomplice?.name,
+            detectiveName: session.detective?.name,
           ),
           const SizedBox(height: 20),
           AchievementsUnlockedCard(roundId: result.id),

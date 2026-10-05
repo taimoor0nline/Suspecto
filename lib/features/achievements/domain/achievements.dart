@@ -88,7 +88,7 @@ class Achievements {
             t.undercoverImposterWins++;
           }
         }
-        if (!imposter && won == 'citizens') {
+        if (!imposter && name != round['accomplice'] && won == 'citizens') {
           t.innocentWins++;
         }
         if (name == jester && won == 'jester') {

@@ -42,13 +42,15 @@ class PartyAwards {
       final session = round.session;
       round.points.forEach((id, points) => add(AwardKind.mvp, id, points));
       for (final player in session.players) {
-        if (session.isImposter(player) && round.impostersWin) {
+        if ((session.isImposter(player) || session.isAccomplice(player)) &&
+            round.impostersWin) {
           add(AwardKind.bluffer, player.id);
         }
       }
       round.votes.forEach((voter, suspect) {
         add(AwardKind.suspect, suspect);
         if (!session.imposterPlayerIds.contains(voter) &&
+            voter != session.accompliceId &&
             session.imposterPlayerIds.contains(suspect)) {
           add(AwardKind.detective, voter);
         }

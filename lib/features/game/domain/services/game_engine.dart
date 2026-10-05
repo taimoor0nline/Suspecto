@@ -16,11 +16,17 @@ class GameEngine {
   static bool jesterAllowed(int playerCount) =>
       playerCount >= GameOptions.jesterMinPlayers;
 
+  /// Special roles never leave fewer than this many plain citizens.
+  static const minPlainCitizens = 2;
+
   /// Deals roles. In undercover mode imposters get a different word, preferably
   /// from the same pack; with only one distinct word the round falls back to
   /// classic rules. In question mode [questions] supplies (innocent, imposter)
   /// question pairs and [words] is not used. With [jester], one innocent
-  /// player becomes the Jester when [jesterAllowed].
+  /// player becomes the Jester when [jesterAllowed]. With [accomplice] and
+  /// [detective], other innocent players get those roles when there are
+  /// enough players, keeping at least [minPlainCitizens] plain citizens; the
+  /// Jester comes first, then the Accomplice, then the Detective.
   GameSession createSession({
     required List<Player> players,
     required List<WordEntry> words,
@@ -28,6 +34,8 @@ class GameEngine {
     GameMode mode = GameMode.classic,
     List<(WordEntry, WordEntry)> questions = const [],
     bool jester = false,
+    bool accomplice = false,
+    bool detective = false,
   }) {
     if (players.length < 3 || players.length > 20) {
       throw ArgumentError('Use 3–20 players.');
@@ -48,9 +56,26 @@ class GameEngine {
     final shuffled = [...players]..shuffle(_random);
     final imposterIds = shuffled.take(imposterCount).map((p) => p.id).toSet();
     final innocents = shuffled.skip(imposterCount).toList();
-    final jesterId = jester && jesterAllowed(players.length)
-        ? innocents[_random.nextInt(innocents.length)].id
-        : null;
+    // innocents is already shuffled, so roles take it in order.
+    var nextInnocent = 0;
+    String? deal(bool wanted, int minPlayers) {
+      if (!wanted ||
+          players.length < minPlayers ||
+          innocents.length - nextInnocent - 1 < minPlainCitizens) {
+        return null;
+      }
+      return innocents[nextInnocent++].id;
+    }
+
+    final jesterId = deal(jester, GameOptions.jesterMinPlayers);
+    final accompliceId = deal(accomplice, GameOptions.accompliceMinPlayers);
+    final detectiveId = deal(detective, GameOptions.detectiveMinPlayers);
+    final cleared = [
+      for (final p in innocents)
+        if (p.id != detectiveId) p.id,
+    ];
+    final detectiveClearId =
+        detectiveId == null ? null : cleared[_random.nextInt(cleared.length)];
     final WordEntry secret;
     WordEntry? decoy;
     if (questionMode) {
@@ -78,6 +103,9 @@ class GameEngine {
           ? GameMode.questions
           : (decoy == null ? GameMode.classic : GameMode.undercover),
       jesterId: jesterId,
+      accompliceId: accompliceId,
+      detectiveId: detectiveId,
+      detectiveClearId: detectiveClearId,
       startingPlayerId: players[_random.nextInt(players.length)].id,
     );
   }

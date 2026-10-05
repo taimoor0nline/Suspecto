@@ -99,6 +99,8 @@ class RoundController extends ChangeNotifier {
       mode: options.mode,
       questions: questions,
       jester: options.jester,
+      accomplice: options.accomplice,
+      detective: options.detective,
     );
     _ballot = Ballot(players.map((p) => p.id));
     _phase = RoundPhase.reveal;

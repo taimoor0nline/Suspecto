@@ -35,7 +35,9 @@ class Scoring {
     int pointsFor(String id) {
       final sharp =
           session.imposterPlayerIds.contains(votes[id]) ? sharpVote : 0;
-      if (session.imposterPlayerIds.contains(id)) {
+      // The Accomplice scores as an imposter and gets no sharp-vote point.
+      if (session.imposterPlayerIds.contains(id) ||
+          id == session.accompliceId) {
         return jesterOut || citizensWon
             ? 0
             : (stolen ? imposterSteal : imposterEscape);

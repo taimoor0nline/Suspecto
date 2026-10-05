@@ -413,7 +413,17 @@
     "Next round": "Siguiente ronda",
     "Match winner": "Ganador de la partida",
     "First to {number} pts": "El primero a {number} pts",
-    "{name} wins the match!": "¡{name} gana la partida!"
+    "{name} wins the match!": "¡{name} gana la partida!",
+    "You are the Accomplice": "Eres el cómplice",
+    "You win with the imposters. Protect them without getting caught.": "Ganas con los impostores. Protégelos sin que te descubran.",
+    "You are the Detective": "Eres el detective",
+    "Detective role": "Rol de detective",
+    "Accomplice role": "Rol de cómplice",
+    "One innocent player secretly learns that another player is innocent. Needs 4+ players.": "Un jugador inocente descubre en secreto que otro jugador es inocente. Requiere 4+ jugadores.",
+    "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "Un jugador recibe la palabra real, conoce a los impostores y gana con ellos. Requiere 6+ jugadores.",
+    "{name} is not an imposter.": "{name} no es un impostor.",
+    "Accomplice: {name}": "Cómplice: {name}",
+    "Detective: {name}": "Detective: {name}"
   },
   "fr": {
     "Trust no one.\nSuspect everyone.": "Ne fais confiance à personne.\nSoupçonne tout le monde.",
@@ -829,7 +839,17 @@
     "Next round": "Manche suivante",
     "Match winner": "Vainqueur du match",
     "First to {number} pts": "Premier à {number} pts",
-    "{name} wins the match!": "{name} remporte le match !"
+    "{name} wins the match!": "{name} remporte le match !",
+    "You are the Accomplice": "Tu es le complice",
+    "You win with the imposters. Protect them without getting caught.": "Tu gagnes avec les imposteurs. Protège-les sans te faire prendre.",
+    "You are the Detective": "Tu es le détective",
+    "Detective role": "Rôle du détective",
+    "Accomplice role": "Rôle du complice",
+    "One innocent player secretly learns that another player is innocent. Needs 4+ players.": "Un joueur innocent apprend en secret qu’un autre joueur est innocent. 4 joueurs minimum.",
+    "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "Un joueur reçoit le vrai mot, connaît les imposteurs et gagne avec eux. 6 joueurs minimum.",
+    "{name} is not an imposter.": "{name} n’est pas un imposteur.",
+    "Accomplice: {name}": "Complice : {name}",
+    "Detective: {name}": "Détective : {name}"
   },
   "ja": {
     "Trust no one.\nSuspect everyone.": "誰も信じるな。\n全員を疑え。",
@@ -1245,7 +1265,17 @@
     "Next round": "次のラウンド",
     "Match winner": "マッチの勝者",
     "First to {number} pts": "先に{number}点",
-    "{name} wins the match!": "{name}がマッチに勝利！"
+    "{name} wins the match!": "{name}がマッチに勝利！",
+    "You are the Accomplice": "あなたは共犯者",
+    "You win with the imposters. Protect them without getting caught.": "インポスターと一緒に勝利します。正体を隠しながら彼らを守りましょう。",
+    "You are the Detective": "あなたは探偵",
+    "Detective role": "探偵の役割",
+    "Accomplice role": "共犯者の役割",
+    "One innocent player secretly learns that another player is innocent. Needs 4+ players.": "無実のプレイヤー1人が、別のプレイヤーが無実だとこっそり知ります。4人以上必要。",
+    "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "1人が本当のワードを受け取り、インポスターを知っていて、彼らと一緒に勝利します。6人以上必要。",
+    "{name} is not an imposter.": "{name}はインポスターではありません。",
+    "Accomplice: {name}": "共犯者：{name}",
+    "Detective: {name}": "探偵：{name}"
   },
   "zh-Hans": {
     "Trust no one.\nSuspect everyone.": "别相信任何人。\n每个人都值得怀疑。",
@@ -1661,7 +1691,17 @@
     "Next round": "下一轮",
     "Match winner": "比赛冠军",
     "First to {number} pts": "先得{number}分",
-    "{name} wins the match!": "{name}赢得比赛！"
+    "{name} wins the match!": "{name}赢得比赛！",
+    "You are the Accomplice": "你是帮凶",
+    "You win with the imposters. Protect them without getting caught.": "你和卧底一起获胜。保护他们，别被发现。",
+    "You are the Detective": "你是侦探",
+    "Detective role": "侦探角色",
+    "Accomplice role": "帮凶角色",
+    "One innocent player secretly learns that another player is innocent. Needs 4+ players.": "一名无辜玩家会秘密得知另一名玩家是无辜的。需要 4 名以上玩家。",
+    "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "一名玩家拿到真正的词语，知道谁是卧底，并与他们一起获胜。需要 6 名以上玩家。",
+    "{name} is not an imposter.": "{name}不是卧底。",
+    "Accomplice: {name}": "帮凶：{name}",
+    "Detective: {name}": "侦探：{name}"
   },
   "zh-Hant": {
     "Trust no one.\nSuspect everyone.": "別相信任何人。\n每個人都值得懷疑。",
@@ -2077,6 +2117,16 @@
     "Next round": "下一輪",
     "Match winner": "比賽冠軍",
     "First to {number} pts": "先得{number}分",
-    "{name} wins the match!": "{name}贏得比賽！"
+    "{name} wins the match!": "{name}贏得比賽！",
+    "You are the Accomplice": "你是幫兇",
+    "You win with the imposters. Protect them without getting caught.": "你和臥底一起獲勝。保護他們，別被發現。",
+    "You are the Detective": "你是偵探",
+    "Detective role": "偵探角色",
+    "Accomplice role": "幫兇角色",
+    "One innocent player secretly learns that another player is innocent. Needs 4+ players.": "一名無辜玩家會秘密得知另一名玩家是無辜的。需要 4 名以上玩家。",
+    "One player gets the real word, knows the imposters and wins with them. Needs 6+ players.": "一名玩家拿到真正的詞語，知道誰是臥底，並與他們一起獲勝。需要 6 名以上玩家。",
+    "{name} is not an imposter.": "{name}不是臥底。",
+    "Accomplice: {name}": "幫兇：{name}",
+    "Detective: {name}": "偵探：{name}"
   }
 }

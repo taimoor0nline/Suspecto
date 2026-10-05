@@ -74,6 +74,10 @@ class HistoryScreen extends StatelessWidget {
                         'Imposters: ${(round['imposters'] as List).join(', ')}'),
                     if (round['jester'] is String)
                       LocalText('Jester: ${round['jester']}'),
+                    if (round['accomplice'] is String)
+                      LocalText('Accomplice: ${round['accomplice']}'),
+                    if (round['detective'] is String)
+                      LocalText('Detective: ${round['detective']}'),
                     if (points.isNotEmpty) ...[
                       const SizedBox(height: 8),
                       for (final entry in points.entries)
