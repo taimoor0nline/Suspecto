@@ -4,6 +4,7 @@ import 'package:suspecto/core/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:suspecto/features/game/presentation/game_page.dart';
 import 'package:suspecto/features/game/presentation/setup_screen.dart';
+import 'package:suspecto/features/packs/presentation/packs_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -51,13 +52,24 @@ class HomeScreen extends StatelessWidget {
           const LocalText(
             '1. Each player privately checks their card.\n2. Take turns giving a clue without saying the word.\n3. Discuss, then vote privately for a suspect.\n4. Catch every imposter to win. A tie means a revote.',
           ),
+          const SizedBox(height: 12),
+          const LocalText(
+            'Try Undercover mode, where imposters get a similar word, and win points across rounds.',
+          ),
           const SizedBox(height: 24),
+          OutlinedButton.icon(
+              onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const PacksScreen())),
+              icon: const Icon(Icons.library_books_outlined),
+              label: const LocalText('Word packs')),
+          const SizedBox(height: 8),
           OutlinedButton.icon(
               onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute<void>(
                       builder: (_) => const HistoryScreen())),
               icon: const Icon(Icons.history_rounded),
               label: const LocalText('History & stats')),
+          const SizedBox(height: 8),
           TextButton.icon(
               onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute<void>(

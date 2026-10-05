@@ -61,3 +61,39 @@ Storage failure keeps gameplay available; saved changes may be lost.
 English/Arabic translation and Flutter localization delegates provide RTL
 support. Preferences independently control theme, haptic feedback and system
 click sounds. No monetization or remote telemetry SDK is enabled.
+
+## Source layout
+
+```
+lib/
+  app/                     MaterialApp, theme
+  core/                    AppStore (settings + persistence), language config,
+    l10n/                  localization helpers and the Arabic string table
+  features/
+    game/
+      domain/models/       Player, WordEntry, GameOptions/GameMode, GameSession,
+                           RoundResult
+      domain/services/     GameEngine (dealing, undercover decoys, guess options),
+                           Ballot, Scoring
+      application/         RoundController: the round state machine
+      data/local/          generated built-in words and translations
+      presentation/        setup + play screens; phases/ holds one widget per
+                           round phase; widgets/ holds shared pieces
+    packs/                 WordPack model, built-in catalog, pack list/editor
+    history/  home/  settings/
+```
+
+Presentation widgets render `RoundController` state and forward taps to it;
+game rules live in the domain layer and contain no Flutter UI code.
+
+## Scoring
+
+| Event | Points |
+| --- | --- |
+| Citizens catch every imposter | +1 each citizen |
+| Citizen's vote named an imposter | +1 that citizen |
+| At least one imposter escapes | +2 each imposter |
+| Caught imposters guess the word | +3 each imposter |
+
+History records store points by player name. Rounds saved before scoring was
+added contribute wins but no points to the leaderboard.
