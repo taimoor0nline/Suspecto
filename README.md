@@ -8,7 +8,12 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
 - 240 unique English/Arabic words across 12 family-friendly packs
 - Saved player setup, categories and discussion duration
 - Private hold-to-reveal roles, hiding on release/cancellation/background
-- Timed discussion, private ballots, ties/revotes, results and rematch
+- Classic mode, or Undercover mode where imposters secretly get a similar word
+- Optional category hint for imposters (classic mode)
+- Last-chance guess: caught imposters can steal the win by picking the word
+- Timed discussion (+1 minute), random first speaker, private ballots, ties/revotes
+- Points per round, session scoreboard across rematches and all-time leaderboard
+- Custom word packs (up to 50 packs of 3–200 words) created and stored on device
 - Last 200 completed rounds and player statistics on this device
 - English/Arabic interface, RTL layout, light/dark/system theme
 - Avatars, reduced-motion-aware transitions, optional haptics/system click sounds
