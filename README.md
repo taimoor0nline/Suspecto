@@ -8,7 +8,15 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
 - 240 unique words across 12 family-friendly packs in seven languages
 - Saved player setup, categories and discussion duration
 - Private hold-to-reveal roles, hiding on release/cancellation/background
-- Classic mode, or Undercover mode where imposters secretly get a similar word
+- Classic mode, Undercover mode where imposters secretly get a similar word, and
+  Question mode where everyone answers a question aloud and imposters secretly
+  get a different one (27 question pairs in every language)
+- Word difficulty: Mixed, Easy, Medium or Hard (custom words match every level)
+- Optional Jester: one innocent player who wins alone if voted out (5+ players)
+- Sound effects (card, vote, countdown, time-up, win/lose stings), card-flip
+  reveal and confetti, all respecting the sound setting and reduced motion
+- Party awards (MVP, Best Bluffer, Sharpest Detective, Most Suspected, Chaos
+  Jester) and a shareable results image
 - Optional category hint for imposters (classic mode)
 - Last-chance guess: caught imposters can steal the win by picking the word
 - Timed discussion (+1 minute), random first speaker, private ballots, ties/revotes
@@ -41,7 +49,10 @@ flutter test
 flutter run
 ```
 
-Edit `assets/content/words.json` and regenerate Dart constants. The generator checks
+Edit `assets/content/words.json` (words and their 1–3 difficulty) or
+`assets/content/questions.json` (question pairs) and regenerate Dart constants.
+Sound effects are synthesized by `python scripts/generate_sounds.py`, so they are
+original audio with no third-party licence. The generator checks
 unique IDs, every locale's terms and required fields without a network connection.
 
 ## Beta artifacts

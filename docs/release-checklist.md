@@ -19,6 +19,10 @@ GitHub Actions run. Generated runners/lockfile are archived for committing after
 - Settings/history persistence, clear history and storage failure behavior.
 - Airplane mode, accessibility screen reader and reduced motion.
 - Verify screen-reader announcement timing does not disclose roles to other players.
+- Sounds on real speakers and with the silent switch; confetti with reduced
+  motion; sharing the results image to WhatsApp/Instagram on Android and iPhone
+  (iPad needs the share popover position).
+- Question mode wording in every language, and Jester rounds with 5+ players.
 - Multi-phone: host on Android and iPhone; join by QR and typed code; 3 and 20
   phones; same Wi-Fi and phone hotspot; iOS Local Network and camera prompts;
   screen lock, Wi-Fi drop and app switch on guests and host; rejoin mid-round;
