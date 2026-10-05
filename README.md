@@ -5,7 +5,8 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
 ## Offline beta features
 
 - 3–20 players, 1–3 imposters (strictly fewer than half the party)
-- 240 unique words across 12 family-friendly packs in seven languages
+- 340 unique words across 17 family-friendly packs in seven languages, including
+  themed packs: Football Fever, Countries, Movies & TV, Ramadan & Eid and Kids
 - Saved player setup, categories and discussion duration
 - Private hold-to-reveal roles, hiding on release/cancellation/background
 - Classic mode, Undercover mode where imposters secretly get a similar word, and
@@ -90,7 +91,7 @@ locales use this catalog; a disabled or unknown saved language falls back to
 English. Missing translation strings also use English.
 
 English, Arabic, Spanish, French, Japanese, Simplified Chinese and Traditional
-Chinese are enabled. Each has all 240 word concepts; new locales include the full
+Chinese are enabled. Each has all 340 word concepts; new locales include the full
 UI catalog and dynamic messages. User names are preserved. New translations
 need native-speaker review before release.
 

@@ -59,7 +59,8 @@ Do not enable these services simply to mark the checklist complete.
 
 ## Content and product decisions
 
-Review all translations with native speakers. The current vocabulary is
+Review all translations with native speakers, including the themed packs
+(especially the Ramadan & Eid terms in every language). The current vocabulary is
 original curated starter content, not the proposed tens-of-thousands-word catalog.
 Check branding/name rights, finalize publisher/contact information and decide
 whether children are a target audience before any monetization integration.
