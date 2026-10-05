@@ -40,6 +40,11 @@ class RevealPhase extends StatelessWidget {
               : null,
           question: session.mode == GameMode.questions,
           jester: session.isJester(player),
+          accompliceOf: session.isAccomplice(player)
+              ? session.imposters.map((p) => p.name).join(', ')
+              : null,
+          clearedName:
+              session.isDetective(player) ? session.detectiveClear?.name : null,
         ),
         const SizedBox(height: 24),
         FilledButton(

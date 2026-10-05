@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:suspecto/features/game/data/local/question_pairs.dart';
+import 'package:suspecto/features/game/domain/models/drawing_stroke.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/domain/models/game_session.dart';
 import 'package:suspecto/features/game/domain/models/player.dart';
@@ -12,9 +14,10 @@ import 'package:suspecto/features/game/domain/services/game_engine.dart';
 import 'package:suspecto/features/game/domain/services/party_awards.dart';
 import 'package:suspecto/features/game/domain/services/scoring.dart';
 
-enum RoundPhase { reveal, discussion, vote, tie, guess, result }
+enum RoundPhase { reveal, drawing, discussion, vote, tie, guess, result }
 
-/// Runs one party's rounds: private reveal, timed discussion, private voting,
+/// Runs one party's rounds: private reveal, an optional drawing round, timed
+/// discussion, private voting,
 /// tie revotes, the imposters' last-chance guess and results. Scores
 /// accumulate across rematches until [newMatch]. With a
 /// [GameOptions.matchTarget], the first player to reach it wins the match.
@@ -58,6 +61,9 @@ class RoundController extends ChangeNotifier {
   final Map<String, int> _totals = {};
   final List<RoundResult> _history = [];
   int _roundsPlayed = 0;
+  final List<DrawingStroke> _strokes = [];
+  List<Offset>? _pen;
+  int _drawTurn = 0;
   Timer? _timer;
   late int _remaining;
   DateTime? _deadline;
@@ -77,6 +83,31 @@ class RoundController extends ChangeNotifier {
   RoundResult? get result => _result;
   int get remainingSeconds => _remaining;
   int get roundsPlayed => _roundsPlayed;
+
+  /// Whether this round has a drawing phase.
+  bool get drawingRound =>
+      options.drawing && _session.mode != GameMode.questions;
+
+  /// Finished lines of this round's sketch, oldest first.
+  List<DrawingStroke> get strokes => List.unmodifiable(_strokes);
+
+  /// The line being drawn right now, if any.
+  List<Offset>? get pen => _pen == null ? null : List.unmodifiable(_pen!);
+
+  /// Zero-based drawing turn and the total number of turns.
+  int get drawTurn => _drawTurn;
+  int get drawTurns => players.length * GameOptions.drawingLaps;
+
+  /// Whose turn it is to draw: everyone in seat order from the starting
+  /// player, [GameOptions.drawingLaps] times.
+  Player get drawer {
+    final seats = _session.players;
+    final start = seats.indexWhere((p) => p.id == _session.startingPlayerId);
+    return seats[(start + _drawTurn) % seats.length];
+  }
+
+  /// The current drawer has finished their line.
+  bool get lineDrawn => _strokes.isNotEmpty && _strokes.length == _drawTurn + 1;
 
   /// Every finished round in this session, oldest first.
   List<RoundResult> get history => List.unmodifiable(_history);
@@ -99,6 +130,8 @@ class RoundController extends ChangeNotifier {
       mode: options.mode,
       questions: questions,
       jester: options.jester,
+      accomplice: options.accomplice,
+      detective: options.detective,
     );
     _ballot = Ballot(players.map((p) => p.id));
     _phase = RoundPhase.reveal;
@@ -112,6 +145,9 @@ class RoundController extends ChangeNotifier {
     _result = null;
     _remaining = options.discussionSeconds(discussionMinutes);
     _deadline = null;
+    _strokes.clear();
+    _pen = null;
+    _drawTurn = 0;
   }
 
   /// The party-mode target score, or 0 for endless rounds.
@@ -163,6 +199,7 @@ class RoundController extends ChangeNotifier {
 
   /// Hides anything private, e.g. when the app is backgrounded.
   void hidePrivate() {
+    _pen = null;
     _cardVisible = false;
     _voterReady = false;
     _selected = null;
@@ -186,13 +223,73 @@ class RoundController extends ChangeNotifier {
     }
     _cardViewed = false;
     if (isLastPlayer) {
-      _phase = RoundPhase.discussion;
-      _runTimer();
+      if (drawingRound) {
+        _phase = RoundPhase.drawing;
+      } else {
+        _startDiscussion();
+      }
     } else {
       _index++;
     }
     notifyListeners();
   }
+
+  void _startDiscussion() {
+    _phase = RoundPhase.discussion;
+    _runTimer();
+  }
+
+  /// Starts the drawer's line at [point] (normalised 0–1).
+  void penDown(Offset point) {
+    if (_phase != RoundPhase.drawing || lineDrawn) {
+      return;
+    }
+    _pen = [_clamp(point)];
+    notifyListeners();
+  }
+
+  void penMove(Offset point) {
+    if (_pen == null) {
+      return;
+    }
+    _pen!.add(_clamp(point));
+    notifyListeners();
+  }
+
+  /// Finishes the line. Each turn is exactly one line.
+  void penUp() {
+    final pen = _pen;
+    if (pen == null) {
+      return;
+    }
+    _pen = null;
+    _strokes.add(DrawingStroke(playerId: drawer.id, points: pen));
+    notifyListeners();
+  }
+
+  /// Removes the current drawer's line so they can try again.
+  void undoLine() {
+    if (_phase != RoundPhase.drawing || !lineDrawn) {
+      return;
+    }
+    _strokes.removeLast();
+    notifyListeners();
+  }
+
+  /// Passes to the next drawer, or starts the discussion after the last turn.
+  void passDrawing() {
+    if (_phase != RoundPhase.drawing || !lineDrawn) {
+      return;
+    }
+    _drawTurn++;
+    if (_drawTurn == drawTurns) {
+      _startDiscussion();
+    }
+    notifyListeners();
+  }
+
+  static Offset _clamp(Offset p) =>
+      Offset(p.dx.clamp(0.0, 1.0), p.dy.clamp(0.0, 1.0));
 
   void addDiscussionTime(Duration extra) {
     if (_phase != RoundPhase.discussion) {

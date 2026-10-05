@@ -19,6 +19,8 @@ class SecretCard extends StatelessWidget {
     this.hint,
     this.question = false,
     this.jester = false,
+    this.accompliceOf,
+    this.clearedName,
     this.ownerName,
   });
 
@@ -36,6 +38,12 @@ class SecretCard extends StatelessWidget {
 
   /// This player is the Jester.
   final bool jester;
+
+  /// This player is the Accomplice of these imposters (names, joined).
+  final String? accompliceOf;
+
+  /// This player is the Detective and knows this player is innocent.
+  final String? clearedName;
 
   /// Shows this player's avatar on the hidden card so they know it is theirs.
   final String? ownerName;
@@ -68,9 +76,11 @@ class SecretCard extends StatelessWidget {
             padding: const EdgeInsets.all(28),
             decoration: BoxDecoration(
               color: visible
-                  ? (jester
+                  ? (jester || accompliceOf != null
                       ? theme.colorScheme.tertiaryContainer
-                      : theme.colorScheme.primaryContainer)
+                      : clearedName != null
+                          ? theme.colorScheme.secondaryContainer
+                          : theme.colorScheme.primaryContainer)
                   : theme.colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(28),
             ),
@@ -110,6 +120,34 @@ class SecretCard extends StatelessWidget {
         const LocalText(
             "Get the group to vote you out to win alone, but don't make it obvious!",
             textAlign: TextAlign.center),
+        const Divider(height: 32),
+      ] else if (accompliceOf != null) ...[
+        const Text('🦹', style: TextStyle(fontSize: 44)),
+        const SizedBox(height: 8),
+        LocalText('You are the Accomplice',
+            textAlign: TextAlign.center,
+            style: theme.textTheme.titleLarge
+                ?.copyWith(fontWeight: FontWeight.w800)),
+        const LocalText(
+            'You win with the imposters. Protect them without getting caught.',
+            textAlign: TextAlign.center),
+        const SizedBox(height: 8),
+        LocalText('Imposters: $accompliceOf',
+            textAlign: TextAlign.center,
+            style: theme.textTheme.titleMedium
+                ?.copyWith(fontWeight: FontWeight.w700)),
+        const Divider(height: 32),
+      ] else if (clearedName != null) ...[
+        const Text('🔍', style: TextStyle(fontSize: 44)),
+        const SizedBox(height: 8),
+        LocalText('You are the Detective',
+            textAlign: TextAlign.center,
+            style: theme.textTheme.titleLarge
+                ?.copyWith(fontWeight: FontWeight.w800)),
+        LocalText('$clearedName is not an imposter.',
+            textAlign: TextAlign.center,
+            style: theme.textTheme.titleMedium
+                ?.copyWith(fontWeight: FontWeight.w700)),
         const Divider(height: 32),
       ] else ...[
         Icon(

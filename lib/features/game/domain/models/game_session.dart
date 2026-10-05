@@ -10,6 +10,9 @@ class GameSession {
     this.decoyWord,
     GameMode? mode,
     this.jesterId,
+    this.accompliceId,
+    this.detectiveId,
+    this.detectiveClearId,
     String? startingPlayerId,
   })  : players = List.unmodifiable(players),
         imposterPlayerIds = Set.unmodifiable(imposterPlayerIds),
@@ -31,6 +34,15 @@ class GameSession {
   /// The innocent player who wins alone if voted out, when that role is on.
   final String? jesterId;
 
+  /// The innocent player who knows the imposters and wins with them.
+  final String? accompliceId;
+
+  /// The innocent player who learns that [detectiveClearId] is innocent.
+  final String? detectiveId;
+
+  /// The player the Detective knows is not an imposter.
+  final String? detectiveClearId;
+
   /// The player who gives the first clue or answer.
   final String startingPlayerId;
 
@@ -38,9 +50,22 @@ class GameSession {
 
   bool isJester(Player player) => player.id == jesterId;
 
+  bool isAccomplice(Player player) => player.id == accompliceId;
+
+  bool isDetective(Player player) => player.id == detectiveId;
+
   List<Player> get imposters => players.where(isImposter).toList();
 
   Player? get jester => players.where((p) => p.id == jesterId).firstOrNull;
+
+  Player? get accomplice =>
+      players.where((p) => p.id == accompliceId).firstOrNull;
+
+  Player? get detective =>
+      players.where((p) => p.id == detectiveId).firstOrNull;
+
+  Player? get detectiveClear =>
+      players.where((p) => p.id == detectiveClearId).firstOrNull;
 
   Player get startingPlayer =>
       players.firstWhere((p) => p.id == startingPlayerId);

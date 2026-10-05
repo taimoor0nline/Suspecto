@@ -332,8 +332,10 @@ class AppStore extends ChangeNotifier {
       for (final key in ['players', 'imposters', 'accused']) {
         round[key] = [for (final n in round[key] as List) swap(n)];
       }
-      if (round['jester'] == from) {
-        round['jester'] = to;
+      for (final key in ['jester', 'accomplice', 'detective']) {
+        if (round[key] == from) {
+          round[key] = to;
+        }
       }
       if (round['points'] is Map) {
         round['points'] = {
@@ -375,6 +377,8 @@ class AppStore extends ChangeNotifier {
       bool stolen = false,
       String? jester,
       bool jesterWin = false,
+      String? accomplice,
+      String? detective,
       Map<String, int> points = const {}}) async {
     if (_history.any((r) => r['id'] == id)) {
       return;
@@ -394,6 +398,8 @@ class AppStore extends ChangeNotifier {
       'stolen': stolen,
       if (jester != null) 'jester': jester,
       if (jesterWin) 'jesterWin': true,
+      if (accomplice != null) 'accomplice': accomplice,
+      if (detective != null) 'detective': detective,
       'points': {...points},
     });
     if (_history.length > 200) {
@@ -419,6 +425,8 @@ class AppStore extends ChangeNotifier {
       stolen: result.stolen,
       jester: session.jester?.name,
       jesterWin: result.jesterWin,
+      accomplice: session.accomplice?.name,
+      detective: session.detective?.name,
       points: {
         for (final entry in result.points.entries)
           result.nameOf(entry.key): entry.value,
@@ -432,13 +440,15 @@ class AppStore extends ChangeNotifier {
       for (final name in List<String>.from(round['players'] as List)) {
         final stats = result.putIfAbsent(name, PlayerStats.new);
         final imposter = (round['imposters'] as List).contains(name);
+        // The Accomplice wins and loses with the imposters.
+        final imposterTeam = imposter || round['accomplice'] == name;
         stats.played++;
         stats.points += ((round['points'] as Map?)?[name] as int?) ?? 0;
         if (imposter) {
           stats.imposterRounds++;
         }
         final winner = Achievements.winner(round);
-        if (imposter
+        if (imposterTeam
             ? winner == 'imposters'
             : winner == 'citizens' ||
                 (winner == 'jester' && round['jester'] == name)) {

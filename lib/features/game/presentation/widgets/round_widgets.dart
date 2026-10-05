@@ -58,6 +58,8 @@ class SecretRevealCard extends StatelessWidget {
     required this.imposterNames,
     this.decoy,
     this.jesterName,
+    this.accompliceName,
+    this.detectiveName,
   });
 
   final IconData icon;
@@ -66,6 +68,8 @@ class SecretRevealCard extends StatelessWidget {
   final WordEntry? decoy;
   final String imposterNames;
   final String? jesterName;
+  final String? accompliceName;
+  final String? detectiveName;
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +102,12 @@ class SecretRevealCard extends StatelessWidget {
             LocalText('Imposters: $imposterNames', textAlign: TextAlign.center),
             if (jesterName != null)
               LocalText('Jester: $jesterName', textAlign: TextAlign.center),
+            if (accompliceName != null)
+              LocalText('Accomplice: $accompliceName',
+                  textAlign: TextAlign.center),
+            if (detectiveName != null)
+              LocalText('Detective: $detectiveName',
+                  textAlign: TextAlign.center),
           ],
         ),
       ),

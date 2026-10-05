@@ -140,6 +140,18 @@ game rules live in the domain layer and contain no Flutter UI code.
   pass-the-phone session into a match. `RoundController.champion` is the
   single leader once they reach the target; a tie at the top keeps playing.
   `newMatch` clears session scores and awards. Multi-phone games ignore it.
+- `GameOptions.detective` and `GameOptions.accomplice` deal extra roles to
+  innocent players in pass-the-phone games, after the Jester and never
+  leaving fewer than `GameEngine.minPlainCitizens` plain citizens. The
+  Detective's card names `GameSession.detectiveClearId`, a non-imposter. The
+  Accomplice sees the imposters, scores as one, and counts as an imposter-team
+  winner in stats; history saves both roles by name.
+- `GameOptions.drawing` adds `RoundPhase.drawing` between reveal and
+  discussion (not in question mode). Each player, in seat order from the
+  starting player, adds one `DrawingStroke` per turn for
+  `GameOptions.drawingLaps` laps. Points are normalised 0–1. `DrawingCanvas`
+  claims touches with an `EagerGestureRecognizer` so drags draw instead of
+  scrolling the page. Sketches are not saved to history.
 - Multi-phone protocol version 2 adds the Jester flag, revealed question and
   awards to each view.
 
@@ -152,6 +164,7 @@ game rules live in the domain layer and contain no Flutter UI code.
 | At least one imposter escapes | +2 each imposter |
 | Caught imposters guess the word | +3 each imposter |
 | The Jester is voted out | +3 Jester; nobody else wins (sharp votes still count) |
+| The Accomplice | Scores as an imposter; no point for voting an imposter |
 
 History records store points by player name. Rounds saved before scoring was
 added contribute wins but no points to the leaderboard.

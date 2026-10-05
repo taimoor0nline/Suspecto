@@ -3,6 +3,7 @@ import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/application/round_controller.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/presentation/phases/phase_page.dart';
+import 'package:suspecto/features/game/presentation/widgets/drawing_canvas.dart';
 import 'package:suspecto/features/game/presentation/widgets/round_widgets.dart';
 
 class DiscussionPhase extends StatefulWidget {
@@ -28,13 +29,19 @@ class _DiscussionPhaseState extends State<DiscussionPhase> {
       title: questions ? 'Answer time' : 'Let the bluffing begin',
       subtitle: questions
           ? '$starter answers first. Everyone answers their question out loud, then discuss whose answer did not fit.'
-          : '$starter starts. Give one clue each, then discuss who is bluffing. Keep the word secret.',
+          : round.drawingRound
+              ? 'Look at the drawing together. Whose lines look like a bluff? Keep the word secret.'
+              : '$starter starts. Give one clue each, then discuss who is bluffing. Keep the word secret.',
       onEndRound: widget.onEndRound,
       children: [
         DiscussionTimerCard(
             remainingSeconds: round.remainingSeconds,
             mode: session.mode,
             speedRound: round.options.speedRound),
+        if (round.drawingRound) ...[
+          const SizedBox(height: 16),
+          DrawingCanvas(players: round.players, strokes: round.strokes),
+        ],
         if (questions) ...[
           const SizedBox(height: 16),
           QuestionRevealCard(
