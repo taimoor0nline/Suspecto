@@ -95,6 +95,15 @@ class GameOptionsSection extends StatelessWidget {
         ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
+          secondary: const Icon(Icons.bolt),
+          title: const LocalText('Speed round'),
+          subtitle:
+              const LocalText('30-second discussion with one-word clues.'),
+          value: options.speedRound,
+          onChanged: (value) => onChanged(options.copyWith(speedRound: value)),
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
           secondary: const Text('🃏', style: TextStyle(fontSize: 24)),
           title: const LocalText('Jester role'),
           subtitle: const LocalText(

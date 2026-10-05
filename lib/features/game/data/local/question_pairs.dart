@@ -3,204 +3,507 @@ import 'package:suspecto/features/game/domain/models/word_entry.dart';
 
 /// Question mode: (question for innocent players, question for imposters).
 const questionPairs = <(WordEntry, WordEntry)>[
-  (WordEntry(value: 'How many hours do you sleep on a weekend night?', category: 'Questions'), WordEntry(value: 'How many hours a day do you spend on your phone?', category: 'Questions')),
-  (WordEntry(value: 'What is the best food to eat at the cinema?', category: 'Questions'), WordEntry(value: 'What is the best food to eat at the beach?', category: 'Questions')),
-  (WordEntry(value: 'How many cups of coffee or tea do you drink a day?', category: 'Questions'), WordEntry(value: 'How many glasses of water do you drink a day?', category: 'Questions')),
-  (WordEntry(value: 'How old were you when you got your first phone?', category: 'Questions'), WordEntry(value: 'How old were you when you learned to ride a bike?', category: 'Questions')),
-  (WordEntry(value: 'Which animal would make the best pet?', category: 'Questions'), WordEntry(value: 'Which animal would scare you most at night?', category: 'Questions')),
-  (WordEntry(value: 'How many countries would you like to visit in your life?', category: 'Questions'), WordEntry(value: 'How many friends do you talk to every week?', category: 'Questions')),
-  (WordEntry(value: 'What is the best birthday gift?', category: 'Questions'), WordEntry(value: 'What is the best thing to bring to a picnic?', category: 'Questions')),
-  (WordEntry(value: 'Which room in a house is your favourite?', category: 'Questions'), WordEntry(value: 'Which room in a house do you clean the least?', category: 'Questions')),
-  (WordEntry(value: 'What would you take to a desert island?', category: 'Questions'), WordEntry(value: 'What would you take on a long flight?', category: 'Questions')),
-  (WordEntry(value: 'What is a good name for a cat?', category: 'Questions'), WordEntry(value: 'What is a good name for a boat?', category: 'Questions')),
-  (WordEntry(value: 'How many minutes does it take you to get ready in the morning?', category: 'Questions'), WordEntry(value: 'How many minutes does it take you to cook dinner?', category: 'Questions')),
-  (WordEntry(value: 'Which superpower would you choose?', category: 'Questions'), WordEntry(value: 'Which job would you choose if money did not matter?', category: 'Questions')),
-  (WordEntry(value: 'What colour should a sports car be?', category: 'Questions'), WordEntry(value: 'What colour should a bedroom wall be?', category: 'Questions')),
-  (WordEntry(value: 'What is the best snack for watching a film?', category: 'Questions'), WordEntry(value: 'What is the best snack for a road trip?', category: 'Questions')),
-  (WordEntry(value: 'How many times a week do you exercise?', category: 'Questions'), WordEntry(value: 'How many times a week do you eat dessert?', category: 'Questions')),
-  (WordEntry(value: 'Which famous person would you invite to dinner?', category: 'Questions'), WordEntry(value: 'Which famous person would you swap lives with for a day?', category: 'Questions')),
-  (WordEntry(value: 'What is the most useful thing in a kitchen?', category: 'Questions'), WordEntry(value: 'What is the most useful thing in a bathroom?', category: 'Questions')),
-  (WordEntry(value: 'Which sound annoys you the most?', category: 'Questions'), WordEntry(value: 'Which sound helps you fall asleep?', category: 'Questions')),
-  (WordEntry(value: 'What do you do first when you wake up?', category: 'Questions'), WordEntry(value: 'What do you do just before you sleep?', category: 'Questions')),
-  (WordEntry(value: 'How many songs could you sing without the lyrics?', category: 'Questions'), WordEntry(value: 'How many phone numbers do you know by heart?', category: 'Questions')),
-  (WordEntry(value: 'What is the best place for a first date?', category: 'Questions'), WordEntry(value: 'What is the best place for a family dinner?', category: 'Questions')),
-  (WordEntry(value: 'Which fruit is the most delicious?', category: 'Questions'), WordEntry(value: 'Which fruit is the hardest to eat?', category: 'Questions')),
-  (WordEntry(value: 'How many hours could you go without your phone?', category: 'Questions'), WordEntry(value: 'How many hours could you go without talking?', category: 'Questions')),
-  (WordEntry(value: 'Which season is the best for a holiday?', category: 'Questions'), WordEntry(value: 'Which season makes you feel the laziest?', category: 'Questions')),
-  (WordEntry(value: 'What is the best thing to do on a rainy day?', category: 'Questions'), WordEntry(value: 'What is the best thing to do on a long train ride?', category: 'Questions')),
-  (WordEntry(value: 'How many people is the perfect size for a party?', category: 'Questions'), WordEntry(value: 'How many people can sit around your dining table?', category: 'Questions')),
-  (WordEntry(value: 'What would you buy first if you won a lot of money?', category: 'Questions'), WordEntry(value: 'What would you save first if your house was on fire?', category: 'Questions')),
+  (
+    WordEntry(
+        value: 'How many hours do you sleep on a weekend night?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'How many hours a day do you spend on your phone?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'What is the best food to eat at the cinema?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'What is the best food to eat at the beach?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'How many cups of coffee or tea do you drink a day?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'How many glasses of water do you drink a day?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'How old were you when you got your first phone?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'How old were you when you learned to ride a bike?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'Which animal would make the best pet?', category: 'Questions'),
+    WordEntry(
+        value: 'Which animal would scare you most at night?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'How many countries would you like to visit in your life?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'How many friends do you talk to every week?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(value: 'What is the best birthday gift?', category: 'Questions'),
+    WordEntry(
+        value: 'What is the best thing to bring to a picnic?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'Which room in a house is your favourite?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'Which room in a house do you clean the least?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'What would you take to a desert island?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'What would you take on a long flight?', category: 'Questions')
+  ),
+  (
+    WordEntry(value: 'What is a good name for a cat?', category: 'Questions'),
+    WordEntry(value: 'What is a good name for a boat?', category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'How many minutes does it take you to get ready in the morning?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'How many minutes does it take you to cook dinner?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'Which superpower would you choose?', category: 'Questions'),
+    WordEntry(
+        value: 'Which job would you choose if money did not matter?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'What colour should a sports car be?', category: 'Questions'),
+    WordEntry(
+        value: 'What colour should a bedroom wall be?', category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'What is the best snack for watching a film?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'What is the best snack for a road trip?', category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'How many times a week do you exercise?', category: 'Questions'),
+    WordEntry(
+        value: 'How many times a week do you eat dessert?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'Which famous person would you invite to dinner?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'Which famous person would you swap lives with for a day?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'What is the most useful thing in a kitchen?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'What is the most useful thing in a bathroom?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(value: 'Which sound annoys you the most?', category: 'Questions'),
+    WordEntry(
+        value: 'Which sound helps you fall asleep?', category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'What do you do first when you wake up?', category: 'Questions'),
+    WordEntry(
+        value: 'What do you do just before you sleep?', category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'How many songs could you sing without the lyrics?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'How many phone numbers do you know by heart?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'What is the best place for a first date?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'What is the best place for a family dinner?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'Which fruit is the most delicious?', category: 'Questions'),
+    WordEntry(
+        value: 'Which fruit is the hardest to eat?', category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'How many hours could you go without your phone?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'How many hours could you go without talking?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'Which season is the best for a holiday?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'Which season makes you feel the laziest?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'What is the best thing to do on a rainy day?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'What is the best thing to do on a long train ride?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'How many people is the perfect size for a party?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'How many people can sit around your dining table?',
+        category: 'Questions')
+  ),
+  (
+    WordEntry(
+        value: 'What would you buy first if you won a lot of money?',
+        category: 'Questions'),
+    WordEntry(
+        value: 'What would you save first if your house was on fire?',
+        category: 'Questions')
+  ),
 ];
 
 /// Question translations by locale, keyed by the English question.
 const questionTranslations = <String, Map<String, String>>{
   'ar': {
-    'How many hours do you sleep on a weekend night?': 'كم ساعة تنام في ليلة عطلة نهاية الأسبوع؟',
-    'How many hours a day do you spend on your phone?': 'كم ساعة تقضي على هاتفك يومياً؟',
-    'What is the best food to eat at the cinema?': 'ما أفضل طعام تأكله في السينما؟',
-    'What is the best food to eat at the beach?': 'ما أفضل طعام تأكله على الشاطئ؟',
-    'How many cups of coffee or tea do you drink a day?': 'كم كوباً من القهوة أو الشاي تشرب يومياً؟',
-    'How many glasses of water do you drink a day?': 'كم كوباً من الماء تشرب يومياً؟',
-    'How old were you when you got your first phone?': 'كم كان عمرك عندما حصلت على أول هاتف؟',
-    'How old were you when you learned to ride a bike?': 'كم كان عمرك عندما تعلمت ركوب الدراجة؟',
+    'How many hours do you sleep on a weekend night?':
+        'كم ساعة تنام في ليلة عطلة نهاية الأسبوع؟',
+    'How many hours a day do you spend on your phone?':
+        'كم ساعة تقضي على هاتفك يومياً؟',
+    'What is the best food to eat at the cinema?':
+        'ما أفضل طعام تأكله في السينما؟',
+    'What is the best food to eat at the beach?':
+        'ما أفضل طعام تأكله على الشاطئ؟',
+    'How many cups of coffee or tea do you drink a day?':
+        'كم كوباً من القهوة أو الشاي تشرب يومياً؟',
+    'How many glasses of water do you drink a day?':
+        'كم كوباً من الماء تشرب يومياً؟',
+    'How old were you when you got your first phone?':
+        'كم كان عمرك عندما حصلت على أول هاتف؟',
+    'How old were you when you learned to ride a bike?':
+        'كم كان عمرك عندما تعلمت ركوب الدراجة؟',
     'Which animal would make the best pet?': 'أي حيوان سيكون أفضل حيوان أليف؟',
-    'Which animal would scare you most at night?': 'أي حيوان سيخيفك أكثر في الليل؟',
-    'How many countries would you like to visit in your life?': 'كم دولة تود أن تزور في حياتك؟',
-    'How many friends do you talk to every week?': 'كم صديقاً تتحدث معه كل أسبوع؟',
+    'Which animal would scare you most at night?':
+        'أي حيوان سيخيفك أكثر في الليل؟',
+    'How many countries would you like to visit in your life?':
+        'كم دولة تود أن تزور في حياتك؟',
+    'How many friends do you talk to every week?':
+        'كم صديقاً تتحدث معه كل أسبوع؟',
     'What is the best birthday gift?': 'ما أفضل هدية عيد ميلاد؟',
-    'What is the best thing to bring to a picnic?': 'ما أفضل شيء تحضره إلى نزهة؟',
+    'What is the best thing to bring to a picnic?':
+        'ما أفضل شيء تحضره إلى نزهة؟',
     'Which room in a house is your favourite?': 'ما غرفتك المفضلة في المنزل؟',
-    'Which room in a house do you clean the least?': 'ما الغرفة التي تنظفها أقل من غيرها في المنزل؟',
-    'What would you take to a desert island?': 'ماذا ستأخذ معك إلى جزيرة مهجورة؟',
-    'What would you take on a long flight?': 'ماذا ستأخذ معك في رحلة طيران طويلة؟',
+    'Which room in a house do you clean the least?':
+        'ما الغرفة التي تنظفها أقل من غيرها في المنزل؟',
+    'What would you take to a desert island?':
+        'ماذا ستأخذ معك إلى جزيرة مهجورة؟',
+    'What would you take on a long flight?':
+        'ماذا ستأخذ معك في رحلة طيران طويلة؟',
     'What is a good name for a cat?': 'ما الاسم الجيد لقطة؟',
     'What is a good name for a boat?': 'ما الاسم الجيد لقارب؟',
-    'How many minutes does it take you to get ready in the morning?': 'كم دقيقة تحتاج لتستعد في الصباح؟',
-    'How many minutes does it take you to cook dinner?': 'كم دقيقة تحتاج لتطبخ العشاء؟',
+    'How many minutes does it take you to get ready in the morning?':
+        'كم دقيقة تحتاج لتستعد في الصباح؟',
+    'How many minutes does it take you to cook dinner?':
+        'كم دقيقة تحتاج لتطبخ العشاء؟',
     'Which superpower would you choose?': 'أي قوة خارقة ستختار؟',
-    'Which job would you choose if money did not matter?': 'أي وظيفة ستختار لو لم يكن المال مهماً؟',
+    'Which job would you choose if money did not matter?':
+        'أي وظيفة ستختار لو لم يكن المال مهماً؟',
     'What colour should a sports car be?': 'ما اللون المناسب لسيارة رياضية؟',
-    'What colour should a bedroom wall be?': 'ما اللون المناسب لجدار غرفة النوم؟',
-    'What is the best snack for watching a film?': 'ما أفضل وجبة خفيفة أثناء مشاهدة فيلم؟',
-    'What is the best snack for a road trip?': 'ما أفضل وجبة خفيفة لرحلة بالسيارة؟',
-    'How many times a week do you exercise?': 'كم مرة في الأسبوع تمارس الرياضة؟',
-    'How many times a week do you eat dessert?': 'كم مرة في الأسبوع تأكل الحلوى؟',
-    'Which famous person would you invite to dinner?': 'أي شخص مشهور ستدعوه إلى العشاء؟',
-    'Which famous person would you swap lives with for a day?': 'مع أي شخص مشهور ستتبادل حياتك ليوم واحد؟',
-    'What is the most useful thing in a kitchen?': 'ما أكثر شيء مفيد في المطبخ؟',
-    'What is the most useful thing in a bathroom?': 'ما أكثر شيء مفيد في الحمام؟',
+    'What colour should a bedroom wall be?':
+        'ما اللون المناسب لجدار غرفة النوم؟',
+    'What is the best snack for watching a film?':
+        'ما أفضل وجبة خفيفة أثناء مشاهدة فيلم؟',
+    'What is the best snack for a road trip?':
+        'ما أفضل وجبة خفيفة لرحلة بالسيارة؟',
+    'How many times a week do you exercise?':
+        'كم مرة في الأسبوع تمارس الرياضة؟',
+    'How many times a week do you eat dessert?':
+        'كم مرة في الأسبوع تأكل الحلوى؟',
+    'Which famous person would you invite to dinner?':
+        'أي شخص مشهور ستدعوه إلى العشاء؟',
+    'Which famous person would you swap lives with for a day?':
+        'مع أي شخص مشهور ستتبادل حياتك ليوم واحد؟',
+    'What is the most useful thing in a kitchen?':
+        'ما أكثر شيء مفيد في المطبخ؟',
+    'What is the most useful thing in a bathroom?':
+        'ما أكثر شيء مفيد في الحمام؟',
     'Which sound annoys you the most?': 'ما الصوت الذي يزعجك أكثر؟',
     'Which sound helps you fall asleep?': 'ما الصوت الذي يساعدك على النوم؟',
     'What do you do first when you wake up?': 'ما أول شيء تفعله عندما تستيقظ؟',
     'What do you do just before you sleep?': 'ماذا تفعل قبل أن تنام مباشرة؟',
-    'How many songs could you sing without the lyrics?': 'كم أغنية تستطيع غناءها دون النظر إلى الكلمات؟',
-    'How many phone numbers do you know by heart?': 'كم رقم هاتف تحفظه عن ظهر قلب؟',
+    'How many songs could you sing without the lyrics?':
+        'كم أغنية تستطيع غناءها دون النظر إلى الكلمات؟',
+    'How many phone numbers do you know by heart?':
+        'كم رقم هاتف تحفظه عن ظهر قلب؟',
     'What is the best place for a first date?': 'ما أفضل مكان لموعد أول؟',
     'What is the best place for a family dinner?': 'ما أفضل مكان لعشاء عائلي؟',
     'Which fruit is the most delicious?': 'ما الفاكهة الألذ؟',
     'Which fruit is the hardest to eat?': 'ما الفاكهة الأصعب في الأكل؟',
-    'How many hours could you go without your phone?': 'كم ساعة تستطيع البقاء دون هاتفك؟',
-    'How many hours could you go without talking?': 'كم ساعة تستطيع البقاء دون كلام؟',
+    'How many hours could you go without your phone?':
+        'كم ساعة تستطيع البقاء دون هاتفك؟',
+    'How many hours could you go without talking?':
+        'كم ساعة تستطيع البقاء دون كلام؟',
     'Which season is the best for a holiday?': 'أي فصل هو الأفضل لقضاء عطلة؟',
-    'Which season makes you feel the laziest?': 'أي فصل يجعلك تشعر بالكسل أكثر؟',
-    'What is the best thing to do on a rainy day?': 'ما أفضل شيء تفعله في يوم ممطر؟',
-    'What is the best thing to do on a long train ride?': 'ما أفضل شيء تفعله في رحلة قطار طويلة؟',
-    'How many people is the perfect size for a party?': 'كم عدد الأشخاص المثالي لحفلة؟',
-    'How many people can sit around your dining table?': 'كم شخصاً يمكنه الجلوس حول طاولة طعامك؟',
-    'What would you buy first if you won a lot of money?': 'ما أول شيء ستشتريه لو ربحت مبلغاً كبيراً؟',
-    'What would you save first if your house was on fire?': 'ما أول شيء ستنقذه لو احترق منزلك؟',
+    'Which season makes you feel the laziest?':
+        'أي فصل يجعلك تشعر بالكسل أكثر؟',
+    'What is the best thing to do on a rainy day?':
+        'ما أفضل شيء تفعله في يوم ممطر؟',
+    'What is the best thing to do on a long train ride?':
+        'ما أفضل شيء تفعله في رحلة قطار طويلة؟',
+    'How many people is the perfect size for a party?':
+        'كم عدد الأشخاص المثالي لحفلة؟',
+    'How many people can sit around your dining table?':
+        'كم شخصاً يمكنه الجلوس حول طاولة طعامك؟',
+    'What would you buy first if you won a lot of money?':
+        'ما أول شيء ستشتريه لو ربحت مبلغاً كبيراً؟',
+    'What would you save first if your house was on fire?':
+        'ما أول شيء ستنقذه لو احترق منزلك؟',
   },
   'es': {
-    'How many hours do you sleep on a weekend night?': '¿Cuántas horas duermes una noche de fin de semana?',
-    'How many hours a day do you spend on your phone?': '¿Cuántas horas al día pasas con el móvil?',
-    'What is the best food to eat at the cinema?': '¿Cuál es la mejor comida para el cine?',
-    'What is the best food to eat at the beach?': '¿Cuál es la mejor comida para la playa?',
-    'How many cups of coffee or tea do you drink a day?': '¿Cuántas tazas de café o té bebes al día?',
-    'How many glasses of water do you drink a day?': '¿Cuántos vasos de agua bebes al día?',
-    'How old were you when you got your first phone?': '¿Cuántos años tenías cuando tuviste tu primer móvil?',
-    'How old were you when you learned to ride a bike?': '¿Cuántos años tenías cuando aprendiste a montar en bici?',
-    'Which animal would make the best pet?': '¿Qué animal sería la mejor mascota?',
-    'Which animal would scare you most at night?': '¿Qué animal te asustaría más por la noche?',
-    'How many countries would you like to visit in your life?': '¿Cuántos países te gustaría visitar en tu vida?',
-    'How many friends do you talk to every week?': '¿Con cuántos amigos hablas cada semana?',
-    'What is the best birthday gift?': '¿Cuál es el mejor regalo de cumpleaños?',
-    'What is the best thing to bring to a picnic?': '¿Qué es lo mejor para llevar a un pícnic?',
-    'Which room in a house is your favourite?': '¿Cuál es tu habitación favorita de una casa?',
-    'Which room in a house do you clean the least?': '¿Qué habitación de la casa limpias menos?',
-    'What would you take to a desert island?': '¿Qué te llevarías a una isla desierta?',
-    'What would you take on a long flight?': '¿Qué te llevarías en un vuelo largo?',
+    'How many hours do you sleep on a weekend night?':
+        '¿Cuántas horas duermes una noche de fin de semana?',
+    'How many hours a day do you spend on your phone?':
+        '¿Cuántas horas al día pasas con el móvil?',
+    'What is the best food to eat at the cinema?':
+        '¿Cuál es la mejor comida para el cine?',
+    'What is the best food to eat at the beach?':
+        '¿Cuál es la mejor comida para la playa?',
+    'How many cups of coffee or tea do you drink a day?':
+        '¿Cuántas tazas de café o té bebes al día?',
+    'How many glasses of water do you drink a day?':
+        '¿Cuántos vasos de agua bebes al día?',
+    'How old were you when you got your first phone?':
+        '¿Cuántos años tenías cuando tuviste tu primer móvil?',
+    'How old were you when you learned to ride a bike?':
+        '¿Cuántos años tenías cuando aprendiste a montar en bici?',
+    'Which animal would make the best pet?':
+        '¿Qué animal sería la mejor mascota?',
+    'Which animal would scare you most at night?':
+        '¿Qué animal te asustaría más por la noche?',
+    'How many countries would you like to visit in your life?':
+        '¿Cuántos países te gustaría visitar en tu vida?',
+    'How many friends do you talk to every week?':
+        '¿Con cuántos amigos hablas cada semana?',
+    'What is the best birthday gift?':
+        '¿Cuál es el mejor regalo de cumpleaños?',
+    'What is the best thing to bring to a picnic?':
+        '¿Qué es lo mejor para llevar a un pícnic?',
+    'Which room in a house is your favourite?':
+        '¿Cuál es tu habitación favorita de una casa?',
+    'Which room in a house do you clean the least?':
+        '¿Qué habitación de la casa limpias menos?',
+    'What would you take to a desert island?':
+        '¿Qué te llevarías a una isla desierta?',
+    'What would you take on a long flight?':
+        '¿Qué te llevarías en un vuelo largo?',
     'What is a good name for a cat?': '¿Cuál es un buen nombre para un gato?',
     'What is a good name for a boat?': '¿Cuál es un buen nombre para un barco?',
-    'How many minutes does it take you to get ready in the morning?': '¿Cuántos minutos tardas en arreglarte por la mañana?',
-    'How many minutes does it take you to cook dinner?': '¿Cuántos minutos tardas en preparar la cena?',
+    'How many minutes does it take you to get ready in the morning?':
+        '¿Cuántos minutos tardas en arreglarte por la mañana?',
+    'How many minutes does it take you to cook dinner?':
+        '¿Cuántos minutos tardas en preparar la cena?',
     'Which superpower would you choose?': '¿Qué superpoder elegirías?',
-    'Which job would you choose if money did not matter?': '¿Qué trabajo elegirías si el dinero no importara?',
-    'What colour should a sports car be?': '¿De qué color debería ser un coche deportivo?',
-    'What colour should a bedroom wall be?': '¿De qué color debería ser la pared de un dormitorio?',
-    'What is the best snack for watching a film?': '¿Cuál es el mejor aperitivo para ver una película?',
-    'What is the best snack for a road trip?': '¿Cuál es el mejor aperitivo para un viaje en coche?',
-    'How many times a week do you exercise?': '¿Cuántas veces a la semana haces ejercicio?',
-    'How many times a week do you eat dessert?': '¿Cuántas veces a la semana comes postre?',
-    'Which famous person would you invite to dinner?': '¿A qué persona famosa invitarías a cenar?',
-    'Which famous person would you swap lives with for a day?': '¿Con qué persona famosa cambiarías tu vida por un día?',
-    'What is the most useful thing in a kitchen?': '¿Qué es lo más útil de una cocina?',
-    'What is the most useful thing in a bathroom?': '¿Qué es lo más útil de un baño?',
+    'Which job would you choose if money did not matter?':
+        '¿Qué trabajo elegirías si el dinero no importara?',
+    'What colour should a sports car be?':
+        '¿De qué color debería ser un coche deportivo?',
+    'What colour should a bedroom wall be?':
+        '¿De qué color debería ser la pared de un dormitorio?',
+    'What is the best snack for watching a film?':
+        '¿Cuál es el mejor aperitivo para ver una película?',
+    'What is the best snack for a road trip?':
+        '¿Cuál es el mejor aperitivo para un viaje en coche?',
+    'How many times a week do you exercise?':
+        '¿Cuántas veces a la semana haces ejercicio?',
+    'How many times a week do you eat dessert?':
+        '¿Cuántas veces a la semana comes postre?',
+    'Which famous person would you invite to dinner?':
+        '¿A qué persona famosa invitarías a cenar?',
+    'Which famous person would you swap lives with for a day?':
+        '¿Con qué persona famosa cambiarías tu vida por un día?',
+    'What is the most useful thing in a kitchen?':
+        '¿Qué es lo más útil de una cocina?',
+    'What is the most useful thing in a bathroom?':
+        '¿Qué es lo más útil de un baño?',
     'Which sound annoys you the most?': '¿Qué sonido te molesta más?',
     'Which sound helps you fall asleep?': '¿Qué sonido te ayuda a dormirte?',
-    'What do you do first when you wake up?': '¿Qué es lo primero que haces al despertarte?',
-    'What do you do just before you sleep?': '¿Qué haces justo antes de dormir?',
-    'How many songs could you sing without the lyrics?': '¿Cuántas canciones podrías cantar sin la letra?',
-    'How many phone numbers do you know by heart?': '¿Cuántos números de teléfono te sabes de memoria?',
-    'What is the best place for a first date?': '¿Cuál es el mejor sitio para una primera cita?',
-    'What is the best place for a family dinner?': '¿Cuál es el mejor sitio para una cena familiar?',
+    'What do you do first when you wake up?':
+        '¿Qué es lo primero que haces al despertarte?',
+    'What do you do just before you sleep?':
+        '¿Qué haces justo antes de dormir?',
+    'How many songs could you sing without the lyrics?':
+        '¿Cuántas canciones podrías cantar sin la letra?',
+    'How many phone numbers do you know by heart?':
+        '¿Cuántos números de teléfono te sabes de memoria?',
+    'What is the best place for a first date?':
+        '¿Cuál es el mejor sitio para una primera cita?',
+    'What is the best place for a family dinner?':
+        '¿Cuál es el mejor sitio para una cena familiar?',
     'Which fruit is the most delicious?': '¿Qué fruta es la más deliciosa?',
-    'Which fruit is the hardest to eat?': '¿Qué fruta es la más difícil de comer?',
-    'How many hours could you go without your phone?': '¿Cuántas horas podrías pasar sin tu móvil?',
-    'How many hours could you go without talking?': '¿Cuántas horas podrías pasar sin hablar?',
-    'Which season is the best for a holiday?': '¿Qué estación es la mejor para irse de vacaciones?',
-    'Which season makes you feel the laziest?': '¿Qué estación te da más pereza?',
-    'What is the best thing to do on a rainy day?': '¿Qué es lo mejor que se puede hacer un día de lluvia?',
-    'What is the best thing to do on a long train ride?': '¿Qué es lo mejor que se puede hacer en un viaje largo en tren?',
-    'How many people is the perfect size for a party?': '¿Cuántas personas son ideales para una fiesta?',
-    'How many people can sit around your dining table?': '¿Cuántas personas caben en tu mesa de comedor?',
-    'What would you buy first if you won a lot of money?': '¿Qué comprarías primero si ganaras mucho dinero?',
-    'What would you save first if your house was on fire?': '¿Qué salvarías primero si tu casa se incendiara?',
+    'Which fruit is the hardest to eat?':
+        '¿Qué fruta es la más difícil de comer?',
+    'How many hours could you go without your phone?':
+        '¿Cuántas horas podrías pasar sin tu móvil?',
+    'How many hours could you go without talking?':
+        '¿Cuántas horas podrías pasar sin hablar?',
+    'Which season is the best for a holiday?':
+        '¿Qué estación es la mejor para irse de vacaciones?',
+    'Which season makes you feel the laziest?':
+        '¿Qué estación te da más pereza?',
+    'What is the best thing to do on a rainy day?':
+        '¿Qué es lo mejor que se puede hacer un día de lluvia?',
+    'What is the best thing to do on a long train ride?':
+        '¿Qué es lo mejor que se puede hacer en un viaje largo en tren?',
+    'How many people is the perfect size for a party?':
+        '¿Cuántas personas son ideales para una fiesta?',
+    'How many people can sit around your dining table?':
+        '¿Cuántas personas caben en tu mesa de comedor?',
+    'What would you buy first if you won a lot of money?':
+        '¿Qué comprarías primero si ganaras mucho dinero?',
+    'What would you save first if your house was on fire?':
+        '¿Qué salvarías primero si tu casa se incendiara?',
   },
   'fr': {
-    'How many hours do you sleep on a weekend night?': 'Combien d’heures dors-tu une nuit de week-end ?',
-    'How many hours a day do you spend on your phone?': 'Combien d’heures par jour passes-tu sur ton téléphone ?',
-    'What is the best food to eat at the cinema?': 'Quel est le meilleur aliment à manger au cinéma ?',
-    'What is the best food to eat at the beach?': 'Quel est le meilleur aliment à manger à la plage ?',
-    'How many cups of coffee or tea do you drink a day?': 'Combien de tasses de café ou de thé bois-tu par jour ?',
-    'How many glasses of water do you drink a day?': 'Combien de verres d’eau bois-tu par jour ?',
-    'How old were you when you got your first phone?': 'Quel âge avais-tu quand tu as eu ton premier téléphone ?',
-    'How old were you when you learned to ride a bike?': 'Quel âge avais-tu quand tu as appris à faire du vélo ?',
-    'Which animal would make the best pet?': 'Quel animal ferait le meilleur animal de compagnie ?',
-    'Which animal would scare you most at night?': 'Quel animal te ferait le plus peur la nuit ?',
-    'How many countries would you like to visit in your life?': 'Combien de pays aimerais-tu visiter dans ta vie ?',
-    'How many friends do you talk to every week?': 'À combien d’amis parles-tu chaque semaine ?',
-    'What is the best birthday gift?': 'Quel est le meilleur cadeau d’anniversaire ?',
-    'What is the best thing to bring to a picnic?': 'Quelle est la meilleure chose à apporter à un pique-nique ?',
-    'Which room in a house is your favourite?': 'Quelle est ta pièce préférée dans une maison ?',
-    'Which room in a house do you clean the least?': 'Quelle pièce de la maison nettoies-tu le moins ?',
-    'What would you take to a desert island?': 'Qu’emporterais-tu sur une île déserte ?',
-    'What would you take on a long flight?': 'Qu’emporterais-tu pour un long vol ?',
+    'How many hours do you sleep on a weekend night?':
+        'Combien d’heures dors-tu une nuit de week-end ?',
+    'How many hours a day do you spend on your phone?':
+        'Combien d’heures par jour passes-tu sur ton téléphone ?',
+    'What is the best food to eat at the cinema?':
+        'Quel est le meilleur aliment à manger au cinéma ?',
+    'What is the best food to eat at the beach?':
+        'Quel est le meilleur aliment à manger à la plage ?',
+    'How many cups of coffee or tea do you drink a day?':
+        'Combien de tasses de café ou de thé bois-tu par jour ?',
+    'How many glasses of water do you drink a day?':
+        'Combien de verres d’eau bois-tu par jour ?',
+    'How old were you when you got your first phone?':
+        'Quel âge avais-tu quand tu as eu ton premier téléphone ?',
+    'How old were you when you learned to ride a bike?':
+        'Quel âge avais-tu quand tu as appris à faire du vélo ?',
+    'Which animal would make the best pet?':
+        'Quel animal ferait le meilleur animal de compagnie ?',
+    'Which animal would scare you most at night?':
+        'Quel animal te ferait le plus peur la nuit ?',
+    'How many countries would you like to visit in your life?':
+        'Combien de pays aimerais-tu visiter dans ta vie ?',
+    'How many friends do you talk to every week?':
+        'À combien d’amis parles-tu chaque semaine ?',
+    'What is the best birthday gift?':
+        'Quel est le meilleur cadeau d’anniversaire ?',
+    'What is the best thing to bring to a picnic?':
+        'Quelle est la meilleure chose à apporter à un pique-nique ?',
+    'Which room in a house is your favourite?':
+        'Quelle est ta pièce préférée dans une maison ?',
+    'Which room in a house do you clean the least?':
+        'Quelle pièce de la maison nettoies-tu le moins ?',
+    'What would you take to a desert island?':
+        'Qu’emporterais-tu sur une île déserte ?',
+    'What would you take on a long flight?':
+        'Qu’emporterais-tu pour un long vol ?',
     'What is a good name for a cat?': 'Quel est un bon nom pour un chat ?',
     'What is a good name for a boat?': 'Quel est un bon nom pour un bateau ?',
-    'How many minutes does it take you to get ready in the morning?': 'Combien de minutes te faut-il pour te préparer le matin ?',
-    'How many minutes does it take you to cook dinner?': 'Combien de minutes te faut-il pour préparer le dîner ?',
+    'How many minutes does it take you to get ready in the morning?':
+        'Combien de minutes te faut-il pour te préparer le matin ?',
+    'How many minutes does it take you to cook dinner?':
+        'Combien de minutes te faut-il pour préparer le dîner ?',
     'Which superpower would you choose?': 'Quel super-pouvoir choisirais-tu ?',
-    'Which job would you choose if money did not matter?': 'Quel métier choisirais-tu si l’argent ne comptait pas ?',
-    'What colour should a sports car be?': 'De quelle couleur devrait être une voiture de sport ?',
-    'What colour should a bedroom wall be?': 'De quelle couleur devrait être un mur de chambre ?',
-    'What is the best snack for watching a film?': 'Quel est le meilleur en-cas pour regarder un film ?',
-    'What is the best snack for a road trip?': 'Quel est le meilleur en-cas pour un road trip ?',
-    'How many times a week do you exercise?': 'Combien de fois par semaine fais-tu du sport ?',
-    'How many times a week do you eat dessert?': 'Combien de fois par semaine manges-tu un dessert ?',
-    'Which famous person would you invite to dinner?': 'Quelle célébrité inviterais-tu à dîner ?',
-    'Which famous person would you swap lives with for a day?': 'Avec quelle célébrité échangerais-tu ta vie pour une journée ?',
-    'What is the most useful thing in a kitchen?': 'Quel est l’objet le plus utile dans une cuisine ?',
-    'What is the most useful thing in a bathroom?': 'Quel est l’objet le plus utile dans une salle de bain ?',
+    'Which job would you choose if money did not matter?':
+        'Quel métier choisirais-tu si l’argent ne comptait pas ?',
+    'What colour should a sports car be?':
+        'De quelle couleur devrait être une voiture de sport ?',
+    'What colour should a bedroom wall be?':
+        'De quelle couleur devrait être un mur de chambre ?',
+    'What is the best snack for watching a film?':
+        'Quel est le meilleur en-cas pour regarder un film ?',
+    'What is the best snack for a road trip?':
+        'Quel est le meilleur en-cas pour un road trip ?',
+    'How many times a week do you exercise?':
+        'Combien de fois par semaine fais-tu du sport ?',
+    'How many times a week do you eat dessert?':
+        'Combien de fois par semaine manges-tu un dessert ?',
+    'Which famous person would you invite to dinner?':
+        'Quelle célébrité inviterais-tu à dîner ?',
+    'Which famous person would you swap lives with for a day?':
+        'Avec quelle célébrité échangerais-tu ta vie pour une journée ?',
+    'What is the most useful thing in a kitchen?':
+        'Quel est l’objet le plus utile dans une cuisine ?',
+    'What is the most useful thing in a bathroom?':
+        'Quel est l’objet le plus utile dans une salle de bain ?',
     'Which sound annoys you the most?': 'Quel bruit t’agace le plus ?',
     'Which sound helps you fall asleep?': 'Quel bruit t’aide à t’endormir ?',
-    'What do you do first when you wake up?': 'Que fais-tu en premier au réveil ?',
-    'What do you do just before you sleep?': 'Que fais-tu juste avant de dormir ?',
-    'How many songs could you sing without the lyrics?': 'Combien de chansons pourrais-tu chanter sans les paroles ?',
-    'How many phone numbers do you know by heart?': 'Combien de numéros de téléphone connais-tu par cœur ?',
-    'What is the best place for a first date?': 'Quel est le meilleur endroit pour un premier rendez-vous ?',
-    'What is the best place for a family dinner?': 'Quel est le meilleur endroit pour un dîner en famille ?',
+    'What do you do first when you wake up?':
+        'Que fais-tu en premier au réveil ?',
+    'What do you do just before you sleep?':
+        'Que fais-tu juste avant de dormir ?',
+    'How many songs could you sing without the lyrics?':
+        'Combien de chansons pourrais-tu chanter sans les paroles ?',
+    'How many phone numbers do you know by heart?':
+        'Combien de numéros de téléphone connais-tu par cœur ?',
+    'What is the best place for a first date?':
+        'Quel est le meilleur endroit pour un premier rendez-vous ?',
+    'What is the best place for a family dinner?':
+        'Quel est le meilleur endroit pour un dîner en famille ?',
     'Which fruit is the most delicious?': 'Quel fruit est le plus délicieux ?',
-    'Which fruit is the hardest to eat?': 'Quel fruit est le plus difficile à manger ?',
-    'How many hours could you go without your phone?': 'Combien d’heures pourrais-tu tenir sans ton téléphone ?',
-    'How many hours could you go without talking?': 'Combien d’heures pourrais-tu tenir sans parler ?',
-    'Which season is the best for a holiday?': 'Quelle saison est la meilleure pour partir en vacances ?',
-    'Which season makes you feel the laziest?': 'Quelle saison te rend le plus paresseux ?',
-    'What is the best thing to do on a rainy day?': 'Quelle est la meilleure activité un jour de pluie ?',
-    'What is the best thing to do on a long train ride?': 'Quelle est la meilleure activité pendant un long trajet en train ?',
-    'How many people is the perfect size for a party?': 'Combien de personnes faut-il pour une fête idéale ?',
-    'How many people can sit around your dining table?': 'Combien de personnes peuvent s’asseoir autour de ta table ?',
-    'What would you buy first if you won a lot of money?': 'Qu’achèterais-tu en premier si tu gagnais beaucoup d’argent ?',
-    'What would you save first if your house was on fire?': 'Que sauverais-tu en premier si ta maison brûlait ?',
+    'Which fruit is the hardest to eat?':
+        'Quel fruit est le plus difficile à manger ?',
+    'How many hours could you go without your phone?':
+        'Combien d’heures pourrais-tu tenir sans ton téléphone ?',
+    'How many hours could you go without talking?':
+        'Combien d’heures pourrais-tu tenir sans parler ?',
+    'Which season is the best for a holiday?':
+        'Quelle saison est la meilleure pour partir en vacances ?',
+    'Which season makes you feel the laziest?':
+        'Quelle saison te rend le plus paresseux ?',
+    'What is the best thing to do on a rainy day?':
+        'Quelle est la meilleure activité un jour de pluie ?',
+    'What is the best thing to do on a long train ride?':
+        'Quelle est la meilleure activité pendant un long trajet en train ?',
+    'How many people is the perfect size for a party?':
+        'Combien de personnes faut-il pour une fête idéale ?',
+    'How many people can sit around your dining table?':
+        'Combien de personnes peuvent s’asseoir autour de ta table ?',
+    'What would you buy first if you won a lot of money?':
+        'Qu’achèterais-tu en premier si tu gagnais beaucoup d’argent ?',
+    'What would you save first if your house was on fire?':
+        'Que sauverais-tu en premier si ta maison brûlait ?',
   },
   'ja': {
     'How many hours do you sleep on a weekend night?': '週末の夜は何時間寝ますか？',
@@ -213,7 +516,8 @@ const questionTranslations = <String, Map<String, String>>{
     'How old were you when you learned to ride a bike?': '自転車に乗れるようになったのは何歳？',
     'Which animal would make the best pet?': 'ペットにするなら一番いい動物は？',
     'Which animal would scare you most at night?': '夜に出会ったら一番怖い動物は？',
-    'How many countries would you like to visit in your life?': '人生で何か国を訪れてみたいですか？',
+    'How many countries would you like to visit in your life?':
+        '人生で何か国を訪れてみたいですか？',
     'How many friends do you talk to every week?': '毎週何人の友達と話しますか？',
     'What is the best birthday gift?': '誕生日プレゼントで一番いいものは？',
     'What is the best thing to bring to a picnic?': 'ピクニックに持っていくなら一番いいものは？',
@@ -223,10 +527,12 @@ const questionTranslations = <String, Map<String, String>>{
     'What would you take on a long flight?': '長いフライトに何を持っていきますか？',
     'What is a good name for a cat?': '猫にぴったりの名前は？',
     'What is a good name for a boat?': '船にぴったりの名前は？',
-    'How many minutes does it take you to get ready in the morning?': '朝の支度に何分かかりますか？',
+    'How many minutes does it take you to get ready in the morning?':
+        '朝の支度に何分かかりますか？',
     'How many minutes does it take you to cook dinner?': '夕食を作るのに何分かかりますか？',
     'Which superpower would you choose?': '超能力を選ぶなら何？',
-    'Which job would you choose if money did not matter?': 'お金が関係なければどの仕事を選びますか？',
+    'Which job would you choose if money did not matter?':
+        'お金が関係なければどの仕事を選びますか？',
     'What colour should a sports car be?': 'スポーツカーは何色がいい？',
     'What colour should a bedroom wall be?': '寝室の壁は何色がいい？',
     'What is the best snack for watching a film?': '映画を見ながら食べるのに一番いいおやつは？',
@@ -234,7 +540,8 @@ const questionTranslations = <String, Map<String, String>>{
     'How many times a week do you exercise?': '週に何回運動しますか？',
     'How many times a week do you eat dessert?': '週に何回デザートを食べますか？',
     'Which famous person would you invite to dinner?': '夕食に招きたい有名人は？',
-    'Which famous person would you swap lives with for a day?': '1日だけ人生を入れ替えるならどの有名人？',
+    'Which famous person would you swap lives with for a day?':
+        '1日だけ人生を入れ替えるならどの有名人？',
     'What is the most useful thing in a kitchen?': 'キッチンで一番便利なものは？',
     'What is the most useful thing in a bathroom?': '浴室で一番便利なものは？',
     'Which sound annoys you the most?': '一番イライラする音は？',
@@ -255,8 +562,10 @@ const questionTranslations = <String, Map<String, String>>{
     'What is the best thing to do on a long train ride?': '長い電車の旅でするのに一番いいことは？',
     'How many people is the perfect size for a party?': 'パーティーに理想的な人数は？',
     'How many people can sit around your dining table?': 'あなたの食卓には何人座れますか？',
-    'What would you buy first if you won a lot of money?': '大金が当たったら最初に何を買いますか？',
-    'What would you save first if your house was on fire?': '家が火事になったら最初に何を持ち出しますか？',
+    'What would you buy first if you won a lot of money?':
+        '大金が当たったら最初に何を買いますか？',
+    'What would you save first if your house was on fire?':
+        '家が火事になったら最初に何を持ち出しますか？',
   },
   'zh-Hans': {
     'How many hours do you sleep on a weekend night?': '周末晚上你睡几个小时？',
@@ -279,7 +588,8 @@ const questionTranslations = <String, Map<String, String>>{
     'What would you take on a long flight?': '长途飞行你会带什么？',
     'What is a good name for a cat?': '给猫起什么名字好？',
     'What is a good name for a boat?': '给船起什么名字好？',
-    'How many minutes does it take you to get ready in the morning?': '你早上准备出门要几分钟？',
+    'How many minutes does it take you to get ready in the morning?':
+        '你早上准备出门要几分钟？',
     'How many minutes does it take you to cook dinner?': '你做晚饭要几分钟？',
     'Which superpower would you choose?': '你会选择什么超能力？',
     'Which job would you choose if money did not matter?': '如果不在乎钱，你会选什么工作？',
@@ -290,7 +600,8 @@ const questionTranslations = <String, Map<String, String>>{
     'How many times a week do you exercise?': '你每周运动几次？',
     'How many times a week do you eat dessert?': '你每周吃几次甜点？',
     'Which famous person would you invite to dinner?': '你会邀请哪位名人共进晚餐？',
-    'Which famous person would you swap lives with for a day?': '你想和哪位名人交换一天人生？',
+    'Which famous person would you swap lives with for a day?':
+        '你想和哪位名人交换一天人生？',
     'What is the most useful thing in a kitchen?': '厨房里最有用的东西是什么？',
     'What is the most useful thing in a bathroom?': '浴室里最有用的东西是什么？',
     'Which sound annoys you the most?': '什么声音最让你烦？',
@@ -335,7 +646,8 @@ const questionTranslations = <String, Map<String, String>>{
     'What would you take on a long flight?': '長途飛行你會帶什麼？',
     'What is a good name for a cat?': '給貓取什麼名字好？',
     'What is a good name for a boat?': '給船取什麼名字好？',
-    'How many minutes does it take you to get ready in the morning?': '你早上準備出門要幾分鐘？',
+    'How many minutes does it take you to get ready in the morning?':
+        '你早上準備出門要幾分鐘？',
     'How many minutes does it take you to cook dinner?': '你做晚餐要幾分鐘？',
     'Which superpower would you choose?': '你會選擇什麼超能力？',
     'Which job would you choose if money did not matter?': '如果不在乎錢，你會選什麼工作？',
@@ -346,7 +658,8 @@ const questionTranslations = <String, Map<String, String>>{
     'How many times a week do you exercise?': '你每週運動幾次？',
     'How many times a week do you eat dessert?': '你每週吃幾次甜點？',
     'Which famous person would you invite to dinner?': '你會邀請哪位名人共進晚餐？',
-    'Which famous person would you swap lives with for a day?': '你想和哪位名人交換一天人生？',
+    'Which famous person would you swap lives with for a day?':
+        '你想和哪位名人交換一天人生？',
     'What is the most useful thing in a kitchen?': '廚房裡最有用的東西是什麼？',
     'What is the most useful thing in a bathroom?': '浴室裡最有用的東西是什麼？',
     'Which sound annoys you the most?': '什麼聲音最讓你煩？',

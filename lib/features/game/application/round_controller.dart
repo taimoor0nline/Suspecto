@@ -109,7 +109,7 @@ class RoundController extends ChangeNotifier {
     _suspects = const [];
     _guessOptions = const [];
     _result = null;
-    _remaining = discussionMinutes * 60;
+    _remaining = options.discussionSeconds(discussionMinutes);
     _deadline = null;
   }
 

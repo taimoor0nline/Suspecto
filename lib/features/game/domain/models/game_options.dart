@@ -45,7 +45,11 @@ class GameOptions {
     this.lastChanceGuess = true,
     this.difficulty = WordDifficulty.mixed,
     this.jester = false,
+    this.speedRound = false,
   });
+
+  /// Discussion length for speed rounds.
+  static const speedRoundSeconds = 30;
 
   /// The Jester needs enough players that being voted out is a real bluff.
   static const jesterMinPlayers = 5;
@@ -64,12 +68,20 @@ class GameOptions {
   /// One innocent player secretly wins alone if the group votes them out.
   final bool jester;
 
+  /// A 30-second discussion with one-word clues.
+  final bool speedRound;
+
+  /// Discussion length in seconds for the chosen [minutes].
+  int discussionSeconds(int minutes) =>
+      speedRound ? speedRoundSeconds : minutes * 60;
+
   GameOptions copyWith({
     GameMode? mode,
     bool? imposterHint,
     bool? lastChanceGuess,
     WordDifficulty? difficulty,
     bool? jester,
+    bool? speedRound,
   }) =>
       GameOptions(
         mode: mode ?? this.mode,
@@ -77,6 +89,7 @@ class GameOptions {
         lastChanceGuess: lastChanceGuess ?? this.lastChanceGuess,
         difficulty: difficulty ?? this.difficulty,
         jester: jester ?? this.jester,
+        speedRound: speedRound ?? this.speedRound,
       );
 
   Map<String, dynamic> toJson() => {
@@ -85,6 +98,7 @@ class GameOptions {
         'lastChanceGuess': lastChanceGuess,
         'difficulty': difficulty.name,
         'jester': jester,
+        'speedRound': speedRound,
       };
 
   factory GameOptions.fromJson(Object? json) {
@@ -97,6 +111,7 @@ class GameOptions {
       lastChanceGuess: json['lastChanceGuess'] != false,
       difficulty: WordDifficulty.parse(json['difficulty']),
       jester: json['jester'] == true,
+      speedRound: json['speedRound'] == true,
     );
   }
 }

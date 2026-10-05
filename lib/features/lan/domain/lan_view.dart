@@ -174,6 +174,7 @@ class LanView {
     required this.round,
     required this.mode,
     required this.imposterCount,
+    this.speedRound = false,
     this.card,
     this.revealedQuestion,
     this.starterId,
@@ -193,6 +194,7 @@ class LanView {
   final int round;
   final GameMode mode;
   final int imposterCount;
+  final bool speedRound;
   final LanCard? card;
 
   /// Question mode: the innocent players' question, once the host reveals it.
@@ -236,6 +238,7 @@ class LanView {
         'round': round,
         'mode': mode.name,
         'imposters': imposterCount,
+        'speed': speedRound,
         'card': card?.toJson(),
         'question': revealedQuestion?.toJson(),
         'starter': starterId,
@@ -266,6 +269,7 @@ class LanView {
       round: json['round'] is int ? json['round'] as int : 0,
       mode: GameMode.parse(json['mode']),
       imposterCount: json['imposters'] is int ? json['imposters'] as int : 1,
+      speedRound: json['speed'] == true,
       card: LanCard.fromJson(json['card']),
       revealedQuestion: LanWord.fromJson(json['question']),
       starterId: json['starter'] is String ? json['starter'] as String : null,

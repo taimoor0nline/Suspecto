@@ -259,26 +259,34 @@ const arabicStrings = <String, String>{
   'Easy': 'سهل',
   'Medium': 'متوسط',
   'Hard': 'صعب',
-  'Everyone answers a question out loud. Imposters secretly get a different question.': 'يجيب الجميع عن سؤال بصوت عالٍ. يحصل المخادعون سراً على سؤال مختلف.',
+  'Everyone answers a question out loud. Imposters secretly get a different question.':
+      'يجيب الجميع عن سؤال بصوت عالٍ. يحصل المخادعون سراً على سؤال مختلف.',
   'Not used in question mode.': 'غير مستخدم في وضع الأسئلة.',
   'Jester role': 'دور المهرّج',
-  'One innocent player wins alone if the group votes them out. Needs 5+ players.': 'يفوز لاعب بريء وحده إذا صوّتت المجموعة لإخراجه. يتطلب ٥ لاعبين أو أكثر.',
-  'No words in these packs match that difficulty.': 'لا توجد كلمات في هذه الفئات بهذه الصعوبة.',
+  'One innocent player wins alone if the group votes them out. Needs 5+ players.':
+      'يفوز لاعب بريء وحده إذا صوّتت المجموعة لإخراجه. يتطلب ٥ لاعبين أو أكثر.',
+  'No words in these packs match that difficulty.':
+      'لا توجد كلمات في هذه الفئات بهذه الصعوبة.',
   'You are the Jester': 'أنت المهرّج',
-  'Get the group to vote you out to win alone, but don\'t make it obvious!': 'اجعل المجموعة تصوّت لإخراجك لتفوز وحدك، لكن لا تجعل الأمر واضحاً!',
+  'Get the group to vote you out to win alone, but don\'t make it obvious!':
+      'اجعل المجموعة تصوّت لإخراجك لتفوز وحدك، لكن لا تجعل الأمر واضحاً!',
   'YOUR QUESTION': 'سؤالك',
-  'Answer out loud when it is your turn. Never read the question aloud.': 'أجب بصوت عالٍ عندما يحين دورك. لا تقرأ السؤال بصوت عالٍ أبداً.',
+  'Answer out loud when it is your turn. Never read the question aloud.':
+      'أجب بصوت عالٍ عندما يحين دورك. لا تقرأ السؤال بصوت عالٍ أبداً.',
   'Answer time': 'وقت الإجابة',
   'Question round': 'جولة أسئلة',
-  'Imposters got a different question and may not know they are imposters.': 'حصل المخادعون على سؤال مختلف وقد لا يعرفون أنهم مخادعون.',
+  'Imposters got a different question and may not know they are imposters.':
+      'حصل المخادعون على سؤال مختلف وقد لا يعرفون أنهم مخادعون.',
   'THE QUESTION': 'السؤال',
   'THE IMPOSTERS\' QUESTION': 'سؤال المخادعين',
   'Whose answer did not fit?': 'من كانت إجابته غريبة؟',
-  'Everyone answers out loud first. Then reveal the real question.': 'يجيب الجميع بصوت عالٍ أولاً، ثم اكشفوا السؤال الحقيقي.',
+  'Everyone answers out loud first. Then reveal the real question.':
+      'يجيب الجميع بصوت عالٍ أولاً، ثم اكشفوا السؤال الحقيقي.',
   'Reveal the real question': 'اكشف السؤال الحقيقي',
   'The host will reveal it.': 'سيكشفه المضيف.',
   'The Jester fooled everyone!': 'المهرّج خدع الجميع!',
-  'The group voted out the Jester, who wins this round alone.': 'صوّتت المجموعة لإخراج المهرّج، فيفوز وحده بهذه الجولة.',
+  'The group voted out the Jester, who wins this round alone.':
+      'صوّتت المجموعة لإخراج المهرّج، فيفوز وحده بهذه الجولة.',
   'The Jester won': 'فاز المهرّج',
   'Party awards': 'جوائز الحفلة',
   'MVP': 'الأفضل',
@@ -288,8 +296,11 @@ const arabicStrings = <String, String>{
   'Chaos Jester': 'مهرّج الفوضى',
   'Share results': 'شارك النتائج',
   'Share': 'مشاركة',
-  'Sharing is not available on this device.': 'المشاركة غير متاحة على هذا الجهاز.',
-  'Played Suspecto, the party word game.': 'لعبنا Suspecto، لعبة الكلمات الجماعية.',
+  'Sharing is not available on this device.':
+      'المشاركة غير متاحة على هذا الجهاز.',
+  'Played Suspecto, the party word game.':
+      'لعبنا Suspecto، لعبة الكلمات الجماعية.',
   'Sound effects': 'المؤثرات الصوتية',
-  'Card, vote, timer and celebration sounds.': 'أصوات البطاقات والتصويت والمؤقت والاحتفال.',
+  'Card, vote, timer and celebration sounds.':
+      'أصوات البطاقات والتصويت والمؤقت والاحتفال.',
 };
