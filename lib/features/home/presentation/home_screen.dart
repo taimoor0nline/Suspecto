@@ -1,3 +1,5 @@
+import 'package:suspecto/features/tutorial/presentation/tutorial_screen.dart';
+import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/features/settings/presentation/settings_screen.dart';
 import 'package:suspecto/features/history/presentation/history_screen.dart';
 import 'package:suspecto/core/localization.dart';
@@ -53,6 +55,10 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.devices_rounded),
             label: const LocalText('Play on several phones'),
           ),
+          if (!(StoreScope.maybeOf(context)?.tutorialSeen ?? true)) ...[
+            const SizedBox(height: 16),
+            const _TutorialCard(),
+          ],
           const SizedBox(height: 24),
           const LocalText('HOW TO PLAY',
               style: TextStyle(fontWeight: FontWeight.w800)),
@@ -63,6 +69,14 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 12),
           const LocalText(
             'Try Undercover mode, where imposters get a similar word, and win points across rounds.',
+          ),
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton.icon(
+              onPressed: () => _openTutorial(context),
+              icon: const Icon(Icons.school_outlined),
+              label: const LocalText('Quick tutorial'),
+            ),
           ),
           const SizedBox(height: 24),
           OutlinedButton.icon(
@@ -86,4 +100,32 @@ class HomeScreen extends StatelessWidget {
               label: const LocalText('Settings')),
         ],
       );
+}
+
+void _openTutorial(BuildContext context) => Navigator.of(context)
+    .push(MaterialPageRoute<void>(builder: (_) => const TutorialScreen()));
+
+/// Invites first-time players to the tutorial until it is seen or dismissed.
+class _TutorialCard extends StatelessWidget {
+  const _TutorialCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      color: theme.colorScheme.secondaryContainer,
+      child: ListTile(
+        contentPadding: const EdgeInsetsDirectional.only(start: 16, end: 4),
+        leading: const Text('👋', style: TextStyle(fontSize: 28)),
+        title: const LocalText('New here?'),
+        subtitle: const LocalText('Learn the game in one minute.'),
+        onTap: () => _openTutorial(context),
+        trailing: IconButton(
+          tooltip: translate(context, 'Dismiss'),
+          icon: const Icon(Icons.close),
+          onPressed: () => StoreScope.maybeOf(context)?.markTutorialSeen(),
+        ),
+      ),
+    );
+  }
 }

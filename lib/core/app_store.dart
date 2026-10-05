@@ -35,6 +35,9 @@ class AppStore extends ChangeNotifier {
 
   /// The name this phone last used in a multi-phone game.
   String lanName = '';
+
+  /// The quick tutorial was finished or dismissed on this device.
+  bool tutorialSeen = false;
   final List<WordPack> _customPacks = [];
   List<WordPack> get customPacks => List.unmodifiable(_customPacks);
   final List<Map<String, dynamic>> _history = [];
@@ -86,6 +89,7 @@ class AppStore extends ChangeNotifier {
     lastImposters = data['imposters'] is int ? data['imposters'] as int : 1;
     lastMinutes = data['minutes'] is int ? data['minutes'] as int : 3;
     lastOptions = GameOptions.fromJson(data['options']);
+    tutorialSeen = data['tutorialSeen'] == true;
     lanName =
         data['lanName'] is String && (data['lanName'] as String).length <= 24
             ? data['lanName'] as String
@@ -179,6 +183,7 @@ class AppStore extends ChangeNotifier {
             'minutes': lastMinutes,
             'options': lastOptions.toJson(),
             'lanName': lanName,
+            'tutorialSeen': tutorialSeen,
             'customPacks': [for (final pack in _customPacks) pack.toJson()],
             'history': _history
           }));
@@ -211,6 +216,14 @@ class AppStore extends ChangeNotifier {
     lastImposters = imposters;
     lastMinutes = minutes;
     lastOptions = options ?? lastOptions;
+    await _save();
+  }
+
+  Future<void> markTutorialSeen() async {
+    if (tutorialSeen) {
+      return;
+    }
+    tutorialSeen = true;
     await _save();
   }
 
