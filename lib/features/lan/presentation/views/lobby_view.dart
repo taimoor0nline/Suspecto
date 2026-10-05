@@ -15,16 +15,18 @@ class LobbyView extends StatelessWidget {
   Widget build(BuildContext context) {
     final view = session.view!;
     final theme = Theme.of(context);
-    final code = session.joinCode;
+    final code = session.invite;
     final connected = view.players.where((p) => p.connected).length;
     return LanPage(
       view: view,
       onLeave: onLeave,
       reconnecting: session.status == LanStatus.reconnecting,
       title: view.isHost ? 'Invite your friends' : "You're in!",
-      subtitle: view.isHost
-          ? 'Friends join on the same Wi-Fi or your hotspot. No internet needed.'
-          : 'Waiting for the host to start the round.',
+      subtitle: !view.isHost
+          ? 'Waiting for the host to start the round.'
+          : (code?.online ?? false)
+              ? 'Friends anywhere can join with this code.'
+              : 'Friends join on the same Wi-Fi or your hotspot. No internet needed.',
       children: [
         if (code != null)
           Card(
@@ -46,7 +48,7 @@ class LobbyView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const LocalText('JOIN CODE'),
+                  LocalText(code.online ? 'ROOM CODE' : 'JOIN CODE'),
                   SelectableText(
                     code.code,
                     textDirection: TextDirection.ltr,

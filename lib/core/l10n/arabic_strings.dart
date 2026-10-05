@@ -398,4 +398,33 @@ const arabicStrings = <String, String>{
   '1 vote': 'صوت واحد',
   '1 pt': 'نقطة واحدة',
   '1 word': 'كلمة واحدة',
+  // online2_mod
+  'Online games are not available in this version.':
+      'الألعاب عبر الإنترنت غير متاحة في هذا الإصدار.',
+  'Couldn\'t reach the online game server. Check your internet connection.':
+      'تعذّر الوصول إلى خادم اللعب عبر الإنترنت. تحقق من اتصالك بالإنترنت.',
+  'No game with that code. Check the code and try again.':
+      'لا توجد لعبة بهذا الرمز. تحقق من الرمز وحاول مجدداً.',
+  'The online game server is busy. Try again soon.':
+      'خادم اللعب عبر الإنترنت مشغول. حاول مجدداً بعد قليل.',
+  'Lost the connection to the online game server.':
+      'انقطع الاتصال بخادم اللعب عبر الإنترنت.',
+  'Friends anywhere can join with this code.':
+      'يمكن للأصدقاء الانضمام من أي مكان بهذا الرمز.',
+  'ROOM CODE': 'رمز الغرفة',
+  'Play online': 'العب عبر الإنترنت',
+  'Friends anywhere join with a room code. Everyone needs internet.':
+      'ينضم الأصدقاء من أي مكان برمز الغرفة. يحتاج الجميع إلى الإنترنت.',
+  'One phone hosts an online room.': 'يستضيف هاتف واحد غرفة عبر الإنترنت.',
+  'Share the 6-character room code or QR code with your friends.':
+      'شارك رمز الغرفة المكوّن من ٦ أحرف أو رمز QR مع أصدقائك.',
+  'Everyone joins from their own phone, on any network.':
+      'ينضم الجميع من هواتفهم، على أي شبكة.',
+  'Host an online game': 'استضف لعبة عبر الإنترنت',
+  'Join an online game': 'انضم إلى لعبة عبر الإنترنت',
+  'Pick the rules. Friends join from anywhere with a room code.':
+      'اختر القواعد. ينضم الأصدقاء من أي مكان برمز الغرفة.',
+  'Type or scan the room code on the host\'s phone. Works from anywhere with internet.':
+      'اكتب أو امسح رمز الغرفة الظاهر على هاتف المضيف. يعمل من أي مكان فيه إنترنت.',
+  'Room code': 'رمز الغرفة',
 };

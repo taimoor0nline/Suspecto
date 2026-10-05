@@ -447,6 +447,34 @@ const uiTranslations = <String, Map<String, String>>{
     'Imposters spotted: {number}': 'Impostores descubiertos: {number}',
     'Votes received: {number}': 'Votos recibidos: {number}',
     'Jester wins: {number}': 'Victorias como bufón: {number}',
+    'Online games are not available in this version.':
+        'Las partidas en línea no están disponibles en esta versión.',
+    'Couldn\'t reach the online game server. Check your internet connection.':
+        'No se pudo conectar con el servidor de juego en línea. Comprueba tu conexión a internet.',
+    'No game with that code. Check the code and try again.':
+        'No hay ninguna partida con ese código. Revísalo e inténtalo de nuevo.',
+    'The online game server is busy. Try again soon.':
+        'El servidor de juego en línea está ocupado. Inténtalo de nuevo en breve.',
+    'Lost the connection to the online game server.':
+        'Se perdió la conexión con el servidor de juego en línea.',
+    'Friends anywhere can join with this code.':
+        'Tus amigos pueden unirse desde cualquier lugar con este código.',
+    'ROOM CODE': 'CÓDIGO DE SALA',
+    'Play online': 'Jugar en línea',
+    'Friends anywhere join with a room code. Everyone needs internet.':
+        'Tus amigos se unen desde cualquier lugar con un código de sala. Todos necesitan internet.',
+    'One phone hosts an online room.': 'Un teléfono crea una sala en línea.',
+    'Share the 6-character room code or QR code with your friends.':
+        'Comparte con tus amigos el código de sala de 6 caracteres o el código QR.',
+    'Everyone joins from their own phone, on any network.':
+        'Todos se unen desde su teléfono, en cualquier red.',
+    'Host an online game': 'Crear partida en línea',
+    'Join an online game': 'Unirse a una partida en línea',
+    'Pick the rules. Friends join from anywhere with a room code.':
+        'Elige las reglas. Tus amigos se unen desde cualquier lugar con un código de sala.',
+    'Type or scan the room code on the host\'s phone. Works from anywhere with internet.':
+        'Escribe o escanea el código de sala del teléfono del anfitrión. Funciona desde cualquier lugar con internet.',
+    'Room code': 'Código de sala',
   },
   'fr': {
     'Trust no one.\nSuspect everyone.':
@@ -892,6 +920,35 @@ const uiTranslations = <String, Map<String, String>>{
     'Imposters spotted: {number}': 'Imposteurs repérés : {number}',
     'Votes received: {number}': 'Votes reçus : {number}',
     'Jester wins: {number}': 'Victoires en bouffon : {number}',
+    'Online games are not available in this version.':
+        'Les parties en ligne ne sont pas disponibles dans cette version.',
+    'Couldn\'t reach the online game server. Check your internet connection.':
+        'Impossible de joindre le serveur de jeu en ligne. Vérifie ta connexion internet.',
+    'No game with that code. Check the code and try again.':
+        'Aucune partie avec ce code. Vérifie le code et réessaie.',
+    'The online game server is busy. Try again soon.':
+        'Le serveur de jeu en ligne est occupé. Réessaie bientôt.',
+    'Lost the connection to the online game server.':
+        'Connexion au serveur de jeu en ligne perdue.',
+    'Friends anywhere can join with this code.':
+        'Tes amis peuvent rejoindre de n’importe où avec ce code.',
+    'ROOM CODE': 'CODE DE SALLE',
+    'Play online': 'Jouer en ligne',
+    'Friends anywhere join with a room code. Everyone needs internet.':
+        'Tes amis rejoignent de n’importe où avec un code de salle. Tout le monde a besoin d’internet.',
+    'One phone hosts an online room.':
+        'Un téléphone héberge une salle en ligne.',
+    'Share the 6-character room code or QR code with your friends.':
+        'Partage le code de salle à 6 caractères ou le QR code avec tes amis.',
+    'Everyone joins from their own phone, on any network.':
+        'Chacun rejoint depuis son téléphone, sur n’importe quel réseau.',
+    'Host an online game': 'Héberger une partie en ligne',
+    'Join an online game': 'Rejoindre une partie en ligne',
+    'Pick the rules. Friends join from anywhere with a room code.':
+        'Choisis les règles. Tes amis rejoignent de n’importe où avec un code de salle.',
+    'Type or scan the room code on the host\'s phone. Works from anywhere with internet.':
+        'Saisis ou scanne le code de salle affiché sur le téléphone de l’hôte. Fonctionne partout avec internet.',
+    'Room code': 'Code de salle',
   },
   'ja': {
     'Trust no one.\nSuspect everyone.': '誰も信じるな。\n全員を疑え。',
@@ -1302,6 +1359,32 @@ const uiTranslations = <String, Map<String, String>>{
     'Imposters spotted: {number}': '見抜いたインポスター：{number}',
     'Votes received: {number}': '集めた票：{number}',
     'Jester wins: {number}': 'ジェスターでの勝利：{number}',
+    'Online games are not available in this version.':
+        'このバージョンではオンラインゲームを利用できません。',
+    'Couldn\'t reach the online game server. Check your internet connection.':
+        'オンラインゲームサーバーに接続できません。インターネット接続を確認してください。',
+    'No game with that code. Check the code and try again.':
+        'そのコードのゲームはありません。コードを確認してもう一度試してください。',
+    'The online game server is busy. Try again soon.':
+        'オンラインゲームサーバーが混雑しています。しばらくしてからもう一度試してください。',
+    'Lost the connection to the online game server.': 'オンラインゲームサーバーとの接続が切れました。',
+    'Friends anywhere can join with this code.': '友達はどこからでもこのコードで参加できます。',
+    'ROOM CODE': 'ルームコード',
+    'Play online': 'オンラインで遊ぶ',
+    'Friends anywhere join with a room code. Everyone needs internet.':
+        '友達はどこからでもルームコードで参加できます。全員インターネットが必要です。',
+    'One phone hosts an online room.': '1台がオンラインルームをホストします。',
+    'Share the 6-character room code or QR code with your friends.':
+        '6文字のルームコードかQRコードを友達に共有します。',
+    'Everyone joins from their own phone, on any network.':
+        '全員が自分の端末から、どのネットワークでも参加できます。',
+    'Host an online game': 'オンラインゲームをホスト',
+    'Join an online game': 'オンラインゲームに参加',
+    'Pick the rules. Friends join from anywhere with a room code.':
+        'ルールを選ぼう。友達はどこからでもルームコードで参加します。',
+    'Type or scan the room code on the host\'s phone. Works from anywhere with internet.':
+        'ホストの端末のルームコードを入力するか読み取ります。インターネットがあればどこからでも使えます。',
+    'Room code': 'ルームコード',
   },
   'zh-Hans': {
     'Trust no one.\nSuspect everyone.': '别相信任何人。\n每个人都值得怀疑。',
@@ -1699,6 +1782,30 @@ const uiTranslations = <String, Map<String, String>>{
     'Imposters spotted: {number}': '识破卧底：{number}',
     'Votes received: {number}': '被投票数：{number}',
     'Jester wins: {number}': '小丑获胜：{number}',
+    'Online games are not available in this version.': '此版本不支持在线游戏。',
+    'Couldn\'t reach the online game server. Check your internet connection.':
+        '无法连接在线游戏服务器，请检查网络连接。',
+    'No game with that code. Check the code and try again.':
+        '没有使用该代码的游戏，请检查代码后重试。',
+    'The online game server is busy. Try again soon.': '在线游戏服务器繁忙，请稍后再试。',
+    'Lost the connection to the online game server.': '与在线游戏服务器的连接已断开。',
+    'Friends anywhere can join with this code.': '朋友在任何地方都能用这个代码加入。',
+    'ROOM CODE': '房间码',
+    'Play online': '在线游戏',
+    'Friends anywhere join with a room code. Everyone needs internet.':
+        '朋友在任何地方都能用房间码加入。每个人都需要联网。',
+    'One phone hosts an online room.': '一部手机创建在线房间。',
+    'Share the 6-character room code or QR code with your friends.':
+        '把6位房间码或二维码分享给朋友。',
+    'Everyone joins from their own phone, on any network.':
+        '每个人用自己的手机，在任何网络都能加入。',
+    'Host an online game': '创建在线游戏',
+    'Join an online game': '加入在线游戏',
+    'Pick the rules. Friends join from anywhere with a room code.':
+        '选择规则。朋友在任何地方都能用房间码加入。',
+    'Type or scan the room code on the host\'s phone. Works from anywhere with internet.':
+        '输入或扫描主持人手机上的房间码。有网络的地方都能用。',
+    'Room code': '房间码',
   },
   'zh-Hant': {
     'Trust no one.\nSuspect everyone.': '別相信任何人。\n每個人都值得懷疑。',
@@ -2097,5 +2204,29 @@ const uiTranslations = <String, Map<String, String>>{
     'Imposters spotted: {number}': '識破臥底：{number}',
     'Votes received: {number}': '被投票數：{number}',
     'Jester wins: {number}': '小丑獲勝：{number}',
+    'Online games are not available in this version.': '此版本不支援線上遊戲。',
+    'Couldn\'t reach the online game server. Check your internet connection.':
+        '無法連線線上遊戲伺服器，請檢查網路連線。',
+    'No game with that code. Check the code and try again.':
+        '沒有使用該代碼的遊戲，請檢查代碼後重試。',
+    'The online game server is busy. Try again soon.': '線上遊戲伺服器繁忙，請稍後再試。',
+    'Lost the connection to the online game server.': '與線上遊戲伺服器的連線已中斷。',
+    'Friends anywhere can join with this code.': '朋友在任何地方都能用這個代碼加入。',
+    'ROOM CODE': '房間碼',
+    'Play online': '線上遊戲',
+    'Friends anywhere join with a room code. Everyone needs internet.':
+        '朋友在任何地方都能用房間碼加入。每個人都需要連網。',
+    'One phone hosts an online room.': '一支手機建立線上房間。',
+    'Share the 6-character room code or QR code with your friends.':
+        '把6位房間碼或 QR 碼分享給朋友。',
+    'Everyone joins from their own phone, on any network.':
+        '每個人用自己的手機，在任何網路都能加入。',
+    'Host an online game': '建立線上遊戲',
+    'Join an online game': '加入線上遊戲',
+    'Pick the rules. Friends join from anywhere with a room code.':
+        '選擇規則。朋友在任何地方都能用房間碼加入。',
+    'Type or scan the room code on the host\'s phone. Works from anywhere with internet.':
+        '輸入或掃描主持人手機上的房間碼。有網路的地方都能用。',
+    'Room code': '房間碼',
   },
 };

@@ -18,7 +18,10 @@ import 'package:suspecto/features/packs/presentation/packs_screen.dart';
 
 /// The host's name and rules; players are whoever joins the lobby.
 class HostSetupScreen extends StatefulWidget {
-  const HostSetupScreen({super.key});
+  const HostSetupScreen({super.key, this.online = false});
+
+  /// Host an online room instead of a Wi-Fi/hotspot game.
+  final bool online;
 
   @override
   State<HostSetupScreen> createState() => _HostSetupScreenState();
@@ -32,6 +35,8 @@ class _HostSetupScreenState extends State<HostSetupScreen> {
   int _minutes = 3;
   GameOptions _options = const GameOptions();
   bool _restored = false;
+
+  bool get _online => widget.online;
   bool _starting = false;
 
   List<WordPack> get _packs => [
@@ -85,7 +90,8 @@ class _HostSetupScreenState extends State<HostSetupScreen> {
     setState(() => _starting = true);
     unawaited(store?.saveLanName(_name.text));
     try {
-      final session = await HostSession.start(
+      final session =
+          await (_online ? HostSession.startOnline : HostSession.start)(
         hostName: _name.text,
         config: LanGameConfig(
           imposterCount: _imposters,
@@ -118,8 +124,10 @@ class _HostSetupScreenState extends State<HostSetupScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GamePage(
-      title: 'Host a game',
-      subtitle: 'Pick the rules. Friends join from their own phones.',
+      title: _online ? 'Host an online game' : 'Host a game',
+      subtitle: _online
+          ? 'Pick the rules. Friends join from anywhere with a room code.'
+          : 'Pick the rules. Friends join from their own phones.',
       bottomAction: FilledButton.icon(
         onPressed: _starting ? null : _host,
         icon: _starting
