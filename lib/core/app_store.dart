@@ -3,11 +3,14 @@ import 'package:suspecto/core/language_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:suspecto/features/game/domain/models/game_options.dart';
+import 'package:suspecto/features/packs/domain/word_pack.dart';
 
 class PlayerStats {
   int played = 0;
   int wins = 0;
   int imposterRounds = 0;
+  int points = 0;
 }
 
 class AppStore extends ChangeNotifier {
@@ -24,6 +27,9 @@ class AppStore extends ChangeNotifier {
   List<String> lastCategories = [];
   int lastImposters = 1;
   int lastMinutes = 3;
+  GameOptions lastOptions = const GameOptions();
+  final List<WordPack> _customPacks = [];
+  List<WordPack> get customPacks => List.unmodifiable(_customPacks);
   final List<Map<String, dynamic>> _history = [];
   List<Map<String, dynamic>> get history => List.unmodifiable(
       _history.map((r) => Map<String, dynamic>.unmodifiable(r)));
@@ -53,8 +59,9 @@ class AppStore extends ChangeNotifier {
     } catch (_) {
       return;
     }
-    language = languageConfig.resolve(
-        data['language'] is String ? data['language'] as String : null).code;
+    language = languageConfig
+        .resolve(data['language'] is String ? data['language'] as String : null)
+        .code;
     theme = ['system', 'dark', 'light'].contains(data['theme'])
         ? data['theme'] as String
         : 'system';
@@ -71,6 +78,18 @@ class AppStore extends ChangeNotifier {
     lastCategories = validStrings(data['categories']);
     lastImposters = data['imposters'] is int ? data['imposters'] as int : 1;
     lastMinutes = data['minutes'] is int ? data['minutes'] as int : 3;
+    lastOptions = GameOptions.fromJson(data['options']);
+    _customPacks.clear();
+    final packs =
+        data['customPacks'] is List ? data['customPacks'] as List : [];
+    for (final json in packs) {
+      final pack = WordPack.fromJson(json);
+      if (pack != null &&
+          _customPacks.length < WordPack.maxCustomPacks &&
+          !_customPacks.any((p) => p.id == pack.id)) {
+        _customPacks.add(pack);
+      }
+    }
     _history.clear();
     final rounds = data['history'] is List ? data['history'] as List : [];
     for (final entry in rounds) {
@@ -94,9 +113,11 @@ class AppStore extends ChangeNotifier {
             (round['category'] as String).trim().isEmpty ||
             round['date'] is! String ||
             DateTime.tryParse(round['date'] as String) == null ||
-            round['citizensWin'] is! bool) {
+            round['citizensWin'] is! bool ||
+            (round['stolen'] != null && round['stolen'] is! bool)) {
           continue;
         }
+        final stolen = round['stolen'] == true;
         if (players.length < 3 ||
             players.length > 20 ||
             players.toSet().length != players.length ||
@@ -107,14 +128,24 @@ class AppStore extends ChangeNotifier {
             accused.length != imposters.length ||
             accused.toSet().length != accused.length ||
             ![...imposters, ...accused].every(players.contains) ||
-            accused.every(imposters.contains) != round['citizensWin']) {
+            (accused.every(imposters.contains) && !stolen) !=
+                round['citizensWin']) {
           continue;
         }
+        final rawPoints = round['points'] is Map ? round['points'] as Map : {};
         _history.add({
           ...round,
           'players': players,
           'imposters': imposters,
-          'accused': accused
+          'accused': accused,
+          'stolen': stolen,
+          'points': {
+            for (final entry in rawPoints.entries)
+              if (players.contains(entry.key) &&
+                  entry.value is int &&
+                  (entry.value as int) >= 0)
+                entry.key as String: entry.value as int,
+          },
         });
       } catch (_) {/* Skip only the malformed record. */}
     }
@@ -135,6 +166,8 @@ class AppStore extends ChangeNotifier {
             'categories': lastCategories,
             'imposters': lastImposters,
             'minutes': lastMinutes,
+            'options': lastOptions.toJson(),
+            'customPacks': [for (final pack in _customPacks) pack.toJson()],
             'history': _history
           }));
     } catch (_) {
@@ -158,12 +191,31 @@ class AppStore extends ChangeNotifier {
     await _save();
   }
 
-  Future<void> saveSetup(List<String> players, List<String> categories,
-      int imposters, int minutes) async {
+  Future<void> saveSetup(
+      List<String> players, List<String> categories, int imposters, int minutes,
+      {GameOptions? options}) async {
     lastPlayers = [...players];
     lastCategories = [...categories];
     lastImposters = imposters;
     lastMinutes = minutes;
+    lastOptions = options ?? lastOptions;
+    await _save();
+  }
+
+  /// Adds a custom pack, or replaces the one with the same ID.
+  Future<void> savePack(WordPack pack) async {
+    final index = _customPacks.indexWhere((p) => p.id == pack.id);
+    if (index >= 0) {
+      _customPacks[index] = pack;
+    } else if (_customPacks.length < WordPack.maxCustomPacks) {
+      _customPacks.add(pack);
+    }
+    await _save();
+  }
+
+  Future<void> deletePack(String id) async {
+    _customPacks.removeWhere((p) => p.id == id);
+    lastCategories = lastCategories.where((c) => c != id).toList();
     await _save();
   }
 
@@ -174,7 +226,12 @@ class AppStore extends ChangeNotifier {
       required List<String> players,
       required List<String> imposters,
       required List<String> accused,
-      required bool citizensWin}) async {
+      required bool citizensWin,
+      String mode = 'classic',
+      String? decoyWord,
+      bool customWord = false,
+      bool stolen = false,
+      Map<String, int> points = const {}}) async {
     if (_history.any((r) => r['id'] == id)) {
       return;
     }
@@ -186,7 +243,12 @@ class AppStore extends ChangeNotifier {
       'players': [...players],
       'imposters': [...imposters],
       'accused': [...accused],
-      'citizensWin': citizensWin
+      'citizensWin': citizensWin,
+      'mode': mode,
+      if (decoyWord != null) 'decoyWord': decoyWord,
+      if (customWord) 'customWord': true,
+      'stolen': stolen,
+      'points': {...points},
     });
     if (_history.length > 200) {
       _history.removeRange(200, _history.length);
@@ -201,6 +263,7 @@ class AppStore extends ChangeNotifier {
         final stats = result.putIfAbsent(name, PlayerStats.new);
         final imposter = (round['imposters'] as List).contains(name);
         stats.played++;
+        stats.points += ((round['points'] as Map?)?[name] as int?) ?? 0;
         if (imposter) {
           stats.imposterRounds++;
         }

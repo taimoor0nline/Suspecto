@@ -34,10 +34,11 @@ class _SuspectoAppState extends State<SuspectoApp> {
                 themeMode: _store.themeMode,
                 locale: _store.languageConfig.resolve(_store.language).locale,
                 supportedLocales: _store.languageConfig.enabled
-                    .map((language) => language.locale).toList(),
+                    .map((language) => language.locale)
+                    .toList(),
                 builder: (context, child) => Directionality(
-                  textDirection: _store.languageConfig
-                      .resolve(_store.language).direction,
+                  textDirection:
+                      _store.languageConfig.resolve(_store.language).direction,
                   child: child!,
                 ),
                 localizationsDelegates: const [
