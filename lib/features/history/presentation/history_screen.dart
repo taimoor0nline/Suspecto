@@ -5,6 +5,7 @@ import 'package:suspecto/features/game/presentation/game_page.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
+
   Future<void> _clear(BuildContext context, AppStore store) async {
     final clear = await showDialog<bool>(
         context: context,
@@ -25,11 +26,65 @@ class HistoryScreen extends StatelessWidget {
     }
   }
 
+  /// Saved words from custom packs are shown as typed, never translated.
+  static Widget _word(Map<String, dynamic> round, String key,
+          {TextStyle? style}) =>
+      round['customWord'] == true
+          ? Text(round[key] as String, style: style)
+          : LocalText(round[key] as String, style: style);
+
+  String _outcome(Map<String, dynamic> round) => round['citizensWin'] == true
+      ? 'Citizens won'
+      : round['stolen'] == true
+          ? 'Imposters stole the win'
+          : 'Imposters won';
+
+  void _details(BuildContext context, Map<String, dynamic> round) {
+    final points = (round['points'] as Map?) ?? const {};
+    showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+                title: _word(round, 'word'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    LocalText(_outcome(round)),
+                    if (round['mode'] == 'undercover' &&
+                        round['decoyWord'] is String) ...[
+                      const SizedBox(height: 8),
+                      const LocalText("THE IMPOSTERS' WORD"),
+                      _word(round, 'decoyWord',
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                    ],
+                    const SizedBox(height: 8),
+                    LocalText(
+                        'Imposters: ${(round['imposters'] as List).join(', ')}'),
+                    if (points.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      for (final entry in points.entries)
+                        if ((entry.value as int) > 0)
+                          LocalText('${entry.key}: +${entry.value} pts'),
+                    ],
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const LocalText('Close'))
+                ]));
+  }
+
   @override
   Widget build(BuildContext context) {
     final store = StoreScope.of(context);
+    final theme = Theme.of(context);
+    const heading = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
     final stats = store.stats.entries.toList()
-      ..sort((a, b) => b.value.wins.compareTo(a.value.wins));
+      ..sort((a, b) {
+        final byPoints = b.value.points.compareTo(a.value.points);
+        return byPoints != 0 ? byPoints : b.value.wins.compareTo(a.value.wins);
+      });
     return GamePage(
         title: 'Your party story',
         subtitle: 'Last 200 completed rounds on this device.',
@@ -41,46 +96,41 @@ class HistoryScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const LocalText('Finish a game to start your story.'),
           ] else ...[
-            const LocalText('Player stats',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            for (final entry in stats)
+            const LocalText('Leaderboard', style: heading),
+            for (final (rank, entry) in stats.indexed)
               ListTile(
                   contentPadding: EdgeInsets.zero,
                   leading: CircleAvatar(
-                      child: Text(entry.key.isEmpty
-                          ? '?'
-                          : entry.key.characters.first)),
+                      backgroundColor: rank == 0
+                          ? theme.colorScheme.primary
+                          : theme.colorScheme.surfaceContainerHighest,
+                      foregroundColor: rank == 0
+                          ? theme.colorScheme.onPrimary
+                          : theme.colorScheme.onSurface,
+                      child: rank == 0
+                          ? const Icon(Icons.emoji_events, size: 20)
+                          : Text(entry.key.isEmpty
+                              ? '?'
+                              : entry.key.characters.first)),
                   title: Text(entry.key),
-                  subtitle: Text(StoreScope.of(context).language == 'ar'
-                      ? '${entry.value.played} جولات • ${entry.value.imposterRounds} أدوار مخادع'
-                      : '${entry.value.played} rounds • ${entry.value.imposterRounds} imposter roles'),
-                  trailing: Text(StoreScope.of(context).language == 'ar'
-                      ? '${entry.value.wins} فوز'
-                      : '${entry.value.wins} wins')),
+                  subtitle: LocalText(
+                      '${entry.value.played} rounds • ${entry.value.wins} wins • ${entry.value.imposterRounds} imposter roles'),
+                  trailing: LocalText('${entry.value.points} pts',
+                      style: theme.textTheme.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w700))),
             const SizedBox(height: 24),
-            const LocalText('Completed rounds',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            const LocalText('Completed rounds', style: heading),
             for (final round in store.history)
               Card(
                   child: ListTile(
                 leading: Icon(round['citizensWin'] == true
                     ? Icons.verified_outlined
                     : Icons.theater_comedy_outlined),
-                title: LocalText(round['word'] as String),
+                title: _word(round, 'word'),
                 subtitle: Text(
-                    '${translate(context, round['citizensWin'] == true ? 'Citizens won' : 'Imposters won')}\n${MaterialLocalizations.of(context).formatMediumDate(DateTime.parse(round['date'] as String).toLocal())} • ${(round['players'] as List).join(', ')}'),
+                    '${translate(context, _outcome(round))}${round['mode'] == 'undercover' ? ' • ${translate(context, 'Undercover')}' : ''}\n${MaterialLocalizations.of(context).formatMediumDate(DateTime.parse(round['date'] as String).toLocal())} • ${(round['players'] as List).join(', ')}'),
                 isThreeLine: true,
-                onTap: () => showDialog<void>(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                            title: LocalText(round['word'] as String),
-                            content: LocalText(
-                                'Imposters: ${(round['imposters'] as List).join(', ')}'),
-                            actions: [
-                              TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const LocalText('Close'))
-                            ])),
+                onTap: () => _details(context, round),
               )),
             const SizedBox(height: 20),
             OutlinedButton.icon(
