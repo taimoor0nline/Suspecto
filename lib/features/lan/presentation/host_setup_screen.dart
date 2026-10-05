@@ -12,6 +12,7 @@ import 'package:suspecto/features/lan/application/lan_session.dart';
 import 'package:suspecto/features/lan/data/lan_socket.dart';
 import 'package:suspecto/features/lan/presentation/lan_game_screen.dart';
 import 'package:suspecto/features/packs/data/word_pack_catalog.dart';
+import 'package:suspecto/features/packs/domain/dealable_words.dart';
 import 'package:suspecto/features/packs/domain/word_pack.dart';
 import 'package:suspecto/features/packs/presentation/packs_screen.dart';
 
@@ -71,10 +72,10 @@ class _HostSetupScreenState extends State<HostSetupScreen> {
       return;
     }
     final packs = _packs.where((p) => _packIds.contains(p.id)).toList();
-    if (packs.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: LocalText('Choose at least one category.')),
-      );
+    final deal = dealableWords(packs, _options);
+    if (deal.error != null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: LocalText(deal.error!)));
       return;
     }
     final store = StoreScope.maybeOf(context);
@@ -90,7 +91,7 @@ class _HostSetupScreenState extends State<HostSetupScreen> {
           imposterCount: _imposters,
           discussionMinutes: _minutes,
           options: _options,
-          words: [for (final pack in packs) ...pack.entries],
+          words: deal.words,
         ),
         onRoundComplete: (result) => unawaited(store?.recordResult(result)),
       );
@@ -157,14 +158,16 @@ class _HostSetupScreenState extends State<HostSetupScreen> {
           onChanged: (options) => setState(() => _options = options),
         ),
         const SizedBox(height: 24),
-        PackPicker(
-          packs: _packs,
-          selected: _packIds,
-          onChanged: (ids) => setState(() => _packIds = ids),
-          onManage: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const PacksScreen())),
-        ),
-        const SizedBox(height: 24),
+        if (_options.mode != GameMode.questions) ...[
+          PackPicker(
+            packs: _packs,
+            selected: _packIds,
+            onChanged: (ids) => setState(() => _packIds = ids),
+            onManage: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const PacksScreen())),
+          ),
+          const SizedBox(height: 24),
+        ],
         LocalText('Discussion time', style: theme.textTheme.titleLarge),
         const SizedBox(height: 8),
         Wrap(

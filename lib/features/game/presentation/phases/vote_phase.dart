@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:suspecto/core/app_store.dart';
+import 'package:suspecto/core/audio/sound_effects.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/application/round_controller.dart';
 import 'package:suspecto/features/game/presentation/phases/phase_page.dart';
@@ -37,7 +38,7 @@ class VotePhase extends StatelessWidget {
                 onPressed: round.selected == null
                     ? null
                     : () {
-                        StoreScope.maybeOf(context)?.feedback();
+                        StoreScope.maybeOf(context)?.feedback(sound: Sfx.vote);
                         round.castVote();
                       },
                 child: const LocalText('Submit private vote'),

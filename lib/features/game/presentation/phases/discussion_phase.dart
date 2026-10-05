@@ -3,51 +3,43 @@ import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/application/round_controller.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/presentation/phases/phase_page.dart';
+import 'package:suspecto/features/game/presentation/widgets/round_widgets.dart';
 
-class DiscussionPhase extends StatelessWidget {
+class DiscussionPhase extends StatefulWidget {
   const DiscussionPhase(
       {super.key, required this.round, required this.onEndRound});
   final RoundController round;
   final VoidCallback onEndRound;
 
   @override
+  State<DiscussionPhase> createState() => _DiscussionPhaseState();
+}
+
+class _DiscussionPhaseState extends State<DiscussionPhase> {
+  bool _questionShown = false;
+
+  @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final remaining = round.remainingSeconds;
+    final round = widget.round;
+    final session = round.session;
+    final questions = session.mode == GameMode.questions;
+    final starter = session.startingPlayer.name;
     return PhasePage(
-      title: 'Let the bluffing begin',
-      subtitle:
-          '${round.session.startingPlayer.name} starts. Give one clue each, then discuss who is bluffing. Keep the word secret.',
-      onEndRound: onEndRound,
+      title: questions ? 'Answer time' : 'Let the bluffing begin',
+      subtitle: questions
+          ? '$starter answers first. Everyone answers their question out loud, then discuss whose answer did not fit.'
+          : '$starter starts. Give one clue each, then discuss who is bluffing. Keep the word secret.',
+      onEndRound: widget.onEndRound,
       children: [
-        if (round.session.mode == GameMode.undercover) ...[
-          Card(
-            color: theme.colorScheme.tertiaryContainer,
-            child: const ListTile(
-              leading: Icon(Icons.masks_outlined),
-              title: LocalText('Undercover round'),
-              subtitle: LocalText(
-                  'Imposters got a different word and may not know they are imposters.'),
-            ),
+        if (questions) ...[
+          QuestionRevealCard(
+            question: _questionShown ? session.secretWord : null,
+            onReveal: () => setState(() => _questionShown = true),
           ),
           const SizedBox(height: 12),
         ],
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              children: [
-                const Icon(Icons.timer_outlined, size: 48),
-                const SizedBox(height: 16),
-                Text(
-                  '${remaining ~/ 60}:${(remaining % 60).toString().padLeft(2, '0')}',
-                  style: theme.textTheme.displayLarge,
-                ),
-                LocalText(remaining == 0 ? 'Time to vote!' : 'Discussion time'),
-              ],
-            ),
-          ),
-        ),
+        DiscussionTimerCard(
+            remainingSeconds: round.remainingSeconds, mode: session.mode),
         const SizedBox(height: 24),
         FilledButton(
           onPressed: round.beginVoting,

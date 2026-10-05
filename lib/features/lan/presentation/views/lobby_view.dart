@@ -71,11 +71,16 @@ class LobbyView extends StatelessWidget {
           runSpacing: 8,
           children: [
             Chip(
-              avatar: Icon(view.mode == GameMode.undercover
-                  ? Icons.masks_outlined
-                  : Icons.theater_comedy_outlined),
-              label: LocalText(
-                  view.mode == GameMode.undercover ? 'Undercover' : 'Classic'),
+              avatar: Icon(switch (view.mode) {
+                GameMode.classic => Icons.theater_comedy_outlined,
+                GameMode.undercover => Icons.masks_outlined,
+                GameMode.questions => Icons.record_voice_over,
+              }),
+              label: LocalText(switch (view.mode) {
+                GameMode.classic => 'Classic',
+                GameMode.undercover => 'Undercover',
+                GameMode.questions => 'Questions',
+              }),
             ),
             Chip(
               avatar: const Icon(Icons.person_search_outlined),

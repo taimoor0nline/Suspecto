@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/application/round_controller.dart';
+import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/presentation/phases/phase_page.dart';
 import 'package:suspecto/features/game/presentation/widgets/secret_card.dart';
 
@@ -36,6 +37,8 @@ class RevealPhase extends StatelessWidget {
           hint: word == null && round.options.imposterHint
               ? session.secretWord
               : null,
+          question: session.mode == GameMode.questions,
+          jester: session.isJester(player),
         ),
         const SizedBox(height: 24),
         FilledButton(
