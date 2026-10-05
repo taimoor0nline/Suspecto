@@ -436,7 +436,12 @@
     "Sending your line…": "Enviando tu línea…",
     "Watch the drawing. Your turn is coming.": "Mira el dibujo. Pronto te toca.",
     "Skip this turn": "Saltar este turno",
-    "{name} is drawing": "{name} está dibujando"
+    "{name} is drawing": "{name} está dibujando",
+    "Share invite link": "Compartir enlace de invitación",
+    "Join my Suspecto game!": "¡Únete a mi partida de Suspecto!",
+    "React": "Reaccionar",
+    "This link didn't work": "Este enlace no ha funcionado",
+    "Ask the host for the code and join by typing it.": "Pide el código al anfitrión y únete escribiéndolo."
   },
   "fr": {
     "Trust no one.\nSuspect everyone.": "Ne fais confiance à personne.\nSoupçonne tout le monde.",
@@ -875,7 +880,12 @@
     "Sending your line…": "Envoi de ta ligne…",
     "Watch the drawing. Your turn is coming.": "Regarde le dessin. Ton tour arrive.",
     "Skip this turn": "Passer ce tour",
-    "{name} is drawing": "{name} dessine"
+    "{name} is drawing": "{name} dessine",
+    "Share invite link": "Partager le lien d'invitation",
+    "Join my Suspecto game!": "Rejoins ma partie de Suspecto !",
+    "React": "Réagir",
+    "This link didn't work": "Ce lien n'a pas fonctionné",
+    "Ask the host for the code and join by typing it.": "Demande le code à l'hôte et rejoins en le tapant."
   },
   "ja": {
     "Trust no one.\nSuspect everyone.": "誰も信じるな。\n全員を疑え。",
@@ -1314,7 +1324,12 @@
     "Sending your line…": "線を送信中…",
     "Watch the drawing. Your turn is coming.": "絵を見ていてください。もうすぐあなたの番です。",
     "Skip this turn": "この番をスキップ",
-    "{name} is drawing": "{name}が描いています"
+    "{name} is drawing": "{name}が描いています",
+    "Share invite link": "招待リンクを共有",
+    "Join my Suspecto game!": "Suspectoのゲームに参加しよう！",
+    "React": "リアクション",
+    "This link didn't work": "このリンクは使えませんでした",
+    "Ask the host for the code and join by typing it.": "ホストにコードを聞いて、入力して参加してください。"
   },
   "zh-Hans": {
     "Trust no one.\nSuspect everyone.": "别相信任何人。\n每个人都值得怀疑。",
@@ -1753,7 +1768,12 @@
     "Sending your line…": "正在发送你的笔画…",
     "Watch the drawing. Your turn is coming.": "看着这幅画，马上轮到你了。",
     "Skip this turn": "跳过这一轮",
-    "{name} is drawing": "{name}正在画"
+    "{name} is drawing": "{name}正在画",
+    "Share invite link": "分享邀请链接",
+    "Join my Suspecto game!": "加入我的 Suspecto 游戏！",
+    "React": "回应",
+    "This link didn't work": "此链接无效",
+    "Ask the host for the code and join by typing it.": "向主持人索要代码，输入代码加入。"
   },
   "zh-Hant": {
     "Trust no one.\nSuspect everyone.": "別相信任何人。\n每個人都值得懷疑。",
@@ -2192,6 +2212,11 @@
     "Sending your line…": "正在傳送你的筆畫…",
     "Watch the drawing. Your turn is coming.": "看著這幅畫，馬上輪到你了。",
     "Skip this turn": "跳過這一輪",
-    "{name} is drawing": "{name}正在畫"
+    "{name} is drawing": "{name}正在畫",
+    "Share invite link": "分享邀請連結",
+    "Join my Suspecto game!": "加入我的 Suspecto 遊戲！",
+    "React": "回應",
+    "This link didn't work": "此連結無效",
+    "Ask the host for the code and join by typing it.": "向主持人索取代碼，輸入代碼加入。"
   }
 }

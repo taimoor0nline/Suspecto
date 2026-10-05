@@ -159,6 +159,17 @@ game rules live in the domain layer and contain no Flutter UI code.
   the Accomplice's imposter IDs and the Detective's cleared ID, results name
   both, and views carry the match target, winner and tie. Once someone wins,
   the host's next `start` begins a new match.
+- `JoinLink` builds and parses `suspecto://room/<code>` and
+  `suspecto://join/<code>`; join QR codes now hold these links (the old
+  `suspecto:room:`/`suspecto:join:` prefixes still parse). Android declares
+  the scheme in an intent filter and iOS in `CFBundleURLTypes`; Flutter's
+  built-in deep linking delivers the route, which may be the path only
+  (`/ABC123`), so the code kind is decided by the last part's length.
+  `MaterialApp.onGenerateRoute` opens a pre-filled `JoinScreen`.
+- Reactions: phones send `react` with an index into `lanReactionEmoji`
+  (no free text) in `lanReactionPhases`, at most one per `reactionGap` per
+  player. Views carry the last `maxReactions` with an increasing `seq`, and
+  `ReactionOverlay` animates only reactions newer than the first view it saw.
 - Multi-phone protocol version 2 adds the Jester flag, revealed question and
   awards to each view.
 

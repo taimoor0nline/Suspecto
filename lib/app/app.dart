@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:suspecto/app/theme/app_theme.dart';
 import 'package:suspecto/core/app_store.dart';
+import 'package:suspecto/core/localization.dart';
+import 'package:suspecto/features/game/presentation/game_page.dart';
 import 'package:suspecto/features/home/presentation/home_screen.dart';
+import 'package:suspecto/features/lan/data/lan_transport.dart';
+import 'package:suspecto/features/lan/domain/join_code.dart';
+import 'package:suspecto/features/lan/domain/join_link.dart';
+import 'package:suspecto/features/lan/domain/room_code.dart';
+import 'package:suspecto/features/lan/presentation/join_screen.dart';
 
 class SuspectoApp extends StatefulWidget {
   const SuspectoApp({super.key, this.store});
@@ -47,5 +54,34 @@ class _SuspectoAppState extends State<SuspectoApp> {
                   GlobalCupertinoLocalizations.delegate
                 ],
                 home: const HomeScreen(),
+                onGenerateRoute: _joinRoute,
+                onUnknownRoute: (_) => MaterialPageRoute<void>(
+                  builder: (context) => GamePage(
+                    title: "This link didn't work",
+                    subtitle:
+                        'Ask the host for the code and join by typing it.',
+                    children: [
+                      FilledButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const LocalText('Back'),
+                      ),
+                    ],
+                  ),
+                ),
               )));
+}
+
+/// Opens the join screen for a join link (see [JoinLink]). Returns null for
+/// other routes, and for links this build cannot join.
+Route<void>? _joinRoute(RouteSettings settings) {
+  final code = JoinLink.parse(settings.name ?? '');
+  final Widget? screen = switch (code) {
+    final RoomCode room when onlineRoomsAvailable =>
+      JoinScreen(online: true, initialCode: room.code),
+    final JoinCode wifi when lanSupported => JoinScreen(initialCode: wifi.code),
+    _ => null,
+  };
+  return screen == null
+      ? null
+      : MaterialPageRoute<void>(builder: (_) => screen, settings: settings);
 }

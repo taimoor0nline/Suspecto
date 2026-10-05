@@ -10,19 +10,23 @@ bool get onlineRoomsAvailable => roomServerUrl.isNotEmpty;
 class RoomCode {
   const RoomCode(this.code);
 
+  /// The prefix older versions put in room QR codes; still accepted.
   static const qrPrefix = 'suspecto:room:';
   static const alphabet = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
   static const length = 6;
 
   final String code;
 
-  String get qrData => '$qrPrefix$code';
+  /// The QR code holds the join link, so phone cameras open the app.
+  String get qrData => 'suspecto://room/$code';
 
   /// Parses typed or scanned input, or returns null.
   static RoomCode? parse(String input) {
     var text = input.trim().toUpperCase();
-    if (text.startsWith(qrPrefix.toUpperCase())) {
-      text = text.substring(qrPrefix.length);
+    for (final prefix in [qrPrefix, 'suspecto://room/']) {
+      if (text.startsWith(prefix.toUpperCase())) {
+        text = text.substring(prefix.length);
+      }
     }
     text = text.replaceAll(RegExp(r'[\s-]'), '');
     if (text.length != length || !text.split('').every(alphabet.contains)) {

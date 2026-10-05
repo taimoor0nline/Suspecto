@@ -8,6 +8,8 @@ class JoinCode {
 
   static const basePort = 47820;
   static const portRange = 16;
+
+  /// The prefix older versions put in join QR codes; still accepted.
   static const qrPrefix = 'suspecto:join:';
   static const _alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 
@@ -29,7 +31,8 @@ class JoinCode {
     return '${chars.take(4).join()}-${chars.skip(4).join()}';
   }
 
-  String get qrData => '$qrPrefix$code';
+  /// The QR code holds the join link, so phone cameras open the app.
+  String get qrData => 'suspecto://join/${code.replaceAll('-', '')}';
 
   static bool canEncode(String host, int port) =>
       RegExp(r'^\d{1,3}(\.\d{1,3}){3}$').hasMatch(host) &&
@@ -41,8 +44,10 @@ class JoinCode {
   /// the look-alike letters O, I and L. Returns null for invalid codes.
   static JoinCode? parse(String input) {
     var text = input.trim().toUpperCase();
-    if (text.startsWith(qrPrefix.toUpperCase())) {
-      text = text.substring(qrPrefix.length);
+    for (final prefix in [qrPrefix, 'suspecto://join/']) {
+      if (text.startsWith(prefix.toUpperCase())) {
+        text = text.substring(prefix.length);
+      }
     }
     text = text
         .replaceAll(RegExp(r'[\s-]'), '')

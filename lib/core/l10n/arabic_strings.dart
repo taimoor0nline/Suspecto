@@ -502,4 +502,10 @@ const arabicStrings = <String, String>{
   'Sending your line…': 'جارٍ إرسال خطك…',
   'Watch the drawing. Your turn is coming.': 'تابع الرسمة. دورك قادم.',
   'Skip this turn': 'تخطَّ هذا الدور',
+  'Share invite link': 'شارك رابط الدعوة',
+  'Join my Suspecto game!': 'انضم إلى لعبتي في Suspecto!',
+  'React': 'تفاعل',
+  'This link didn\'t work': 'هذا الرابط لم يعمل',
+  'Ask the host for the code and join by typing it.':
+      'اطلب الرمز من المضيف وانضم بكتابته.',
 };

@@ -46,6 +46,9 @@ abstract final class LanAction {
   static const guess = 'guess';
   static const leave = 'leave';
 
+  /// An emoji reaction: {e: index into lanReactionEmoji}.
+  static const react = 'react';
+
   /// The current drawer's finished line: {xy: encoded points}.
   static const draw = 'draw';
   // Host only.
@@ -81,6 +84,12 @@ class LanHostGame {
   static const hostId = 'h';
   static const maxPlayers = 20;
 
+  /// Reactions kept in views; phones show each new one once.
+  static const maxReactions = 12;
+
+  /// Shortest gap between one player's reactions.
+  static const reactionGap = Duration(milliseconds: 700);
+
   final LanGameConfig config;
   final GameEngine _engine;
   final void Function()? onChanged;
@@ -100,6 +109,9 @@ class LanHostGame {
   final Map<String, int> _totals = {};
   final List<RoundResult> _history = [];
   bool _questionRevealed = false;
+  final List<LanReaction> _reactions = [];
+  int _reactionSeq = 0;
+  final Map<String, DateTime> _lastReaction = {};
   final List<DrawingStroke> _strokes = [];
   int _drawTurn = 0;
   Timer? _timer;
@@ -206,6 +218,8 @@ class LanHostGame {
         _guess(from, data['index']);
       case LanAction.leave:
         _leave(from);
+      case LanAction.react:
+        _react(from, data['e']);
       case LanAction.start when isHost && _betweenRounds:
         _startRound();
       case LanAction.discuss when isHost && _phase == LanPhase.reveal:
@@ -240,6 +254,26 @@ class LanHostGame {
           _changed();
         }
     }
+  }
+
+  void _react(String from, Object? emoji) {
+    final now = DateTime.now();
+    final last = _lastReaction[from];
+    if (!lanReactionPhases.contains(_phase) ||
+        _member(from) == null ||
+        emoji is! int ||
+        emoji < 0 ||
+        emoji >= lanReactionEmoji.length ||
+        (last != null && now.difference(last) < reactionGap)) {
+      return;
+    }
+    _lastReaction[from] = now;
+    _reactions
+        .add(LanReaction(seq: ++_reactionSeq, playerId: from, emoji: emoji));
+    if (_reactions.length > maxReactions) {
+      _reactions.removeAt(0);
+    }
+    _changed();
   }
 
   void _leave(String id) {
@@ -322,6 +356,7 @@ class LanHostGame {
     _seen.clear();
     _strokes.clear();
     _drawTurn = 0;
+    _reactions.clear();
     _questionRevealed = false;
     _guessOptions = const [];
     _accused = const [];
@@ -531,6 +566,8 @@ class LanHostGame {
       drawTurns: _drawingRound ? _drawTurns : 0,
       drawingRound:
           config.options.drawing && config.options.mode != GameMode.questions,
+      reactions:
+          lanReactionPhases.contains(_phase) ? List.of(_reactions) : const [],
     );
   }
 

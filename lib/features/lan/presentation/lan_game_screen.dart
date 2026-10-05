@@ -8,6 +8,7 @@ import 'package:suspecto/features/lan/domain/lan_view.dart';
 import 'package:suspecto/features/lan/presentation/views/lobby_view.dart';
 import 'package:suspecto/features/lan/presentation/views/result_view.dart';
 import 'package:suspecto/features/lan/presentation/views/round_views.dart';
+import 'package:suspecto/features/lan/presentation/widgets/reactions.dart';
 
 /// Shows a multi-phone game on this phone, host or guest. Owns [session] and
 /// leaves the game when closed.
@@ -119,6 +120,19 @@ class _LanGameScreenState extends State<LanGameScreen>
       );
     }
     final inRound = view.me?.inRound ?? false;
+    return ReactionScope(
+      session: session,
+      child: Stack(
+        children: [
+          _phaseView(view, inRound),
+          Positioned.fill(child: ReactionOverlay(session: session)),
+        ],
+      ),
+    );
+  }
+
+  Widget _phaseView(LanView view, bool inRound) {
+    final session = _session;
     return switch (view.phase) {
       LanPhase.lobby => LobbyView(session: session, onLeave: _leave),
       LanPhase.result => LanResultView(session: session, onLeave: _leave),

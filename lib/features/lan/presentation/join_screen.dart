@@ -11,10 +11,13 @@ import 'package:suspecto/features/lan/domain/join_code.dart';
 import 'package:suspecto/features/lan/presentation/lan_game_screen.dart';
 
 class JoinScreen extends StatefulWidget {
-  const JoinScreen({super.key, this.online = false});
+  const JoinScreen({super.key, this.online = false, this.initialCode});
 
   /// Join an online room by room code instead of a Wi-Fi join code.
   final bool online;
+
+  /// A code from a join link, filled in so joining is one tap.
+  final String? initialCode;
 
   @override
   State<JoinScreen> createState() => _JoinScreenState();
@@ -32,6 +35,7 @@ class _JoinScreenState extends State<JoinScreen> {
     if (!_restored) {
       _restored = true;
       _name.text = StoreScope.maybeOf(context)?.lanName ?? '';
+      _code.text = widget.initialCode ?? '';
     }
   }
 
