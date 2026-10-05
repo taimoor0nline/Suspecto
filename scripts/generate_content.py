@@ -43,9 +43,10 @@ def main():
     rows = json.loads((ROOT / 'assets/content/words.json').read_text())['words']
     validate_words(rows)
     source = (ROOT / 'lib/core/localization.dart').read_text()
-    arabic = source.split('const _arabic =')[1]
-    required = {ast.literal_eval("'" + key + "'") for key in
-                re.findall(r"'((?:\\.|[^'\\])*)'\s*:", arabic)}
+    arabic = (ROOT / 'lib/core/l10n/arabic_strings.dart').read_text()
+    arabic = arabic.split('const arabicStrings =')[1]
+    required = {ast.literal_eval(key) for key in re.findall(
+        r'''(?m)^\s*('(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")\s*:''', arabic)}
     templates = source.split('final _dynamicMessages =')[1].split('class LocalText')[0]
     required.update(ast.literal_eval("'" + key + "'") for key in
                     re.findall(r",\s*'((?:\\.|[^'\\])*)'\s*,\s*\[", templates))

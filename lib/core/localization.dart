@@ -88,15 +88,29 @@ final _dynamicMessages = <(RegExp, String, List<String>)>[
   (RegExp(r'^I am (.+)$'), 'I am {name}', ['name']),
   (RegExp(r'^Player (\d+)$'), 'Player {number}', ['number']),
   (RegExp(r'^Remove player (\d+)$'), 'Remove player {number}', ['number']),
-  (RegExp(r'^Add player \((\d+)/20\)$'), 'Add player ({number}/20)', ['number']),
+  (
+    RegExp(r'^Add player \((\d+)/20\)$'),
+    'Add player ({number}/20)',
+    ['number']
+  ),
   (RegExp(r'^(\d+) min$'), '{number} min', ['number']),
   (RegExp(r'^(\d+) votes$'), '{number} votes', ['number']),
-  (RegExp(r'^Card (\d+) of (\d+)\. Everyone else, look away\.$'),
-    'Card {number} of {total}. Everyone else, look away.', ['number', 'total']),
-  (RegExp(r'^Vote (\d+) of (\d+)\. Choose your suspect privately\.$'),
-    'Vote {number} of {total}. Choose your suspect privately.', ['number', 'total']),
-  (RegExp(r'^(.+) starts\. Give one clue each, then discuss who is bluffing\. Keep the word secret\.$'),
-    '{name} starts. Give one clue each, then discuss who is bluffing. Keep the word secret.', ['name']),
+  (
+    RegExp(r'^Card (\d+) of (\d+)\. Everyone else, look away\.$'),
+    'Card {number} of {total}. Everyone else, look away.',
+    ['number', 'total']
+  ),
+  (
+    RegExp(r'^Vote (\d+) of (\d+)\. Choose your suspect privately\.$'),
+    'Vote {number} of {total}. Choose your suspect privately.',
+    ['number', 'total']
+  ),
+  (
+    RegExp(
+        r'^(.+) starts\. Give one clue each, then discuss who is bluffing\. Keep the word secret\.$'),
+    '{name} starts. Give one clue each, then discuss who is bluffing. Keep the word secret.',
+    ['name']
+  ),
   (RegExp(r'^Imposters: (.+)$'), 'Imposters: {name}', ['name']),
   (
     RegExp(r'^Caught: (.+)\. Guess the secret word to steal the win\.$'),
