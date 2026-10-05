@@ -11,6 +11,7 @@ import 'package:suspecto/features/game/domain/models/round_result.dart';
 import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/domain/services/ballot.dart';
 import 'package:suspecto/features/game/domain/services/game_engine.dart';
+import 'package:suspecto/features/game/domain/services/match_rules.dart';
 import 'package:suspecto/features/game/domain/services/party_awards.dart';
 import 'package:suspecto/features/game/domain/services/scoring.dart';
 
@@ -157,27 +158,19 @@ class RoundController extends ChangeNotifier {
   /// Null for endless play, before the target, or while tied at the top
   /// (play continues until one player leads).
   Player? get champion {
-    if (matchTarget <= 0 || _phase != RoundPhase.result) {
+    if (_phase != RoundPhase.result) {
       return null;
     }
-    final table = standings;
-    if (table.first.value < matchTarget ||
-        (table.length > 1 && table[1].value == table.first.value)) {
-      return null;
-    }
-    return table.first.key;
+    final id = MatchRules.champion(_scores, matchTarget);
+    return players.where((p) => p.id == id).firstOrNull;
   }
 
   /// Players tied at the top on or above [matchTarget] with no single winner.
-  bool get matchTied {
-    if (matchTarget <= 0 || _phase != RoundPhase.result) {
-      return false;
-    }
-    final table = standings;
-    return table.first.value >= matchTarget &&
-        table.length > 1 &&
-        table[1].value == table.first.value;
-  }
+  bool get matchTied =>
+      _phase == RoundPhase.result && MatchRules.tied(_scores, matchTarget);
+
+  Map<String, int> get _scores =>
+      {for (final p in players) p.id: _totals[p.id] ?? 0};
 
   void playAgain() {
     if (champion != null) {

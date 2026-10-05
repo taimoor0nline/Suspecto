@@ -6,6 +6,7 @@ import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/presentation/game_page.dart';
 import 'package:suspecto/features/game/presentation/widgets/game_options_section.dart';
+import 'package:suspecto/features/game/presentation/widgets/match_length_picker.dart';
 import 'package:suspecto/features/game/presentation/widgets/pack_picker.dart';
 import 'package:suspecto/features/lan/application/lan_host_game.dart';
 import 'package:suspecto/features/lan/application/lan_session.dart';
@@ -170,6 +171,11 @@ class _HostSetupScreenState extends State<HostSetupScreen> {
             'Lowered automatically if too few players join (always fewer than half).'),
         const SizedBox(height: 24),
         GameOptionsSection(
+          options: _options,
+          onChanged: (options) => setState(() => _options = options),
+        ),
+        const SizedBox(height: 24),
+        MatchLengthPicker(
           options: _options,
           onChanged: (options) => setState(() => _options = options),
         ),

@@ -8,6 +8,7 @@ import 'package:suspecto/features/game/domain/services/game_engine.dart';
 import 'package:suspecto/features/game/presentation/game_page.dart';
 import 'package:suspecto/features/game/presentation/play_screen.dart';
 import 'package:suspecto/features/game/presentation/widgets/game_options_section.dart';
+import 'package:suspecto/features/game/presentation/widgets/match_length_picker.dart';
 import 'package:suspecto/features/game/presentation/widgets/pack_picker.dart';
 import 'package:suspecto/features/packs/data/word_pack_catalog.dart';
 import 'package:suspecto/features/packs/domain/dealable_words.dart';
@@ -183,36 +184,14 @@ class _SetupScreenState extends State<SetupScreen> {
         ),
         const SizedBox(height: 24),
         GameOptionsSection(
-          passAndPlay: true,
           options: _options,
           onChanged: (options) => setState(() => _options = options),
         ),
         const SizedBox(height: 24),
-        LocalText('Match length', style: theme.textTheme.titleLarge),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final target in GameOptions.matchTargets)
-              ChoiceChip(
-                avatar: target == 0
-                    ? const Icon(Icons.all_inclusive, size: 18)
-                    : const Icon(Icons.emoji_events_outlined, size: 18),
-                label:
-                    LocalText(target == 0 ? 'Endless' : 'First to $target pts'),
-                selected: _options.matchTarget == target,
-                onSelected: (_) => setState(
-                    () => _options = _options.copyWith(matchTarget: target)),
-              ),
-          ],
+        MatchLengthPicker(
+          options: _options,
+          onChanged: (options) => setState(() => _options = options),
         ),
-        const SizedBox(height: 8),
-        LocalText(
-            _options.matchTarget == 0
-                ? 'Play as many rounds as you like.'
-                : 'Play rounds until one player reaches the target score.',
-            style: theme.textTheme.bodyMedium),
         const SizedBox(height: 24),
         if (_options.mode != GameMode.questions) ...[
           PackPicker(

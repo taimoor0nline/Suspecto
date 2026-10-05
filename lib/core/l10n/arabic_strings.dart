@@ -490,9 +490,16 @@ const arabicStrings = <String, String>{
   'One player gets the real word, knows the imposters and wins with them. Needs 6+ players.':
       'لاعب يحصل على الكلمة الحقيقية ويعرف المخادعين ويفوز معهم. يحتاج 6 لاعبين أو أكثر.',
   'Drawing round': 'جولة الرسم',
-  'Take turns adding one line each to a drawing of your word, then discuss.': 'يضيف كل لاعب بدوره خطاً واحداً إلى رسمة كلمته، ثم تتناقشون.',
+  'Take turns adding one line each to a drawing of your word, then discuss.':
+      'يضيف كل لاعب بدوره خطاً واحداً إلى رسمة كلمته، ثم تتناقشون.',
   'Redo my line': 'أعد رسم خطي',
   'Done, pass the phone': 'تم، مرر الهاتف',
-  'Look at the drawing together. Whose lines look like a bluff? Keep the word secret.': 'انظروا إلى الرسمة معاً. خطوط من تبدو خدعة؟ لا تكشفوا الكلمة.',
+  'Look at the drawing together. Whose lines look like a bluff? Keep the word secret.':
+      'انظروا إلى الرسمة معاً. خطوط من تبدو خدعة؟ لا تكشفوا الكلمة.',
   'The drawing': 'الرسمة',
+  'Your turn to draw': 'دورك في الرسم',
+  'Done': 'تم',
+  'Sending your line…': 'جارٍ إرسال خطك…',
+  'Watch the drawing. Your turn is coming.': 'تابع الرسمة. دورك قادم.',
+  'Skip this turn': 'تخطَّ هذا الدور',
 };

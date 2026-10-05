@@ -5,16 +5,9 @@ import 'package:suspecto/features/game/domain/models/game_options.dart';
 /// Game mode, difficulty and optional rules for the setup screens.
 class GameOptionsSection extends StatelessWidget {
   const GameOptionsSection(
-      {super.key,
-      required this.options,
-      required this.onChanged,
-      this.passAndPlay = false});
+      {super.key, required this.options, required this.onChanged});
   final GameOptions options;
   final ValueChanged<GameOptions> onChanged;
-
-  /// Offers the drawing round, Detective and Accomplice, which only
-  /// pass-the-phone games support.
-  final bool passAndPlay;
 
   @override
   Widget build(BuildContext context) {
@@ -111,19 +104,18 @@ class GameOptionsSection extends StatelessWidget {
           value: options.speedRound,
           onChanged: (value) => onChanged(options.copyWith(speedRound: value)),
         ),
-        if (passAndPlay)
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            secondary: const Icon(Icons.brush_outlined),
-            title: const LocalText('Drawing round'),
-            subtitle: LocalText(questions
-                ? 'Not used in question mode.'
-                : 'Take turns adding one line each to a drawing of your word, then discuss.'),
-            value: !questions && options.drawing,
-            onChanged: questions
-                ? null
-                : (value) => onChanged(options.copyWith(drawing: value)),
-          ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          secondary: const Icon(Icons.brush_outlined),
+          title: const LocalText('Drawing round'),
+          subtitle: LocalText(questions
+              ? 'Not used in question mode.'
+              : 'Take turns adding one line each to a drawing of your word, then discuss.'),
+          value: !questions && options.drawing,
+          onChanged: questions
+              ? null
+              : (value) => onChanged(options.copyWith(drawing: value)),
+        ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           secondary: const Text('🃏', style: TextStyle(fontSize: 24)),
@@ -133,27 +125,24 @@ class GameOptionsSection extends StatelessWidget {
           value: options.jester,
           onChanged: (value) => onChanged(options.copyWith(jester: value)),
         ),
-        if (passAndPlay) ...[
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            secondary: const Text('🔍', style: TextStyle(fontSize: 24)),
-            title: const LocalText('Detective role'),
-            subtitle: const LocalText(
-                'One innocent player secretly learns that another player is innocent. Needs 4+ players.'),
-            value: options.detective,
-            onChanged: (value) => onChanged(options.copyWith(detective: value)),
-          ),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            secondary: const Text('🦹', style: TextStyle(fontSize: 24)),
-            title: const LocalText('Accomplice role'),
-            subtitle: const LocalText(
-                'One player gets the real word, knows the imposters and wins with them. Needs 6+ players.'),
-            value: options.accomplice,
-            onChanged: (value) =>
-                onChanged(options.copyWith(accomplice: value)),
-          ),
-        ],
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          secondary: const Text('🔍', style: TextStyle(fontSize: 24)),
+          title: const LocalText('Detective role'),
+          subtitle: const LocalText(
+              'One innocent player secretly learns that another player is innocent. Needs 4+ players.'),
+          value: options.detective,
+          onChanged: (value) => onChanged(options.copyWith(detective: value)),
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          secondary: const Text('🦹', style: TextStyle(fontSize: 24)),
+          title: const LocalText('Accomplice role'),
+          subtitle: const LocalText(
+              'One player gets the real word, knows the imposters and wins with them. Needs 6+ players.'),
+          value: options.accomplice,
+          onChanged: (value) => onChanged(options.copyWith(accomplice: value)),
+        ),
       ],
     );
   }

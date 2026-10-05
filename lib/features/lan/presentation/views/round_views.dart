@@ -3,6 +3,8 @@ import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/core/audio/sound_effects.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
+import 'package:suspecto/features/game/domain/models/player.dart';
+import 'package:suspecto/features/game/presentation/widgets/drawing_canvas.dart';
 import 'package:suspecto/features/game/presentation/widgets/round_widgets.dart';
 import 'package:suspecto/features/game/presentation/widgets/secret_card.dart';
 import 'package:suspecto/features/game/presentation/widgets/word_text.dart';
@@ -64,6 +66,9 @@ class LanRevealView extends LanRoundView {
           hint: card.hint?.entry,
           question: view.mode == GameMode.questions,
           jester: card.jester,
+          accompliceOf: card.accompliceOf?.map(view.nameOf).join(', '),
+          clearedName:
+              card.clearedId == null ? null : view.nameOf(card.clearedId!),
         ),
         const SizedBox(height: 24),
         if (!seen)
@@ -106,12 +111,18 @@ class LanDiscussionView extends LanRoundView {
       title: questions ? 'Answer time' : 'Let the bluffing begin',
       subtitle: questions
           ? '$starter answers first. Everyone answers their question out loud, then discuss whose answer did not fit.'
-          : '$starter starts. Give one clue each, then discuss who is bluffing. Keep the word secret.',
+          : view.strokes.isNotEmpty
+              ? 'Look at the drawing together. Whose lines look like a bluff? Keep the word secret.'
+              : '$starter starts. Give one clue each, then discuss who is bluffing. Keep the word secret.',
       children: [
         DiscussionTimerCard(
             remainingSeconds: view.remainingSeconds,
             mode: view.mode,
             speedRound: view.speedRound),
+        if (view.strokes.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          DrawingCanvas(players: lanPlayers(view), strokes: view.strokes),
+        ],
         if (questions) ...[
           const SizedBox(height: 16),
           QuestionRevealCard(
@@ -297,4 +308,89 @@ class LanSitOutView extends LanRoundView {
           LanPlayerList(view: view),
         ],
       );
+}
+
+/// Round players as game [Player]s, for shared widgets such as the canvas.
+List<Player> lanPlayers(LanView view) => [
+      for (final p in view.players) Player(id: p.id, name: p.name),
+    ];
+
+/// Drawing round: the drawer sketches one line on their own phone and sends
+/// it when done; everyone else watches the drawing grow.
+class LanDrawingView extends StatefulWidget {
+  const LanDrawingView(
+      {super.key, required this.session, required this.onLeave});
+  final LanSession session;
+  final VoidCallback onLeave;
+
+  @override
+  State<LanDrawingView> createState() => _LanDrawingViewState();
+}
+
+class _LanDrawingViewState extends State<LanDrawingView> {
+  List<Offset>? _pen;
+  List<Offset>? _line;
+  bool _sent = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final session = widget.session;
+    final view = session.view!;
+    final mine = view.myTurnToDraw && !_sent;
+    final drawer = view.player(view.drawerId);
+    final me = Player(id: view.you, name: view.me?.name ?? '');
+    final drawing = _pen ?? _line;
+    return LanPage(
+      view: view,
+      onLeave: widget.onLeave,
+      reconnecting: session.status == LanStatus.reconnecting,
+      title: mine ? 'Your turn to draw' : '${drawer?.name ?? '?'} is drawing',
+      subtitle:
+          'Line ${view.drawTurn + 1} of ${view.drawTurns}. Add one line to the drawing. No letters or numbers!',
+      children: [
+        DrawingCanvas(
+          players: lanPlayers(view),
+          strokes: view.strokes,
+          pen: mine ? drawing : null,
+          penPlayer: me,
+          onPenDown:
+              mine && _line == null ? (p) => setState(() => _pen = [p]) : null,
+          onPenMove: (p) => setState(() =>
+              _pen?.add(Offset(p.dx.clamp(0.0, 1.0), p.dy.clamp(0.0, 1.0)))),
+          onPenUp: () => setState(() {
+            _line = _pen;
+            _pen = null;
+          }),
+        ),
+        const SizedBox(height: 12),
+        if (mine) ...[
+          TextButton.icon(
+            onPressed:
+                _line == null ? null : () => setState(() => _line = null),
+            icon: const Icon(Icons.undo),
+            label: const LocalText('Redo my line'),
+          ),
+          const SizedBox(height: 8),
+          FilledButton(
+            onPressed: _line == null
+                ? null
+                : () {
+                    StoreScope.maybeOf(context)?.feedback();
+                    session.send(LanAction.draw, {'xy': encodePoints(_line!)});
+                    setState(() => _sent = true);
+                  },
+            child: const LocalText('Done'),
+          ),
+        ] else
+          WaitingNote(view.myTurnToDraw
+              ? 'Sending your line…'
+              : 'Watch the drawing. Your turn is coming.'),
+        if (view.isHost && !view.myTurnToDraw)
+          TextButton(
+            onPressed: () => session.send(LanAction.skipDraw),
+            child: const LocalText('Skip this turn'),
+          ),
+      ],
+    );
+  }
 }
