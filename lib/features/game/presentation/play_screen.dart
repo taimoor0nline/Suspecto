@@ -66,27 +66,9 @@ class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
 
   void _record(RoundResult result) {
     final store = StoreScope.maybeOf(context);
-    if (store == null) {
-      return;
+    if (store != null) {
+      unawaited(store.recordResult(result));
     }
-    final session = result.session;
-    unawaited(store.recordRound(
-      id: result.id,
-      word: session.secretWord.value,
-      category: session.secretWord.category,
-      players: session.players.map((p) => p.name).toList(),
-      imposters: session.imposters.map((p) => p.name).toList(),
-      accused: result.accusedIds.map(result.nameOf).toList(),
-      citizensWin: result.citizensWin,
-      mode: result.mode.name,
-      decoyWord: session.decoyWord?.value,
-      customWord: session.secretWord.custom,
-      stolen: result.stolen,
-      points: {
-        for (final entry in result.points.entries)
-          result.nameOf(entry.key): entry.value,
-      },
-    ));
   }
 
   Future<void> _endRound() async {

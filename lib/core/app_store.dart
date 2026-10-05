@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
+import 'package:suspecto/features/game/domain/models/round_result.dart';
 import 'package:suspecto/features/packs/domain/word_pack.dart';
 
 class PlayerStats {
@@ -28,6 +29,9 @@ class AppStore extends ChangeNotifier {
   int lastImposters = 1;
   int lastMinutes = 3;
   GameOptions lastOptions = const GameOptions();
+
+  /// The name this phone last used in a multi-phone game.
+  String lanName = '';
   final List<WordPack> _customPacks = [];
   List<WordPack> get customPacks => List.unmodifiable(_customPacks);
   final List<Map<String, dynamic>> _history = [];
@@ -79,6 +83,10 @@ class AppStore extends ChangeNotifier {
     lastImposters = data['imposters'] is int ? data['imposters'] as int : 1;
     lastMinutes = data['minutes'] is int ? data['minutes'] as int : 3;
     lastOptions = GameOptions.fromJson(data['options']);
+    lanName =
+        data['lanName'] is String && (data['lanName'] as String).length <= 24
+            ? data['lanName'] as String
+            : '';
     _customPacks.clear();
     final packs =
         data['customPacks'] is List ? data['customPacks'] as List : [];
@@ -167,6 +175,7 @@ class AppStore extends ChangeNotifier {
             'imposters': lastImposters,
             'minutes': lastMinutes,
             'options': lastOptions.toJson(),
+            'lanName': lanName,
             'customPacks': [for (final pack in _customPacks) pack.toJson()],
             'history': _history
           }));
@@ -199,6 +208,11 @@ class AppStore extends ChangeNotifier {
     lastImposters = imposters;
     lastMinutes = minutes;
     lastOptions = options ?? lastOptions;
+    await _save();
+  }
+
+  Future<void> saveLanName(String name) async {
+    lanName = name.trim();
     await _save();
   }
 
@@ -254,6 +268,28 @@ class AppStore extends ChangeNotifier {
       _history.removeRange(200, _history.length);
     }
     await _save();
+  }
+
+  /// Saves a finished round from either pass-and-play or a multi-phone game.
+  Future<void> recordResult(RoundResult result) {
+    final session = result.session;
+    return recordRound(
+      id: result.id,
+      word: session.secretWord.value,
+      category: session.secretWord.category,
+      players: session.players.map((p) => p.name).toList(),
+      imposters: session.imposters.map((p) => p.name).toList(),
+      accused: result.accusedIds.map(result.nameOf).toList(),
+      citizensWin: result.citizensWin,
+      mode: result.mode.name,
+      decoyWord: session.decoyWord?.value,
+      customWord: session.secretWord.custom,
+      stolen: result.stolen,
+      points: {
+        for (final entry in result.points.entries)
+          result.nameOf(entry.key): entry.value,
+      },
+    );
   }
 
   Map<String, PlayerStats> get stats {
