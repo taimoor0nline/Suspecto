@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:suspecto/core/localization.dart';
-import 'package:suspecto/features/lan/domain/join_code.dart';
 
-/// Scans a host's QR code and pops with the [JoinCode].
-class ScanCodeScreen extends StatefulWidget {
-  const ScanCodeScreen({super.key});
+/// Scans QR codes until [parse] accepts one, then pops with the result.
+/// Used for multi-phone join codes and shared word packs.
+class ScanCodeScreen<T extends Object> extends StatefulWidget {
+  const ScanCodeScreen({super.key, required this.parse, required this.hint});
+
+  /// Returns the scanned value, or null to keep scanning.
+  final T? Function(String text) parse;
+
+  /// English instruction shown over the camera.
+  final String hint;
 
   @override
-  State<ScanCodeScreen> createState() => _ScanCodeScreenState();
+  State<ScanCodeScreen<T>> createState() => _ScanCodeScreenState<T>();
 }
 
-class _ScanCodeScreenState extends State<ScanCodeScreen> {
+class _ScanCodeScreenState<T extends Object> extends State<ScanCodeScreen<T>> {
   final _controller = MobileScannerController(formats: [BarcodeFormat.qrCode]);
   bool _done = false;
 
@@ -26,10 +32,10 @@ class _ScanCodeScreenState extends State<ScanCodeScreen> {
       return;
     }
     for (final barcode in capture.barcodes) {
-      final code = JoinCode.parse(barcode.rawValue ?? '');
-      if (code != null) {
+      final value = widget.parse(barcode.rawValue ?? '');
+      if (value != null) {
         _done = true;
-        Navigator.pop(context, code);
+        Navigator.pop(context, value);
         return;
       }
     }
@@ -48,7 +54,7 @@ class _ScanCodeScreenState extends State<ScanCodeScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: LocalText(
-                    'Camera unavailable. Type the join code instead.',
+                    'Camera unavailable.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
@@ -61,12 +67,12 @@ class _ScanCodeScreenState extends State<ScanCodeScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 color: Colors.black54,
-                child: const SafeArea(
+                child: SafeArea(
                   top: false,
                   child: LocalText(
-                    "Point the camera at the QR code on the host's phone.",
+                    widget.hint,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ),

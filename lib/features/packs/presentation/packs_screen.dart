@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/packs/domain/pack_code.dart';
+import 'package:suspecto/core/widgets/scan_code_screen.dart';
 import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/presentation/game_page.dart';
@@ -12,6 +14,30 @@ class PacksScreen extends StatelessWidget {
   void _open(BuildContext context, [WordPack? pack]) =>
       Navigator.of(context).push(MaterialPageRoute<void>(
           builder: (_) => PackEditorScreen(pack: pack)));
+
+  /// Imports a pack shown as a QR code on another phone.
+  Future<void> _scan(BuildContext context) async {
+    final store = StoreScope.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final added = translate(context, 'Pack added');
+    final scanned = await Navigator.of(context).push(
+      MaterialPageRoute<({String name, List<String> words})>(
+        builder: (_) =>
+            const ScanCodeScreen<({String name, List<String> words})>(
+          parse: PackCode.decode,
+          hint: "Point the camera at the pack's QR code.",
+        ),
+      ),
+    );
+    if (scanned == null) {
+      return;
+    }
+    final name =
+        PackCode.uniqueName(scanned.name, store.customPacks.map((p) => p.name));
+    await store.savePack(WordPack.custom(
+        id: WordPack.newCustomId(), name: name, words: scanned.words));
+    messenger.showSnackBar(SnackBar(content: Text('$added: $name')));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +74,12 @@ class PacksScreen extends StatelessWidget {
           onPressed: full ? null : () => _open(context),
           icon: const Icon(Icons.add),
           label: const LocalText('Create pack'),
+        ),
+        const SizedBox(height: 8),
+        OutlinedButton.icon(
+          onPressed: full ? null : () => _scan(context),
+          icon: const Icon(Icons.qr_code_scanner),
+          label: const LocalText('Scan a pack'),
         ),
         if (full) ...[
           const SizedBox(height: 8),

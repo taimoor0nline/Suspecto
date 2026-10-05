@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/core/localization.dart';
+import 'package:suspecto/core/widgets/scan_code_screen.dart';
 import 'package:suspecto/features/game/presentation/game_page.dart';
 import 'package:suspecto/features/lan/application/lan_session.dart';
 import 'package:suspecto/features/lan/domain/join_code.dart';
 import 'package:suspecto/features/lan/presentation/lan_game_screen.dart';
-import 'package:suspecto/features/lan/presentation/scan_code_screen.dart';
 
 class JoinScreen extends StatefulWidget {
   const JoinScreen({super.key});
@@ -39,8 +39,12 @@ class _JoinScreenState extends State<JoinScreen> {
   }
 
   Future<void> _scan() async {
-    final code = await Navigator.of(context).push<JoinCode>(
-        MaterialPageRoute(builder: (_) => const ScanCodeScreen()));
+    final code = await Navigator.of(context).push<JoinCode>(MaterialPageRoute(
+      builder: (_) => const ScanCodeScreen<JoinCode>(
+        parse: JoinCode.parse,
+        hint: "Point the camera at the QR code on the host's phone.",
+      ),
+    ));
     if (code != null && mounted) {
       _code.text = code.code;
       if (_name.text.trim().isNotEmpty) {
