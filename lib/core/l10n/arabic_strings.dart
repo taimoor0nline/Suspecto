@@ -193,8 +193,6 @@ const arabicStrings = <String, String>{
   'Scan QR code': 'امسح رمز QR',
   'Join with code': 'انضم بالرمز',
   'Join QR code': 'رمز QR للانضمام',
-  'Camera unavailable. Type the join code instead.':
-      'الكاميرا غير متاحة. اكتب رمز الانضمام بدلاً من ذلك.',
   'Point the camera at the QR code on the host\'s phone.':
       'وجّه الكاميرا إلى رمز QR على هاتف المضيف.',
   'Invite your friends': 'ادعُ أصدقاءك',
@@ -303,4 +301,66 @@ const arabicStrings = <String, String>{
   'Sound effects': 'المؤثرات الصوتية',
   'Card, vote, timer and celebration sounds.':
       'أصوات البطاقات والتصويت والمؤقت والاحتفال.',
+  // retention_tr
+  'Speed round': 'جولة سريعة',
+  'One-word clues only. Think fast!': 'تلميحات من كلمة واحدة فقط. فكّر بسرعة!',
+  '30-second discussion with one-word clues.':
+      'نقاش لمدة ٣٠ ثانية بتلميحات من كلمة واحدة.',
+  'First round': 'الجولة الأولى',
+  'Finish your first round.': 'أكمل جولتك الأولى.',
+  'Regular': 'لاعب دائم',
+  'Play 10 rounds.': 'العب ١٠ جولات.',
+  'Party animal': 'نجم الحفلات',
+  'Play 50 rounds.': 'العب ٥٠ جولة.',
+  'Master of disguise': 'سيد التنكر',
+  'Win 5 rounds as an imposter.': 'افز بـ٥ جولات كمخادع.',
+  'Detective': 'محقق',
+  'Win 10 rounds as an innocent player.': 'افز بـ١٠ جولات كلاعب بريء.',
+  'Thief': 'اللص',
+  'Steal a win with the last-chance guess.': 'اخطف الفوز بالتخمين الأخير.',
+  'Jester\'s laugh': 'ضحكة المهرّج',
+  'Win a round as the Jester.': 'افز بجولة كمهرّج.',
+  'Deep cover': 'تخفٍّ عميق',
+  'Win as an imposter in Undercover mode.': 'افز كمخادع في الوضع المتخفي.',
+  'Quiz night': 'ليلة الأسئلة',
+  'Play 5 rounds in Question mode.': 'العب ٥ جولات في وضع الأسئلة.',
+  'Full house': 'بيت ممتلئ',
+  'Play a round with 10 or more players.': 'العب جولة مع ١٠ لاعبين أو أكثر.',
+  'Century': 'المئوية',
+  'Score 100 points.': 'اجمع ١٠٠ نقطة.',
+  '🏅 Achievements unlocked!': '🏅 إنجازات جديدة!',
+  'Tap a player to see their achievements.': 'اضغط على لاعب لرؤية إنجازاته.',
+  'Share by QR code': 'شارك برمز QR',
+  'Scan a pack': 'امسح فئة',
+  'Pack added': 'تمت إضافة الفئة',
+  'Point the camera at the pack\'s QR code.':
+      'وجّه الكاميرا إلى رمز QR الخاص بالفئة.',
+  'Word pack QR code': 'رمز QR لفئة الكلمات',
+  'On the other phone: Word packs → Scan a pack.':
+      'على الهاتف الآخر: فئات الكلمات ← امسح فئة.',
+  'This pack is too big for one QR code. Try fewer or shorter words.':
+      'هذه الفئة أكبر من أن تتسع في رمز QR واحد. جرّب كلمات أقل أو أقصر.',
+  'Camera unavailable.': 'الكاميرا غير متاحة.',
+  'Quick tutorial': 'شرح سريع',
+  'Skip': 'تخطَّ',
+  'Next': 'التالي',
+  'Let\'s play!': 'هيا نلعب!',
+  'New here?': 'جديد هنا؟',
+  'Learn the game in one minute.': 'تعلّم اللعبة في دقيقة واحدة.',
+  'Dismiss': 'إغلاق',
+  'One secret word': 'كلمة سرية واحدة',
+  'Everyone gets the same secret word, except the imposters. They have to fake it.':
+      'يحصل الجميع على الكلمة السرية نفسها، إلا المخادعين. عليهم أن يتظاهروا بمعرفتها.',
+  'Pass and peek': 'مرّر وألقِ نظرة',
+  'Pass the phone around. Hold the card to see your role, and let go to hide it.':
+      'مرّروا الهاتف بينكم. اضغط باستمرار على البطاقة لرؤية دورك، وارفع إصبعك لإخفائها.',
+  'Give a clue': 'قدّم تلميحاً',
+  'Take turns saying one clue about the word. Too obvious helps the imposter; too vague looks suspicious.':
+      'تناوبوا على قول تلميح واحد عن الكلمة. التلميح الواضح جداً يساعد المخادع، والغامض جداً يثير الشك.',
+  'Vote them out': 'صوّتوا لإخراجهم',
+  'Vote privately for whoever seems to be bluffing. Catch every imposter to win, but caught imposters get one guess at the word!':
+      'صوّت سراً لمن يبدو أنه يخادع. اكشفوا كل المخادعين للفوز، لكن المخادعين المكشوفين يحصلون على فرصة لتخمين الكلمة!',
+  'Mix it up': 'نوّع اللعب',
+  'Try Undercover and Question modes, add a Jester, or play on everyone\'s phone over Wi-Fi.':
+      'جرّب الوضع المتخفي ووضع الأسئلة، أو أضف مهرّجاً، أو العبوا على هواتفكم جميعاً عبر الواي فاي.',
 };
