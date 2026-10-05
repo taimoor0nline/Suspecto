@@ -29,6 +29,7 @@ class ResultPhase extends StatelessWidget {
     final imposterNames = session.imposters.map((p) => p.name).join(', ');
     final awards = round.awards;
     final standings = round.standings;
+    final champion = round.champion;
     return Celebration(
       key: ValueKey(result.id),
       tone: copy.tone,
@@ -36,6 +37,10 @@ class ResultPhase extends StatelessWidget {
         title: copy.title,
         subtitle: copy.subtitle,
         children: [
+          if (champion != null) ...[
+            MatchWinnerCard(name: champion.name),
+            const SizedBox(height: 20),
+          ],
           SecretRevealCard(
             icon: copy.icon,
             mode: session.mode,
@@ -59,6 +64,14 @@ class ResultPhase extends StatelessWidget {
             ),
           const SizedBox(height: 20),
           LocalText('Scoreboard', style: theme.textTheme.titleLarge),
+          if (round.matchTarget > 0) ...[
+            const SizedBox(height: 4),
+            LocalText(
+                round.matchTied
+                    ? 'Tied at the top. Keep playing until one player leads.'
+                    : 'First to ${round.matchTarget} pts',
+                style: theme.textTheme.bodyMedium),
+          ],
           const SizedBox(height: 8),
           Scoreboard(standings: standings, roundPoints: result.points),
           if (awards.isNotEmpty) ...[
@@ -68,15 +81,24 @@ class ResultPhase extends StatelessWidget {
             PartyAwardsCard(awards: awards, nameOf: result.nameOf),
           ],
           const SizedBox(height: 20),
-          FilledButton(
-            onPressed: round.playAgain,
-            child: const LocalText('Play again'),
-          ),
+          if (champion != null)
+            FilledButton(
+              onPressed: round.newMatch,
+              child: const LocalText('New match'),
+            )
+          else
+            FilledButton(
+              onPressed: round.playAgain,
+              child: LocalText(
+                  round.matchTarget > 0 ? 'Next round' : 'Play again'),
+            ),
           const SizedBox(height: 8),
           ShareResultsButton(
             summary: (context) => ResultSummary.build(
               context,
-              title: copy.title,
+              title: champion == null
+                  ? copy.title
+                  : '${champion.name} wins the match!',
               secretLabel: secretLabels(session.mode).$1,
               secret: wordLabel(context, session.secretWord),
               imposters: 'Imposters: $imposterNames',
@@ -90,6 +112,40 @@ class ResultPhase extends StatelessWidget {
             child: const LocalText('Change players & settings'),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Crowns the party-mode winner above the round's results.
+class MatchWinnerCard extends StatelessWidget {
+  const MatchWinnerCard({super.key, required this.name});
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      color: theme.colorScheme.primaryContainer,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const Text('🏆', style: TextStyle(fontSize: 48)),
+            const SizedBox(height: 8),
+            LocalText('Match winner',
+                style: theme.textTheme.labelLarge
+                    ?.copyWith(color: theme.colorScheme.onPrimaryContainer)),
+            const SizedBox(height: 8),
+            PlayerAvatar(name: name, radius: 28),
+            const SizedBox(height: 8),
+            LocalText('$name wins the match!',
+                textAlign: TextAlign.center,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color: theme.colorScheme.onPrimaryContainer)),
+          ],
+        ),
       ),
     );
   }

@@ -46,10 +46,14 @@ class GameOptions {
     this.difficulty = WordDifficulty.mixed,
     this.jester = false,
     this.speedRound = false,
+    this.matchTarget = 0,
   });
 
   /// Discussion length for speed rounds.
   static const speedRoundSeconds = 30;
+
+  /// Match lengths offered in setup, in points. 0 plays endless rounds.
+  static const matchTargets = [0, 5, 10, 15];
 
   /// The Jester needs enough players that being voted out is a real bluff.
   static const jesterMinPlayers = 5;
@@ -71,6 +75,10 @@ class GameOptions {
   /// A 30-second discussion with one-word clues.
   final bool speedRound;
 
+  /// Party mode: the first player to this many session points wins the
+  /// match. 0 plays endless rounds.
+  final int matchTarget;
+
   /// Discussion length in seconds for the chosen [minutes].
   int discussionSeconds(int minutes) =>
       speedRound ? speedRoundSeconds : minutes * 60;
@@ -82,6 +90,7 @@ class GameOptions {
     WordDifficulty? difficulty,
     bool? jester,
     bool? speedRound,
+    int? matchTarget,
   }) =>
       GameOptions(
         mode: mode ?? this.mode,
@@ -90,6 +99,7 @@ class GameOptions {
         difficulty: difficulty ?? this.difficulty,
         jester: jester ?? this.jester,
         speedRound: speedRound ?? this.speedRound,
+        matchTarget: matchTarget ?? this.matchTarget,
       );
 
   Map<String, dynamic> toJson() => {
@@ -99,6 +109,7 @@ class GameOptions {
         'difficulty': difficulty.name,
         'jester': jester,
         'speedRound': speedRound,
+        'matchTarget': matchTarget,
       };
 
   factory GameOptions.fromJson(Object? json) {
@@ -112,6 +123,9 @@ class GameOptions {
       difficulty: WordDifficulty.parse(json['difficulty']),
       jester: json['jester'] == true,
       speedRound: json['speedRound'] == true,
+      matchTarget: matchTargets.contains(json['matchTarget'])
+          ? json['matchTarget'] as int
+          : 0,
     );
   }
 }

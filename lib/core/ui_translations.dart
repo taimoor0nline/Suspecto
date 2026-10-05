@@ -520,6 +520,18 @@ const uiTranslations = <String, Map<String, String>>{
     'Caught imposters guess the word':
         'Los impostores descubiertos adivinan la palabra',
     'The Jester is voted out': 'Expulsan al bufón',
+    'Match length': 'Duración de la partida',
+    'Endless': 'Sin fin',
+    'Play as many rounds as you like.': 'Jugad tantas rondas como queráis.',
+    'Play rounds until one player reaches the target score.':
+        'Jugad rondas hasta que un jugador alcance la puntuación objetivo.',
+    'Tied at the top. Keep playing until one player leads.':
+        'Empate en cabeza. Seguid jugando hasta que un jugador lidere.',
+    'New match': 'Nueva partida',
+    'Next round': 'Siguiente ronda',
+    'Match winner': 'Ganador de la partida',
+    'First to {number} pts': 'El primero a {number} pts',
+    '{name} wins the match!': '¡{name} gana la partida!',
   },
   'fr': {
     'Trust no one.\nSuspect everyone.':
@@ -1039,6 +1051,19 @@ const uiTranslations = <String, Map<String, String>>{
     'Caught imposters guess the word':
         'Les imposteurs démasqués devinent le mot',
     'The Jester is voted out': 'Le bouffon est éliminé',
+    'Match length': 'Durée du match',
+    'Endless': 'Sans fin',
+    'Play as many rounds as you like.':
+        'Jouez autant de manches que vous voulez.',
+    'Play rounds until one player reaches the target score.':
+        'Jouez des manches jusqu\'à ce qu\'un joueur atteigne le score visé.',
+    'Tied at the top. Keep playing until one player leads.':
+        'Égalité en tête. Continuez jusqu\'à ce qu\'un joueur mène.',
+    'New match': 'Nouveau match',
+    'Next round': 'Manche suivante',
+    'Match winner': 'Vainqueur du match',
+    'First to {number} pts': 'Premier à {number} pts',
+    '{name} wins the match!': '{name} remporte le match !',
   },
   'ja': {
     'Trust no one.\nSuspect everyone.': '誰も信じるな。\n全員を疑え。',
@@ -1517,6 +1542,18 @@ const uiTranslations = <String, Map<String, String>>{
     'An imposter escapes': 'インポスターが逃げ切る',
     'Caught imposters guess the word': '見破られたインポスターが言葉を当てる',
     'The Jester is voted out': 'ジェスターが投票で追放される',
+    'Match length': 'マッチの長さ',
+    'Endless': 'エンドレス',
+    'Play as many rounds as you like.': '好きなだけラウンドを遊べます。',
+    'Play rounds until one player reaches the target score.':
+        '誰かが目標スコアに達するまでラウンドを続けます。',
+    'Tied at the top. Keep playing until one player leads.':
+        '首位が同点です。誰かが単独首位になるまで続けましょう。',
+    'New match': '新しいマッチ',
+    'Next round': '次のラウンド',
+    'Match winner': 'マッチの勝者',
+    'First to {number} pts': '先に{number}点',
+    '{name} wins the match!': '{name}がマッチに勝利！',
   },
   'zh-Hans': {
     'Trust no one.\nSuspect everyone.': '别相信任何人。\n每个人都值得怀疑。',
@@ -1980,6 +2017,18 @@ const uiTranslations = <String, Map<String, String>>{
     'An imposter escapes': '有卧底逃脱',
     'Caught imposters guess the word': '被识破的卧底猜中词语',
     'The Jester is voted out': '小丑被投出',
+    'Match length': '比赛长度',
+    'Endless': '无限',
+    'Play as many rounds as you like.': '想玩多少轮就玩多少轮。',
+    'Play rounds until one player reaches the target score.':
+        '持续进行回合，直到有玩家达到目标分数。',
+    'Tied at the top. Keep playing until one player leads.':
+        '并列第一。继续游戏，直到有一名玩家领先。',
+    'New match': '新比赛',
+    'Next round': '下一轮',
+    'Match winner': '比赛冠军',
+    'First to {number} pts': '先得{number}分',
+    '{name} wins the match!': '{name}赢得比赛！',
   },
   'zh-Hant': {
     'Trust no one.\nSuspect everyone.': '別相信任何人。\n每個人都值得懷疑。',
@@ -2444,5 +2493,17 @@ const uiTranslations = <String, Map<String, String>>{
     'An imposter escapes': '有臥底逃脫',
     'Caught imposters guess the word': '被識破的臥底猜中詞語',
     'The Jester is voted out': '小丑被投出',
+    'Match length': '比賽長度',
+    'Endless': '無限',
+    'Play as many rounds as you like.': '想玩多少輪就玩多少輪。',
+    'Play rounds until one player reaches the target score.':
+        '持續進行回合，直到有玩家達到目標分數。',
+    'Tied at the top. Keep playing until one player leads.':
+        '並列第一。繼續遊戲，直到有一名玩家領先。',
+    'New match': '新比賽',
+    'Next round': '下一輪',
+    'Match winner': '比賽冠軍',
+    'First to {number} pts': '先得{number}分',
+    '{name} wins the match!': '{name}贏得比賽！',
   },
 };

@@ -33,6 +33,8 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
 - Last-chance guess: caught imposters can steal the win by picking the word
 - Timed discussion (+1 minute), random first speaker, private ballots, ties/revotes
 - Points per round, session scoreboard across rematches and all-time leaderboard
+- Party mode: play a match to 5, 10 or 15 points; the first player to reach it
+  alone is crowned match winner (ties keep playing), then start a new match
 - Custom word packs (up to 50 packs of 3–200 words) created and stored on device
 - Multi-phone play on the same Wi-Fi or a phone hotspot, with no internet or server:
   one phone hosts and shows a QR/join code, everyone reveals and votes on their own

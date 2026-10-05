@@ -187,6 +187,32 @@ class _SetupScreenState extends State<SetupScreen> {
           onChanged: (options) => setState(() => _options = options),
         ),
         const SizedBox(height: 24),
+        LocalText('Match length', style: theme.textTheme.titleLarge),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final target in GameOptions.matchTargets)
+              ChoiceChip(
+                avatar: target == 0
+                    ? const Icon(Icons.all_inclusive, size: 18)
+                    : const Icon(Icons.emoji_events_outlined, size: 18),
+                label:
+                    LocalText(target == 0 ? 'Endless' : 'First to $target pts'),
+                selected: _options.matchTarget == target,
+                onSelected: (_) => setState(
+                    () => _options = _options.copyWith(matchTarget: target)),
+              ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        LocalText(
+            _options.matchTarget == 0
+                ? 'Play as many rounds as you like.'
+                : 'Play rounds until one player reaches the target score.',
+            style: theme.textTheme.bodyMedium),
+        const SizedBox(height: 24),
         if (_options.mode != GameMode.questions) ...[
           PackPicker(
             packs: _packs,
