@@ -11,7 +11,8 @@ imposters. Pass the phone, check your role privately, give clever clues and vote
 for the players who are bluffing.
 
 - Play together with 3–20 players and up to 3 imposters.
-- Choose from 12 packs with 240 words in English and Arabic.
+- Choose from 12 packs with 240 words in English, Arabic, Spanish, French,
+  Japanese and Chinese.
 - Reveal cards privately by holding the screen; release to hide.
 - Play Classic or Undercover, where imposters get a similar word.
 - Caught imposters get one last chance to guess the word and steal the win.
