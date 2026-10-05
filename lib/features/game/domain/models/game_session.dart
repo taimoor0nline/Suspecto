@@ -8,27 +8,39 @@ class GameSession {
     required Set<String> imposterPlayerIds,
     required this.secretWord,
     this.decoyWord,
+    GameMode? mode,
+    this.jesterId,
     String? startingPlayerId,
   })  : players = List.unmodifiable(players),
         imposterPlayerIds = Set.unmodifiable(imposterPlayerIds),
+        mode = mode ??
+            (decoyWord == null ? GameMode.classic : GameMode.undercover),
         startingPlayerId = startingPlayerId ?? players.first.id;
 
   final List<Player> players;
   final Set<String> imposterPlayerIds;
+
+  /// The word, or in question mode the question, that innocent players get.
   final WordEntry secretWord;
 
-  /// The word imposters receive in undercover mode; null in classic mode.
+  /// What imposters get in undercover and question modes; null in classic.
   final WordEntry? decoyWord;
 
-  /// The player who gives the first clue.
-  final String startingPlayerId;
+  final GameMode mode;
 
-  GameMode get mode =>
-      decoyWord == null ? GameMode.classic : GameMode.undercover;
+  /// The innocent player who wins alone if voted out, when that role is on.
+  final String? jesterId;
+
+  /// The player who gives the first clue or answer.
+  final String startingPlayerId;
 
   bool isImposter(Player player) => imposterPlayerIds.contains(player.id);
 
+  bool isJester(Player player) => player.id == jesterId;
+
   List<Player> get imposters => players.where(isImposter).toList();
+
+  Player? get jester => players.where((p) => p.id == jesterId).firstOrNull;
 
   Player get startingPlayer =>
       players.firstWhere((p) => p.id == startingPlayerId);

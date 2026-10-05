@@ -16,22 +16,38 @@ class Scoring {
   /// Each imposter when caught imposters guess the secret word.
   static const imposterSteal = 3;
 
+  /// The Jester when the group votes them out. Nobody else wins that round,
+  /// though sharp votes still count.
+  static const jesterWin = 3;
+
   /// Points per player ID. Every player gets an entry, including zero.
   static Map<String, int> score({
     required GameSession session,
     required Map<String, String> votes,
-    required bool allCaught,
+    required List<String> accusedIds,
     required bool stolen,
   }) {
+    final jesterOut =
+        session.jesterId != null && accusedIds.contains(session.jesterId);
+    final allCaught = accusedIds.isNotEmpty &&
+        accusedIds.every(session.imposterPlayerIds.contains);
     final citizensWon = allCaught && !stolen;
+    int pointsFor(String id) {
+      final sharp =
+          session.imposterPlayerIds.contains(votes[id]) ? sharpVote : 0;
+      if (session.imposterPlayerIds.contains(id)) {
+        return jesterOut || citizensWon
+            ? 0
+            : (stolen ? imposterSteal : imposterEscape);
+      }
+      if (id == session.jesterId && jesterOut) {
+        return jesterWin + sharp;
+      }
+      return (citizensWon ? citizensWin : 0) + sharp;
+    }
+
     return Map.unmodifiable({
-      for (final player in session.players)
-        player.id: session.isImposter(player)
-            ? (citizensWon ? 0 : (stolen ? imposterSteal : imposterEscape))
-            : (citizensWon ? citizensWin : 0) +
-                (session.imposterPlayerIds.contains(votes[player.id])
-                    ? sharpVote
-                    : 0),
+      for (final player in session.players) player.id: pointsFor(player.id)
     });
   }
 }

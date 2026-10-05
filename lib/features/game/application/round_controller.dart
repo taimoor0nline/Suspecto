@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:suspecto/features/game/data/local/question_pairs.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/domain/models/game_session.dart';
 import 'package:suspecto/features/game/domain/models/player.dart';
@@ -8,6 +9,7 @@ import 'package:suspecto/features/game/domain/models/round_result.dart';
 import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/domain/services/ballot.dart';
 import 'package:suspecto/features/game/domain/services/game_engine.dart';
+import 'package:suspecto/features/game/domain/services/party_awards.dart';
 import 'package:suspecto/features/game/domain/services/scoring.dart';
 
 enum RoundPhase { reveal, discussion, vote, tie, guess, result }
@@ -22,6 +24,7 @@ class RoundController extends ChangeNotifier {
     required this.imposterCount,
     required this.discussionMinutes,
     this.options = const GameOptions(),
+    this.questions = questionPairs,
     this.onCompleted,
     GameEngine? engine,
   })  : players = List.unmodifiable(players),
@@ -35,6 +38,7 @@ class RoundController extends ChangeNotifier {
   final int imposterCount;
   final int discussionMinutes;
   final GameOptions options;
+  final List<(WordEntry, WordEntry)> questions;
   final void Function(RoundResult result)? onCompleted;
   final GameEngine _engine;
 
@@ -51,6 +55,7 @@ class RoundController extends ChangeNotifier {
   List<WordEntry> _guessOptions = const [];
   RoundResult? _result;
   final Map<String, int> _totals = {};
+  final List<RoundResult> _history = [];
   int _roundsPlayed = 0;
   Timer? _timer;
   late int _remaining;
@@ -72,6 +77,12 @@ class RoundController extends ChangeNotifier {
   int get remainingSeconds => _remaining;
   int get roundsPlayed => _roundsPlayed;
 
+  /// Every finished round in this session, oldest first.
+  List<RoundResult> get history => List.unmodifiable(_history);
+
+  /// Session titles such as MVP and Best Bluffer, by player ID.
+  List<PartyAward> get awards => PartyAwards.compute(_history);
+
   /// Session totals per player ID, highest first.
   List<MapEntry<Player, int>> get standings => [
         for (final p in players) MapEntry(p, _totals[p.id] ?? 0),
@@ -85,6 +96,8 @@ class RoundController extends ChangeNotifier {
       words: words,
       imposterCount: imposterCount,
       mode: options.mode,
+      questions: questions,
+      jester: options.jester,
     );
     _ballot = Ballot(players.map((p) => p.id));
     _phase = RoundPhase.reveal;
@@ -201,7 +214,9 @@ class RoundController extends ChangeNotifier {
     }
     _suspects = suspects;
     final allCaught = suspects.every(_session.imposterPlayerIds.contains);
-    if (allCaught && options.lastChanceGuess) {
+    if (allCaught &&
+        options.lastChanceGuess &&
+        _session.mode != GameMode.questions) {
       _guessOptions = _engine.guessOptions(_session, words);
       if (_guessOptions.isNotEmpty) {
         _phase = RoundPhase.guess;
@@ -220,11 +235,10 @@ class RoundController extends ChangeNotifier {
   }
 
   void _finish({required bool stolen}) {
-    final allCaught = _suspects.every(_session.imposterPlayerIds.contains);
     final points = Scoring.score(
       session: _session,
       votes: _ballot.votes,
-      allCaught: allCaught,
+      accusedIds: _suspects,
       stolen: stolen,
     );
     points.forEach((id, value) => _totals[id] = (_totals[id] ?? 0) + value);
@@ -235,7 +249,9 @@ class RoundController extends ChangeNotifier {
       accusedIds: _suspects,
       stolen: stolen,
       points: points,
+      votes: _ballot.votes,
     );
+    _history.add(_result!);
     _phase = RoundPhase.result;
     notifyListeners();
     onCompleted?.call(_result!);

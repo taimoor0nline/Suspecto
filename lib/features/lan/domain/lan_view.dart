@@ -1,8 +1,9 @@
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/domain/models/word_entry.dart';
+import 'package:suspecto/features/game/domain/services/party_awards.dart';
 
 /// Protocol version; phones with a different version cannot play together.
-const lanProtocolVersion = 1;
+const lanProtocolVersion = 2;
 
 enum LanPhase {
   lobby,
@@ -82,7 +83,7 @@ class LanPlayerView {
 
 /// What one player may see of their own role.
 class LanCard {
-  const LanCard({this.word, this.hint});
+  const LanCard({this.word, this.hint, this.jester = false});
 
   /// Null for a classic-mode imposter.
   final LanWord? word;
@@ -90,13 +91,17 @@ class LanCard {
   /// The secret word's pack, shown to classic imposters when hints are on.
   final LanWord? hint;
 
+  /// This player is the Jester and wins alone if voted out.
+  final bool jester;
+
   Map<String, Object?> toJson() =>
-      {'word': word?.toJson(), 'hint': hint?.toJson()};
+      {'word': word?.toJson(), 'hint': hint?.toJson(), 'jester': jester};
 
   static LanCard? fromJson(Object? json) => json is Map
       ? LanCard(
           word: LanWord.fromJson(json['word']),
-          hint: LanWord.fromJson(json['hint']))
+          hint: LanWord.fromJson(json['hint']),
+          jester: json['jester'] == true)
       : null;
 }
 
@@ -110,6 +115,8 @@ class LanResult {
     required this.points,
     required this.citizensWin,
     required this.stolen,
+    this.jesterId,
+    this.jesterWin = false,
   });
 
   final LanWord secret;
@@ -120,6 +127,8 @@ class LanResult {
   final Map<String, int> points;
   final bool citizensWin;
   final bool stolen;
+  final String? jesterId;
+  final bool jesterWin;
 
   Map<String, Object?> toJson() => {
         'secret': secret.toJson(),
@@ -130,6 +139,8 @@ class LanResult {
         'points': points,
         'citizensWin': citizensWin,
         'stolen': stolen,
+        'jester': jesterId,
+        'jesterWin': jesterWin,
       };
 
   static LanResult? fromJson(Object? json) {
@@ -146,6 +157,8 @@ class LanResult {
       points: _ints(json['points']),
       citizensWin: json['citizensWin'] == true,
       stolen: json['stolen'] == true,
+      jesterId: json['jester'] is String ? json['jester'] as String : null,
+      jesterWin: json['jesterWin'] == true,
     );
   }
 }
@@ -162,6 +175,7 @@ class LanView {
     required this.mode,
     required this.imposterCount,
     this.card,
+    this.revealedQuestion,
     this.starterId,
     this.remainingSeconds = 0,
     this.myVote,
@@ -169,6 +183,7 @@ class LanView {
     this.guesserIds = const [],
     this.result,
     this.scores = const {},
+    this.awards = const [],
   });
 
   final LanPhase phase;
@@ -179,6 +194,9 @@ class LanView {
   final GameMode mode;
   final int imposterCount;
   final LanCard? card;
+
+  /// Question mode: the innocent players' question, once the host reveals it.
+  final LanWord? revealedQuestion;
   final String? starterId;
   final int remainingSeconds;
   final String? myVote;
@@ -188,6 +206,9 @@ class LanView {
 
   /// Points per player ID across this game's rounds.
   final Map<String, int> scores;
+
+  /// Session titles, sent with results.
+  final List<PartyAward> awards;
 
   LanPlayerView? player(String? id) {
     for (final p in players) {
@@ -216,6 +237,7 @@ class LanView {
         'mode': mode.name,
         'imposters': imposterCount,
         'card': card?.toJson(),
+        'question': revealedQuestion?.toJson(),
         'starter': starterId,
         'remaining': remainingSeconds,
         'myVote': myVote,
@@ -223,6 +245,10 @@ class LanView {
         'guessers': guesserIds,
         'result': result?.toJson(),
         'scores': scores,
+        'awards': [
+          for (final a in awards)
+            {'kind': a.kind.name, 'id': a.playerId, 'n': a.count},
+        ],
       };
 
   static LanView? fromJson(Object? json) {
@@ -241,6 +267,7 @@ class LanView {
       mode: GameMode.parse(json['mode']),
       imposterCount: json['imposters'] is int ? json['imposters'] as int : 1,
       card: LanCard.fromJson(json['card']),
+      revealedQuestion: LanWord.fromJson(json['question']),
       starterId: json['starter'] is String ? json['starter'] as String : null,
       remainingSeconds: json['remaining'] is int ? json['remaining'] as int : 0,
       myVote: json['myVote'] is String ? json['myVote'] as String : null,
@@ -252,6 +279,16 @@ class LanView {
       guesserIds: _strings(json['guessers']),
       result: LanResult.fromJson(json['result']),
       scores: _ints(json['scores']),
+      awards: [
+        if (json['awards'] is List)
+          for (final a in json['awards'] as List)
+            if (a is Map &&
+                a['id'] is String &&
+                a['n'] is int &&
+                AwardKind.values.any((k) => k.name == a['kind']))
+              PartyAward(AwardKind.values.byName(a['kind'] as String),
+                  a['id'] as String, a['n'] as int),
+      ],
     );
   }
 }

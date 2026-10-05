@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:suspecto/features/game/data/local/question_pairs.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/domain/models/game_session.dart';
 import 'package:suspecto/features/game/domain/models/player.dart';
@@ -7,6 +8,7 @@ import 'package:suspecto/features/game/domain/models/round_result.dart';
 import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/domain/services/ballot.dart';
 import 'package:suspecto/features/game/domain/services/game_engine.dart';
+import 'package:suspecto/features/game/domain/services/party_awards.dart';
 import 'package:suspecto/features/game/domain/services/scoring.dart';
 import 'package:suspecto/features/lan/domain/lan_view.dart';
 
@@ -17,12 +19,14 @@ class LanGameConfig {
     required this.discussionMinutes,
     required this.options,
     required this.words,
+    this.questions = questionPairs,
   });
 
   final int imposterCount;
   final int discussionMinutes;
   final GameOptions options;
   final List<WordEntry> words;
+  final List<(WordEntry, WordEntry)> questions;
 }
 
 class _Member {
@@ -43,6 +47,7 @@ abstract final class LanAction {
   static const start = 'start';
   static const discuss = 'discuss';
   static const addTime = 'addTime';
+  static const revealQuestion = 'revealQuestion';
   static const startVote = 'startVote';
   static const lobby = 'lobby';
   static const kick = 'kick';
@@ -85,6 +90,8 @@ class LanHostGame {
   List<String> _accused = const [];
   RoundResult? _result;
   final Map<String, int> _totals = {};
+  final List<RoundResult> _history = [];
+  bool _questionRevealed = false;
   Timer? _timer;
   int _remaining = 0;
   DateTime? _deadline;
@@ -184,6 +191,10 @@ class LanHostGame {
       case LanAction.discuss when isHost && _phase == LanPhase.reveal:
         _startDiscussion();
         _changed();
+      case LanAction.revealQuestion
+          when isHost && _phase == LanPhase.discussion:
+        _questionRevealed = true;
+        _changed();
       case LanAction.addTime when isHost && _phase == LanPhase.discussion:
         _remaining += 60;
         _runTimer();
@@ -240,9 +251,12 @@ class LanHostGame {
       imposterCount: config.imposterCount
           .clamp(1, GameEngine.maxImposters(players.length)),
       mode: config.options.mode,
+      questions: config.questions,
+      jester: config.options.jester,
     );
     _ballot = Ballot(players.map((p) => p.id));
     _seen.clear();
+    _questionRevealed = false;
     _guessOptions = const [];
     _accused = const [];
     _result = null;
@@ -296,7 +310,9 @@ class LanHostGame {
     }
     _accused = suspects;
     final allCaught = suspects.every(session.imposterPlayerIds.contains);
-    if (allCaught && config.options.lastChanceGuess) {
+    if (allCaught &&
+        config.options.lastChanceGuess &&
+        session.mode != GameMode.questions) {
       _guessOptions = _engine.guessOptions(session, config.words);
       if (_guessOptions.isNotEmpty) {
         _phase = LanPhase.guess;
@@ -326,7 +342,7 @@ class LanHostGame {
     final points = Scoring.score(
       session: session,
       votes: _ballot!.votes,
-      allCaught: _accused.every(session.imposterPlayerIds.contains),
+      accusedIds: _accused,
       stolen: stolen,
     );
     points.forEach((id, value) => _totals[id] = (_totals[id] ?? 0) + value);
@@ -336,7 +352,9 @@ class LanHostGame {
       accusedIds: _accused,
       stolen: stolen,
       points: points,
+      votes: _ballot!.votes,
     );
+    _history.add(_result!);
     _phase = LanPhase.result;
     _changed();
     onRoundComplete?.call(_result!);
@@ -360,6 +378,7 @@ class LanHostGame {
             ? LanWord(session.secretWord.category,
                 custom: session.secretWord.custom)
             : null,
+        jester: session.isJester(player),
       );
     }
     final result = _result;
@@ -386,6 +405,11 @@ class LanHostGame {
           ),
       ],
       card: card,
+      revealedQuestion: _questionRevealed &&
+              _phase == LanPhase.discussion &&
+              session?.mode == GameMode.questions
+          ? LanWord.from(session!.secretWord)
+          : null,
       starterId: session?.startingPlayerId,
       remainingSeconds: _remaining,
       myVote: _phase == LanPhase.vote ? _ballot?.votes[playerId] : null,
@@ -407,9 +431,13 @@ class LanHostGame {
               points: result.points,
               citizensWin: result.citizensWin,
               stolen: result.stolen,
+              jesterId: session.jesterId,
+              jesterWin: result.jesterWin,
             )
           : null,
       scores: Map.of(_totals),
+      awards:
+          _phase == LanPhase.result ? PartyAwards.compute(_history) : const [],
     );
   }
 

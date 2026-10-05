@@ -11,14 +11,23 @@ class GameEngine {
 
   static int maxImposters(int playerCount) => min(3, (playerCount - 1) ~/ 2);
 
+  /// Whether a Jester can be dealt: enough players that one innocent player
+  /// can be the Jester and imposters remain fewer than half.
+  static bool jesterAllowed(int playerCount) =>
+      playerCount >= GameOptions.jesterMinPlayers;
+
   /// Deals roles. In undercover mode imposters get a different word, preferably
   /// from the same pack; with only one distinct word the round falls back to
-  /// classic rules.
+  /// classic rules. In question mode [questions] supplies (innocent, imposter)
+  /// question pairs and [words] is not used. With [jester], one innocent
+  /// player becomes the Jester when [jesterAllowed].
   GameSession createSession({
     required List<Player> players,
     required List<WordEntry> words,
     int imposterCount = 1,
     GameMode mode = GameMode.classic,
+    List<(WordEntry, WordEntry)> questions = const [],
+    bool jester = false,
   }) {
     if (players.length < 3 || players.length > 20) {
       throw ArgumentError('Use 3–20 players.');
@@ -32,26 +41,43 @@ class GameEngine {
         'Imposters must be fewer than half the players, up to 3.',
       );
     }
-    if (words.isEmpty) {
+    final questionMode = mode == GameMode.questions;
+    if (questionMode ? questions.isEmpty : words.isEmpty) {
       throw ArgumentError('Choose at least one category.');
     }
     final shuffled = [...players]..shuffle(_random);
-    final secret = words[_random.nextInt(words.length)];
+    final imposterIds = shuffled.take(imposterCount).map((p) => p.id).toSet();
+    final innocents = shuffled.skip(imposterCount).toList();
+    final jesterId = jester && jesterAllowed(players.length)
+        ? innocents[_random.nextInt(innocents.length)].id
+        : null;
+    final WordEntry secret;
     WordEntry? decoy;
-    if (mode == GameMode.undercover) {
-      final others = _distinctFrom(secret, words);
-      final sameCategory =
-          others.where((w) => w.category == secret.category).toList();
-      final pool = sameCategory.isNotEmpty ? sameCategory : others;
-      if (pool.isNotEmpty) {
-        decoy = pool[_random.nextInt(pool.length)];
+    if (questionMode) {
+      final pair = questions[_random.nextInt(questions.length)];
+      secret = pair.$1;
+      decoy = pair.$2;
+    } else {
+      secret = words[_random.nextInt(words.length)];
+      if (mode == GameMode.undercover) {
+        final others = _distinctFrom(secret, words);
+        final sameCategory =
+            others.where((w) => w.category == secret.category).toList();
+        final pool = sameCategory.isNotEmpty ? sameCategory : others;
+        if (pool.isNotEmpty) {
+          decoy = pool[_random.nextInt(pool.length)];
+        }
       }
     }
     return GameSession(
       players: players,
-      imposterPlayerIds: shuffled.take(imposterCount).map((p) => p.id).toSet(),
+      imposterPlayerIds: imposterIds,
       secretWord: secret,
       decoyWord: decoy,
+      mode: questionMode
+          ? GameMode.questions
+          : (decoy == null ? GameMode.classic : GameMode.undercover),
+      jesterId: jesterId,
       startingPlayerId: players[_random.nextInt(players.length)].id,
     );
   }

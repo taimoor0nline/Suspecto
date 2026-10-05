@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:suspecto/core/language_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:suspecto/core/audio/sound_effects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/domain/models/round_result.dart';
@@ -22,7 +23,8 @@ class AppStore extends ChangeNotifier {
   String language = 'en';
   String theme = 'system';
   bool haptics = true;
-  bool sounds = false;
+  bool sounds = true;
+  final SoundEffects _sfx = SoundEffects();
   bool storageAvailable = true;
   List<String> lastPlayers = [];
   List<String> lastCategories = [];
@@ -70,7 +72,7 @@ class AppStore extends ChangeNotifier {
         ? data['theme'] as String
         : 'system';
     haptics = data['haptics'] != false;
-    sounds = data['sounds'] == true;
+    sounds = data['sounds'] != false;
     List<String> validStrings(dynamic value) =>
         value is List && value.every((x) => x is String && x.trim().isNotEmpty)
             ? List<String>.from(value)
@@ -245,6 +247,8 @@ class AppStore extends ChangeNotifier {
       String? decoyWord,
       bool customWord = false,
       bool stolen = false,
+      String? jester,
+      bool jesterWin = false,
       Map<String, int> points = const {}}) async {
     if (_history.any((r) => r['id'] == id)) {
       return;
@@ -262,6 +266,8 @@ class AppStore extends ChangeNotifier {
       if (decoyWord != null) 'decoyWord': decoyWord,
       if (customWord) 'customWord': true,
       'stolen': stolen,
+      if (jester != null) 'jester': jester,
+      if (jesterWin) 'jesterWin': true,
       'points': {...points},
     });
     if (_history.length > 200) {
@@ -285,6 +291,8 @@ class AppStore extends ChangeNotifier {
       decoyWord: session.decoyWord?.value,
       customWord: session.secretWord.custom,
       stolen: result.stolen,
+      jester: session.jester?.name,
+      jesterWin: result.jesterWin,
       points: {
         for (final entry in result.points.entries)
           result.nameOf(entry.key): entry.value,
@@ -316,7 +324,7 @@ class AppStore extends ChangeNotifier {
     await _save();
   }
 
-  void feedback({bool reveal = false}) {
+  void feedback({bool reveal = false, Sfx? sound}) {
     if (haptics) {
       if (reveal) {
         HapticFeedback.mediumImpact();
@@ -324,9 +332,27 @@ class AppStore extends ChangeNotifier {
         HapticFeedback.selectionClick();
       }
     }
+    playSound(sound ?? (reveal ? Sfx.reveal : Sfx.tap));
+  }
+
+  /// Plays a sound effect when sounds are on.
+  void playSound(Sfx sfx) {
     if (sounds) {
-      SystemSound.play(SystemSoundType.click);
+      _sfx.play(sfx);
     }
+  }
+
+  /// A stronger buzz for big moments such as time running out.
+  void alert() {
+    if (haptics) {
+      HapticFeedback.heavyImpact();
+    }
+  }
+
+  @override
+  void dispose() {
+    _sfx.dispose();
+    super.dispose();
   }
 }
 
