@@ -11,3 +11,34 @@ final List<WordPack> builtInPacks = List.unmodifiable([
       entries: starterWords.where((w) => w.category == category).toList(),
     ),
 ]);
+
+/// Icons for built-in packs, keyed by pack ID.
+const packEmoji = {
+  'Food': '🍕',
+  'Animals': '🐾',
+  'Sports': '🏅',
+  'Technology': '💻',
+  'Places': '📍',
+  'Objects': '🧰',
+  'Nature': '🌿',
+  'Jobs': '💼',
+  'Music': '🎵',
+  'Home': '🏠',
+  'Vehicles': '🚗',
+  'Travel': '✈️',
+  'Football Fever': '⚽',
+  'Countries': '🌍',
+  'Movies & TV': '🎬',
+  'Ramadan & Eid': '🌙',
+  'Kids': '🧸',
+};
+
+/// Recently added packs, tagged "New" in pack pickers. Players who saved a
+/// pack selection before these existed have to opt in, so the tag helps.
+const newPackIds = {
+  'Football Fever',
+  'Countries',
+  'Movies & TV',
+  'Ramadan & Eid',
+  'Kids',
+};
