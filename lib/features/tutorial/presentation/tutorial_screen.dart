@@ -31,7 +31,7 @@ const _pages = [
 ];
 
 /// A short swipeable guide to the rules. Finishing or skipping it hides the
-/// "New here?" card on the home screen.
+/// "New" tag on the home tutorial button.
 class TutorialScreen extends StatefulWidget {
   const TutorialScreen({super.key});
 

@@ -100,6 +100,8 @@ String translateForLanguage(String language, String text) {
     (RegExp(r'^Imposters spotted: (\d+)$'), (m) => 'مخادعون مكشوفون: ${m[1]}'),
     (RegExp(r'^Votes received: (\d+)$'), (m) => 'الأصوات المستلمة: ${m[1]}'),
     (RegExp(r'^Jester wins: (\d+)$'), (m) => 'انتصارات كمهرّج: ${m[1]}'),
+    (RegExp(r'^(\d+) available$'), (m) => '${m[1]} متاحة'),
+    (RegExp(r'^(\d+) saved$'), (m) => '${m[1]} محفوظون'),
   ];
   for (final (pattern, replacement) in patterns) {
     final match = pattern.firstMatch(text);
@@ -189,6 +191,8 @@ final _dynamicMessages = <(RegExp, String, List<String>)>[
   ),
   (RegExp(r'^Votes received: (\d+)$'), 'Votes received: {number}', ['number']),
   (RegExp(r'^Jester wins: (\d+)$'), 'Jester wins: {number}', ['number']),
+  (RegExp(r'^(\d+) available$'), '{number} available', ['number']),
+  (RegExp(r'^(\d+) saved$'), '{number} saved', ['number']),
 ];
 
 /// English source text for counts, with singular forms. Pass the result to

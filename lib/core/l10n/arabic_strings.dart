@@ -1,15 +1,9 @@
 /// Arabic UI strings keyed by their English source text.
 const arabicStrings = <String, String>{
   'Trust no one.\nSuspect everyone.': 'لا تثق بأحد.\nاشك في الجميع.',
-  'The secret word is out. Someone is bluffing.':
-      'الجميع يعرف الكلمة السرية. أحدهم يخادع.',
   'One phone. A room full of suspects.': 'هاتف واحد. ومجموعة من المشتبه بهم.',
-  '3–20 friends • 1–3 imposters • Fully offline':
-      '٣–٢٠ لاعباً • ١–٣ مخادعين • دون إنترنت',
   'Start game': 'ابدأ اللعبة',
   'HOW TO PLAY': 'طريقة اللعب',
-  '1. Each player privately checks their card.\n2. Take turns giving a clue without saying the word.\n3. Discuss, then vote privately for a suspect.\n4. Catch every imposter to win. A tie means a revote.':
-      '١. يرى كل لاعب بطاقته سراً.\n٢. يقدم كل لاعب تلميحاً دون ذكر الكلمة.\n٣. ناقشوا ثم صوتوا سراً للمشتبه به.\n٤. اكشفوا كل المخادعين للفوز. عند التعادل، أعيدوا التصويت.',
   'Gather your suspects': 'اجمع اللاعبين',
   'Add your friends, pick your packs, and pass the phone.':
       'أضف أصدقاءك، اختر الفئات، ثم مرر الهاتف.',
@@ -53,7 +47,6 @@ const arabicStrings = <String, String>{
   'Your current round will be lost.': 'ستفقد الجولة الحالية.',
   'Keep playing': 'متابعة اللعب',
   'Settings': 'الإعدادات',
-  'History & stats': 'السجل والإحصاءات',
   'Make it your party': 'خصص تجربتك',
   'Preferences are saved on this device.': 'تُحفظ التفضيلات على هذا الجهاز.',
   'Language': 'اللغة',
@@ -120,8 +113,6 @@ const arabicStrings = <String, String>{
       'كُشف المخادعون لكنهم خمّنوا الكلمة السرية.',
   "THE IMPOSTERS' WORD": 'كلمة المخادعين',
   'Scoreboard': 'لوحة النقاط',
-  'Try Undercover mode, where imposters get a similar word, and win points across rounds.':
-      'جرّب النمط المتخفي حيث يحصل المخادعون على كلمة مشابهة، واجمع النقاط عبر الجولات.',
   // Word packs.
   'All': 'الكل',
   'None': 'لا شيء',
@@ -345,9 +336,6 @@ const arabicStrings = <String, String>{
   'Skip': 'تخطَّ',
   'Next': 'التالي',
   'Let\'s play!': 'هيا نلعب!',
-  'New here?': 'جديد هنا؟',
-  'Learn the game in one minute.': 'تعلّم اللعبة في دقيقة واحدة.',
-  'Dismiss': 'إغلاق',
   'One secret word': 'كلمة سرية واحدة',
   'Everyone gets the same secret word, except the imposters. They have to fake it.':
       'يحصل الجميع على الكلمة السرية نفسها، إلا المخادعين. عليهم أن يتظاهروا بمعرفتها.',
@@ -427,4 +415,58 @@ const arabicStrings = <String, String>{
   'Type or scan the room code on the host\'s phone. Works from anywhere with internet.':
       'اكتب أو امسح رمز الغرفة الظاهر على هاتف المضيف. يعمل من أي مكان فيه إنترنت.',
   'Room code': 'رمز الغرفة',
+  // home_tr
+  'The secret party game of bluffs and deductions.':
+      'لعبة الحفلات السرية للخداع والاستنتاج.',
+  'Pass & Play': 'مرّر والعب',
+  '3–20 players': '٣–٢٠ لاعباً',
+  '1–3 imposters': '١–٣ مخادعين',
+  '100% offline': 'دون إنترنت ١٠٠٪',
+  'Offline ready': 'يعمل دون إنترنت',
+  'Play across multiple phones': 'العب على عدة هواتف',
+  'LAN / Wi-Fi': 'شبكة محلية / واي فاي',
+  'Play online with friends anywhere':
+      'العب عبر الإنترنت مع أصدقائك في أي مكان',
+  'Quick rules': 'القواعد باختصار',
+  'Check secret word': 'اطّلع على الكلمة السرية',
+  'Private peek': 'نظرة خاصة',
+  'Pass the phone around. Memorize your card in silence.':
+      'مرّروا الهاتف. احفظ بطاقتك بصمت.',
+  'Share clues': 'شارك التلميحات',
+  '1-word hint': 'تلميح بكلمة واحدة',
+  'Give one careful hint that proves you know the word without giving it away.':
+      'قدّم تلميحاً حذراً يثبت أنك تعرف الكلمة دون أن تكشفها.',
+  'Interrogate & vote': 'استجوب وصوّت',
+  'Debate': 'نقاش',
+  'Question suspicious clues, debate, and vote for a suspect.':
+      'ناقشوا التلميحات المريبة، وتجادلوا، ثم صوّتوا للمشتبه به.',
+  'Unmask the imposter': 'اكشف المخادع',
+  'Eliminate': 'إقصاء',
+  'Innocent players win if every hidden imposter is caught.':
+      'يفوز اللاعبون الأبرياء إذا كُشف كل المخادعين المختبئين.',
+  'Special rule: Undercover mode': 'قاعدة خاصة: الوضع المتخفي',
+  'Imposters get a similar word (like Coffee and Tea) and might not even know they are bluffing!':
+      'يحصل المخادعون على كلمة مشابهة (مثل القهوة والشاي) وقد لا يعرفون حتى أنهم يخادعون!',
+  'Take the 1-minute tutorial': 'خذ الشرح في دقيقة واحدة',
+  'GAME HUB': 'مركز اللعبة',
+  'Custom setup': 'إعداد مخصص',
+  'Themes, kids & your own': 'مواضيع وأطفال وفئاتك الخاصة',
+  'Players & rosters': 'اللاعبون والقوائم',
+  'Profiles & avatars': 'الملفات والصور الرمزية',
+  'Points, wins & badges': 'النقاط والانتصارات والشارات',
+  'Rankings': 'الترتيب',
+  'Game settings': 'إعدادات اللعبة',
+  'Language, theme & sounds': 'اللغة والمظهر والأصوات',
+  'Quick start': 'بدء سريع',
+  'Play': 'العب',
+  'Packs': 'الفئات',
+  'Stats': 'الإحصاءات',
+  'Setup': 'الإعدادات',
+  'Optional rules': 'قواعد اختيارية',
+  'Scoring': 'احتساب النقاط',
+  'Innocent players catch every imposter': 'يكشف الأبرياء كل المخادعين',
+  'Your vote named an imposter': 'صوّتَّ لمخادع',
+  'An imposter escapes': 'ينجو مخادع',
+  'Caught imposters guess the word': 'يخمّن المخادعون المكشوفون الكلمة',
+  'The Jester is voted out': 'صُوّت لإخراج المهرّج',
 };
