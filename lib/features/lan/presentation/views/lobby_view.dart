@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/lan/application/lan_host_game.dart';
@@ -63,6 +64,29 @@ class LobbyView extends StatelessWidget {
                     'On other phones: Play on several phones → Join a game.',
                     textAlign: TextAlign.center,
                   ),
+                  if (view.isHost) ...[
+                    const SizedBox(height: 12),
+                    Builder(
+                      builder: (context) => OutlinedButton.icon(
+                        onPressed: () {
+                          // iPads anchor the share sheet to the button.
+                          final box = context.findRenderObject() as RenderBox?;
+                          SharePlus.instance.share(ShareParams(
+                            text: [
+                              translate(context, 'Join my Suspecto game!'),
+                              '${translate(context, code.online ? 'Room code' : 'Join code')}: ${code.code}',
+                              code.qrData,
+                            ].join('\n'),
+                            sharePositionOrigin: box == null
+                                ? null
+                                : box.localToGlobal(Offset.zero) & box.size,
+                          ));
+                        },
+                        icon: const Icon(Icons.share_outlined),
+                        label: const LocalText('Share invite link'),
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

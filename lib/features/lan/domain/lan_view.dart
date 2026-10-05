@@ -8,6 +8,44 @@ import 'package:suspecto/features/game/domain/services/party_awards.dart';
 /// Protocol version; phones with a different version cannot play together.
 const lanProtocolVersion = 3;
 
+/// The emoji players can react with, sent by index so phones never show
+/// arbitrary text from another phone.
+const lanReactionEmoji = ['😂', '😱', '🤔', '👀', '🤥', '👏'];
+
+/// Phases where players can react: while talking and on the results.
+const lanReactionPhases = {
+  LanPhase.drawing,
+  LanPhase.discussion,
+  LanPhase.tie,
+  LanPhase.result,
+};
+
+/// One emoji reaction. [seq] increases through the game, so each phone
+/// shows every reaction once.
+class LanReaction {
+  const LanReaction(
+      {required this.seq, required this.playerId, required this.emoji});
+  final int seq;
+  final String playerId;
+
+  /// An index into [lanReactionEmoji].
+  final int emoji;
+
+  Map<String, Object?> toJson() => {'n': seq, 'p': playerId, 'e': emoji};
+
+  static LanReaction? fromJson(Object? json) => json is Map &&
+          json['n'] is int &&
+          json['p'] is String &&
+          json['e'] is int &&
+          (json['e'] as int) >= 0 &&
+          (json['e'] as int) < lanReactionEmoji.length
+      ? LanReaction(
+          seq: json['n'] as int,
+          playerId: json['p'] as String,
+          emoji: json['e'] as int)
+      : null;
+}
+
 /// Most points kept per line on the wire; longer lines are thinned evenly.
 const lanMaxStrokePoints = 80;
 
@@ -236,6 +274,7 @@ class LanView {
     this.drawTurn = 0,
     this.drawTurns = 0,
     this.drawingRound = false,
+    this.reactions = const [],
   });
 
   final LanPhase phase;
@@ -281,6 +320,9 @@ class LanView {
 
   /// The host turned on drawing rounds (not used in question mode).
   final bool drawingRound;
+
+  /// The latest emoji reactions, oldest first.
+  final List<LanReaction> reactions;
 
   LanPlayerView? player(String? id) {
     for (final p in players) {
@@ -332,6 +374,7 @@ class LanView {
         'drawTurn': drawTurn,
         'drawTurns': drawTurns,
         'drawing': drawingRound,
+        'reactions': [for (final r in reactions) r.toJson()],
       };
 
   static LanView? fromJson(Object? json) {
@@ -386,6 +429,11 @@ class LanView {
       drawTurn: json['drawTurn'] is int ? json['drawTurn'] as int : 0,
       drawTurns: json['drawTurns'] is int ? json['drawTurns'] as int : 0,
       drawingRound: json['drawing'] == true,
+      reactions: [
+        if (json['reactions'] is List)
+          for (final r in json['reactions'] as List)
+            if (LanReaction.fromJson(r) case final reaction?) reaction,
+      ],
     );
   }
 }

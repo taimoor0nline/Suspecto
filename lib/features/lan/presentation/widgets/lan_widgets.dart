@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/presentation/game_page.dart';
 import 'package:suspecto/features/lan/domain/lan_view.dart';
+import 'package:suspecto/features/lan/presentation/widgets/reactions.dart';
 
 /// The page frame for every multi-phone screen. Back navigation is disabled;
 /// leaving goes through [onLeave], which confirms first.
@@ -24,33 +25,39 @@ class LanPage extends StatelessWidget {
   final bool reconnecting;
 
   @override
-  Widget build(BuildContext context) => GamePage(
-        canPop: false,
-        title: title,
-        subtitle: subtitle,
-        children: [
-          if (reconnecting) ...[
-            Card(
-              color: Theme.of(context).colorScheme.errorContainer,
-              child: const ListTile(
-                leading: SizedBox.square(
-                    dimension: 24,
-                    child: CircularProgressIndicator(strokeWidth: 3)),
-                title: LocalText('Reconnecting…'),
-                subtitle: LocalText('Stay on the same Wi-Fi or hotspot.'),
-              ),
+  Widget build(BuildContext context) {
+    final session = ReactionScope.maybeOf(context);
+    return GamePage(
+      canPop: false,
+      title: title,
+      subtitle: subtitle,
+      bottomAction: session != null && lanReactionPhases.contains(view.phase)
+          ? ReactionBar(session: session)
+          : null,
+      children: [
+        if (reconnecting) ...[
+          Card(
+            color: Theme.of(context).colorScheme.errorContainer,
+            child: const ListTile(
+              leading: SizedBox.square(
+                  dimension: 24,
+                  child: CircularProgressIndicator(strokeWidth: 3)),
+              title: LocalText('Reconnecting…'),
+              subtitle: LocalText('Stay on the same Wi-Fi or hotspot.'),
             ),
-            const SizedBox(height: 16),
-          ],
-          ...children,
-          const SizedBox(height: 20),
-          TextButton(
-            onPressed: onLeave,
-            child:
-                LocalText(view.isHost ? 'End game for everyone' : 'Leave game'),
           ),
+          const SizedBox(height: 16),
         ],
-      );
+        ...children,
+        const SizedBox(height: 20),
+        TextButton(
+          onPressed: onLeave,
+          child:
+              LocalText(view.isHost ? 'End game for everyone' : 'Leave game'),
+        ),
+      ],
+    );
+  }
 }
 
 /// Who is in the game, with connection and progress state.

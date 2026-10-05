@@ -149,6 +149,43 @@ void main() {
     game.dispose();
   });
 
+  test('reactions: allowed phases, fixed emoji, rate limit and order',
+      () async {
+    final (game, ids) = _game(const GameOptions());
+    game.handle(ids[1], LanAction.react, {'e': 0});
+    expect(_view(game, ids.first).reactions, isEmpty, reason: 'lobby');
+    game.handle(LanHostGame.hostId, LanAction.start);
+    game.handle(ids[1], LanAction.react, {'e': 0});
+    expect(_view(game, ids.first).reactions, isEmpty, reason: 'reveal');
+    _revealAll(game, ids);
+    for (final bad in [-1, lanReactionEmoji.length, 'x', null]) {
+      game.handle(ids[1], LanAction.react, {'e': bad});
+    }
+    expect(_view(game, ids.first).reactions, isEmpty);
+    game.handle(ids[1], LanAction.react, {'e': 2});
+    game.handle(ids[1], LanAction.react, {'e': 3});
+    game.handle(ids[2], LanAction.react, {'e': 4});
+    var reactions = _view(game, ids.first).reactions;
+    expect([
+      for (final r in reactions) (r.playerId, r.emoji)
+    ], [
+      (ids[1], 2),
+      (ids[2], 4)
+    ], reason: 'the second tap came too soon');
+    expect(reactions[1].seq, greaterThan(reactions[0].seq));
+    await Future<void>.delayed(LanHostGame.reactionGap);
+    for (var i = 0; i < LanHostGame.maxReactions; i++) {
+      game.handle(ids[i % ids.length], LanAction.react, {'e': 1});
+      if (i % ids.length == ids.length - 1) {
+        await Future<void>.delayed(LanHostGame.reactionGap);
+      }
+    }
+    reactions = _view(game, ids.first).reactions;
+    expect(reactions, hasLength(LanHostGame.maxReactions));
+    expect(reactions.last.seq, LanHostGame.maxReactions + 2);
+    game.dispose();
+  });
+
   test('malformed lines are ignored', () {
     for (final bad in [
       null,

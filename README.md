@@ -35,6 +35,11 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
   or hotspot (no internet); or online rooms through your own relay server,
   where friends anywhere join with a 6-character room code (see
   `server/README.md`)
+- Join links: `suspecto://room/ABC123` (online) or `suspecto://join/…` (Wi-Fi)
+  open the app on the join screen with the code filled in; join QR codes carry
+  the link so a phone's camera app opens it, and the host can share it
+- Emoji reactions in multi-phone games while drawing, discussing and on the
+  results, floating up on every phone with the sender's name
 - Optional category hint for imposters (classic mode)
 - Last-chance guess: caught imposters can steal the win by picking the word
 - Timed discussion (+1 minute), random first speaker, private ballots, ties/revotes
