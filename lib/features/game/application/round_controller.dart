@@ -16,7 +16,8 @@ enum RoundPhase { reveal, discussion, vote, tie, guess, result }
 
 /// Runs one party's rounds: private reveal, timed discussion, private voting,
 /// tie revotes, the imposters' last-chance guess and results. Scores
-/// accumulate across rematches for the lifetime of the controller.
+/// accumulate across rematches until [newMatch]. With a
+/// [GameOptions.matchTarget], the first player to reach it wins the match.
 class RoundController extends ChangeNotifier {
   RoundController({
     required List<Player> players,
@@ -113,7 +114,49 @@ class RoundController extends ChangeNotifier {
     _deadline = null;
   }
 
+  /// The party-mode target score, or 0 for endless rounds.
+  int get matchTarget => options.matchTarget;
+
+  /// The match winner: the single leader once they reach [matchTarget].
+  /// Null for endless play, before the target, or while tied at the top
+  /// (play continues until one player leads).
+  Player? get champion {
+    if (matchTarget <= 0 || _phase != RoundPhase.result) {
+      return null;
+    }
+    final table = standings;
+    if (table.first.value < matchTarget ||
+        (table.length > 1 && table[1].value == table.first.value)) {
+      return null;
+    }
+    return table.first.key;
+  }
+
+  /// Players tied at the top on or above [matchTarget] with no single winner.
+  bool get matchTied {
+    if (matchTarget <= 0 || _phase != RoundPhase.result) {
+      return false;
+    }
+    final table = standings;
+    return table.first.value >= matchTarget &&
+        table.length > 1 &&
+        table[1].value == table.first.value;
+  }
+
   void playAgain() {
+    if (champion != null) {
+      return;
+    }
+    _deal();
+    notifyListeners();
+  }
+
+  /// Clears session scores and awards and deals the first round of a new
+  /// match with the same players and settings.
+  void newMatch() {
+    _totals.clear();
+    _history.clear();
+    _roundsPlayed = 0;
     _deal();
     notifyListeners();
   }

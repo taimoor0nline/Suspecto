@@ -136,6 +136,10 @@ game rules live in the domain layer and contain no Flutter UI code.
   host become `host-away`/`host-back` app messages. The server keeps a room
   for 60 seconds after the host disconnects so it can resume with its token.
   `ROOM_SERVER` (dart-define) enables the feature.
+- `GameOptions.matchTarget` (0, 5, 10 or 15; 0 is endless) turns a
+  pass-the-phone session into a match. `RoundController.champion` is the
+  single leader once they reach the target; a tie at the top keeps playing.
+  `newMatch` clears session scores and awards. Multi-phone games ignore it.
 - Multi-phone protocol version 2 adds the Jester flag, revealed question and
   awards to each view.
 

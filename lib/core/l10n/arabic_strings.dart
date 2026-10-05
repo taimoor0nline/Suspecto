@@ -469,4 +469,14 @@ const arabicStrings = <String, String>{
   'An imposter escapes': 'ينجو مخادع',
   'Caught imposters guess the word': 'يخمّن المخادعون المكشوفون الكلمة',
   'The Jester is voted out': 'صُوّت لإخراج المهرّج',
+  'Match length': 'طول المباراة',
+  'Endless': 'بلا نهاية',
+  'Play as many rounds as you like.': 'العبوا عدد الجولات الذي تريدونه.',
+  'Play rounds until one player reaches the target score.':
+      'العبوا جولات حتى يصل أحد اللاعبين إلى النقاط المطلوبة.',
+  'Tied at the top. Keep playing until one player leads.':
+      'تعادل في الصدارة. واصلوا اللعب حتى يتقدم لاعب واحد.',
+  'New match': 'مباراة جديدة',
+  'Next round': 'الجولة التالية',
+  'Match winner': 'بطل المباراة',
 };
