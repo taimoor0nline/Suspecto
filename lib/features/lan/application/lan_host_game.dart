@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:suspecto/features/game/data/local/question_pairs.dart';
+import 'package:suspecto/features/game/domain/models/drawing_stroke.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/domain/models/game_session.dart';
 import 'package:suspecto/features/game/domain/models/player.dart';
@@ -8,6 +9,7 @@ import 'package:suspecto/features/game/domain/models/round_result.dart';
 import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/domain/services/ballot.dart';
 import 'package:suspecto/features/game/domain/services/game_engine.dart';
+import 'package:suspecto/features/game/domain/services/match_rules.dart';
 import 'package:suspecto/features/game/domain/services/party_awards.dart';
 import 'package:suspecto/features/game/domain/services/scoring.dart';
 import 'package:suspecto/features/lan/domain/lan_view.dart';
@@ -43,7 +45,13 @@ abstract final class LanAction {
   static const vote = 'vote';
   static const guess = 'guess';
   static const leave = 'leave';
+
+  /// The current drawer's finished line: {xy: encoded points}.
+  static const draw = 'draw';
   // Host only.
+  static const skipDraw = 'skipDraw';
+
+  /// Deals the next round, or a new match once someone has won.
   static const start = 'start';
   static const discuss = 'discuss';
   static const addTime = 'addTime';
@@ -92,6 +100,8 @@ class LanHostGame {
   final Map<String, int> _totals = {};
   final List<RoundResult> _history = [];
   bool _questionRevealed = false;
+  final List<DrawingStroke> _strokes = [];
+  int _drawTurn = 0;
   Timer? _timer;
   int _remaining = 0;
   DateTime? _deadline;
@@ -176,10 +186,20 @@ class LanHostGame {
       case LanAction.seen:
         if (_phase == LanPhase.reveal && _inRound(from) && _seen.add(from)) {
           if (_session!.players.every((p) => _seen.contains(p.id))) {
-            _startDiscussion();
+            _afterReveal();
           }
           _changed();
         }
+      case LanAction.draw:
+        final points = decodePoints(data['xy']);
+        if (_phase == LanPhase.drawing &&
+            from == _drawer?.id &&
+            points != null) {
+          _strokes.add(DrawingStroke(playerId: from, points: points));
+          _nextDrawTurn();
+        }
+      case LanAction.skipDraw when isHost && _phase == LanPhase.drawing:
+        _nextDrawTurn();
       case LanAction.vote:
         _vote(from, data['suspect']);
       case LanAction.guess:
@@ -189,7 +209,7 @@ class LanHostGame {
       case LanAction.start when isHost && _betweenRounds:
         _startRound();
       case LanAction.discuss when isHost && _phase == LanPhase.reveal:
-        _startDiscussion();
+        _afterReveal();
         _changed();
       case LanAction.revealQuestion
           when isHost && _phase == LanPhase.discussion:
@@ -236,6 +256,44 @@ class LanHostGame {
 
   bool get canStart => _betweenRounds && connectedCount >= 3;
 
+  /// Someone has won the match; the next start begins a new match.
+  bool get _matchOver =>
+      MatchRules.champion(_totals, config.options.matchTarget) != null;
+
+  bool get _drawingRound =>
+      config.options.drawing && _session?.mode != GameMode.questions;
+
+  int get _drawTurns =>
+      (_session?.players.length ?? 0) * GameOptions.drawingLaps;
+
+  /// Whose turn it is to draw: everyone in seat order from the starting
+  /// player, [GameOptions.drawingLaps] times.
+  Player? get _drawer {
+    final session = _session;
+    if (session == null || _phase != LanPhase.drawing) {
+      return null;
+    }
+    final seats = session.players;
+    final start = seats.indexWhere((p) => p.id == session.startingPlayerId);
+    return seats[(start + _drawTurn) % seats.length];
+  }
+
+  void _afterReveal() {
+    if (_drawingRound) {
+      _phase = LanPhase.drawing;
+    } else {
+      _startDiscussion();
+    }
+  }
+
+  void _nextDrawTurn() {
+    _drawTurn++;
+    if (_drawTurn >= _drawTurns) {
+      _startDiscussion();
+    }
+    _changed();
+  }
+
   void _startRound() {
     final players = [
       for (final m in _members)
@@ -243,6 +301,10 @@ class LanHostGame {
     ];
     if (players.length < 3) {
       return;
+    }
+    if (_matchOver) {
+      _totals.clear();
+      _history.clear();
     }
     _timer?.cancel();
     _session = _engine.createSession(
@@ -253,9 +315,13 @@ class LanHostGame {
       mode: config.options.mode,
       questions: config.questions,
       jester: config.options.jester,
+      accomplice: config.options.accomplice,
+      detective: config.options.detective,
     );
     _ballot = Ballot(players.map((p) => p.id));
     _seen.clear();
+    _strokes.clear();
+    _drawTurn = 0;
     _questionRevealed = false;
     _guessOptions = const [];
     _accused = const [];
@@ -379,6 +445,11 @@ class LanHostGame {
                 custom: session.secretWord.custom)
             : null,
         jester: session.isJester(player),
+        accompliceOf: session.isAccomplice(player)
+            ? session.imposterPlayerIds.toList()
+            : null,
+        clearedId:
+            session.isDetective(player) ? session.detectiveClearId : null,
       );
     }
     final result = _result;
@@ -434,12 +505,32 @@ class LanHostGame {
               stolen: result.stolen,
               jesterId: session.jesterId,
               jesterWin: result.jesterWin,
+              accompliceId: session.accompliceId,
+              detectiveId: session.detectiveId,
               roundId: result.id,
             )
           : null,
       scores: Map.of(_totals),
       awards:
           _phase == LanPhase.result ? PartyAwards.compute(_history) : const [],
+      matchTarget: config.options.matchTarget,
+      championId: _phase == LanPhase.result
+          ? MatchRules.champion(_totals, config.options.matchTarget)
+          : null,
+      matchTied: _phase == LanPhase.result &&
+          MatchRules.tied(_totals, config.options.matchTarget),
+      strokes: switch (_phase) {
+        LanPhase.drawing ||
+        LanPhase.discussion ||
+        LanPhase.result =>
+          List.of(_strokes),
+        _ => const [],
+      },
+      drawerId: _drawer?.id,
+      drawTurn: _drawTurn,
+      drawTurns: _drawingRound ? _drawTurns : 0,
+      drawingRound:
+          config.options.drawing && config.options.mode != GameMode.questions,
     );
   }
 

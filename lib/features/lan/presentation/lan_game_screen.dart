@@ -129,6 +129,10 @@ class _LanGameScreenState extends State<LanGameScreen>
           cardVisible: _cardVisible,
           onHold: (show) => setState(() => _cardVisible = show),
         ),
+      LanPhase.drawing => LanDrawingView(
+          key: ValueKey('draw-${view.round}-${view.drawTurn}'),
+          session: session,
+          onLeave: _leave),
       LanPhase.discussion =>
         LanDiscussionView(session: session, onLeave: _leave),
       LanPhase.vote => LanVoteView(

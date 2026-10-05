@@ -1,13 +1,20 @@
+import 'dart:ui';
+
+import 'package:suspecto/features/game/domain/models/drawing_stroke.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
 import 'package:suspecto/features/game/domain/models/word_entry.dart';
 import 'package:suspecto/features/game/domain/services/party_awards.dart';
 
 /// Protocol version; phones with a different version cannot play together.
-const lanProtocolVersion = 2;
+const lanProtocolVersion = 3;
+
+/// Most points kept per line on the wire; longer lines are thinned evenly.
+const lanMaxStrokePoints = 120;
 
 enum LanPhase {
   lobby,
   reveal,
+  drawing,
   discussion,
   vote,
   tie,
@@ -83,7 +90,13 @@ class LanPlayerView {
 
 /// What one player may see of their own role.
 class LanCard {
-  const LanCard({this.word, this.hint, this.jester = false});
+  const LanCard({
+    this.word,
+    this.hint,
+    this.jester = false,
+    this.accompliceOf,
+    this.clearedId,
+  });
 
   /// Null for a classic-mode imposter.
   final LanWord? word;
@@ -94,14 +107,28 @@ class LanCard {
   /// This player is the Jester and wins alone if voted out.
   final bool jester;
 
-  Map<String, Object?> toJson() =>
-      {'word': word?.toJson(), 'hint': hint?.toJson(), 'jester': jester};
+  /// This player is the Accomplice of these imposter IDs.
+  final List<String>? accompliceOf;
+
+  /// This player is the Detective and knows this player ID is innocent.
+  final String? clearedId;
+
+  Map<String, Object?> toJson() => {
+        'word': word?.toJson(),
+        'hint': hint?.toJson(),
+        'jester': jester,
+        'acc': accompliceOf,
+        'clr': clearedId,
+      };
 
   static LanCard? fromJson(Object? json) => json is Map
       ? LanCard(
           word: LanWord.fromJson(json['word']),
           hint: LanWord.fromJson(json['hint']),
-          jester: json['jester'] == true)
+          jester: json['jester'] == true,
+          accompliceOf: json['acc'] is List ? _strings(json['acc']) : null,
+          clearedId: json['clr'] is String ? json['clr'] as String : null,
+        )
       : null;
 }
 
@@ -117,6 +144,8 @@ class LanResult {
     required this.stolen,
     this.jesterId,
     this.jesterWin = false,
+    this.accompliceId,
+    this.detectiveId,
     this.roundId,
   });
 
@@ -130,6 +159,8 @@ class LanResult {
   final bool stolen;
   final String? jesterId;
   final bool jesterWin;
+  final String? accompliceId;
+  final String? detectiveId;
 
   /// The host's history ID for this round.
   final String? roundId;
@@ -145,6 +176,8 @@ class LanResult {
         'stolen': stolen,
         'jester': jesterId,
         'jesterWin': jesterWin,
+        'accomplice': accompliceId,
+        'detective': detectiveId,
         'roundId': roundId,
       };
 
@@ -164,6 +197,10 @@ class LanResult {
       stolen: json['stolen'] == true,
       jesterId: json['jester'] is String ? json['jester'] as String : null,
       jesterWin: json['jesterWin'] == true,
+      accompliceId:
+          json['accomplice'] is String ? json['accomplice'] as String : null,
+      detectiveId:
+          json['detective'] is String ? json['detective'] as String : null,
       roundId: json['roundId'] is String ? json['roundId'] as String : null,
     );
   }
@@ -191,6 +228,14 @@ class LanView {
     this.result,
     this.scores = const {},
     this.awards = const [],
+    this.matchTarget = 0,
+    this.championId,
+    this.matchTied = false,
+    this.strokes = const [],
+    this.drawerId,
+    this.drawTurn = 0,
+    this.drawTurns = 0,
+    this.drawingRound = false,
   });
 
   final LanPhase phase;
@@ -218,6 +263,25 @@ class LanView {
   /// Session titles, sent with results.
   final List<PartyAward> awards;
 
+  /// Party mode target score, or 0 for endless rounds.
+  final int matchTarget;
+
+  /// The match winner, sent with results once someone has won.
+  final String? championId;
+
+  /// Players are tied at the top on or above the target.
+  final bool matchTied;
+
+  /// Drawing round: the shared sketch so far, whose turn it is, and the
+  /// zero-based turn out of [drawTurns].
+  final List<DrawingStroke> strokes;
+  final String? drawerId;
+  final int drawTurn;
+  final int drawTurns;
+
+  /// The host turned on drawing rounds (not used in question mode).
+  final bool drawingRound;
+
   LanPlayerView? player(String? id) {
     for (final p in players) {
       if (p.id == id) {
@@ -235,6 +299,8 @@ class LanView {
       players.where((p) => p.inRound).toList();
 
   bool get canGuess => guesserIds.contains(you);
+
+  bool get myTurnToDraw => phase == LanPhase.drawing && drawerId == you;
 
   Map<String, Object?> toJson() => {
         'phase': phase.name,
@@ -258,6 +324,14 @@ class LanView {
           for (final a in awards)
             {'kind': a.kind.name, 'id': a.playerId, 'n': a.count},
         ],
+        'match': matchTarget,
+        'champion': championId,
+        'matchTied': matchTied,
+        'strokes': [for (final s in strokes) encodeStroke(s)],
+        'drawer': drawerId,
+        'drawTurn': drawTurn,
+        'drawTurns': drawTurns,
+        'drawing': drawingRound,
       };
 
   static LanView? fromJson(Object? json) {
@@ -299,8 +373,65 @@ class LanView {
               PartyAward(AwardKind.values.byName(a['kind'] as String),
                   a['id'] as String, a['n'] as int),
       ],
+      matchTarget: json['match'] is int ? json['match'] as int : 0,
+      championId:
+          json['champion'] is String ? json['champion'] as String : null,
+      matchTied: json['matchTied'] == true,
+      strokes: [
+        if (json['strokes'] is List)
+          for (final s in json['strokes'] as List)
+            if (decodeStroke(s) case final stroke?) stroke,
+      ],
+      drawerId: json['drawer'] is String ? json['drawer'] as String : null,
+      drawTurn: json['drawTurn'] is int ? json['drawTurn'] as int : 0,
+      drawTurns: json['drawTurns'] is int ? json['drawTurns'] as int : 0,
+      drawingRound: json['drawing'] == true,
     );
   }
+}
+
+/// Thins [points] evenly to at most [lanMaxStrokePoints], keeping both ends.
+List<Offset> thinStroke(List<Offset> points) {
+  if (points.length <= lanMaxStrokePoints) {
+    return points;
+  }
+  final step = (points.length - 1) / (lanMaxStrokePoints - 1);
+  return [
+    for (var i = 0; i < lanMaxStrokePoints; i++) points[(i * step).round()],
+  ];
+}
+
+/// Points as a flat list of whole thousandths: [x0, y0, x1, y1, …].
+List<int> encodePoints(List<Offset> points) => [
+      for (final p in thinStroke(points)) ...[
+        (p.dx.clamp(0.0, 1.0) * 1000).round(),
+        (p.dy.clamp(0.0, 1.0) * 1000).round(),
+      ],
+    ];
+
+/// Reads [encodePoints] output; null if malformed or empty.
+List<Offset>? decodePoints(Object? json) {
+  if (json is! List ||
+      json.isEmpty ||
+      json.length.isOdd ||
+      json.length > lanMaxStrokePoints * 2 ||
+      json.any((n) => n is! int || n < 0 || n > 1000)) {
+    return null;
+  }
+  return [
+    for (var i = 0; i < json.length; i += 2)
+      Offset((json[i] as int) / 1000, (json[i + 1] as int) / 1000),
+  ];
+}
+
+Map<String, Object?> encodeStroke(DrawingStroke stroke) =>
+    {'p': stroke.playerId, 'xy': encodePoints(stroke.points)};
+
+DrawingStroke? decodeStroke(Object? json) {
+  final points = json is Map ? decodePoints(json['xy']) : null;
+  return json is Map && json['p'] is String && points != null
+      ? DrawingStroke(playerId: json['p'] as String, points: points)
+      : null;
 }
 
 List<String> _strings(Object? json) =>

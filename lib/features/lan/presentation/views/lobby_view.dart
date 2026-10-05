@@ -88,6 +88,16 @@ class LobbyView extends StatelessWidget {
               avatar: const Icon(Icons.person_search_outlined),
               label: LocalText('Imposters: ${view.imposterCount}'),
             ),
+            if (view.matchTarget > 0)
+              Chip(
+                avatar: const Icon(Icons.emoji_events_outlined),
+                label: LocalText('First to ${view.matchTarget} pts'),
+              ),
+            if (view.drawingRound)
+              const Chip(
+                avatar: Icon(Icons.brush_outlined),
+                label: LocalText('Drawing round'),
+              ),
           ],
         ),
         const SizedBox(height: 16),

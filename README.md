@@ -16,13 +16,13 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
 - Optional Jester: one innocent player who wins alone if voted out (5+ players)
 - Optional Detective (4+ players), who secretly learns one innocent player, and
   Accomplice (6+ players), who gets the real word, knows the imposters and
-  wins with them (pass-the-phone games)
+  wins with them
 - Sound effects (card, vote, countdown, time-up, win/lose stings), card-flip
   reveal and confetti, all respecting the sound setting and reduced motion
 - Party awards (MVP, Best Bluffer, Sharpest Detective, Most Suspected, Chaos
   Jester) and a shareable results image
 - Speed round: a 30-second discussion with one-word clues
-- Drawing round (pass-the-phone, classic and undercover): everyone takes turns
+- Drawing round (classic and undercover): everyone takes turns
   adding one line to a shared sketch of their word, twice around, in their own
   colour; the sketch stays up during discussion and on the results
 - 11 achievements per player, derived from saved history (so earlier rounds

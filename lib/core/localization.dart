@@ -110,8 +110,10 @@ String translateForLanguage(String language, String text) {
     (
       RegExp(
           r'^Line (\d+) of (\d+)\. Add one line to the drawing\. No letters or numbers!$'),
-      (m) => 'الخط ${m[1]} من ${m[2]}. أضف خطاً واحداً إلى الرسمة. بلا حروف أو أرقام!'
+      (m) =>
+          'الخط ${m[1]} من ${m[2]}. أضف خطاً واحداً إلى الرسمة. بلا حروف أو أرقام!'
     ),
+    (RegExp(r'^(.+) is drawing$'), (m) => '${m[1]} يرسم الآن'),
   ];
   for (final (pattern, replacement) in patterns) {
     final match = pattern.firstMatch(text);
@@ -218,6 +220,7 @@ final _dynamicMessages = <(RegExp, String, List<String>)>[
     'Line {number} of {total}. Add one line to the drawing. No letters or numbers!',
     ['number', 'total']
   ),
+  (RegExp(r'^(.+) is drawing$'), '{name} is drawing', ['name']),
 ];
 
 /// English source text for counts, with singular forms. Pass the result to

@@ -139,9 +139,10 @@ game rules live in the domain layer and contain no Flutter UI code.
 - `GameOptions.matchTarget` (0, 5, 10 or 15; 0 is endless) turns a
   pass-the-phone session into a match. `RoundController.champion` is the
   single leader once they reach the target; a tie at the top keeps playing.
-  `newMatch` clears session scores and awards. Multi-phone games ignore it.
+  `newMatch` clears session scores and awards. `MatchRules` holds the winner
+  rule for both pass-the-phone and multi-phone games.
 - `GameOptions.detective` and `GameOptions.accomplice` deal extra roles to
-  innocent players in pass-the-phone games, after the Jester and never
+  innocent players, after the Jester and never
   leaving fewer than `GameEngine.minPlainCitizens` plain citizens. The
   Detective's card names `GameSession.detectiveClearId`, a non-imposter. The
   Accomplice sees the imposters, scores as one, and counts as an imposter-team
@@ -152,6 +153,12 @@ game rules live in the domain layer and contain no Flutter UI code.
   `GameOptions.drawingLaps` laps. Points are normalised 0–1. `DrawingCanvas`
   claims touches with an `EagerGestureRecognizer` so drags draw instead of
   scrolling the page. Sketches are not saved to history.
+- Multi-phone protocol version 3 adds `LanPhase.drawing` and the `draw`
+  (current drawer's finished line) and host-only `skipDraw` actions; lines
+  travel as whole thousandths, thinned to `lanMaxStrokePoints`. Cards carry
+  the Accomplice's imposter IDs and the Detective's cleared ID, results name
+  both, and views carry the match target, winner and tie. Once someone wins,
+  the host's next `start` begins a new match.
 - Multi-phone protocol version 2 adds the Jester flag, revealed question and
   awards to each view.
 
