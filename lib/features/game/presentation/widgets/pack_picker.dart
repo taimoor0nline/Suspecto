@@ -31,7 +31,12 @@ class PackPicker extends StatelessWidget {
               : Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    LocalText(pack.name),
+                    // Shrinks with an ellipsis rather than overflowing
+                    // narrow screens at large text sizes.
+                    Flexible(
+                      child: LocalText(pack.name,
+                          maxLines: 1, overflow: TextOverflow.ellipsis),
+                    ),
                     if (newPackIds.contains(pack.id)) ...[
                       const SizedBox(width: 6),
                       Container(

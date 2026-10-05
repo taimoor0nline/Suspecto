@@ -31,14 +31,19 @@ const packEmoji = {
   'Movies & TV': '🎬',
   'Ramadan & Eid': '🌙',
   'Kids': '🧸',
+  'Space': '🚀',
+  'Fantasy & Magic': '🧙',
+  'School Days': '🎒',
+  'Sea Life': '🐠',
+  'South Asia': '🛺',
 };
 
 /// Recently added packs, tagged "New" in pack pickers. Players who saved a
 /// pack selection before these existed have to opt in, so the tag helps.
 const newPackIds = {
-  'Football Fever',
-  'Countries',
-  'Movies & TV',
-  'Ramadan & Eid',
-  'Kids',
+  'Space',
+  'Fantasy & Magic',
+  'School Days',
+  'Sea Life',
+  'South Asia',
 };
