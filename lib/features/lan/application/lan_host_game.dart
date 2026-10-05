@@ -260,7 +260,7 @@ class LanHostGame {
     _guessOptions = const [];
     _accused = const [];
     _result = null;
-    _remaining = config.discussionMinutes * 60;
+    _remaining = config.options.discussionSeconds(config.discussionMinutes);
     _round++;
     _phase = LanPhase.reveal;
     _changed();
@@ -389,6 +389,7 @@ class LanHostGame {
       round: _round,
       mode: config.options.mode,
       imposterCount: config.imposterCount,
+      speedRound: config.options.speedRound,
       players: [
         for (final m in _members)
           LanPlayerView(
@@ -433,6 +434,7 @@ class LanHostGame {
               stolen: result.stolen,
               jesterId: session.jesterId,
               jesterWin: result.jesterWin,
+              roundId: result.id,
             )
           : null,
       scores: Map.of(_totals),

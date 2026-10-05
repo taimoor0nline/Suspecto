@@ -23,6 +23,9 @@ GitHub Actions run. Generated runners/lockfile are archived for committing after
   motion; sharing the results image to WhatsApp/Instagram on Android and iPhone
   (iPad needs the share popover position).
 - Question mode wording in every language, and Jester rounds with 5+ players.
+- Scan a shared pack QR code between Android and iPhone, including a 200-word
+  Arabic or Chinese pack (dense code) at normal screen brightness.
+- Achievements after upgrading with existing history; tutorial card on first run.
 - Multi-phone: host on Android and iPhone; join by QR and typed code; 3 and 20
   phones; same Wi-Fi and phone hotspot; iOS Local Network and camera prompts;
   screen lock, Wi-Fi drop and app switch on guests and host; rejoin mid-round;

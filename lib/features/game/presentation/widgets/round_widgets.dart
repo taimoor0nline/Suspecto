@@ -107,10 +107,15 @@ class SecretRevealCard extends StatelessWidget {
 
 /// Discussion countdown with the mode explainer above it.
 class DiscussionTimerCard extends StatelessWidget {
-  const DiscussionTimerCard(
-      {super.key, required this.remainingSeconds, required this.mode});
+  const DiscussionTimerCard({
+    super.key,
+    required this.remainingSeconds,
+    required this.mode,
+    this.speedRound = false,
+  });
   final int remainingSeconds;
   final GameMode mode;
+  final bool speedRound;
 
   @override
   Widget build(BuildContext context) {
@@ -133,6 +138,17 @@ class DiscussionTimerCard extends StatelessWidget {
       remainingSeconds: remaining,
       child: Column(
         children: [
+          if (speedRound) ...[
+            Card(
+              color: theme.colorScheme.errorContainer,
+              child: const ListTile(
+                leading: Icon(Icons.bolt),
+                title: LocalText('Speed round'),
+                subtitle: LocalText('One-word clues only. Think fast!'),
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
           if (banner != null) ...[
             Card(
               color: theme.colorScheme.tertiaryContainer,

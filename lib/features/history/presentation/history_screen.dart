@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/achievements/presentation/achievement_widgets.dart';
+import 'package:suspecto/features/achievements/domain/achievements.dart';
 import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/presentation/game_page.dart';
@@ -91,6 +93,10 @@ class HistoryScreen extends StatelessWidget {
     final store = StoreScope.of(context);
     final theme = Theme.of(context);
     const heading = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
+    final badges = {
+      for (final e in Achievements.tally(store.history).entries)
+        e.key: e.value.unlocked,
+    };
     final stats = store.stats.entries.toList()
       ..sort((a, b) {
         final byPoints = b.value.points.compareTo(a.value.points);
@@ -108,9 +114,11 @@ class HistoryScreen extends StatelessWidget {
             const LocalText('Finish a game to start your story.'),
           ] else ...[
             const LocalText('Leaderboard', style: heading),
+            const LocalText('Tap a player to see their achievements.'),
             for (final (rank, entry) in stats.indexed)
               ListTile(
                   contentPadding: EdgeInsets.zero,
+                  onTap: () => showPlayerAchievements(context, entry.key),
                   leading: CircleAvatar(
                       backgroundColor: rank == 0
                           ? theme.colorScheme.primary
@@ -123,7 +131,13 @@ class HistoryScreen extends StatelessWidget {
                           : Text(entry.key.isEmpty
                               ? '?'
                               : entry.key.characters.first)),
-                  title: Text(entry.key),
+                  title: Text.rich(TextSpan(children: [
+                    TextSpan(text: entry.key),
+                    if ((badges[entry.key]?.length ?? 0) > 0)
+                      TextSpan(
+                          text: '  🏅 ${badges[entry.key]!.length}',
+                          style: theme.textTheme.bodySmall),
+                  ])),
                   subtitle: LocalText(
                       '${entry.value.played} rounds • ${entry.value.wins} wins • ${entry.value.imposterRounds} imposter roles'),
                   trailing: LocalText('${entry.value.points} pts',

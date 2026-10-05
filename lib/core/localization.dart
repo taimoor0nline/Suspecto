@@ -91,6 +91,11 @@ String translateForLanguage(String language, String text) {
       RegExp(r'^(\d+) rounds • (\d+) wins • (\d+) imposter roles$'),
       (m) => '${m[1]} جولات • ${m[2]} فوز • ${m[3]} أدوار مخادع'
     ),
+    (
+      RegExp(r'^(\d+) of (\d+) achievements$'),
+      (m) => '${m[1]} من ${m[2]} إنجازات'
+    ),
+    (RegExp(r'^Page (\d+) of (\d+)$'), (m) => 'الصفحة ${m[1]} من ${m[2]}'),
   ];
   for (final (pattern, replacement) in patterns) {
     final match = pattern.firstMatch(text);
@@ -165,6 +170,16 @@ final _dynamicMessages = <(RegExp, String, List<String>)>[
   ),
   (RegExp(r'^(\d+) votes received$'), '{number} votes received', ['number']),
   (RegExp(r'^(\d+) Jester wins$'), '{number} Jester wins', ['number']),
+  (
+    RegExp(r'^(\d+) of (\d+) achievements$'),
+    '{number} of {total} achievements',
+    ['number', 'total']
+  ),
+  (
+    RegExp(r'^Page (\d+) of (\d+)$'),
+    'Page {number} of {total}',
+    ['number', 'total']
+  ),
 ];
 
 class LocalText extends StatelessWidget {

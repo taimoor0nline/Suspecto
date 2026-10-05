@@ -117,7 +117,9 @@ class LanDiscussionView extends LanRoundView {
           const SizedBox(height: 12),
         ],
         DiscussionTimerCard(
-            remainingSeconds: view.remainingSeconds, mode: view.mode),
+            remainingSeconds: view.remainingSeconds,
+            mode: view.mode,
+            speedRound: view.speedRound),
         const SizedBox(height: 24),
         if (view.isHost) ...[
           FilledButton(

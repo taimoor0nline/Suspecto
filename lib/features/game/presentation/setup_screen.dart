@@ -187,19 +187,21 @@ class _SetupScreenState extends State<SetupScreen> {
           ),
           const SizedBox(height: 24),
         ],
-        LocalText('Discussion time', style: theme.textTheme.titleLarge),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          children: [
-            for (final n in [1, 3, 5])
-              ChoiceChip(
-                label: LocalText('$n min'),
-                selected: _minutes == n,
-                onSelected: (_) => setState(() => _minutes = n),
-              ),
-          ],
-        ),
+        if (!_options.speedRound) ...[
+          LocalText('Discussion time', style: theme.textTheme.titleLarge),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            children: [
+              for (final n in [1, 3, 5])
+                ChoiceChip(
+                  label: LocalText('$n min'),
+                  selected: _minutes == n,
+                  onSelected: (_) => setState(() => _minutes = n),
+                ),
+            ],
+          ),
+        ],
         const SizedBox(height: 28),
         FilledButton(
             onPressed: _start, child: const LocalText('Deal secret roles')),

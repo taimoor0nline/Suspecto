@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/achievements/presentation/achievement_widgets.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/application/round_controller.dart';
 import 'package:suspecto/features/game/presentation/phases/phase_page.dart';
@@ -43,6 +44,7 @@ class ResultPhase extends StatelessWidget {
             jesterName: session.jester?.name,
           ),
           const SizedBox(height: 20),
+          AchievementsUnlockedCard(roundId: result.id),
           LocalText('The votes', style: theme.textTheme.titleLarge),
           for (final p in session.players)
             ListTile(

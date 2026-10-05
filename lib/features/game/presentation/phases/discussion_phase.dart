@@ -39,7 +39,9 @@ class _DiscussionPhaseState extends State<DiscussionPhase> {
           const SizedBox(height: 12),
         ],
         DiscussionTimerCard(
-            remainingSeconds: round.remainingSeconds, mode: session.mode),
+            remainingSeconds: round.remainingSeconds,
+            mode: session.mode,
+            speedRound: round.options.speedRound),
         const SizedBox(height: 24),
         FilledButton(
           onPressed: round.beginVoting,

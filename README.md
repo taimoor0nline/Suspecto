@@ -17,6 +17,11 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
   reveal and confetti, all respecting the sound setting and reduced motion
 - Party awards (MVP, Best Bluffer, Sharpest Detective, Most Suspected, Chaos
   Jester) and a shareable results image
+- Speed round: a 30-second discussion with one-word clues
+- 11 achievements per player, derived from saved history (so earlier rounds
+  count), shown on results and in History
+- Share custom packs by QR code and import them with "Scan a pack"
+- A five-page quick tutorial, offered on Home until seen
 - Optional category hint for imposters (classic mode)
 - Last-chance guess: caught imposters can steal the win by picking the word
 - Timed discussion (+1 minute), random first speaker, private ballots, ties/revotes

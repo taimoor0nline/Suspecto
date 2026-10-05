@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/packs/presentation/pack_qr_dialog.dart';
 import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/presentation/game_page.dart';
@@ -119,6 +120,12 @@ class _PackEditorScreenState extends State<PackEditorScreen> {
           label: const LocalText('Save pack'),
         ),
         if (widget.pack != null) ...[
+          const SizedBox(height: 8),
+          OutlinedButton.icon(
+            onPressed: () => showPackQr(context, widget.pack!),
+            icon: const Icon(Icons.qr_code_2),
+            label: const LocalText('Share by QR code'),
+          ),
           const SizedBox(height: 8),
           TextButton.icon(
             onPressed: _delete,
