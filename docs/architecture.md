@@ -117,6 +117,13 @@ game rules live in the domain layer and contain no Flutter UI code.
 - `SoundEffects` (core/audio) plays bundled WAVs and is disabled under
   `flutter test`. `Celebration` and `CountdownSounds` add sound and confetti.
 - `ResultShareCard` is rendered to PNG and shared with `share_plus`.
+- `GameOptions.speedRound` sets a 30-second discussion.
+- `Achievements` (features/achievements) tallies saved history per player name
+  and reports what a round unlocked; `AppStore.stats` uses the same winner rule.
+- `PackCode` packs a custom pack as `suspecto:pack:1:` + base64url(gzip(JSON)),
+  under the 2,800-character limit for one QR code (200 words of Arabic or
+  Chinese is about 1,600). `ScanCodeScreen` (core/widgets) scans join codes and
+  packs.
 - Multi-phone protocol version 2 adds the Jester flag, revealed question and
   awards to each view.
 

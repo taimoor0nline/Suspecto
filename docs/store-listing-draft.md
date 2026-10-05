@@ -17,6 +17,8 @@ for the players who are bluffing.
 - Play Classic, Undercover (imposters get a similar word) or Question mode.
 - Choose easy, medium or hard words, and add a sneaky Jester role.
 - Win party awards like Best Bluffer and share your results with friends.
+- Unlock achievements, try quick speed rounds and learn in a one-minute tutorial.
+- Share your own word packs with friends by QR code.
 - Caught imposters get one last chance to guess the word and steal the win.
 - Score points across rounds and climb the leaderboard.
 - Create your own word packs with inside jokes and themes.
