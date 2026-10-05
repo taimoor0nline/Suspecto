@@ -5,7 +5,7 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
 ## Offline beta features
 
 - 3–20 players, 1–3 imposters (strictly fewer than half the party)
-- 240 unique English/Arabic words across 12 family-friendly packs
+- 240 unique words across 12 family-friendly packs in seven languages
 - Saved player setup, categories and discussion duration
 - Private hold-to-reveal roles, hiding on release/cancellation/background
 - Classic mode, or Undercover mode where imposters secretly get a similar word
@@ -15,7 +15,8 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
 - Points per round, session scoreboard across rematches and all-time leaderboard
 - Custom word packs (up to 50 packs of 3–200 words) created and stored on device
 - Last 200 completed rounds and player statistics on this device
-- English/Arabic interface, RTL layout, light/dark/system theme
+- English, Arabic, Spanish, French, Japanese and Simplified/Traditional Chinese
+  interface, RTL layout for Arabic, light/dark/system theme
 - Avatars, reduced-motion-aware transitions, optional haptics/system click sounds
 - App branding, launcher icons, automated analysis/tests/builds and screenshot capture
 
@@ -38,7 +39,7 @@ flutter run
 ```
 
 Edit `assets/content/words.json` and regenerate Dart constants. The generator checks
-unique IDs, English/Arabic terms and required fields without a network connection.
+unique IDs, every locale's terms and required fields without a network connection.
 
 ## Beta artifacts
 
@@ -59,8 +60,15 @@ app build. English is the required enabled fallback. Settings and supported
 locales use this catalog; a disabled or unknown saved language falls back to
 English. Missing translation strings also use English.
 
-English and Arabic are enabled. Spanish, French, Japanese, Simplified Chinese
-and Traditional Chinese are registered but disabled: their UI and word
-translations must be implemented and reviewed before enabling them. The catalog
-includes native names, locale codes and text direction. This is bundled
-configuration, so changes require a new build; no network is required.
+English, Arabic, Spanish, French, Japanese, Simplified Chinese and Traditional
+Chinese are enabled. Each has all 240 word concepts; new locales include the full
+UI catalog and dynamic messages. User names are preserved. New translations
+need native-speaker review before release.
+
+New UI strings are added in English with their Arabic translation in
+`lib/core/l10n/arabic_strings.dart`; that table defines the required keys.
+Edit `assets/content/ui_translations.json` for the other languages' UI strings and
+`assets/content/words.json` for vocabulary. Run `python scripts/generate_content.py`
+to regenerate Dart constants. Validation rejects missing entries, duplicate word
+translations and mismatched placeholders. Run the validation unit tests with
+`python -m unittest discover -s scripts -p 'test_*.py'`.

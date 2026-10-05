@@ -41,10 +41,10 @@ final defaultLanguageConfig = LanguageConfig(const [
   AppLanguage(code: 'en', name: 'English', enabled: true),
   AppLanguage(
       code: 'ar', name: 'العربية', enabled: true, direction: TextDirection.rtl),
-  // Enable only after UI and word translations have been added and reviewed.
-  AppLanguage(code: 'es', name: 'Español', enabled: false),
-  AppLanguage(code: 'fr', name: 'Français', enabled: false),
-  AppLanguage(code: 'ja', name: '日本語', enabled: false),
-  AppLanguage(code: 'zh-Hans', name: '简体中文', enabled: false),
-  AppLanguage(code: 'zh-Hant', name: '繁體中文', enabled: false),
+  // UI and word translations are bundled for each enabled locale.
+  AppLanguage(code: 'es', name: 'Español', enabled: true),
+  AppLanguage(code: 'fr', name: 'Français', enabled: true),
+  AppLanguage(code: 'ja', name: '日本語', enabled: true),
+  AppLanguage(code: 'zh-Hans', name: '简体中文', enabled: true),
+  AppLanguage(code: 'zh-Hant', name: '繁體中文', enabled: true),
 ]);

@@ -23,7 +23,9 @@ jobs:
           channel: stable
           cache: true
       - name: Validate offline content
-        run: python scripts/generate_content.py
+        run: |
+          python -m unittest discover -s scripts -p 'test_*.py'
+          python scripts/generate_content.py
       - name: Generate platform runners
         run: flutter create --empty --platforms=android,ios,web --project-name suspecto --org com.suspecto .
       - run: flutter pub get

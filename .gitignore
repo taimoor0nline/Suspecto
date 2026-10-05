@@ -25,3 +25,7 @@ android/key.properties
 *.keystore
 GoogleService-Info.plist
 google-services.json
+
+# Python content tooling
+__pycache__/
+*.pyc
