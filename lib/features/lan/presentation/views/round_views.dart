@@ -52,6 +52,7 @@ class LanRevealView extends LanRoundView {
       subtitle: 'Make sure nobody can see your screen.',
       children: [
         SecretCard(
+          ownerName: view.me?.name,
           visible: cardVisible,
           onHold: (show) {
             if (show && !cardVisible) {

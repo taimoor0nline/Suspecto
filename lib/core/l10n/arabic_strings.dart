@@ -370,4 +370,28 @@ const arabicStrings = <String, String>{
   'Ramadan & Eid': 'رمضان والعيد',
   'Kids': 'الأطفال',
   'New': 'جديد',
+  // profiles_tr
+  'Players': 'اللاعبون',
+  'Saved players keep their avatar, stats and achievements. New names are saved when a game starts.':
+      'يحتفظ اللاعبون المحفوظون بصورهم الرمزية وإحصاءاتهم وإنجازاتهم. تُحفظ الأسماء الجديدة عند بدء اللعبة.',
+  'No saved players yet': 'لا يوجد لاعبون محفوظون بعد',
+  'Add player': 'إضافة لاعب',
+  'That name already has a profile or stats. Choose another name.':
+      'هذا الاسم لديه ملف أو إحصاءات بالفعل. اختر اسماً آخر.',
+  'Rename this player?': 'هل تريد إعادة تسمية هذا اللاعب؟',
+  'Their rounds, stats and achievements will move to the new name.':
+      'ستنتقل جولاته وإحصاءاته وإنجازاته إلى الاسم الجديد.',
+  'Rename': 'إعادة تسمية',
+  'Remove this player?': 'هل تريد إزالة هذا اللاعب؟',
+  'Their past rounds stay in history. You can add them again anytime.':
+      'تبقى جولاته السابقة في السجل. يمكنك إضافته مجدداً في أي وقت.',
+  'New player': 'لاعب جديد',
+  'Edit player': 'تعديل اللاعب',
+  'Pick a name, an avatar and a colour.': 'اختر اسماً وصورة رمزية ولوناً.',
+  'Name': 'الاسم',
+  'Avatar': 'الصورة الرمزية',
+  'Colour': 'اللون',
+  'Save player': 'حفظ اللاعب',
+  'Remove player': 'إزالة اللاعب',
+  'Saved players': 'اللاعبون المحفوظون',
 };

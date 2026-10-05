@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/profiles/presentation/player_avatar.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/domain/models/player.dart';
 
@@ -25,17 +26,10 @@ class Scoreboard extends StatelessWidget {
             for (final (rank, entry) in standings.indexed)
               ListTile(
                 dense: true,
-                leading: CircleAvatar(
-                  radius: 16,
-                  backgroundColor: entry.value == best && best > 0
-                      ? theme.colorScheme.primary
-                      : theme.colorScheme.surfaceContainerHighest,
-                  foregroundColor: entry.value == best && best > 0
-                      ? theme.colorScheme.onPrimary
-                      : theme.colorScheme.onSurface,
-                  child: Text('${rank + 1}'),
-                ),
-                title: Text(entry.key.name, style: theme.textTheme.titleMedium),
+                leading: PlayerAvatar(name: entry.key.name, radius: 18),
+                title: Text(
+                    '${entry.value == best && best > 0 ? '👑 ' : '${rank + 1}. '}${entry.key.name}',
+                    style: theme.textTheme.titleMedium),
                 subtitle: (roundPoints[entry.key.id] ?? 0) > 0
                     ? LocalText('+${roundPoints[entry.key.id]} this round',
                         style: TextStyle(color: theme.colorScheme.primary))

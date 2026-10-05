@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suspecto/features/profiles/presentation/player_avatar.dart';
 import 'package:suspecto/core/app_store.dart';
 import 'package:suspecto/core/localization.dart';
 import 'package:suspecto/features/game/domain/models/game_options.dart';
@@ -13,14 +14,8 @@ import 'package:suspecto/features/packs/domain/dealable_words.dart';
 import 'package:suspecto/features/packs/domain/word_pack.dart';
 import 'package:suspecto/features/packs/presentation/packs_screen.dart';
 
-const _avatarIcons = [
-  Icons.pets,
-  Icons.bolt,
-  Icons.star,
-  Icons.rocket_launch,
-  Icons.local_florist,
-  Icons.sports_esports,
-];
+/// The untouched default names, which are never saved as players.
+final _placeholderName = RegExp(r'^Player \d+$');
 
 class SetupScreen extends StatefulWidget {
   const SetupScreen({super.key});
@@ -87,6 +82,17 @@ class _SetupScreenState extends State<SetupScreen> {
   void _addPlayer() => setState(() =>
       _names.add(TextEditingController(text: 'Player ${_names.length + 1}')));
 
+  /// Puts a saved player into the first empty or placeholder row, or a new row.
+  void _addSaved(String name) => setState(() {
+        final free = _names.where((c) =>
+            c.text.trim().isEmpty || _placeholderName.hasMatch(c.text.trim()));
+        if (free.isNotEmpty) {
+          free.first.text = name;
+        } else if (_names.length < 20) {
+          _names.add(TextEditingController(text: name));
+        }
+      });
+
   void _removePlayer(int index) => setState(() {
         _names.removeAt(index).dispose();
         _imposters =
@@ -123,6 +129,9 @@ class _SetupScreenState extends State<SetupScreen> {
     store?.saveSetup(players.map((p) => p.name).toList(),
         packs.map((p) => p.id).toList(), _imposters, _minutes,
         options: _options);
+    store?.rememberPlayers(players
+        .map((p) => p.name)
+        .where((name) => !_placeholderName.hasMatch(name)));
     store?.feedback();
     Navigator.of(context).push(
       MaterialPageRoute<void>(
@@ -157,6 +166,7 @@ class _SetupScreenState extends State<SetupScreen> {
           icon: const Icon(Icons.person_add_alt_1),
           label: LocalText('Add player (${_names.length}/20)'),
         ),
+        _savedPlayers(theme),
         const SizedBox(height: 24),
         LocalText('Imposters', style: theme.textTheme.titleLarge),
         const SizedBox(height: 8),
@@ -209,14 +219,49 @@ class _SetupScreenState extends State<SetupScreen> {
     );
   }
 
+  /// One-tap chips for remembered players who are not in the list yet.
+  Widget _savedPlayers(ThemeData theme) {
+    final inList = _names.map((c) => c.text.trim().toLowerCase()).toSet();
+    final saved = [
+      ...?StoreScope.maybeOf(context)?.profiles,
+    ].where((p) => !inList.contains(p.name.toLowerCase())).toList();
+    if (saved.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LocalText('Saved players', style: theme.textTheme.titleSmall),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final profile in saved)
+                ActionChip(
+                  avatar: PlayerAvatar(name: profile.name, radius: 12),
+                  label: Text(profile.name),
+                  onPressed: _names.length < 20 ||
+                          _names.any((c) =>
+                              _placeholderName.hasMatch(c.text.trim()) ||
+                              c.text.trim().isEmpty)
+                      ? () => _addSaved(profile.name)
+                      : null,
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _playerRow(int i) => Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: Row(
           children: [
-            CircleAvatar(
-                backgroundColor: Colors.primaries[i % Colors.primaries.length]
-                    .withValues(alpha: 0.18),
-                child: Icon(_avatarIcons[i % _avatarIcons.length])),
+            PlayerAvatar(name: _names[i].text),
             const SizedBox(width: 12),
             Expanded(
               child: TextFormField(
@@ -228,6 +273,7 @@ class _SetupScreenState extends State<SetupScreen> {
                   counterText: '',
                 ),
                 validator: _validateName,
+                onChanged: (_) => setState(() {}),
               ),
             ),
             IconButton(

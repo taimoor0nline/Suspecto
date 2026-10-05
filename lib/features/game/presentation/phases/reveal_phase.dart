@@ -31,6 +31,7 @@ class RevealPhase extends StatelessWidget {
       onEndRound: onEndRound,
       children: [
         SecretCard(
+          ownerName: player.name,
           visible: round.cardVisible,
           onHold: (show) => _show(context, show),
           word: word,
