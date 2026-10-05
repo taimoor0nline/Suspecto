@@ -4,6 +4,7 @@ import 'package:suspecto/core/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:suspecto/features/game/presentation/game_page.dart';
 import 'package:suspecto/features/game/presentation/setup_screen.dart';
+import 'package:suspecto/features/lan/presentation/lan_menu_screen.dart';
 import 'package:suspecto/features/packs/presentation/packs_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,6 +45,13 @@ class HomeScreen extends StatelessWidget {
                 MaterialPageRoute<void>(builder: (_) => const SetupScreen())),
             icon: const Icon(Icons.play_arrow_rounded),
             label: const LocalText('Start game'),
+          ),
+          const SizedBox(height: 12),
+          FilledButton.tonalIcon(
+            onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const LanMenuScreen())),
+            icon: const Icon(Icons.devices_rounded),
+            label: const LocalText('Play on several phones'),
           ),
           const SizedBox(height: 24),
           const LocalText('HOW TO PLAY',

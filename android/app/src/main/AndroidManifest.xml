@@ -1,4 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Multi-phone games: the host phone runs a local Wi-Fi/hotspot server. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Scanning a host's join QR code. -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <application
         android:label="suspecto"
         android:name="${applicationName}"

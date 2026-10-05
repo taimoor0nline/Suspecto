@@ -6,6 +6,10 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Scan a host's QR code to join a game on the same Wi-Fi.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Play Suspecto with friends' phones on the same Wi-Fi or hotspot.</string>
 	<key>CFBundleDisplayName</key>
 	<string>Suspecto</string>
 	<key>CFBundleExecutable</key>
