@@ -1,3 +1,5 @@
+import 'package:suspecto/features/lan/presentation/online_menu_screen.dart';
+import 'package:suspecto/features/lan/domain/room_code.dart';
 import 'package:suspecto/features/profiles/presentation/profiles_screen.dart';
 import 'package:suspecto/features/tutorial/presentation/tutorial_screen.dart';
 import 'package:suspecto/core/app_store.dart';
@@ -56,6 +58,16 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.devices_rounded),
             label: const LocalText('Play on several phones'),
           ),
+          if (onlineRoomsAvailable) ...[
+            const SizedBox(height: 12),
+            FilledButton.tonalIcon(
+              onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                      builder: (_) => const OnlineMenuScreen())),
+              icon: const Icon(Icons.public),
+              label: const LocalText('Play online'),
+            ),
+          ],
           if (!(StoreScope.maybeOf(context)?.tutorialSeen ?? true)) ...[
             const SizedBox(height: 16),
             const _TutorialCard(),

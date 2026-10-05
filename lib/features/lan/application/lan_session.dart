@@ -7,7 +7,9 @@ import 'package:suspecto/features/game/domain/models/round_result.dart';
 import 'package:suspecto/features/lan/application/lan_host_game.dart';
 import 'package:suspecto/features/lan/data/lan_socket.dart';
 import 'package:suspecto/features/lan/data/lan_transport.dart';
+import 'package:suspecto/features/lan/data/relay_transport.dart';
 import 'package:suspecto/features/lan/domain/join_code.dart';
+import 'package:suspecto/features/lan/domain/room_code.dart';
 import 'package:suspecto/features/lan/domain/lan_view.dart';
 
 enum LanStatus { connecting, connected, reconnecting, closed }
@@ -21,8 +23,8 @@ abstract class LanSession extends ChangeNotifier {
   /// Why the session closed, as an English message.
   String? get closedReason;
 
-  /// Set on the host phone only.
-  JoinCode? get joinCode => null;
+  /// How friends join; set on the host phone only.
+  Invite? get invite => null;
 
   void send(String action, [Map<String, Object?> data = const {}]);
 
@@ -36,6 +38,9 @@ abstract final class _Wire {
   static const view = 'view';
   static const reject = 'reject';
   static const closed = 'closed';
+  // Online rooms only, injected by the relay transport.
+  static const hostAway = 'host-away';
+  static const hostBack = 'host-back';
 }
 
 Map<String, Object?>? _decode(String message) {
@@ -47,18 +52,22 @@ Map<String, Object?>? _decode(String message) {
   }
 }
 
-/// Runs the game and the server on the host phone; the host also plays.
+/// Runs the game on the host phone, which also plays. Guests connect over
+/// Wi-Fi/hotspot ([start]) or through the online relay ([startOnline]).
 class HostSession extends LanSession {
-  HostSession._(this.joinCode, this._server);
+  HostSession._(this.invite, this._closeTransport);
 
   late final LanHostGame _game;
-  final LanServer _server;
+  final Future<void> Function() _closeTransport;
   final Map<String, LanSocket> _sockets = {};
   bool _closed = false;
+  bool _reconnecting = false;
+  String? _closedReason;
 
   @override
-  final JoinCode joinCode;
+  final Invite invite;
 
+  /// A game for phones on the same Wi-Fi or this phone's hotspot.
   static Future<HostSession> start({
     required String hostName,
     required LanGameConfig config,
@@ -80,25 +89,80 @@ class HostSession extends LanSession {
       throw const LanException(
           'Connect to Wi-Fi or turn on your hotspot, then try again.');
     }
-    session = HostSession._(JoinCode(host: address, port: server.port), server);
-    session._game = LanHostGame(
+    final code = JoinCode(host: address, port: server.port);
+    session = HostSession._(
+      Invite(code: code.code, qrData: code.qrData, online: false),
+      server.close,
+    ).._init(hostName, config, onRoundComplete);
+    return session;
+  }
+
+  /// An online room that friends anywhere can join with its code.
+  static Future<HostSession> startOnline({
+    required String hostName,
+    required LanGameConfig config,
+    void Function(RoundResult result)? onRoundComplete,
+  }) async {
+    if (!onlineRoomsAvailable) {
+      throw const LanException(
+          'Online games are not available in this version.');
+    }
+    HostSession? session;
+    final relay = await RelayHost.create(
+        roomServerUrl, (socket) => session?._accept(socket));
+    final code = RoomCode(relay.roomCode);
+    session = HostSession._(
+      Invite(code: code.code, qrData: code.qrData, online: true),
+      relay.close,
+    ).._init(hostName, config, onRoundComplete);
+    relay
+      ..onReconnecting = session._setReconnecting
+      ..onRoomLost = () =>
+          session!._lost('Lost the connection to the online game server.');
+    return session;
+  }
+
+  void _init(String hostName, LanGameConfig config,
+      void Function(RoundResult result)? onRoundComplete) {
+    _game = LanHostGame(
       hostName: hostName,
       config: config,
-      onChanged: session._broadcast,
+      onChanged: _broadcast,
       onRoundComplete: onRoundComplete,
-      onKicked: session._kick,
+      onKicked: _kick,
     );
-    return session;
+  }
+
+  void _setReconnecting(bool reconnecting) {
+    _reconnecting = reconnecting;
+    if (reconnecting) {
+      notifyListeners();
+    } else {
+      // Guests may have missed updates while the server was unreachable.
+      _broadcast();
+    }
+  }
+
+  void _lost(String reason) {
+    if (_closed) {
+      return;
+    }
+    _closed = true;
+    _closedReason = reason;
+    _game.dispose();
+    notifyListeners();
   }
 
   @override
   LanView get view => _game.viewFor(LanHostGame.hostId);
 
   @override
-  LanStatus get status => _closed ? LanStatus.closed : LanStatus.connected;
+  LanStatus get status => _closed
+      ? LanStatus.closed
+      : (_reconnecting ? LanStatus.reconnecting : LanStatus.connected);
 
   @override
-  String? get closedReason => null;
+  String? get closedReason => _closedReason;
 
   /// Enough connected players to deal a round.
   bool get canStart => _game.canStart;
@@ -190,7 +254,7 @@ class HostSession extends LanSession {
       unawaited(socket.close());
     }
     _sockets.clear();
-    await _server.close();
+    await _closeTransport();
     notifyListeners();
   }
 }
@@ -198,12 +262,21 @@ class HostSession extends LanSession {
 /// A guest phone. Reconnects automatically after Wi-Fi blips, rejoining as the
 /// same player with the same role and score.
 class ClientSession extends LanSession {
-  ClientSession({required this.name, required this.code}) {
+  ClientSession._(this.name, this._connector) {
     unawaited(_connect());
   }
 
+  /// Joins a Wi-Fi/hotspot game.
+  factory ClientSession.wifi({required String name, required JoinCode code}) =>
+      ClientSession._(name, () => connectLan(code.host, code.port));
+
+  /// Joins an online room through the relay server.
+  factory ClientSession.online(
+          {required String name, required RoomCode room}) =>
+      ClientSession._(name, () => connectRelay(roomServerUrl, room.code));
+
   final String name;
-  final JoinCode code;
+  final Future<LanSocket> Function() _connector;
   final String _token =
       List.generate(16, (_) => Random.secure().nextInt(16).toRadixString(16))
           .join();
@@ -227,7 +300,14 @@ class ClientSession extends LanSession {
   Future<void> _connect() async {
     final LanSocket socket;
     try {
-      socket = await connectLan(code.host, code.port);
+      socket = await _connector();
+    } on LanUnreachable {
+      _dropped(null);
+      return;
+    } on LanException catch (e) {
+      // Final answers such as "no game with that code": don't retry.
+      _close(e.message);
+      return;
     } catch (_) {
       _dropped(null);
       return;
@@ -241,13 +321,15 @@ class ClientSession extends LanSession {
         onDone: () => _dropped(socket),
         onError: (Object _) {},
         cancelOnError: false);
-    socket.send(jsonEncode({
-      't': _Wire.hello,
-      'v': lanProtocolVersion,
-      'name': name,
-      'token': _token,
-    }));
+    _sendHello();
   }
+
+  void _sendHello() => _socket?.send(jsonEncode({
+        't': _Wire.hello,
+        'v': lanProtocolVersion,
+        'name': name,
+        'token': _token,
+      }));
 
   void _onMessage(String message) {
     if (_left) {
@@ -269,6 +351,15 @@ class ClientSession extends LanSession {
             : 'Could not join this game.');
       case _Wire.closed:
         _close('The host ended the game.');
+      case _Wire.hostAway:
+        _status = LanStatus.reconnecting;
+        notifyListeners();
+      case _Wire.hostBack:
+        // The host may have missed our hello while away; joining again with
+        // the same token is harmless.
+        _sendHello();
+        _status = _view == null ? LanStatus.connecting : LanStatus.connected;
+        notifyListeners();
     }
   }
 

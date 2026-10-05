@@ -25,6 +25,10 @@ An offline pass-the-phone party game in Flutter. No API, accounts or remote data
 - A five-page quick tutorial, offered on Home until seen
 - Player profiles: an avatar and colour per player, one-tap saved players in
   setup, and renaming that moves a player's history, stats and achievements
+- Three ways to play: pass one phone around; several phones on the same Wi-Fi
+  or hotspot (no internet); or online rooms through your own relay server,
+  where friends anywhere join with a 6-character room code (see
+  `server/README.md`)
 - Optional category hint for imposters (classic mode)
 - Last-chance guess: caught imposters can steal the win by picking the word
 - Timed discussion (+1 minute), random first speaker, private ballots, ties/revotes
@@ -84,6 +88,16 @@ sends each phone only its own card. Only the host phone saves the round to
 history. Hosting and joining need Android/iOS; the web build hides this mode.
 Some public or office Wi-Fi isolates devices; a phone hotspot avoids that.
 Validate on physical devices, including iOS's Local Network permission prompt.
+
+## Online rooms
+
+`server/` contains a small Node.js relay. The host phone still runs the game;
+the server only creates room codes and passes messages, so online and Wi-Fi
+games share all game code. Build the app with
+`--dart-define=ROOM_SERVER=wss://your-domain/rooms` to enable online rooms;
+without it they are hidden. Online rooms also work in the web build. Deployment
+(VPS with automatic HTTPS, or any Docker host) is described in
+`server/README.md`.
 
 ## Language availability
 

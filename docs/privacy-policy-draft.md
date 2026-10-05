@@ -26,7 +26,15 @@ the device (round outcome, word, player names, awards and points) and opens the
 system share sheet; nothing is sent unless you choose an app to share with. Any network permission in a debug build is
 used by development tooling; release manifests must be reviewed before release.
 
-This draft applies only to the current offline build. Introducing ads, purchases,
+Online rooms (builds configured with a game server) send the same game
+messages through the publisher's relay server so phones on different networks
+can play: player names, each phone's own card, votes and results. The server
+keeps rooms in memory only while a game is open, does not store or log message
+contents, and connections are encrypted (wss). The hosting provider may log IP
+addresses. The publisher must name the server operator and location here
+before enabling online rooms in a release.
+
+This draft applies only to the current build. Introducing ads, purchases,
 analytics or cloud features requires revising the policy and store declarations.
 
 Before publication, the publisher must supply its legal identity, privacy contact,

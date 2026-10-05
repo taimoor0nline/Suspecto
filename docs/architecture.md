@@ -129,6 +129,13 @@ game rules live in the domain layer and contain no Flutter UI code.
   under the 2,800-character limit for one QR code (200 words of Arabic or
   Chinese is about 1,600). `ScanCodeScreen` (core/widgets) scans join codes and
   packs.
+- Online rooms: `server/` is a Node.js WebSocket relay (no game logic, no
+  storage). `RelayHost` exposes each online guest to `HostSession` as a
+  `LanSocket`, and `connectRelay` gives guests the same interface, so Wi-Fi and
+  online games share `LanHostGame` and all screens. Relay notices about the
+  host become `host-away`/`host-back` app messages. The server keeps a room
+  for 60 seconds after the host disconnects so it can resume with its token.
+  `ROOM_SERVER` (dart-define) enables the feature.
 - Multi-phone protocol version 2 adds the Jester flag, revealed question and
   awards to each view.
 

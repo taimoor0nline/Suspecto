@@ -18,3 +18,9 @@ class LanException implements Exception {
   @override
   String toString() => message;
 }
+
+/// A network failure worth retrying, unlike other [LanException]s such as
+/// "no game with that code".
+class LanUnreachable extends LanException {
+  const LanUnreachable(super.message);
+}

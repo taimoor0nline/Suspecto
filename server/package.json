@@ -1,0 +1,23 @@
+{
+  "name": "suspecto-rooms",
+  "version": "1.0.0",
+  "description": "Relay server for Suspecto online rooms. Passes messages between phones in a room; the host phone runs the game.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "tsc -p tsconfig.json --watch"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.12",
+    "typescript": "^5.6.0"
+  }
+}

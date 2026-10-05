@@ -28,6 +28,10 @@ GitHub Actions run. Generated runners/lockfile are archived for committing after
 - Achievements after upgrading with existing history; tutorial card on first run.
 - Player profiles: saved-player chips in setup, renaming with existing history,
   and emoji avatars rendering on older Android devices.
+- Online rooms: deploy `server/` with HTTPS, build with `ROOM_SERVER=wss://…`,
+  play with phones on different networks (mobile data and Wi-Fi), lock the host
+  phone for under a minute and confirm the room resumes, and finalize the
+  privacy policy section on the relay server before release.
 - Multi-phone: host on Android and iPhone; join by QR and typed code; 3 and 20
   phones; same Wi-Fi and phone hotspot; iOS Local Network and camera prompts;
   screen lock, Wi-Fi drop and app switch on guests and host; rejoin mid-round;

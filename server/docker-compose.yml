@@ -1,0 +1,29 @@
+# VPS deployment with automatic HTTPS. Set ROOMS_DOMAIN in .env (see README).
+services:
+  rooms:
+    build: .
+    restart: unless-stopped
+    environment:
+      - PORT=8080
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-}
+    expose:
+      - "8080"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - rooms
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - ROOMS_DOMAIN=${ROOMS_DOMAIN:?Set ROOMS_DOMAIN in .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
