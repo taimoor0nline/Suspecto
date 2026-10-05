@@ -357,6 +357,11 @@ const arabicStrings = <String, String>{
   'Movies & TV': 'أفلام وتلفزيون',
   'Ramadan & Eid': 'رمضان والعيد',
   'Kids': 'الأطفال',
+  'Space': 'الفضاء',
+  'Fantasy & Magic': 'الخيال والسحر',
+  'School Days': 'أيام المدرسة',
+  'Sea Life': 'عالم البحار',
+  'South Asia': 'جنوب آسيا',
   'New': 'جديد',
   // profiles_tr
   'Players': 'اللاعبون',
