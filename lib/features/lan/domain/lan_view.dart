@@ -9,7 +9,7 @@ import 'package:suspecto/features/game/domain/services/party_awards.dart';
 const lanProtocolVersion = 3;
 
 /// Most points kept per line on the wire; longer lines are thinned evenly.
-const lanMaxStrokePoints = 120;
+const lanMaxStrokePoints = 80;
 
 enum LanPhase {
   lobby,

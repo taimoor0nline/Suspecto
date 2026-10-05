@@ -130,6 +130,25 @@ void main() {
     game.dispose();
   });
 
+  test('a full 20-player drawing fits in one online relay message', () {
+    final (game, ids) = _game(const GameOptions(drawing: true), guests: 19);
+    game.handle(LanHostGame.hostId, LanAction.start);
+    _revealAll(game, ids);
+    final line = {
+      'xy': encodePoints([
+        for (var i = 0; i < 1000; i++) Offset(i / 1000, (i % 7) / 7 + .123),
+      ]),
+    };
+    while (_view(game, ids.first).phase == LanPhase.drawing) {
+      game.handle(_view(game, ids.first).drawerId!, LanAction.draw, line);
+    }
+    final json =
+        jsonEncode({'t': 'view', 'view': game.viewFor(ids[1]).toJson()});
+    // The relay's default MAX_MESSAGE_BYTES is 64 KiB; keep clear headroom.
+    expect(utf8.encode(json).length, lessThan(48 * 1024));
+    game.dispose();
+  });
+
   test('malformed lines are ignored', () {
     for (final bad in [
       null,
