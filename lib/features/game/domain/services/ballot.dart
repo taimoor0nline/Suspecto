@@ -14,6 +14,9 @@ class Ballot {
     _votes[voter] = suspect;
   }
 
+  /// Voter ID to suspect ID for every ballot cast so far.
+  Map<String, String> get votes => Map.unmodifiable(_votes);
+
   Map<String, int> get counts {
     final result = {for (final id in _ids) id: 0};
     for (final suspect in _votes.values) {
