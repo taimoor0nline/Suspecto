@@ -1,0 +1,4 @@
+# Caddy obtains and renews the HTTPS certificate for ROOMS_DOMAIN.
+{$ROOMS_DOMAIN} {
+	reverse_proxy rooms:8080
+}
